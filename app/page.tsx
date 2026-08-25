@@ -6,12 +6,15 @@ import { Chess, Square } from "chess.js";
 import { Chessboard } from "react-chessboard";
 
 type PieceImageProps = {
+  fill?: string;
+  square?: string;
   svgStyle?: CSSProperties;
 };
 
 const renderCustomPiece =
   (piece: string) =>
-  ({ svgStyle }: PieceImageProps) => (
+  function PieceRenderer({ svgStyle }: PieceImageProps = {}) {
+    return (
     <img
       src={`/pieces/${piece}.svg`}
       alt={`${piece} chess piece`}
@@ -19,7 +22,8 @@ const renderCustomPiece =
       style={svgStyle}
       draggable={false}
     />
-  );
+    );
+  };
 
 const customPieces = {
   wP: renderCustomPiece("wP"),
