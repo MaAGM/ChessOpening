@@ -1,8 +1,44 @@
 "use client";
 
+import type { CSSProperties } from "react";
 import { useState } from "react";
 import { Chess, Square } from "chess.js";
 import { Chessboard } from "react-chessboard";
+
+type PieceImageProps = {
+  fill?: string;
+  square?: string;
+  svgStyle?: CSSProperties;
+};
+
+const renderCustomPiece =
+  (piece: string) =>
+  function PieceRenderer({ svgStyle }: PieceImageProps = {}) {
+    return (
+    <img
+      src={`/pieces/${piece}.svg`}
+      alt={`${piece} chess piece`}
+      className="pointer-events-none h-full w-full select-none"
+      style={svgStyle}
+      draggable={false}
+    />
+    );
+  };
+
+const customPieces = {
+  wP: renderCustomPiece("wP"),
+  wN: renderCustomPiece("wN"),
+  wB: renderCustomPiece("wB"),
+  wR: renderCustomPiece("wR"),
+  wQ: renderCustomPiece("wQ"),
+  wK: renderCustomPiece("wK"),
+  bP: renderCustomPiece("bP"),
+  bN: renderCustomPiece("bN"),
+  bB: renderCustomPiece("bB"),
+  bR: renderCustomPiece("bR"),
+  bQ: renderCustomPiece("bQ"),
+  bK: renderCustomPiece("bK"),
+};
 
 export default function Home() {
   // Keep the full chess game in state so we can always render from the latest FEN.
@@ -46,6 +82,7 @@ export default function Home() {
               id: "chess-opening-board",
               position: game.fen(),
               boardStyle: { width: "100%", height: "auto" },
+              pieces: customPieces,
               onPieceDrop: ({ sourceSquare, targetSquare }) => onPieceDrop(sourceSquare, targetSquare),
             }}
           />
