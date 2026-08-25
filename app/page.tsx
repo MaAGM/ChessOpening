@@ -83,6 +83,8 @@ export default function Home() {
               position: game.fen(),
               boardStyle: { width: "100%", height: "auto" },
               pieces: customPieces,
+              darkSquareStyle: { backgroundColor: '#769656' },
+              lightSquareStyle: { backgroundColor: '#b4c89d' },
               onPieceDrop: ({ sourceSquare, targetSquare }) => onPieceDrop(sourceSquare, targetSquare),
             }}
           />
