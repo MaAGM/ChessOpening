@@ -1,7 +1,7 @@
 "use client";
 
 import type { CSSProperties } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Chess, Square } from "chess.js";
 import { Chessboard } from "react-chessboard";
 
@@ -40,16 +40,51 @@ const customPieces = {
   bK: renderCustomPiece("bK"),
 };
 
+const initialFen = new Chess().fen();
+
 export default function Home() {
-  // Keep the full chess game in state so we can always render from the latest FEN.
   const [game, setGame] = useState(() => new Chess());
+  const [history, setHistory] = useState<string[]>([initialFen]);
+  const [historyIndex, setHistoryIndex] = useState(0);
   const [moveSquares, setMoveSquares] = useState<Record<string, CSSProperties>>({});
   const [optionSquares, setOptionSquares] = useState<Record<string, CSSProperties>>({});
   const [rightClickedSquares, setRightClickedSquares] = useState<Record<string, CSSProperties>>({});
   const [selectedSquare, setSelectedSquare] = useState<Square | null>(null);
+  const currentFen = history[historyIndex];
+  const currentGame = new Chess(currentFen);
+
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "ArrowUp" || e.key === "ArrowDown") {
+        e.preventDefault();
+        return;
+      }
+
+      if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        setHistoryIndex((prev) => (prev > 0 ? prev - 1 : prev));
+        return;
+      }
+
+      if (e.key === "ArrowRight") {
+        e.preventDefault();
+        setHistoryIndex((prev) => (prev < history.length - 1 ? prev + 1 : prev));
+      }
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [history.length]);
 
   const applyMove = (sourceSquare: Square, targetSquare: Square) => {
+    let nextHistory = history;
     const nextGame = new Chess(game.fen());
+
+    if (historyIndex < history.length - 1) {
+      nextHistory = history.slice(0, historyIndex + 1);
+      nextGame.load(history[historyIndex]);
+    }
+
     const move = nextGame.move({
       from: sourceSquare,
       to: targetSquare,
@@ -63,7 +98,12 @@ export default function Home() {
     console.log("Move (SAN):", move.san);
     console.log("Position (FEN):", nextGame.fen());
 
+    const nextFen = nextGame.fen();
+    const updatedHistory = [...nextHistory, nextFen];
+
     setGame(nextGame);
+    setHistory(updatedHistory);
+    setHistoryIndex(updatedHistory.length - 1);
     setMoveSquares({
       [move.from]: { backgroundColor: "rgba(255, 255, 0, 0.7)" },
       [move.to]: { backgroundColor: "rgba(255, 255, 0, 0.7)" },
@@ -86,8 +126,8 @@ export default function Home() {
     return applyMove(sourceSquare as Square, targetSquare as Square);
   };
 
-  const getMoveOptions = (square: Square) => {
-    const moves = game.moves({ square, verbose: true });
+  const getMoveOptions = (square: Square, positionGame: Chess) => {
+    const moves = positionGame.moves({ square, verbose: true });
     if (moves.length === 0) {
       return {};
     }
@@ -110,6 +150,7 @@ export default function Home() {
 
   const onSquareClick = (square: string) => {
     const clickedSquare = square as Square;
+    const positionGame = new Chess(currentFen);
     setRightClickedSquares({});
 
     if (selectedSquare) {
@@ -119,10 +160,10 @@ export default function Home() {
         return;
       }
 
-      const clickedPiece = game.get(clickedSquare);
-      if (clickedPiece && clickedPiece.color === game.turn()) {
+      const clickedPiece = positionGame.get(clickedSquare);
+      if (clickedPiece && clickedPiece.color === positionGame.turn()) {
         setSelectedSquare(clickedSquare);
-        setOptionSquares(getMoveOptions(clickedSquare));
+        setOptionSquares(getMoveOptions(clickedSquare, positionGame));
         return;
       }
 
@@ -134,12 +175,12 @@ export default function Home() {
       return;
     }
 
-    const piece = game.get(clickedSquare);
-    if (!piece || piece.color !== game.turn()) {
+    const piece = positionGame.get(clickedSquare);
+    if (!piece || piece.color !== positionGame.turn()) {
       return;
     }
 
-    const options = getMoveOptions(clickedSquare);
+    const options = getMoveOptions(clickedSquare, positionGame);
     setSelectedSquare(clickedSquare);
     setOptionSquares(options);
   };
@@ -156,12 +197,12 @@ export default function Home() {
           <Chessboard
             options={{
               id: "chess-opening-board",
-              position: game.fen(),
+              position: history[historyIndex],
               boardStyle: { width: "100%", height: "auto" },
               pieces: customPieces,
               darkSquareStyle: { backgroundColor: '#769656' },
               lightSquareStyle: { backgroundColor: '#b4c89d' },
-              canDragPiece: ({ piece }) => piece.pieceType[0] === game.turn(),
+              canDragPiece: ({ piece }) => piece.pieceType[0] === currentGame.turn(),
               onPieceDrop: ({ sourceSquare, targetSquare }) => onPieceDrop(sourceSquare, targetSquare),
               onSquareClick: ({ square }) => onSquareClick(square),
               squareStyles: { ...rightClickedSquares, ...moveSquares, ...optionSquares },
