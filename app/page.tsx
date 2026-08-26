@@ -65,8 +65,8 @@ export default function Home() {
 
     setGame(nextGame);
     setMoveSquares({
-      [move.from]: { backgroundColor: "rgba(255, 255, 0, 0.4)" },
-      [move.to]: { backgroundColor: "rgba(255, 255, 0, 0.4)" },
+      [move.from]: { backgroundColor: "rgba(255, 255, 0, 0.7)" },
+      [move.to]: { backgroundColor: "rgba(255, 255, 0, 0.7)" },
     });
     setOptionSquares({});
     setRightClickedSquares({});
@@ -76,6 +76,9 @@ export default function Home() {
   };
 
   const onPieceDrop = (sourceSquare: string, targetSquare: string | null) => {
+    setSelectedSquare(null);
+    setOptionSquares({});
+
     if (!targetSquare) {
       return false;
     }
@@ -90,7 +93,7 @@ export default function Home() {
     }
 
     const squares: Record<string, CSSProperties> = {
-      [square]: { backgroundColor: "rgba(0, 0, 255, 0.2)" },
+      [square]: { backgroundColor: "rgba(0, 0, 255, 0.5)" },
     };
 
     moves.forEach((move) => {
@@ -110,16 +113,29 @@ export default function Home() {
     setRightClickedSquares({});
 
     if (selectedSquare) {
+      if (clickedSquare === selectedSquare) {
+        setSelectedSquare(null);
+        setOptionSquares({});
+        return;
+      }
+
+      const clickedPiece = game.get(clickedSquare);
+      if (clickedPiece && clickedPiece.color === game.turn()) {
+        setSelectedSquare(clickedSquare);
+        setOptionSquares(getMoveOptions(clickedSquare));
+        return;
+      }
+
       const moved = applyMove(selectedSquare, clickedSquare);
       if (moved) {
         return;
       }
+
+      return;
     }
 
     const piece = game.get(clickedSquare);
     if (!piece || piece.color !== game.turn()) {
-      setSelectedSquare(null);
-      setOptionSquares({});
       return;
     }
 
@@ -145,6 +161,7 @@ export default function Home() {
               pieces: customPieces,
               darkSquareStyle: { backgroundColor: '#769656' },
               lightSquareStyle: { backgroundColor: '#b4c89d' },
+              canDragPiece: ({ piece }) => piece.pieceType[0] === game.turn(),
               onPieceDrop: ({ sourceSquare, targetSquare }) => onPieceDrop(sourceSquare, targetSquare),
               onSquareClick: ({ square }) => onSquareClick(square),
               squareStyles: { ...rightClickedSquares, ...moveSquares, ...optionSquares },
