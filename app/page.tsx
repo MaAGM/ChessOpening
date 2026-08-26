@@ -147,7 +147,7 @@ export default function Home() {
               lightSquareStyle: { backgroundColor: '#b4c89d' },
               onPieceDrop: ({ sourceSquare, targetSquare }) => onPieceDrop(sourceSquare, targetSquare),
               onSquareClick: ({ square }) => onSquareClick(square),
-              customSquareStyles: { ...rightClickedSquares, ...moveSquares, ...optionSquares },
+              squareStyles: { ...rightClickedSquares, ...moveSquares, ...optionSquares },
             }}
           />
         </div>
