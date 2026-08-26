@@ -43,17 +43,16 @@ const customPieces = {
 export default function Home() {
   // Keep the full chess game in state so we can always render from the latest FEN.
   const [game, setGame] = useState(() => new Chess());
+  const [moveSquares, setMoveSquares] = useState<Record<string, CSSProperties>>({});
+  const [optionSquares, setOptionSquares] = useState<Record<string, CSSProperties>>({});
+  const [rightClickedSquares, setRightClickedSquares] = useState<Record<string, CSSProperties>>({});
+  const [selectedSquare, setSelectedSquare] = useState<Square | null>(null);
 
-  const onPieceDrop = (sourceSquare: string, targetSquare: string | null) => {
-    if (!targetSquare) {
-      return false;
-    }
-
-    // Work on a copy to keep state updates immutable.
+  const applyMove = (sourceSquare: Square, targetSquare: Square) => {
     const nextGame = new Chess(game.fen());
     const move = nextGame.move({
-      from: sourceSquare as Square,
-      to: targetSquare as Square,
+      from: sourceSquare,
+      to: targetSquare,
       promotion: "q",
     });
 
@@ -65,7 +64,68 @@ export default function Home() {
     console.log("Position (FEN):", nextGame.fen());
 
     setGame(nextGame);
+    setMoveSquares({
+      [move.from]: { backgroundColor: "rgba(255, 255, 0, 0.4)" },
+      [move.to]: { backgroundColor: "rgba(255, 255, 0, 0.4)" },
+    });
+    setOptionSquares({});
+    setRightClickedSquares({});
+    setSelectedSquare(null);
+
     return true;
+  };
+
+  const onPieceDrop = (sourceSquare: string, targetSquare: string | null) => {
+    if (!targetSquare) {
+      return false;
+    }
+
+    return applyMove(sourceSquare as Square, targetSquare as Square);
+  };
+
+  const getMoveOptions = (square: Square) => {
+    const moves = game.moves({ square, verbose: true });
+    if (moves.length === 0) {
+      return {};
+    }
+
+    const squares: Record<string, CSSProperties> = {
+      [square]: { backgroundColor: "rgba(0, 0, 255, 0.2)" },
+    };
+
+    moves.forEach((move) => {
+      squares[move.to] = {
+        background:
+          move.captured
+            ? "radial-gradient(transparent 0%, transparent 79%, rgba(0,0,0,.1) 80%)"
+            : "radial-gradient(circle, rgba(0,0,255,.2) 25%, transparent 25%)",
+      };
+    });
+
+    return squares;
+  };
+
+  const onSquareClick = (square: string) => {
+    const clickedSquare = square as Square;
+    setRightClickedSquares({});
+
+    if (selectedSquare) {
+      const moved = applyMove(selectedSquare, clickedSquare);
+      if (moved) {
+        return;
+      }
+    }
+
+    const piece = game.get(clickedSquare);
+    if (!piece || piece.color !== game.turn()) {
+      setSelectedSquare(null);
+      setOptionSquares({});
+      return;
+    }
+
+    const options = getMoveOptions(clickedSquare);
+    setSelectedSquare(clickedSquare);
+    setOptionSquares(options);
   };
 
   return (
@@ -86,6 +146,8 @@ export default function Home() {
               darkSquareStyle: { backgroundColor: '#769656' },
               lightSquareStyle: { backgroundColor: '#b4c89d' },
               onPieceDrop: ({ sourceSquare, targetSquare }) => onPieceDrop(sourceSquare, targetSquare),
+              onSquareClick: ({ square }) => onSquareClick(square),
+              squareStyles: { ...rightClickedSquares, ...moveSquares, ...optionSquares },
             }}
           />
         </div>
