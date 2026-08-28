@@ -1,9 +1,10 @@
 "use client";
 
 import type { CSSProperties } from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Chess, Square } from "chess.js";
 import { Chessboard } from "react-chessboard";
+import type { PieceHandlerArgs } from "react-chessboard";
 
 type PieceImageProps = {
   fill?: string;
@@ -41,6 +42,7 @@ const customPieces = {
 };
 
 const initialFen = new Chess().fen();
+const BOARD_FILES = ["a", "b", "c", "d", "e", "f", "g", "h"];
 
 export default function Home() {
   const [game, setGame] = useState(() => new Chess());
@@ -49,9 +51,65 @@ export default function Home() {
   const [moveSquares, setMoveSquares] = useState<Record<string, CSSProperties>>({});
   const [optionSquares, setOptionSquares] = useState<Record<string, CSSProperties>>({});
   const [rightClickedSquares, setRightClickedSquares] = useState<Record<string, CSSProperties>>({});
+  const [checkSquare, setCheckSquare] = useState<Record<string, CSSProperties>>({});
   const [selectedSquare, setSelectedSquare] = useState<Square | null>(null);
+  const [draggedSquare, setDraggedSquare] = useState<string | null>(null);
+  const draggedSquareRef = useRef<string | null>(null);
   const currentFen = history[historyIndex];
   const currentGame = new Chess(currentFen);
+
+  const restoreDraggedPiece = () => {
+    draggedSquareRef.current = null;
+    setDraggedSquare(null);
+  };
+
+  const updateCheckState = (fenGame: Chess) => {
+    if (!fenGame.inCheck()) {
+      setCheckSquare({});
+      return;
+    }
+
+    const turn = fenGame.turn();
+    const board = fenGame.board();
+
+    for (let rank = 0; rank < board.length; rank++) {
+      for (let file = 0; file < board[rank].length; file++) {
+        const piece = board[rank][file];
+        if (piece && piece.type === "k" && piece.color === turn) {
+          const kingSquare = `${BOARD_FILES[file]}${8 - rank}`;
+          setCheckSquare({
+            [kingSquare]: {
+              background: "radial-gradient(transparent 0%, transparent 79%, rgba(220, 20, 60, 0.8) 80%)",
+            },
+          });
+          return;
+        }
+      }
+    }
+
+    setCheckSquare({});
+  };
+
+  // Keep the check highlight in sync with every move AND with history navigation.
+  useEffect(() => {
+    updateCheckState(new Chess(currentFen));
+  }, [currentFen]);
+
+  useEffect(() => {
+    const onRelease = () => {
+      if (!draggedSquareRef.current) {
+        return;
+      }
+      restoreDraggedPiece();
+    };
+
+    window.addEventListener("pointerup", onRelease, true);
+    window.addEventListener("pointercancel", onRelease, true);
+    return () => {
+      window.removeEventListener("pointerup", onRelease, true);
+      window.removeEventListener("pointercancel", onRelease, true);
+    };
+  }, []);
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
@@ -85,18 +143,20 @@ export default function Home() {
       nextGame.load(history[historyIndex]);
     }
 
-    const move = nextGame.move({
-      from: sourceSquare,
-      to: targetSquare,
-      promotion: "q",
-    });
+    let move;
+    try {
+      move = nextGame.move({
+        from: sourceSquare,
+        to: targetSquare,
+        promotion: "q",
+      });
+    } catch {
+      return false;
+    }
 
     if (!move) {
       return false;
     }
-
-    console.log("Move (SAN):", move.san);
-    console.log("Position (FEN):", nextGame.fen());
 
     const nextFen = nextGame.fen();
     const updatedHistory = [...nextHistory, nextFen];
@@ -105,8 +165,8 @@ export default function Home() {
     setHistory(updatedHistory);
     setHistoryIndex(updatedHistory.length - 1);
     setMoveSquares({
-      [move.from]: { backgroundColor: "rgba(255, 255, 0, 0.7)" },
-      [move.to]: { backgroundColor: "rgba(255, 255, 0, 0.7)" },
+      [move.from]: { backgroundColor: "rgba(245, 236, 142, 0.6)" },
+      [move.to]: { backgroundColor: "rgba(245, 236, 142, 0.6)" },
     });
     setOptionSquares({});
     setRightClickedSquares({});
@@ -118,6 +178,7 @@ export default function Home() {
   const onPieceDrop = (sourceSquare: string, targetSquare: string | null) => {
     setSelectedSquare(null);
     setOptionSquares({});
+    restoreDraggedPiece();
 
     if (!targetSquare) {
       return false;
@@ -133,19 +194,45 @@ export default function Home() {
     }
 
     const squares: Record<string, CSSProperties> = {
-      [square]: { backgroundColor: "rgba(0, 0, 255, 0.5)" },
+      [square]: { backgroundColor: "rgba(20, 85, 30, 0.3)" },
     };
 
     moves.forEach((move) => {
       squares[move.to] = {
         background:
           move.captured
-            ? "radial-gradient(transparent 0%, transparent 79%, rgba(0,0,0,.1) 80%)"
-            : "radial-gradient(circle, rgba(0,0,255,.2) 25%, transparent 25%)",
+            ? "radial-gradient(transparent 0%, transparent 79%, rgba(0, 0, 0, 0.25) 80%)"
+            : "radial-gradient(circle, rgba(0, 0, 0, 0.25) 25%, transparent 25%)",
       };
     });
 
     return squares;
+  };
+
+  const onPieceDragBegin = ({ square }: PieceHandlerArgs) => {
+    if (!square) {
+      return;
+    }
+
+    draggedSquareRef.current = square;
+    setDraggedSquare(square);
+
+    const clickedSquare = square as Square;
+    const positionGame = new Chess(currentFen);
+    setRightClickedSquares({});
+
+    const piece = positionGame.get(clickedSquare);
+    if (!piece || piece.color !== positionGame.turn()) {
+      return;
+    }
+
+    setSelectedSquare(clickedSquare);
+    setOptionSquares(getMoveOptions(clickedSquare, positionGame));
+  };
+
+  const onPieceDragEnd = () => {
+    restoreDraggedPiece();
+    setOptionSquares({});
   };
 
   const onSquareClick = (square: string) => {
@@ -194,6 +281,14 @@ export default function Home() {
         </p>
 
         <div className="mx-auto w-full max-w-[560px]">
+          <div className="select-none">
+          {draggedSquare ? (
+            <style>{`
+              #chess-opening-board-board [id*="-piece-"][id$="-${draggedSquare}"] {
+                opacity: 0 !important;
+              }
+            `}</style>
+          ) : null}
           <Chessboard
             options={{
               id: "chess-opening-board",
@@ -202,12 +297,16 @@ export default function Home() {
               pieces: customPieces,
               darkSquareStyle: { backgroundColor: '#769656' },
               lightSquareStyle: { backgroundColor: '#b4c89d' },
+              draggingPieceGhostStyle: { opacity: 1 },
               canDragPiece: ({ piece }) => piece.pieceType[0] === currentGame.turn(),
+              onPieceDrag: onPieceDragBegin,
+              onPieceDragCancel: onPieceDragEnd,
               onPieceDrop: ({ sourceSquare, targetSquare }) => onPieceDrop(sourceSquare, targetSquare),
               onSquareClick: ({ square }) => onSquareClick(square),
-              squareStyles: { ...rightClickedSquares, ...moveSquares, ...optionSquares },
+              squareStyles: { ...rightClickedSquares, ...moveSquares, ...optionSquares, ...checkSquare },
             }}
           />
+          </div>
         </div>
       </section>
     </main>
