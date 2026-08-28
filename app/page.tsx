@@ -44,6 +44,12 @@ const customPieces = {
 const initialFen = new Chess().fen();
 const BOARD_FILES = ["a", "b", "c", "d", "e", "f", "g", "h"];
 
+const playSound = (type: string) => {
+  if (typeof window !== "undefined") {
+    new Audio(`/sounds/${type}.mp3`).play().catch((e) => console.log("Audio play failed", e));
+  }
+};
+
 export default function Home() {
   const [game, setGame] = useState(() => new Chess());
   const [history, setHistory] = useState<string[]>([initialFen]);
@@ -161,6 +167,18 @@ export default function Home() {
     const nextFen = nextGame.fen();
     const updatedHistory = [...nextHistory, nextFen];
 
+    if (nextGame.isCheckmate() || nextGame.isGameOver()) {
+      playSound("checkmate");
+    } else if (nextGame.inCheck()) {
+      playSound("check");
+    } else if (move.captured || move.flags.includes("c") || move.flags.includes("e")) {
+      playSound("capture");
+    } else if (move.flags.includes("k") || move.flags.includes("q")) {
+      playSound("castle");
+    } else {
+      playSound("move");
+    }
+
     setGame(nextGame);
     setHistory(updatedHistory);
     setHistoryIndex(updatedHistory.length - 1);
@@ -214,6 +232,8 @@ export default function Home() {
       return;
     }
 
+    playSound("select");
+
     draggedSquareRef.current = square;
     setDraggedSquare(square);
 
@@ -249,6 +269,7 @@ export default function Home() {
 
       const clickedPiece = positionGame.get(clickedSquare);
       if (clickedPiece && clickedPiece.color === positionGame.turn()) {
+        playSound("select");
         setSelectedSquare(clickedSquare);
         setOptionSquares(getMoveOptions(clickedSquare, positionGame));
         return;
@@ -267,6 +288,7 @@ export default function Home() {
       return;
     }
 
+    playSound("select");
     const options = getMoveOptions(clickedSquare, positionGame);
     setSelectedSquare(clickedSquare);
     setOptionSquares(options);
