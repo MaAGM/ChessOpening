@@ -1,7 +1,7 @@
 "use client";
 
 import type { CSSProperties } from "react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Chess, Square } from "chess.js";
 import { Chessboard } from "react-chessboard";
 import type { PieceHandlerArgs } from "react-chessboard";
@@ -59,15 +59,8 @@ export default function Home() {
   const [rightClickedSquares, setRightClickedSquares] = useState<Record<string, CSSProperties>>({});
   const [checkSquare, setCheckSquare] = useState<Record<string, CSSProperties>>({});
   const [selectedSquare, setSelectedSquare] = useState<Square | null>(null);
-  const [draggedSquare, setDraggedSquare] = useState<string | null>(null);
-  const draggedSquareRef = useRef<string | null>(null);
   const currentFen = history[historyIndex];
   const currentGame = new Chess(currentFen);
-
-  const restoreDraggedPiece = () => {
-    draggedSquareRef.current = null;
-    setDraggedSquare(null);
-  };
 
   const updateCheckState = (fenGame: Chess) => {
     if (!fenGame.inCheck()) {
@@ -100,22 +93,6 @@ export default function Home() {
   useEffect(() => {
     updateCheckState(new Chess(currentFen));
   }, [currentFen]);
-
-  useEffect(() => {
-    const onRelease = () => {
-      if (!draggedSquareRef.current) {
-        return;
-      }
-      restoreDraggedPiece();
-    };
-
-    window.addEventListener("pointerup", onRelease, true);
-    window.addEventListener("pointercancel", onRelease, true);
-    return () => {
-      window.removeEventListener("pointerup", onRelease, true);
-      window.removeEventListener("pointercancel", onRelease, true);
-    };
-  }, []);
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
@@ -196,7 +173,6 @@ export default function Home() {
   const onPieceDrop = (sourceSquare: string, targetSquare: string | null) => {
     setSelectedSquare(null);
     setOptionSquares({});
-    restoreDraggedPiece();
 
     if (!targetSquare) {
       return false;
@@ -234,9 +210,6 @@ export default function Home() {
 
     playSound("select");
 
-    draggedSquareRef.current = square;
-    setDraggedSquare(square);
-
     const clickedSquare = square as Square;
     const positionGame = new Chess(currentFen);
     setRightClickedSquares({});
@@ -251,7 +224,6 @@ export default function Home() {
   };
 
   const onPieceDragEnd = () => {
-    restoreDraggedPiece();
     setOptionSquares({});
   };
 
@@ -295,22 +267,9 @@ export default function Home() {
   };
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-slate-950 px-4 py-10 text-slate-100">
-      <section className="w-full max-w-2xl rounded-2xl border border-slate-800 bg-slate-900/80 p-6 shadow-2xl shadow-black/40">
-        <h1 className="mb-2 text-center text-2xl font-semibold">Chess Opening Starter</h1>
-        <p className="mb-6 text-center text-sm text-slate-300">
-          Drag and drop pieces to play legal moves. Open the browser console to see SAN and FEN logs.
-        </p>
-
-        <div className="mx-auto w-full max-w-[560px]">
-          <div className="select-none">
-          {draggedSquare ? (
-            <style>{`
-              #chess-opening-board-board [id*="-piece-"][id$="-${draggedSquare}"] {
-                opacity: 0 !important;
-              }
-            `}</style>
-          ) : null}
+    <main className="flex min-h-screen items-center justify-start bg-slate-900 px-4 py-10 pl-16 text-slate-100">
+      <section className="w-full max-w-137.5 border-2 border-[#D4AF37] bg-[#D4AF37]/10 p-2 shadow-2xl shadow-black/40">
+        <div className="select-none bg-[#769656]">
           <Chessboard
             options={{
               id: "chess-opening-board",
@@ -328,7 +287,6 @@ export default function Home() {
               squareStyles: { ...rightClickedSquares, ...moveSquares, ...optionSquares, ...checkSquare },
             }}
           />
-          </div>
         </div>
       </section>
     </main>
