@@ -278,7 +278,7 @@ export default function Home() {
               pieces: customPieces,
               darkSquareStyle: { backgroundColor: '#769656' },
               lightSquareStyle: { backgroundColor: '#b4c89d' },
-              draggingPieceGhostStyle: { opacity: 1 },
+              draggingPieceGhostStyle: { opacity: 0 },
               canDragPiece: ({ piece }) => piece.pieceType[0] === currentGame.turn(),
               onPieceDrag: onPieceDragBegin,
               onPieceDragCancel: onPieceDragEnd,
