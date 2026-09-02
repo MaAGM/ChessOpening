@@ -23,11 +23,14 @@ export function useChessGame() {
   const [checkSquare, setCheckSquare] = useState<Record<string, CSSProperties>>({});
   const [selectedSquare, setSelectedSquare] = useState<Square | null>(null);
 
-  // Sticky opening name: once a position matches a known opening, it stays
-  // displayed even after the game leaves the local database (i.e. moving
-  // further into an unlisted continuation shouldn't blank the label).
-  // Navigating history backward past the point where it was first detected
-  // re-derives it from scratch, since lookups are recomputed per position.
+  // Sticky opening name: re-derived from the local database on every move.
+  // Because the dataset has an entry per known theoretical position (not
+  // just top-level openings), this naturally becomes more specific as play
+  // continues through known theory - e.g. "King's Indian Defense" early on,
+  // then "King's Indian Defense: Sämisch Variation" a few moves later. It
+  // only "stops updating" once the game leaves the database entirely, at
+  // which point the last (most specific) match found stays displayed
+  // rather than disappearing.
   const [lastKnownOpening, setLastKnownOpening] = useState<string | null>(null);
 
   const currentFen = history[historyIndex];
@@ -39,9 +42,10 @@ export function useChessGame() {
   }, [currentFen]);
 
   // Opening detection: re-evaluate on every position change. If the current
-  // position matches a known opening, update the sticky label. If it
-  // doesn't match but we're at the very start (index 0), reset to null so a
-  // fresh game doesn't inherit a stale label from a previous session.
+  // position matches a known opening, update the sticky label (this is what
+  // lets the name become more specific move after move). If it doesn't
+  // match but we're at the very start (index 0), reset to null so a fresh
+  // game doesn't inherit a stale label from a previous session.
   useEffect(() => {
     const name = getOpeningName(currentFen);
     if (name) {

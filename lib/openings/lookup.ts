@@ -1,41 +1,34 @@
-import ecoData from "./eco.json";
+import openingsData from "./openings.json";
 
-export type OpeningEntry = {
-  eco: string;
-  name: string;
-};
+// openings.json maps a bare piece-placement string (the first FEN field
+// only - no side-to-move, castling rights, or en passant square) directly
+// to an opening name, e.g.:
+//   "rnbqkbnr/pppppppp/8/8/8/7N/PPPPPPPP/RNBQKB1R": "Amar Opening"
+// This is coarser than a full position (it ignores castling rights and
+// en passant), but that's actually fine for opening identification: two
+// positions with the same piece placement almost always belong to the
+// same opening line in practice, and this is the exact key format the
+// dataset ships with.
+const openingsByPlacement = openingsData as Record<string, string>;
 
-/**
- * Normalizes a full FEN string down to its first 4 fields
- * (piece placement, active color, castling rights, en passant square).
- * The halfmove clock and fullmove number are stripped because they do not
- * affect which opening a position belongs to, and including them would make
- * every lookup miss after the first couple of moves.
- */
-function normalizeFen(fen: string): string {
-  return fen.split(" ").slice(0, 4).join(" ");
-}
-
-// Built once at module load time; reused for every lookup for the lifetime
-// of the app. Keying by normalized FEN gives O(1) lookups instead of
-// scanning an array of {fen, name} pairs on every move.
-const openingMap: Map<string, OpeningEntry> = new Map(
-  Object.entries(ecoData as Record<string, OpeningEntry>)
-);
-
-/**
- * Returns the opening entry (ECO code + name) matching the given FEN,
- * or null if the position isn't in the local database (i.e. the game
- * has left known opening theory, or the dataset doesn't cover it yet).
- */
-export function getOpening(fen: string): OpeningEntry | null {
-  const key = normalizeFen(fen);
-  return openingMap.get(key) ?? null;
+function getPiecePlacement(fen: string): string {
+  return fen.split(" ")[0];
 }
 
 /**
- * Convenience wrapper returning just the display name, or null.
+ * Returns the opening name for the given FEN, or null if the position
+ * isn't in the local database (the game has left known theory, or this
+ * exact placement isn't covered).
+ *
+ * Because the dataset contains one entry per known theoretical position -
+ * from the very first move down to deep, specific lines - looking this up
+ * on every ply naturally yields more and more specific names as the game
+ * progresses through known theory (e.g. "King's Indian Defense" early on,
+ * later "King's Indian Defense: Sämisch Variation, Bronstein Defense" once
+ * enough moves have been played). There's no separate "refine" step needed:
+ * refinement falls out of calling this again after every move.
  */
 export function getOpeningName(fen: string): string | null {
-  return getOpening(fen)?.name ?? null;
+  const placement = getPiecePlacement(fen);
+  return openingsByPlacement[placement] ?? null;
 }
