@@ -17,6 +17,7 @@ export default function Home() {
     onPieceDragEnd,
     onSquareClick,
     onSquareRightClick,
+    resetGame,
   } = useChessGame();
   const [panelMode, setPanelMode] = useState<"menu" | "explorer">("menu");
 
@@ -24,7 +25,6 @@ export default function Home() {
     if (panelMode === "menu") {
       setPanelMode("explorer");
     }
-
     return onPieceDrop(sourceSquare, targetSquare);
   };
 
@@ -55,28 +55,56 @@ export default function Home() {
             </h2>
             <button
               type="button"
-              className="rounded-xl border border-emerald-400/40 bg-emerald-500/20 px-4 py-3 text-left font-semibold text-emerald-100 transition hover:bg-emerald-500/35 hover:text-white"
-              onClick={() => setPanelMode("explorer")}
+              disabled
+              className="cursor-not-allowed rounded-xl border border-emerald-400/40 bg-emerald-500/20 px-4 py-3 text-left font-semibold text-emerald-100 opacity-50 grayscale"
             >
               Apprendre une ouverture
             </button>
             <button
               type="button"
-              className="rounded-xl border border-blue-400/40 bg-blue-500/20 px-4 py-3 text-left font-semibold text-blue-100 transition hover:bg-blue-500/35 hover:text-white"
-              onClick={() => setPanelMode("explorer")}
+              disabled
+              className="cursor-not-allowed rounded-xl border border-blue-400/40 bg-blue-500/20 px-4 py-3 text-left font-semibold text-blue-100 opacity-50 grayscale"
             >
               Mettre à jour son répertoire
             </button>
             <button
               type="button"
-              className="rounded-xl border border-amber-400/40 bg-amber-500/20 px-4 py-3 text-left font-semibold text-amber-100 transition hover:bg-amber-500/35 hover:text-white"
-              onClick={() => setPanelMode("explorer")}
+              disabled
+              className="cursor-not-allowed rounded-xl border border-amber-400/40 bg-amber-500/20 px-4 py-3 text-left font-semibold text-amber-100 opacity-50 grayscale"
             >
               Réviser les ouvertures
             </button>
+            <p className="text-center text-xs text-slate-500">
+              Jouez un coup sur l&apos;échiquier pour commencer.
+            </p>
           </div>
         ) : (
-          <MasterExplorer currentFen={currentFen} />
+          <div className="flex h-full flex-col gap-3">
+            <button
+              type="button"
+              onClick={() => {
+                setPanelMode("menu");
+                resetGame();
+              }}
+              className="flex w-fit items-center gap-2 rounded-lg border border-slate-600 bg-slate-700/40 px-3 py-1.5 text-sm font-medium text-slate-300 transition hover:border-[#D4AF37]/60 hover:bg-slate-700/70 hover:text-[#D4AF37]"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                className="h-4 w-4"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M17 10a.75.75 0 0 1-.75.75H5.612l4.158 3.96a.75.75 0 1 1-1.04 1.08l-5.5-5.25a.75.75 0 0 1 0-1.08l5.5-5.25a.75.75 0 1 1 1.04 1.08L5.612 9.25H16.25A.75.75 0 0 1 17 10Z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              Retour
+            </button>
+
+            <MasterExplorer currentFen={currentFen} />
+          </div>
         )}
       </aside>
     </main>
