@@ -4,6 +4,7 @@ import { useChessGame } from "@/hooks/useChessGame";
 import { ChessBoard } from "@/components/chess/ChessBoard";
 import { OpeningName } from "@/components/chess/OpeningName";
 import { MoveList } from "@/components/chess/MoveList";
+import { MasterExplorer } from "@/components/chess/MasterExplorer";
 
 export default function Home() {
   const {
@@ -45,6 +46,7 @@ export default function Home() {
           Moves
         </h2>
         <MoveList sanHistory={sanHistory} historyIndex={historyIndex} onSelectMove={goToMove} />
+        <MasterExplorer currentFen={currentFen} />
       </aside>
     </main>
   );
