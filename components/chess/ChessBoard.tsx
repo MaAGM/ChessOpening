@@ -46,6 +46,7 @@ type ChessBoardProps = {
   onPieceDragBegin: (args: PieceHandlerArgs) => void;
   onPieceDragEnd: () => void;
   onSquareClick: (square: string) => void;
+  onSquareRightClick: (square: string) => void;
 };
 
 export function ChessBoard({
@@ -56,6 +57,7 @@ export function ChessBoard({
   onPieceDragBegin,
   onPieceDragEnd,
   onSquareClick,
+  onSquareRightClick,
 }: ChessBoardProps) {
   return (
     <div className="select-none bg-[#769656]">
@@ -73,6 +75,7 @@ export function ChessBoard({
           onPieceDragCancel: onPieceDragEnd,
           onPieceDrop: ({ sourceSquare, targetSquare }) => onPieceDrop(sourceSquare, targetSquare),
           onSquareClick: ({ square }) => onSquareClick(square),
+          onSquareRightClick: ({ square }) => onSquareRightClick(square),
           squareStyles,
         }}
       />

@@ -172,6 +172,25 @@ export function useChessGame() {
     setOptionSquares({});
   };
 
+  // Right-click toggles a red highlight on a square, chess.com-style.
+  // Clicking an already-highlighted square removes it; clicking a new one
+  // adds it. Multiple squares can be highlighted at once. These highlights
+  // are cleared whenever a move is played or a left-click interaction
+  // starts (see the setRightClickedSquares({}) calls in applyMove,
+  // onPieceDragBegin, and onSquareClick below).
+  const onSquareRightClick = (square: string) => {
+    setRightClickedSquares((prev) => {
+      if (prev[square]) {
+        const { [square]: _removed, ...rest } = prev;
+        return rest;
+      }
+      return {
+        ...prev,
+        [square]: { backgroundColor: "rgba(235, 97, 80, 0.8)" },
+      };
+    });
+  };
+
   const onSquareClick = (square: string) => {
     const clickedSquare = square as Square;
     const positionGame = new Chess(currentFen);
@@ -240,6 +259,7 @@ export function useChessGame() {
     onPieceDragBegin,
     onPieceDragEnd,
     onSquareClick,
+    onSquareRightClick,
     goToMove,
   };
 }

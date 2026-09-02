@@ -1,7 +1,7 @@
 "use client";
 
 import { useChessGame } from "@/hooks/useChessGame";
-import { ChessBoard } from "@/components/chess/ChessBoard"
+import { ChessBoard } from "@/components/chess/ChessBoard";
 import { OpeningName } from "@/components/chess/OpeningName";
 import { MoveList } from "@/components/chess/MoveList";
 
@@ -17,6 +17,7 @@ export default function Home() {
     onPieceDragBegin,
     onPieceDragEnd,
     onSquareClick,
+    onSquareRightClick,
     goToMove,
   } = useChessGame();
 
@@ -34,6 +35,7 @@ export default function Home() {
             onPieceDragBegin={onPieceDragBegin}
             onPieceDragEnd={onPieceDragEnd}
             onSquareClick={onSquareClick}
+            onSquareRightClick={onSquareRightClick}
           />
         </section>
       </div>
