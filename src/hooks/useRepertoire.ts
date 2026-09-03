@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 
 export type LearningProgress = Record<string, number>;
 
@@ -52,13 +52,10 @@ export function setSavedRepertoire(value: string[]): void {
 }
 
 export function useRepertoire() {
-  const [learningProgress, setLearningProgressState] = useState<LearningProgress>({});
-  const [savedRepertoire, setSavedRepertoireState] = useState<string[]>([]);
-
-  useEffect(() => {
-    setLearningProgressState(getLearningProgress());
-    setSavedRepertoireState(getSavedRepertoire());
-  }, []);
+  const [learningProgress, setLearningProgressState] = useState<LearningProgress>(() =>
+    getLearningProgress(),
+  );
+  const [savedRepertoire, setSavedRepertoireState] = useState<string[]>(() => getSavedRepertoire());
 
   const updateLearningProgress = useCallback((openingId: string, stepIndex: number) => {
     setLearningProgressState((previous) => {
