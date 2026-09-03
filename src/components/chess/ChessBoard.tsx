@@ -1,7 +1,7 @@
 import type { CSSProperties } from "react";
 import { Chess } from "chess.js";
 import { Chessboard } from "react-chessboard";
-import type { PieceHandlerArgs } from "react-chessboard";
+import type { Arrow, PieceHandlerArgs } from "react-chessboard";
 
 type PieceImageProps = {
   fill?: string;
@@ -61,6 +61,12 @@ export function ChessBoard({
   onSquareClick,
   onSquareRightClick,
 }: ChessBoardProps) {
+  const boardArrows: Arrow[] = (customArrows ?? []).map(([startSquare, endSquare]) => ({
+    startSquare,
+    endSquare,
+    color: "#f59e0b",
+  }));
+
   return (
     <div className="select-none bg-[#769656]">
       <Chessboard
@@ -79,7 +85,7 @@ export function ChessBoard({
           onSquareClick: ({ square }) => onSquareClick(square),
           onSquareRightClick: ({ square }) => onSquareRightClick(square),
           squareStyles,
-          arrows: customArrows ?? [],
+          arrows: boardArrows,
         }}
       />
     </div>
