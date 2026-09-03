@@ -42,6 +42,7 @@ type ChessBoardProps = {
   position: string;
   currentGame: Chess;
   squareStyles: Record<string, CSSProperties>;
+  customArrows?: [string, string][];
   onPieceDrop: (sourceSquare: string, targetSquare: string | null) => boolean;
   onPieceDragBegin: (args: PieceHandlerArgs) => void;
   onPieceDragEnd: () => void;
@@ -53,6 +54,7 @@ export function ChessBoard({
   position,
   currentGame,
   squareStyles,
+  customArrows,
   onPieceDrop,
   onPieceDragBegin,
   onPieceDragEnd,
@@ -77,6 +79,7 @@ export function ChessBoard({
           onSquareClick: ({ square }) => onSquareClick(square),
           onSquareRightClick: ({ square }) => onSquareRightClick(square),
           squareStyles,
+          arrows: customArrows ?? [],
         }}
       />
     </div>
