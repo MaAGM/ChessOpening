@@ -1,10 +1,15 @@
 "use client";
 
 import { useState } from "react";
+import { Chess } from "chess.js";
 import { useChessGame } from "@/hooks/useChessGame";
 import { ChessBoard } from "@/components/chess/ChessBoard";
 import { OpeningName } from "@/components/chess/OpeningName";
+import { LearningPanel } from "@/components/chess/LearningPanel";
 import { MasterExplorer } from "@/components/chess/MasterExplorer";
+import { OpeningSelector } from "@/components/chess/OpeningSelector";
+import { useRepertoire } from "@/hooks/useRepertoire";
+import { openingTutorials } from "@/lib/data/openings";
 
 export default function Home() {
   const {
@@ -19,13 +24,71 @@ export default function Home() {
     onSquareRightClick,
     resetGame,
   } = useChessGame();
-  const [panelMode, setPanelMode] = useState<"menu" | "explorer">("menu");
+  const { addSavedMove, updateLearningProgress } = useRepertoire();
+  const [panelMode, setPanelMode] = useState<
+    "menu" | "explorer" | "opening_selector" | "learning_active"
+  >("menu");
+  const [activeTutorialId, setActiveTutorialId] = useState<string | null>(null);
+  const [currentStepIndex, setCurrentStepIndex] = useState(0);
+
+  const activeTutorial = openingTutorials.find((tutorial) => tutorial.id === activeTutorialId) ?? null;
+  const currentStep =
+    activeTutorial && activeTutorial.steps.length > 0
+      ? activeTutorial.steps[Math.min(currentStepIndex, activeTutorial.steps.length - 1)]
+      : null;
 
   const handlePieceDrop = (sourceSquare: string, targetSquare: string | null) => {
     if (panelMode === "menu") {
       setPanelMode("explorer");
     }
     return onPieceDrop(sourceSquare, targetSquare);
+  };
+
+  const playInitialSequence = (initialSequence: string[]) => {
+    if (initialSequence.length === 0) return;
+
+    const simulationGame = new Chess();
+    const moves = initialSequence
+      .map((sanMove) => simulationGame.move(sanMove))
+      .filter((move): move is NonNullable<ReturnType<Chess["move"]>> => Boolean(move))
+      .map((move) => ({ from: move.from, to: move.to }));
+
+    const playMove = (index: number) => {
+      if (index >= moves.length) return;
+      const nextMove = moves[index];
+      onPieceDrop(nextMove.from, nextMove.to);
+      window.setTimeout(() => playMove(index + 1), 0);
+    };
+
+    window.setTimeout(() => playMove(0), 0);
+  };
+
+  const handleStartTutorial = (id: string, startIndex: number) => {
+    const tutorial = openingTutorials.find((opening) => opening.id === id);
+    if (!tutorial || tutorial.steps.length === 0) return;
+
+    const safeStartIndex = Math.min(Math.max(startIndex, 0), tutorial.steps.length - 1);
+    setActiveTutorialId(id);
+    setCurrentStepIndex(safeStartIndex);
+    setPanelMode("learning_active");
+    updateLearningProgress(id, safeStartIndex);
+
+    resetGame();
+    playInitialSequence(tutorial.initialSequence);
+  };
+
+  const handleNextStep = () => {
+    if (!activeTutorial || !activeTutorialId) return;
+    const nextStep = Math.min(currentStepIndex + 1, activeTutorial.steps.length - 1);
+    setCurrentStepIndex(nextStep);
+    updateLearningProgress(activeTutorialId, nextStep);
+  };
+
+  const handleBackToMenu = () => {
+    setPanelMode("menu");
+    setActiveTutorialId(null);
+    setCurrentStepIndex(0);
+    resetGame();
   };
 
   return (
@@ -43,6 +106,7 @@ export default function Home() {
             onPieceDragEnd={onPieceDragEnd}
             onSquareClick={onSquareClick}
             onSquareRightClick={onSquareRightClick}
+            customArrows={currentStep?.arrows}
           />
         </section>
       </div>
@@ -55,8 +119,8 @@ export default function Home() {
             </h2>
             <button
               type="button"
-              disabled
-              className="cursor-not-allowed rounded-xl border border-emerald-400/40 bg-emerald-500/20 px-4 py-3 text-left font-semibold text-emerald-100 opacity-50 grayscale"
+              onClick={() => setPanelMode("opening_selector")}
+              className="rounded-xl border border-emerald-400/40 bg-emerald-500/20 px-4 py-3 text-left font-semibold text-emerald-100 transition hover:border-emerald-300/70 hover:bg-emerald-500/30"
             >
               Apprendre une ouverture
             </button>
@@ -82,10 +146,7 @@ export default function Home() {
           <div className="flex h-full flex-col gap-3">
             <button
               type="button"
-              onClick={() => {
-                setPanelMode("menu");
-                resetGame();
-              }}
+              onClick={handleBackToMenu}
               className="flex w-fit items-center gap-2 rounded-lg border border-slate-600 bg-slate-700/40 px-3 py-1.5 text-sm font-medium text-slate-300 transition hover:border-[#D4AF37]/60 hover:bg-slate-700/70 hover:text-[#D4AF37]"
             >
               <svg
@@ -103,7 +164,17 @@ export default function Home() {
               Retour
             </button>
 
-            <MasterExplorer currentFen={currentFen} />
+            {panelMode === "explorer" && <MasterExplorer currentFen={currentFen} />}
+
+            {panelMode === "opening_selector" && <OpeningSelector onSelectOpening={handleStartTutorial} />}
+
+            {panelMode === "learning_active" && currentStep && (
+              <LearningPanel
+                currentStep={currentStep}
+                onNextStep={handleNextStep}
+                onSaveMove={addSavedMove}
+              />
+            )}
           </div>
         )}
       </aside>
