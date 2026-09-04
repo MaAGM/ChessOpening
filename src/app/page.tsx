@@ -9,7 +9,7 @@ import { LearningPanel } from "@/components/chess/LearningPanel";
 import { MasterExplorer } from "@/components/chess/MasterExplorer";
 import { OpeningSelector } from "@/components/chess/OpeningSelector";
 import { useRepertoire } from "@/hooks/useRepertoire";
-import { openingTutorials, findNodeByMoveSequence, computeFenForPath } from "@/lib/data/openings";
+import { findNodeByMoveSequence, computeFenForPath, getAllChapters } from "@/lib/data/openings";
 
 export default function Home() {
   const {
@@ -25,14 +25,14 @@ export default function Home() {
     resetGame,
     loadPosition,
   } = useChessGame();
-  const { addSavedMove, updateLearningProgress } = useRepertoire();
+  const { addSavedMove, addCompletedChapter } = useRepertoire();
   const [panelMode, setPanelMode] = useState<
     "menu" | "explorer" | "opening_selector" | "learning_active"
   >("menu");
   const [activeTutorialId, setActiveTutorialId] = useState<string | null>(null);
   const [currentPath, setCurrentPath] = useState<string[]>([]);
 
-  const activeTutorial = openingTutorials.find((tutorial) => tutorial.id === activeTutorialId) ?? null;
+  const activeTutorial = getAllChapters().find((tutorial) => tutorial.id === activeTutorialId) ?? null;
   const currentNode = activeTutorial
     ? findNodeByMoveSequence(activeTutorial.root, currentPath)
     : null;
@@ -44,17 +44,16 @@ export default function Home() {
     return onPieceDrop(sourceSquare, targetSquare);
   };
 
-  const handleStartTutorial = (id: string, path: string[]) => {
-    const tutorial = openingTutorials.find((opening) => opening.id === id);
+  const handleStartTutorial = (id: string) => {
+    const tutorial = getAllChapters().find((t) => t.id === id);
     if (!tutorial) return;
 
     setActiveTutorialId(id);
-    setCurrentPath(path);
+    setCurrentPath([]);
     setPanelMode("learning_active");
-    updateLearningProgress(id, path);
-
+    // Load the initial position (empty path)
     try {
-      const fen = computeFenForPath(path);
+      const fen = computeFenForPath([]);
       loadPosition(fen);
     } catch (e) {
       console.error(e);
@@ -66,7 +65,6 @@ export default function Home() {
     if (!activeTutorialId) return;
     const nextPath = [...currentPath, san];
     setCurrentPath(nextPath);
-    updateLearningProgress(activeTutorialId, nextPath);
 
     try {
       const nextFen = computeFenForPath(nextPath);

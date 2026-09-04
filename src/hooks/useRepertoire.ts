@@ -1,10 +1,10 @@
+// Updated Repertoire Hook – binary chapter completion
 "use client";
 
 import { useCallback, useState } from "react";
 
-export type LearningProgress = Record<string, string[]>;
-
-const LEARNING_PROGRESS_KEY = "chess-opening:learning-progress";
+// New storage key – bypasses old corrupted cache
+const COMPLETED_CHAPTERS_KEY = "chess-opening:completed-chapters-v2";
 const SAVED_REPERTOIRE_KEY = "chess-opening:saved-repertoire";
 
 function hasBrowserStorage(): boolean {
@@ -20,25 +20,32 @@ function parseJsonSafely<T>(value: string | null, fallback: T): T {
   }
 }
 
-export function getLearningProgress(): LearningProgress {
-  if (!hasBrowserStorage()) return {};
-  const parsed = parseJsonSafely<unknown>(window.localStorage.getItem(LEARNING_PROGRESS_KEY), {});
-  if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) return {};
+// ---------- Completed Chapters ----------
+export type CompletedChapters = string[];
 
-  const progress: LearningProgress = {};
-  for (const [key, value] of Object.entries(parsed)) {
-    if (Array.isArray(value) && value.every((v) => typeof v === "string")) {
-      progress[key] = value;
-    }
-  }
-  return progress;
+export function getCompletedChapters(): CompletedChapters {
+  if (!hasBrowserStorage()) return [];
+  const parsed = parseJsonSafely<string[]>(window.localStorage.getItem(COMPLETED_CHAPTERS_KEY), []);
+  if (!Array.isArray(parsed)) return [];
+  // ensure all entries are strings and unique
+  return Array.from(new Set(parsed.filter((item): item is string => typeof item === "string")));
 }
 
-export function setLearningProgress(value: LearningProgress): void {
+export function setCompletedChapters(value: CompletedChapters): void {
   if (!hasBrowserStorage()) return;
-  window.localStorage.setItem(LEARNING_PROGRESS_KEY, JSON.stringify(value));
+  const unique = Array.from(new Set(value));
+  window.localStorage.setItem(COMPLETED_CHAPTERS_KEY, JSON.stringify(unique));
 }
 
+/** Add a chapter ID to the completed list if not already present. */
+export function markChapterComplete(chapterId: string): void {
+  const current = getCompletedChapters();
+  if (!current.includes(chapterId)) {
+    setCompletedChapters([...current, chapterId]);
+  }
+}
+
+// ---------- Saved Repertoire (unchanged) ----------
 export function getSavedRepertoire(): string[] {
   if (!hasBrowserStorage()) return [];
   const parsed = parseJsonSafely<unknown[]>(window.localStorage.getItem(SAVED_REPERTOIRE_KEY), []);
@@ -52,22 +59,25 @@ export function setSavedRepertoire(value: string[]): void {
 }
 
 export function useRepertoire() {
-  const [learningProgress, setLearningProgressState] = useState<LearningProgress>(() =>
-    getLearningProgress(),
+  const [completedChapters, setCompletedChaptersState] = useState<CompletedChapters>(() =>
+    getCompletedChapters(),
   );
   const [savedRepertoire, setSavedRepertoireState] = useState<string[]>(() => getSavedRepertoire());
 
-  const updateLearningProgress = useCallback((openingId: string, path: string[]) => {
-    setLearningProgressState((previous) => {
-      const next = { ...previous, [openingId]: path };
-      setLearningProgress(next);
+  // Update the completed chapters state and persist
+  const addCompletedChapter = useCallback((chapterId: string) => {
+    setCompletedChaptersState((prev) => {
+      if (prev.includes(chapterId)) return prev;
+      const next = [...prev, chapterId];
+      setCompletedChapters(next);
       return next;
     });
   }, []);
 
-  const replaceLearningProgress = useCallback((value: LearningProgress) => {
-    setLearningProgressState(value);
-    setLearningProgress(value);
+  const replaceCompletedChapters = useCallback((value: CompletedChapters) => {
+    const unique = Array.from(new Set(value));
+    setCompletedChaptersState(unique);
+    setCompletedChapters(unique);
   }, []);
 
   const addSavedMove = useCallback((move: string) => {
@@ -86,10 +96,10 @@ export function useRepertoire() {
   }, []);
 
   return {
-    learningProgress,
+    completedChapters,
     savedRepertoire,
-    updateLearningProgress,
-    replaceLearningProgress,
+    addCompletedChapter,
+    replaceCompletedChapters,
     addSavedMove,
     replaceSavedRepertoire,
   };
