@@ -195,6 +195,24 @@ export function useChessGame() {
     setLastKnownOpening(null);
   };
 
+  const loadPosition = (fen: string) => {
+    try {
+      const tempGame = new Chess();
+      tempGame.load(fen);
+      setGame(tempGame);
+      setHistory([tempGame.fen()]);
+      setSanHistory([]);
+      setHistoryIndex(0);
+      setMoveSquares({});
+      setOptionSquares({});
+      setRightClickedSquares({});
+      setCheckSquare({});
+      setSelectedSquare(null);
+    } catch (e) {
+      console.error("Failed to load FEN:", fen, e);
+    }
+  };
+
   return {
     currentFen,
     currentGame,
@@ -215,5 +233,6 @@ export function useChessGame() {
     onSquareRightClick,
     goToMove,
     resetGame,
+    loadPosition,
   };
 }

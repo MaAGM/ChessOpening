@@ -2,7 +2,7 @@
 
 import { useCallback, useState } from "react";
 
-export type LearningProgress = Record<string, number>;
+export type LearningProgress = Record<string, string[]>;
 
 const LEARNING_PROGRESS_KEY = "chess-opening:learning-progress";
 const SAVED_REPERTOIRE_KEY = "chess-opening:saved-repertoire";
@@ -27,7 +27,7 @@ export function getLearningProgress(): LearningProgress {
 
   const progress: LearningProgress = {};
   for (const [key, value] of Object.entries(parsed)) {
-    if (typeof value === "number" && Number.isFinite(value)) {
+    if (Array.isArray(value) && value.every((v) => typeof v === "string")) {
       progress[key] = value;
     }
   }
@@ -57,9 +57,9 @@ export function useRepertoire() {
   );
   const [savedRepertoire, setSavedRepertoireState] = useState<string[]>(() => getSavedRepertoire());
 
-  const updateLearningProgress = useCallback((openingId: string, stepIndex: number) => {
+  const updateLearningProgress = useCallback((openingId: string, path: string[]) => {
     setLearningProgressState((previous) => {
-      const next = { ...previous, [openingId]: stepIndex };
+      const next = { ...previous, [openingId]: path };
       setLearningProgress(next);
       return next;
     });

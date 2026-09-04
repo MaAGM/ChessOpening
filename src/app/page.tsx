@@ -9,7 +9,7 @@ import { LearningPanel } from "@/components/chess/LearningPanel";
 import { MasterExplorer } from "@/components/chess/MasterExplorer";
 import { OpeningSelector } from "@/components/chess/OpeningSelector";
 import { useRepertoire } from "@/hooks/useRepertoire";
-import { openingTutorials } from "@/lib/data/openings";
+import { openingTutorials, findNodeByMoveSequence, computeFenForPath } from "@/lib/data/openings";
 
 export default function Home() {
   const {
@@ -23,19 +23,19 @@ export default function Home() {
     onSquareClick,
     onSquareRightClick,
     resetGame,
+    loadPosition,
   } = useChessGame();
   const { addSavedMove, updateLearningProgress } = useRepertoire();
   const [panelMode, setPanelMode] = useState<
     "menu" | "explorer" | "opening_selector" | "learning_active"
   >("menu");
   const [activeTutorialId, setActiveTutorialId] = useState<string | null>(null);
-  const [currentStepIndex, setCurrentStepIndex] = useState(0);
+  const [currentPath, setCurrentPath] = useState<string[]>([]);
 
   const activeTutorial = openingTutorials.find((tutorial) => tutorial.id === activeTutorialId) ?? null;
-  const currentStep =
-    activeTutorial && activeTutorial.steps.length > 0
-      ? activeTutorial.steps[Math.min(currentStepIndex, activeTutorial.steps.length - 1)]
-      : null;
+  const currentNode = activeTutorial
+    ? findNodeByMoveSequence(activeTutorial.root, currentPath)
+    : null;
 
   const handlePieceDrop = (sourceSquare: string, targetSquare: string | null) => {
     if (panelMode === "menu") {
@@ -44,50 +44,42 @@ export default function Home() {
     return onPieceDrop(sourceSquare, targetSquare);
   };
 
-  const playInitialSequence = (initialSequence: string[]) => {
-    if (initialSequence.length === 0) return;
-
-    const simulationGame = new Chess();
-    const moves = initialSequence
-      .map((sanMove) => simulationGame.move(sanMove))
-      .filter((move): move is NonNullable<ReturnType<Chess["move"]>> => Boolean(move))
-      .map((move) => ({ from: move.from, to: move.to }));
-
-    const playMove = (index: number) => {
-      if (index >= moves.length) return;
-      const nextMove = moves[index];
-      onPieceDrop(nextMove.from, nextMove.to);
-      window.setTimeout(() => playMove(index + 1), 0);
-    };
-
-    window.setTimeout(() => playMove(0), 0);
-  };
-
-  const handleStartTutorial = (id: string, startIndex: number) => {
+  const handleStartTutorial = (id: string, path: string[]) => {
     const tutorial = openingTutorials.find((opening) => opening.id === id);
-    if (!tutorial || tutorial.steps.length === 0) return;
+    if (!tutorial) return;
 
-    const safeStartIndex = Math.min(Math.max(startIndex, 0), tutorial.steps.length - 1);
     setActiveTutorialId(id);
-    setCurrentStepIndex(safeStartIndex);
+    setCurrentPath(path);
     setPanelMode("learning_active");
-    updateLearningProgress(id, safeStartIndex);
+    updateLearningProgress(id, path);
 
-    resetGame();
-    playInitialSequence(tutorial.initialSequence);
+    try {
+      const fen = computeFenForPath(path);
+      loadPosition(fen);
+    } catch (e) {
+      console.error(e);
+      loadPosition(new Chess().fen());
+    }
   };
 
-  const handleNextStep = () => {
-    if (!activeTutorial || !activeTutorialId) return;
-    const nextStep = Math.min(currentStepIndex + 1, activeTutorial.steps.length - 1);
-    setCurrentStepIndex(nextStep);
-    updateLearningProgress(activeTutorialId, nextStep);
+  const handleBranchSelect = (san: string) => {
+    if (!activeTutorialId) return;
+    const nextPath = [...currentPath, san];
+    setCurrentPath(nextPath);
+    updateLearningProgress(activeTutorialId, nextPath);
+
+    try {
+      const nextFen = computeFenForPath(nextPath);
+      loadPosition(nextFen);
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   const handleBackToMenu = () => {
     setPanelMode("menu");
     setActiveTutorialId(null);
-    setCurrentStepIndex(0);
+    setCurrentPath([]);
     resetGame();
   };
 
@@ -106,7 +98,7 @@ export default function Home() {
             onPieceDragEnd={onPieceDragEnd}
             onSquareClick={onSquareClick}
             onSquareRightClick={onSquareRightClick}
-            customArrows={currentStep?.arrows}
+            customArrows={currentNode?.arrows}
           />
         </section>
       </div>
@@ -168,10 +160,11 @@ export default function Home() {
 
             {panelMode === "opening_selector" && <OpeningSelector onSelectOpening={handleStartTutorial} />}
 
-            {panelMode === "learning_active" && currentStep && (
+            {panelMode === "learning_active" && currentNode && (
               <LearningPanel
-                currentStep={currentStep}
-                onNextStep={handleNextStep}
+                currentNode={currentNode}
+                currentPath={currentPath}
+                onBranchSelect={handleBranchSelect}
                 onSaveMove={addSavedMove}
               />
             )}
