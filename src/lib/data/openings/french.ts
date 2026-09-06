@@ -5,22 +5,22 @@ const advanceRoot: TutorialNode = {
   children: {
     e5: {
       move: "e5",
-      explanation: "La Variante d'Avance. Les Blancs ferment le centre et gagnent de l'espace à l'aile Roi.",
-      arrows: [["e4", "e5"]],
+      explanation: "La Variante d'Avance. Les Blancs ferment le centre et gagnent de l'espace. Votre objectif vital est d'attaquer la base de leur chaîne de pions (d4) avec c5.",
+      arrows: [["c7", "c5"]],
       children: {
         c5: {
           move: "c5",
-          explanation: "La réaction vitale de la Française. Le centre étant bloqué, les Noirs attaquent la base de la chaîne de pions adverse (d4).",
-          arrows: [["c7", "c5"]],
           children: {
             c3: {
               move: "c3",
-              explanation: "Les Blancs consolident d4. Si d4 tombe, c'est tout le centre blanc qui s'effondre.",
+              explanation: "Ils consolident d4 avec le pion c3. Continuez d'accentuer la pression sur d4 en sortant votre Cavalier en c6.",
+              arrows: [["b8", "c6"]],
               children: {
                 Nc6: {
                   move: "Nc6",
-                  explanation: "Les Noirs augmentent la pression sur d4 tout en se développant.",
-                  arrows: [["b8", "c6"]],
+                  explanation: "Parfait ! C'est la position de base de la Française d'Avance. Vos prochaines étapes : Db6, Cge7, et potentiellement f6 pour briser e5.",
+                  // Flèches prospectives pour illustrer le plan futur
+                  arrows: [["d8", "b6"], ["g8", "e7"], ["f7", "f6"]]
                 }
               }
             }
@@ -31,31 +31,36 @@ const advanceRoot: TutorialNode = {
   },
 };
 
-// 2. Variante Tarrasch (Test de l'embranchement avec 2 choix pour les Noirs)
+// 2. Variante Tarrasch (Embranchement avec 2 choix pour les Noirs)
 const tarraschRoot: TutorialNode = {
   children: {
     Nd2: {
       move: "Nd2",
-      explanation: "La Variante Tarrasch. Contrairement à Cc3, ce coup ne bloque pas le pion c2, ce qui permettra aux Blancs de jouer c3 pour soutenir d4.",
-      arrows: [["b1", "d2"]],
+      explanation: "La Variante Tarrasch. Les Blancs protègent e4 sans bloquer leur pion c2. Vous avez deux options : dynamiter avec c5 (ouverte), ou fermer avec Cf6.",
+      arrows: [["c7", "c5"], ["g8", "f6"]],
       children: {
         // --- CHOIX 1 ---
         c5: {
           move: "c5",
-          explanation: "Option A : La Tarrasch ouverte. Les Noirs contestent immédiatement le centre. La position va s'ouvrir.",
-          arrows: [["c7", "c5"]],
+          explanation: "Excellent choix ! La Tarrasch ouverte va ouvrir la position rapidement, préparez-vous à un jeu dynamique et tactique.",
+          // Indique le pion central adverse qui va sauter
+          arrows: [["c5", "d4"]] 
         },
         // --- CHOIX 2 ---
         Nf6: {
           move: "Nf6",
-          explanation: "Option B : La Tarrasch fermée. Les Noirs provoquent la poussée e5 pour bloquer le centre avant de contre-attaquer.",
-          arrows: [["g8", "f6"]],
           children: {
             e5: {
               move: "e5",
-              explanation: "Les Blancs gagnent de l'espace avec tempo sur le cavalier.",
+              explanation: "Les Blancs gagnent de l'espace avec tempo. Repliez votre cavalier en d7 pour préparer sereinement la contre-attaque c5 !",
+              arrows: [["f6", "d7"]],
               children: {
-                Nfd7: { move: "Nfd7" }
+                Nfd7: {
+                  move: "Nfd7",
+                  explanation: "Bien joué. Depuis d7, votre cavalier soutient la future rupture c5. La bataille de manœuvres commence.",
+                  // Montre la future rupture soutenue par le cavalier
+                  arrows: [["c7", "c5"]]
+                }
               }
             }
           }
@@ -65,41 +70,47 @@ const tarraschRoot: TutorialNode = {
   },
 };
 
-// 3. Variante Classique / Winawer (Test d'un autre embranchement)
+// 3. Variante Classique / Winawer (Embranchement au 3ème coup)
 const classicalRoot: TutorialNode = {
   children: {
     Nc3: {
       move: "Nc3",
-      explanation: "Le coup le plus naturel. Les Blancs développent une pièce tout en défendant e4 et en mettant la pression sur d5.",
-      arrows: [["b1", "c3"]],
+      explanation: "Le coup principal des Blancs. Vous pouvez soit clouer ce cavalier avec Fb4 (Winawer), soit mettre la pression sur e4 avec Cf6 (Classique).",
+      arrows: [["f8", "b4"], ["g8", "f6"]],
       children: {
         Bb4: {
           move: "Bb4",
-          explanation: "La fameuse Variante Winawer ! Les Noirs clouent le cavalier, menaçant indirectement de gagner le pion e4.",
-          arrows: [["f8", "b4"]],
+          explanation: "La redoutable Winawer ! Vous menacez indirectement le pion e4 en éliminant son défenseur et créez des déséquilibres complexes.",
+          // Montre la menace de destruction du défenseur
+          arrows: [["b4", "c3"]] 
         },
         Nf6: {
           move: "Nf6",
-          explanation: "La Variante Classique (Steinitz). Une pression directe et saine sur le pion e4.",
-          arrows: [["g8", "f6"]],
+          explanation: "La Variante Classique (Steinitz). Une pression directe et saine sur le centre blanc.",
+          // Montre la pression sur le pion central
+          arrows: [["f6", "e4"]] 
         }
       }
     },
   },
 };
 
-// Helper pour injecter les coups de base de la Française
+// Helper repensé pour l'auto-play
 function buildRoot(chapterRoot: TutorialNode): TutorialNode {
   return {
     children: {
       e4: {
         move: "e4",
+        explanation: "L'ordinateur ouvre par 1. e4. Répondez avec e6 pour entrer dans la Défense Française !",
+        arrows: [["e7", "e6"]],
         children: {
           e6: {
             move: "e6",
             children: {
               d4: {
                 move: "d4",
+                explanation: "Les Blancs s'emparent du centre. Frappez immédiatement au cœur de leur dispositif avec d5.",
+                arrows: [["d7", "d5"]],
                 children: {
                   d5: {
                     move: "d5",
