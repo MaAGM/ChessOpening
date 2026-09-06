@@ -40,7 +40,7 @@ export function LearningPanel({
           <button
             type="button"
             onClick={onRewindToBranch}
-            className="group flex items-center justify-center gap-2 rounded-lg border border-amber-300/50 bg-gradient-to-r from-amber-400/25 via-yellow-300/20 to-amber-500/25 px-4 py-3 text-sm font-semibold text-amber-100 shadow-lg shadow-amber-700/20 transition hover:scale-[1.01] hover:border-amber-200 hover:from-amber-300/30 hover:to-yellow-300/30 hover:text-amber-50"
+            className="group flex items-center justify-center gap-2 rounded-lg border border-amber-300/50 bg-linear-to-r from-amber-400/25 via-yellow-300/20 to-amber-500/25 px-4 py-3 text-sm font-semibold text-amber-100 shadow-lg shadow-amber-700/20 transition hover:scale-[1.01] hover:border-amber-200 hover:from-amber-300/30 hover:to-yellow-300/30 hover:text-amber-50"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
