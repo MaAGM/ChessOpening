@@ -9,6 +9,7 @@ import { LearningPanel } from "@/components/chess/LearningPanel";
 import { MasterExplorer } from "@/components/chess/MasterExplorer";
 import { OpeningSelector } from "@/components/chess/OpeningSelector";
 import { useRepertoire } from "@/hooks/useRepertoire";
+import type { TutorialNode } from "@/lib/data/openings";
 import { findNodeByMoveSequence, computeFenForPath, getAllChapters, openingCourses } from "@/lib/data/openings";
 
 const BLACK_DEFENSE_COURSE_IDS = new Set([
@@ -45,7 +46,7 @@ export default function Home() {
     resetGame,
     loadPosition,
   } = useChessGame();
-  const { addSavedMove, addCompletedChapter } = useRepertoire();
+  const { addSavedMove } = useRepertoire();
   const [panelMode, setPanelMode] = useState<
     "menu" | "explorer" | "opening_selector" | "learning_active"
   >("menu");
@@ -58,15 +59,17 @@ export default function Home() {
   const userColor = getUserColorForCourse(activeCourse?.id);
 
   const activeTutorial = getAllChapters().find((chapter) => chapter.id === activeTutorialId) ?? null;
-  const activeNode = activeTutorial
-    ? currentPath.length === 0
-      ? {
-          ...activeTutorial.root,
-          explanation: `Prêt à apprendre la variante : ${activeTutorial.name} ? Jouez le premier coup sur l'échiquier !`,
-          arrows: [] as any,
-        }
-      : findNodeByMoveSequence(activeTutorial.root, currentPath)
-    : null;
+  const activeNode = useMemo<TutorialNode | null>(() => {
+    if (!activeTutorial) return null;
+    if (currentPath.length === 0) {
+      return {
+        ...activeTutorial.root,
+        explanation: `Prêt à apprendre la variante : ${activeTutorial.name} ? Jouez le premier coup sur l'échiquier !`,
+        arrows: [],
+      };
+    }
+    return findNodeByMoveSequence(activeTutorial.root, currentPath);
+  }, [activeTutorial, currentPath]);
 
   const handlePieceDrop = (sourceSquare: string, targetSquare: string | null) => {
     if (panelMode === "menu") {
