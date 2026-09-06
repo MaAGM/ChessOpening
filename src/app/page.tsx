@@ -32,9 +32,15 @@ export default function Home() {
   const [activeTutorialId, setActiveTutorialId] = useState<string | null>(null);
   const [currentPath, setCurrentPath] = useState<string[]>([]);
 
-  const activeTutorial = getAllChapters().find((tutorial) => tutorial.id === activeTutorialId) ?? null;
-  const currentNode = activeTutorial
-    ? findNodeByMoveSequence(activeTutorial.root, currentPath)
+  const activeTutorial = getAllChapters().find((chapter) => chapter.id === activeTutorialId) ?? null;
+  const activeNode = activeTutorial
+    ? currentPath.length === 0
+      ? {
+          ...activeTutorial.root,
+          explanation: `Prêt à apprendre la variante : ${activeTutorial.name} ? Jouez le premier coup sur l'échiquier !`,
+          arrows: [] as any,
+        }
+      : findNodeByMoveSequence(activeTutorial.root, currentPath)
     : null;
 
   const handlePieceDrop = (sourceSquare: string, targetSquare: string | null) => {
@@ -96,12 +102,12 @@ export default function Home() {
             onPieceDragEnd={onPieceDragEnd}
             onSquareClick={onSquareClick}
             onSquareRightClick={onSquareRightClick}
-            customArrows={currentNode?.arrows}
+              customArrows={activeNode?.arrows}
           />
         </section>
       </div>
 
-      <aside className="flex h-137.5 w-80 flex-col rounded-lg border border-slate-700 bg-slate-800/60 p-4">
+      <aside className={`flex h-137.5 flex-col rounded-lg border border-slate-700 bg-slate-800/60 p-4 transition-all duration-300 ease-in-out ${panelMode === "opening_selector" ? "w-[900px]" : "w-80"}`}>
         {panelMode === "menu" ? (
           <div className="flex h-full flex-col justify-center gap-4">
             <h2 className="text-center text-sm font-semibold uppercase tracking-wide text-slate-300">
@@ -158,9 +164,9 @@ export default function Home() {
 
             {panelMode === "opening_selector" && <OpeningSelector onSelectOpening={handleStartTutorial} />}
 
-            {panelMode === "learning_active" && currentNode && (
+            {panelMode === "learning_active" && activeNode && (
               <LearningPanel
-                currentNode={currentNode}
+                currentNode={activeNode}
                 currentPath={currentPath}
                 onBranchSelect={handleBranchSelect}
                 onSaveMove={addSavedMove}

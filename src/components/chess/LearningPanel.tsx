@@ -11,9 +11,9 @@ export function LearningPanel({ currentNode, currentPath, onBranchSelect, onSave
   const branchEntries = Object.entries(currentNode.children ?? {});
 
   return (
-    <section className="flex h-full flex-col rounded-xl border border-slate-600 bg-slate-900/60 p-4 shadow-lg shadow-slate-950/40">
+    <section className="flex h-full flex-col rounded-xl border border-slate-600 bg-slate-800/70 p-4 shadow-lg shadow-slate-950/40">
       {currentNode.explanation && (
-        <p className="rounded-lg border border-amber-400/30 bg-amber-500/10 p-3 text-sm leading-relaxed text-amber-100">
+        <p className="rounded-lg border border-slate-500/30 bg-slate-700/20 p-3 text-sm leading-relaxed text-slate-100">
           {currentNode.explanation}
         </p>
       )}
@@ -34,7 +34,7 @@ export function LearningPanel({ currentNode, currentPath, onBranchSelect, onSave
             key={san}
             type="button"
             onClick={() => onBranchSelect(san)}
-            className="rounded-lg border border-slate-400/40 bg-slate-700/40 px-4 py-2 text-sm font-semibold text-slate-100 transition hover:border-amber-300/70 hover:bg-amber-500/20 hover:text-amber-100"
+            className="rounded-lg border border-slate-400/40 bg-slate-700/40 px-4 py-2 text-sm font-semibold text-slate-100 transition hover:border-emerald-300/70 hover:bg-emerald-500/20 hover:text-emerald-100"
           >
             Jouer {san}
           </button>
