@@ -101,7 +101,7 @@ function buildRoot(chapterRoot: TutorialNode): TutorialNode {
     children: {
       e4: {
         move: "e4",
-        explanation: "L'ordinateur ouvre par 1. e4. Répondez avec e6 pour entrer dans la Défense Française !",
+        explanation: "Les blancs ouvre par 1. e4. Répondez avec e6 pour entrer dans la Défense Française !",
         arrows: [["e7", "e6"]],
         children: {
           e6: {

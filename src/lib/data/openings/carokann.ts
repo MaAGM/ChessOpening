@@ -1,83 +1,133 @@
-import type { OpeningCourse, OpeningChapter, TutorialNode, TutorialArrow } from "./types";
+import type { OpeningCourse, OpeningChapter, TutorialNode } from "./types";
 
-/** Helper to build a linear tutorial tree */
-function buildTutorialNode(
-  moves: string[],
-  explanations: string[],
-  arrows: TutorialArrow[][]
-): TutorialNode {
-  if (moves.length === 0) return {};
-  const [move, ...restMoves] = moves;
-  const [exp, ...restExps] = explanations;
-  const [arrowSet, ...restArrows] = arrows;
-  const node: TutorialNode = {
-    move,
-    explanation: exp,
-    arrows: arrowSet,
-    children: restMoves.length > 0 ? { [restMoves[0]]: buildTutorialNode(restMoves, restExps, restArrows) } : undefined,
-  };
-  return node;
-}
+// Caro-Kann – B12 (Variante d'Avance) : 1. e4 c6 2. d4 d5 3. e5 Bf5 4. Nf3 e6
+const carokannB12Root: TutorialNode = {
+  children: {
+    e4: {
+      move: "e4",
+      explanation: "L'ordinateur ouvre par 1. e4. Préparez la solide Défense Caro-Kann en jouant c6 pour soutenir la poussée d5.",
+      arrows: [["c7", "c6"]],
+      children: {
+        c6: {
+          move: "c6",
+          // Nœud fantôme (Coup du joueur)
+          children: {
+            d4: {
+              move: "d4",
+              explanation: "Les Blancs s'emparent logiquement du centre. Frappez immédiatement avec d5.",
+              arrows: [["d7", "d5"]],
+              children: {
+                d5: {
+                  move: "d5",
+                  // Nœud fantôme
+                  children: {
+                    e5: {
+                      move: "e5",
+                      explanation: "La Variante d'Avance ! Les Blancs ferment le centre. C'est l'idée maîtresse de la Caro-Kann : sortez votre Fou de cases claires (Bf5) AVANT de jouer e6.",
+                      arrows: [["c8", "f5"]],
+                      children: {
+                        Bf5: {
+                          move: "Bf5",
+                          // Nœud fantôme
+                          children: {
+                            Nf3: {
+                              move: "Nf3",
+                              explanation: "Ils développent leur cavalier. Votre fou étant sauvé à l'extérieur, vous pouvez maintenant fermer sereinement votre chaîne de pions avec e6.",
+                              arrows: [["e7", "e6"]],
+                              children: {
+                                e6: {
+                                  move: "e6",
+                                  explanation: "Parfait ! Le fameux 'Fou de la Caro-Kann' est actif, contrairement à la Française. Prochaines étapes : saper leur centre avec c5 et développer le cavalier en e7 puis c6.",
+                                  // Flèches prospectives de plans de milieu de jeu
+                                  arrows: [["c6", "c5"], ["g8", "e7"], ["b8", "d7"]]
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+};
 
-// Caro‑Kann – B12: 1. e4 c6 2. d4 d5 3. e5 Bf5 4. Nf3 e6
-const carokannB12Root: TutorialNode = buildTutorialNode(
-  ["e4", "c6", "d4", "d5", "e5", "Bf5", "Nf3", "e6"],
-  [
-    "e4 occupe le centre et ouvre la diagonale du fou.",
-    "...c6 prépare le coup ...d5 tout en conservant une structure solide.",
-    "d4 renforce le centre blanc.",
-    "...d5 conteste le centre et ouvre la voie au fou.",
-    "e5 pousse le pion, prend de l'espace et empêche le fou noir de se développer sur c8.",
-    "...Bf5 développe le fou actif sur la case f5, pressant le pion c2.",
-    "Nf3 développe le cavalier, contrôle e5 et prépare le roque.",
-    "...e6 consolide le centre noir et libère le fou c8."
-  ],
-  [
-    [["e2","e4"]],
-    [["c7","c6"]],
-    [["d2","d4"]],
-    [["d7","d5"]],
-    [["e4","e5"]],
-    [["c8","f5"]],
-    [["g1","f3"]],
-    [["e7","e6"]]
-  ]
-);
-
-// Caro‑Kann – B13 (Échange) : 1. e4 c6 2. d4 d5 3. exd5 cxd5 4. Bd3 Nc6 5. c3
-const carokannB13Root: TutorialNode = buildTutorialNode(
-  ["e4", "c6", "d4", "d5", "exd5", "cxd5", "Bd3", "Nc6", "c3"],
-  [
-    "e4 occupe le centre.",
-    "...c6 prépare ...d5 tout en gardant la structure flexible.",
-    "d4 renforce le centre.",
-    "...d5 conteste le centre.",
-    "exd5 échange le pion, ouvrant la colonne d.",
-    "cxd5 recaptule, maintenant un centre de pions symétrique.",
-    "Bd3 développe le fou, prépare le roque et contrôle e4.",
-    "...Nc6 développe le cavalier, prépare le développement du fou.",
-    "c3 renforce le contrôle du centre et prépare d4‑d5.",
-  ],
-  [
-    [["e2","e4"]],
-    [["c7","c6"]],
-    [["d2","d4"]],
-    [["d7","d5"]],
-    [["e4","d5"]],
-    [["c6","d5"]],
-    [["f1","d3"]],
-    [["b8","c6"]],
-    [["c2","c3"]]
-  ]
-);
+// Caro-Kann – B13 (Variante d'Échange) : 1. e4 c6 2. d4 d5 3. exd5 cxd5 4. Bd3 Nc6 5. c3
+const carokannB13Root: TutorialNode = {
+  children: {
+    e4: {
+      move: "e4",
+      explanation: "L'ordinateur ouvre par 1. e4. Entrez dans la Caro-Kann avec c6.",
+      arrows: [["c7", "c6"]],
+      children: {
+        c6: {
+          move: "c6",
+          // Nœud fantôme
+          children: {
+            d4: {
+              move: "d4",
+              explanation: "Les Blancs prennent le centre. Contestez ce contrôle avec d5.",
+              arrows: [["d7", "d5"]],
+              children: {
+                d5: {
+                  move: "d5",
+                  // Nœud fantôme
+                  children: {
+                    exd5: {
+                      move: "exd5",
+                      explanation: "La Variante d'Échange ! L'ordinateur relâche la tension centrale. Reprenez du pion 'c' pour ouvrir la colonne c et maintenir une symétrie au centre.",
+                      arrows: [["c6", "d5"]],
+                      children: {
+                        cxd5: {
+                          move: "cxd5",
+                          // Nœud fantôme
+                          children: {
+                            Bd3: {
+                              move: "Bd3",
+                              explanation: "Ils placent leur Fou sur une diagonale active pour vous empêcher de sortir votre Fou en f5. Développez votre Cavalier en c6 pour contrôler d4 et e5.",
+                              arrows: [["b8", "c6"]],
+                              children: {
+                                Nc6: {
+                                  move: "Nc6",
+                                  // Nœud fantôme
+                                  children: {
+                                    c3: {
+                                      move: "c3",
+                                      explanation: "Les Blancs solidifient d4 et limitent votre cavalier. Vous avez atteint la position clé. Votre plan : sortir votre fou de cases claires en g4 et installer une structure solide.",
+                                      // Flèches prospectives (Développement classique)
+                                      arrows: [["g8", "f6"], ["c8", "g4"]]
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+};
 
 export const carokannCourse: OpeningCourse = {
   id: "caro_kann",
-  name: "Caro Kann",
-  description: "Formation complète sur Caro Kann",
+  name: "Défense Caro-Kann",
+  description: "Extrêmement solide. Développez intelligemment vos pièces avant de contre-attaquer la structure blanche.",
   chapters: [
-    { id: "caro_kann-b12", name: "Caro‑Kann - Avance", root: carokannB12Root },
-    { id: "caro_kann-b13", name: "Caro‑Kann - Échange", root: carokannB13Root },
+    { id: "caro_kann-b12", name: "Variante d'Avance", root: carokannB12Root },
+    { id: "caro_kann-b13", name: "Variante d'Échange", root: carokannB13Root },
   ],
 };
-

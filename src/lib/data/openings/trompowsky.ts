@@ -1,53 +1,54 @@
-import type { OpeningCourse, OpeningChapter, TutorialNode, TutorialArrow } from "./types";
+import type { OpeningCourse, OpeningChapter, TutorialNode } from "./types";
 
-/** Helper to build a linear tutorial tree */
-function buildTutorialNode(
-  moves: string[],
-  explanations: string[],
-  arrows: TutorialArrow[][]
-): TutorialNode {
-  if (moves.length === 0) return {};
-  const [move, ...restMoves] = moves;
-  const [exp, ...restExps] = explanations;
-  const [arrowSet, ...restArrows] = arrows;
-  const node: TutorialNode = {
-    move,
-    explanation: exp,
-    arrows: arrowSet,
-    children: restMoves.length > 0 ? { [restMoves[0]]: buildTutorialNode(restMoves, restExps, restArrows) } : undefined,
-  };
-  return node;
-}
-
-// Trompowsky – A45: 1. d4 Nf6 2. Bg5 Ne4 3. Bf4
-const trompowskyA45Root: TutorialNode = buildTutorialNode(
-  ["d4", "Nf6", "Bg5", "Ne4", "Bf4"],
-  [
-    "d4 occupe le centre et prépare le développement du fou.",
-    "...Nf6 développe le cavalier, contrôle e4 et prépare le roque.",
-    "Bg5 crée une menace immédiate sur le cavalier f6, cherchant à perturber la défense noire.",
-    "...Ne4 contre‑attaque en attaquant le fou blanc et en gagnant du temps.",
-    "Bf4 redéploie le fou, maintient la pression sur le centre et prépare le roque.",
-  ],
-  [
-    [["d2","d4"]],
-    [["g8","f6"]],
-    [["c1","g5"]],
-    [["f6","e4"]],
-    [["c1","f4"]],
-  ]
-);
+// Trompowsky – A45 : 1. d4 Nf6 2. Bg5 Ne4 3. Bf4
+const trompowskyA45Root: TutorialNode = {
+  explanation: "L'Attaque Trompowsky. Surprenez votre adversaire en évitant les lourdes théories de l'Est-Indienne ou de la Grünfeld. Ouvrez avec d4.",
+  arrows: [["d2", "d4"]],
+  children: {
+    d4: {
+      move: "d4",
+      // Nœud fantôme (Coup du joueur)
+      children: {
+        Nf6: {
+          move: "Nf6",
+          explanation: "Les Noirs développent classiquement leur cavalier. Sortez immédiatement des sentiers battus en agressant ce cavalier avec votre Fou en g5 !",
+          arrows: [["c1", "g5"]],
+          children: {
+            Bg5: {
+              move: "Bg5",
+              // Nœud fantôme
+              children: {
+                Ne4: {
+                  move: "Ne4",
+                  explanation: "Ils choisissent la réponse la plus critique : ils contre-attaquent votre Fou tout en centralisant leur cavalier. Repliez sagement le Fou en f4.",
+                  arrows: [["g5", "f4"]],
+                  children: {
+                    Bf4: {
+                      move: "Bf4",
+                      explanation: "La position de base est atteinte ! Votre Fou est actif et le cavalier noir en e4 peut vite devenir une cible. Vos prochains plans : consolider avec e3, développer le cavalier (Cd2), ou chasser l'intrus avec f3.",
+                      // Flèches prospectives de plan de jeu (Développement et expulsion du cavalier)
+                      arrows: [["e2", "e3"], ["b1", "d2"], ["f2", "f3"]]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+};
 
 export const trompowskyCourse: OpeningCourse = {
   id: "trompowsky",
-  name: "Trompowsky",
-  description: "Formation complète sur Trompowsky",
+  name: "Attaque Trompowsky",
+  description: "Ciblez immédiatement le cavalier adverse au 2ème coup pour imposer votre propre type de position.",
   chapters: [
     {
       id: "trompowsky-a45",
-      name: "Attaque Trompowsky",
+      name: "Ligne Principale (Ne4)",
       root: trompowskyA45Root,
     },
   ],
 };
-

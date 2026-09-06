@@ -1,55 +1,60 @@
-import type { OpeningCourse, OpeningChapter, TutorialNode, TutorialArrow } from "./types";
+import type { OpeningCourse, OpeningChapter, TutorialNode } from "./types";
 
-/** Helper to build a linear tutorial tree */
-function buildTutorialNode(
-  moves: string[],
-  explanations: string[],
-  arrows: TutorialArrow[][]
-): TutorialNode {
-  if (moves.length === 0) return {};
-  const [move, ...restMoves] = moves;
-  const [exp, ...restExps] = explanations;
-  const [arrowSet, ...restArrows] = arrows;
-  const node: TutorialNode = {
-    move,
-    explanation: exp,
-    arrows: arrowSet,
-    children: restMoves.length > 0 ? { [restMoves[0]]: buildTutorialNode(restMoves, restExps, restArrows) } : undefined,
-  };
-  return node;
-}
-
-// Vienna – C25: 1. e4 e5 2. Nc3 Nf6 3. Bc4 Bc5
-const viennaRoot: TutorialNode = buildTutorialNode(
-  ["e4", "e5", "Nc3", "Nf6", "Bc4", "Bc5"],
-  [
-    "e4 occupe le centre et ouvre la diagonale du fou blanc.",
-    "...e5 répond symétriquement, contestation immédiate du centre.",
-    "Nc3 développe le cavalier, soutient le centre et prépare le fou en c4.",
-    "...Nf6 développe le cavalier, attaque le pion e4 et prépare le roque.",
-    "Bc4 place le fou sur la puissante diagonale a2‑g8, visant f7.",
-    "...Bc5 place le fou noir en symétrie, appuie le pion e5 et contrôle la case f2.",
-  ],
-  [
-    [["e2","e4"]],
-    [["e7","e5"]],
-    [["b1","c3"]],
-    [["g8","f6"]],
-    [["f1","c4"]],
-    [["f8","c5"]],
-  ]
-);
+// Vienna – C25 : 1. e4 e5 2. Nc3 Nf6 3. Bc4 Bc5
+const viennaRoot: TutorialNode = {
+  explanation: "La Partie Viennoise. Développez-vous solidement avant de lancer des attaques féroces. Prenez le centre avec e4.",
+  arrows: [["e2", "e4"]],
+  children: {
+    e4: {
+      move: "e4",
+      // Nœud fantôme (Coup du joueur)
+      children: {
+        e5: {
+          move: "e5",
+          explanation: "Les Noirs répondent symétriquement. Au lieu du classique Cf3, développez votre cavalier Dame en c3 pour blinder e4 et garder f4 ouvert.",
+          arrows: [["b1", "c3"]],
+          children: {
+            Nc3: {
+              move: "Nc3",
+              // Nœud fantôme
+              children: {
+                Nf6: {
+                  move: "Nf6",
+                  explanation: "Ils développent leur cavalier Roi. Poursuivez votre développement actif en braquant votre Fou de cases claires sur f7 (Fc4).",
+                  arrows: [["f1", "c4"]],
+                  children: {
+                    Bc4: {
+                      move: "Bc4",
+                      // Nœud fantôme
+                      children: {
+                        Bc5: {
+                          move: "Bc5",
+                          explanation: "Les Noirs copient votre placement (Variante Symétrique). La position de base est atteinte ! Votre plan : solidifier avec d3, développer tranquillement (Cge2, O-O), ou lancer le terrible Gambit Viennois retardé avec f4.",
+                          // Flèches prospectives de plan de jeu
+                          arrows: [["d2", "d3"], ["f2", "f4"]]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+};
 
 export const viennaCourse: OpeningCourse = {
   id: "vienna",
-  name: "Vienna",
-  description: "Formation complète sur Vienna",
+  name: "Partie Viennoise",
+  description: "Gardez la flexibilité de votre pion f et préparez des attaques surprises tout en conservant un centre impénétrable.",
   chapters: [
     {
       id: "vienna-c25",
-      name: "Partie Viennoise",
+      name: "Variante Symétrique",
       root: viennaRoot,
     },
   ],
 };
-

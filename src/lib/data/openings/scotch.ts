@@ -1,61 +1,80 @@
-import type { OpeningCourse, OpeningChapter, TutorialNode, TutorialArrow } from "./types";
+import type { OpeningCourse, OpeningChapter, TutorialNode } from "./types";
 
-/** Helper to build a linear tutorial tree */
-function buildTutorialNode(
-  moves: string[],
-  explanations: string[],
-  arrows: TutorialArrow[][]
-): TutorialNode {
-  if (moves.length === 0) return {};
-  const [move, ...restMoves] = moves;
-  const [exp, ...restExps] = explanations;
-  const [arrowSet, ...restArrows] = arrows;
-  const node: TutorialNode = {
-    move,
-    explanation: exp,
-    arrows: arrowSet,
-    children: restMoves.length > 0 ? { [restMoves[0]]: buildTutorialNode(restMoves, restExps, restArrows) } : undefined,
-  };
-  return node;
-}
-
-// Scotch – C45: 1. e4 e5 2. Nf3 Nc6 3. d4 exd4 4. Nxd4 Nf6 5. Nxc6
-const scotchRoot: TutorialNode = buildTutorialNode(
-  ["e4", "e5", "Nf3", "Nc6", "d4", "exd4", "Nxd4", "Nf6", "Nxc6"],
-  [
-    "e4 occupe le centre et ouvre la diagonale du fou.",
-    "...e5 répond symétriquement, contestation du centre.",
-    "Nf3 développe le cavalier, prépare le centre et le roque.",
-    "...Nc6 développe le cavalier, controle e5 et prépare d4.",
-    "d4 ouvre le centre, offrant des possibilités d'échange.",
-    "...exd4 accepte le pion, ouvrant la colonne e.",
-    "Nxd4 récupère le pion, centralise le cavalier.",
-    "...Nf6 développe le cavalier, attaque e4 et prépare le roque.",
-    "Nxc6 capture le cavalier en c6, double les pions noirs et crée une faiblesse.",
-  ],
-  [
-    [["e2","e4"]],
-    [["e7","e5"]],
-    [["g1","f3"]],
-    [["b8","c6"]],
-    [["d2","d4"]],
-    [["e5","d4"]],
-    [["f3","d4"]],
-    [["g8","f6"]],
-    [["d4","c6"]],
-  ]
-);
+// Scotch – C45 : 1. e4 e5 2. Nf3 Nc6 3. d4 exd4 4. Nxd4 Nf6 5. Nxc6
+const scotchRoot: TutorialNode = {
+  explanation: "La Partie Écossaise. Fuyez la théorie de l'Espagnole ou de l'Italienne en dynamitant le centre dès le 3ème coup.",
+  arrows: [["e2", "e4"]],
+  children: {
+    e4: {
+      move: "e4",
+      // Nœud fantôme (Coup du joueur)
+      children: {
+        e5: {
+          move: "e5",
+          explanation: "Les Noirs répondent classiquement. Développez votre cavalier Roi avec tempo sur le pion e5.",
+          arrows: [["g1", "f3"]],
+          children: {
+            Nf3: {
+              move: "Nf3",
+              // Nœud fantôme
+              children: {
+                Nc6: {
+                  move: "Nc6",
+                  explanation: "Ils défendent. C'est ici que l'Écossaise se révèle : n'attendez pas et brisez immédiatement le centre avec d4 !",
+                  arrows: [["d2", "d4"]],
+                  children: {
+                    d4: {
+                      move: "d4",
+                      // Nœud fantôme
+                      children: {
+                        exd4: {
+                          move: "exd4",
+                          explanation: "L'échange est quasiment forcé. Récupérez le pion en centralisant puissamment votre cavalier (Cxd4).",
+                          arrows: [["f3", "d4"]],
+                          children: {
+                            Nxd4: {
+                              move: "Nxd4",
+                              // Nœud fantôme
+                              children: {
+                                Nf6: {
+                                  move: "Nf6",
+                                  explanation: "Les Noirs contre-attaquent votre pion e4. Détériorez leur structure en échangeant votre cavalier en c6.",
+                                  arrows: [["d4", "c6"]],
+                                  children: {
+                                    Nxc6: {
+                                      move: "Nxc6",
+                                      explanation: "Boum ! Vous forcez les pions noirs à se doubler sur la colonne 'c'. Le jeu est ouvert. Vos prochaines armes : pousser agressivement e5 pour chasser leur cavalier, ou défendre e4 calmement (ex: Fd3 ou Fg5).",
+                                      // Flèches prospectives de plan d'attaque et de développement
+                                      arrows: [["e4", "e5"], ["f1", "d3"], ["c1", "g5"]]
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+};
 
 export const scotchCourse: OpeningCourse = {
   id: "scotch",
-  name: "Scotch",
-  description: "Formation complète sur Scotch",
+  name: "Partie Écossaise",
+  description: "Ouvrez la position de force dès le 3ème coup pour surprendre votre adversaire et créer des déséquilibres immédiats.",
   chapters: [
     {
       id: "scotch-c45",
-      name: "Partie Écossaise",
+      name: "Ligne Principale (C45)",
       root: scotchRoot,
     },
   ],
 };
-

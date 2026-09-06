@@ -1,49 +1,41 @@
-import type { OpeningCourse, OpeningChapter, TutorialNode, TutorialArrow } from "./types";
+import type { OpeningCourse, OpeningChapter, TutorialNode } from "./types";
 
-/** Helper to build a linear tutorial tree */
-function buildTutorialNode(
-  moves: string[],
-  explanations: string[],
-  arrows: TutorialArrow[][]
-): TutorialNode {
-  if (moves.length === 0) return {};
-  const [move, ...restMoves] = moves;
-  const [exp, ...restExps] = explanations;
-  const [arrowSet, ...restArrows] = arrows;
-  const node: TutorialNode = {
-    move,
-    explanation: exp,
-    arrows: arrowSet,
-    children: restMoves.length > 0 ? { [restMoves[0]]: buildTutorialNode(restMoves, restExps, restArrows) } : undefined,
-  };
-  return node;
-}
-
-// Reti – A04: 1. Nf3 d5 2. c4
-const retiA04Root: TutorialNode = buildTutorialNode(
-  ["Nf3", "d5", "c4"],
-  [
-    "Nf3 développe le cavalier, contrôle les cases e5 et d4, et prépare un futur fianchetto du fou.",
-    "...d5 occupe le centre, conteste e4 et libère le fou noir.",
-    "c4 attaque le centre, prépare le contrôle du d5 noir et ouvre la diagonale du fou blanc vers g2."
-  ],
-  [
-    [["g1","f3"]],
-    [["d7","d5"]],
-    [["c2","c4"]]
-  ]
-);
+// Reti – A04 : 1. Nf3 d5 2. c4
+const retiA04Root: TutorialNode = {
+  explanation: "L'Ouverture Réti. Une approche hypermoderne et subtile. Contrôlez le centre à distance en développant d'abord votre cavalier.",
+  arrows: [["g1", "f3"]],
+  children: {
+    Nf3: {
+      move: "Nf3",
+      // Nœud fantôme (Coup du joueur)
+      children: {
+        d5: {
+          move: "d5",
+          explanation: "Les Noirs occupent classiquement le centre avec un pion massif. Attaquez immédiatement cette base par le flanc en jouant c4.",
+          arrows: [["c2", "c4"]],
+          children: {
+            c4: {
+              move: "c4",
+              explanation: "Excellent ! Vous mettez une forte pression asymétrique sur d5. La position est tendue. Vos prochains plans typiques de la Réti : fianchetter votre Fou pour rayonner sur la grande diagonale (g3 puis Fg2).",
+              // Flèches prospectives de plan de jeu (Le fianchetto caractéristique)
+              arrows: [["g2", "g3"], ["f1", "g2"]]
+            }
+          }
+        }
+      }
+    }
+  }
+};
 
 export const retiCourse: OpeningCourse = {
   id: "reti",
-  name: "Reti",
-  description: "Formation complète sur Reti",
+  name: "Ouverture Réti",
+  description: "Une ouverture hypermoderne tout en souplesse. Attaquez le centre par les flancs sans vous y engager prématurément.",
   chapters: [
     {
       id: "reti-a04",
-      name: "Ouverture Réti",
+      name: "Ligne Principale (A04)",
       root: retiA04Root,
     },
   ],
 };
-

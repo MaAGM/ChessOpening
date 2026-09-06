@@ -1,49 +1,55 @@
-import type { OpeningCourse, OpeningChapter, TutorialNode, TutorialArrow } from "./types";
+import type { OpeningCourse, OpeningChapter, TutorialNode } from "./types";
 
-/** Helper to build a linear tutorial tree */
-function buildTutorialNode(
-  moves: string[],
-  explanations: string[],
-  arrows: TutorialArrow[][]
-): TutorialNode {
-  if (moves.length === 0) return {};
-  const [move, ...restMoves] = moves;
-  const [exp, ...restExps] = explanations;
-  const [arrowSet, ...restArrows] = arrows;
-  const node: TutorialNode = {
-    move,
-    explanation: exp,
-    arrows: arrowSet,
-    children: restMoves.length > 0 ? { [restMoves[0]]: buildTutorialNode(restMoves, restExps, restArrows) } : undefined,
-  };
-  return node;
-}
-
-// Kings Gambit – C33: 1. e4 e5 2. f4 exf4 3. Nf3 g5
-const kingsGambitRoot: TutorialNode = buildTutorialNode(
-  ["e4", "e5", "f4", "exf4", "Nf3", "g5"],
-  [
-    "e4 occupe le case centrales et ouvre la diagonale du fou.",
-    "...e5 répond symétriquement, contrôlant le centre.",
-    "f4 offre le gambit du roi, sacrifie un pion pour l'initiative.",
-    "...exf4 accepte le pion, mais ouvre la diagonale a7‑g1 du fou noir.",
-    "Nf3 développe le cavalier, prépare le roque et attaque le pion f4.",
-    "...g5 attaque le cavalier et crée des menaces sur le roi blanc."
-  ],
-  [
-    [["e2","e4"]],
-    [["e7","e5"]],
-    [["f2","f4"]],
-    [["e5","f4"]],
-    [["g1","f3"]],
-    [["g7","g5"]]
-  ]
-);
+// Kings Gambit – C33 : 1. e4 e5 2. f4 exf4 3. Nf3 g5
+const kingsGambitRoot: TutorialNode = {
+  explanation: "Le légendaire Gambit du Roi ! Plongez l'adversaire dans le chaos dès le deuxième coup. Commencez par prendre le centre avec e4.",
+  arrows: [["e2", "e4"]],
+  children: {
+    e4: {
+      move: "e4",
+      // Nœud fantôme (Coup du joueur)
+      children: {
+        e5: {
+          move: "e5",
+          explanation: "Les Noirs répondent classiquement. Déclenchez la tempête : sacrifiez immédiatement votre pion f4 pour miner leur centre et ouvrir la colonne f !",
+          arrows: [["f2", "f4"]],
+          children: {
+            f4: {
+              move: "f4",
+              // Nœud fantôme
+              children: {
+                exf4: {
+                  move: "exf4",
+                  explanation: "Gambit accepté ! L'échiquier s'enflamme. Vous devez absolument empêcher l'échec mortel de la Dame noire en h4 (Dh4+). Sortez vite votre cavalier pour contrôler cette case.",
+                  arrows: [["g1", "f3"]],
+                  children: {
+                    Nf3: {
+                      move: "Nf3",
+                      // Nœud fantôme
+                      children: {
+                        g5: {
+                          move: "g5",
+                          explanation: "Ils s'accrochent à leur pion de plus avec les dents et menacent de chasser votre cavalier (g4). La guerre est déclarée ! Vos prochaines armes : miner leur chaîne avec h4 ou pointer votre Fou sur f7 (Fc4).",
+                          // Flèches prospectives de plan d'attaque
+                          arrows: [["h2", "h4"], ["f1", "c4"]]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+};
 
 export const kings_gambitCourse: OpeningCourse = {
   id: "kings_gambit",
-  name: "Kings Gambit",
-  description: "Formation complète sur Kings Gambit",
+  name: "Gambit du Roi",
+  description: "Sacrifiez un pion dès le 2ème coup pour obtenir une attaque dévastatrice et un centre massif.",
   chapters: [
     {
       id: "kings_gambit-c33",
@@ -52,4 +58,3 @@ export const kings_gambitCourse: OpeningCourse = {
     },
   ],
 };
-
