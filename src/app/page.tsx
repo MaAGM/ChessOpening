@@ -32,6 +32,24 @@ function getUserColorForCourse(courseId?: string | null): "white" | "black" {
   return BLACK_DEFENSE_COURSE_IDS.has(courseId) ? "black" : "white";
 }
 
+function getPreviousBranchPath(rootNode: TutorialNode, currentPath: string[]): string[] | null {
+  let node: TutorialNode | undefined = rootNode;
+  let previousBranchPath: string[] | null =
+    Object.keys(rootNode.children ?? {}).length > 1 ? [] : null;
+
+  for (let i = 0; i < currentPath.length; i += 1) {
+    if (!node?.children) break;
+    node = node.children[currentPath[i]];
+    if (!node) break;
+
+    if (Object.keys(node.children ?? {}).length > 1) {
+      previousBranchPath = currentPath.slice(0, i + 1);
+    }
+  }
+
+  return previousBranchPath;
+}
+
 export default function Home() {
   const {
     currentFen,
@@ -69,6 +87,10 @@ export default function Home() {
       };
     }
     return findNodeByMoveSequence(activeTutorial.root, currentPath);
+  }, [activeTutorial, currentPath]);
+  const previousBranchPath = useMemo<string[] | null>(() => {
+    if (!activeTutorial) return null;
+    return getPreviousBranchPath(activeTutorial.root, currentPath);
   }, [activeTutorial, currentPath]);
 
   const handlePieceDrop = (sourceSquare: string, targetSquare: string | null) => {
@@ -128,6 +150,21 @@ export default function Home() {
     setActiveTutorialId(null);
     setCurrentPath([]);
     resetGame();
+  };
+
+  const handleRewindToBranch = () => {
+    if (!activeTutorial) return;
+    const branchPath = getPreviousBranchPath(activeTutorial.root, currentPath);
+    if (!branchPath) return;
+
+    setCurrentPath(branchPath);
+    try {
+      const fen = computeFenForPath(branchPath);
+      loadPosition(fen);
+    } catch (e) {
+      console.error(e);
+      loadPosition(new Chess().fen());
+    }
   };
 
   useEffect(() => {
@@ -241,6 +278,9 @@ export default function Home() {
               <LearningPanel
                 currentNode={activeNode}
                 onSaveMove={addSavedMove}
+                hasPreviousBranch={Boolean(previousBranchPath)}
+                onRewindToBranch={handleRewindToBranch}
+                onBackToMenu={handleBackToMenu}
               />
             )}
           </div>
