@@ -59,17 +59,22 @@ export default function Home() {
     onPieceDrop,
     onPieceDragBegin,
     onPieceDragEnd,
-    onSquareClick,
+    onSquareClick, // <-- Restauré : indispensable pour l'affichage visuel !
     onSquareRightClick,
     resetGame,
     loadPosition,
   } = useChessGame();
+  
   const { addSavedMove } = useRepertoire();
   const [panelMode, setPanelMode] = useState<
     "menu" | "explorer" | "opening_selector" | "learning_active"
   >("menu");
   const [activeTutorialId, setActiveTutorialId] = useState<string | null>(null);
   const [currentPath, setCurrentPath] = useState<string[]>([]);
+  
+  // État pour gérer le premier clic (Click-to-Move) localement
+  const [moveFrom, setMoveFrom] = useState<string | null>(null);
+
   const activeCourse = useMemo(
     () => openingCourses.find((course) => course.chapters.some((chapter) => chapter.id === activeTutorialId)) ?? null,
     [activeTutorialId],
@@ -82,10 +87,17 @@ export default function Home() {
       ? activeTutorial.root 
       : findNodeByMoveSequence(activeTutorial.root, currentPath)
     : null;
+    
   const previousBranchPath = useMemo<string[] | null>(() => {
     if (!activeTutorial) return null;
     return getPreviousBranchPath(activeTutorial.root, currentPath);
   }, [activeTutorial, currentPath]);
+
+  const isChapterFinished = activeNode ? Object.keys(activeNode.children ?? {}).length === 0 : false;
+  const currentChapterIndex = activeCourse?.chapters.findIndex(c => c.id === activeTutorialId) ?? -1;
+  const nextChapter = activeCourse && currentChapterIndex !== -1 && currentChapterIndex < activeCourse.chapters.length - 1
+    ? activeCourse.chapters[currentChapterIndex + 1]
+    : null;
 
   const handlePieceDrop = (sourceSquare: string, targetSquare: string | null) => {
     if (panelMode === "menu") {
@@ -116,10 +128,66 @@ export default function Home() {
       const moved = onPieceDrop(sourceSquare, targetSquare);
       if (moved) {
         setCurrentPath((prev) => [...prev, previewMove.san]);
+        setMoveFrom(null); // Nettoie le state de clic au cas où on drag après avoir cliqué
       }
       return moved;
     }
-    return onPieceDrop(sourceSquare, targetSquare);
+    
+    const moved = onPieceDrop(sourceSquare, targetSquare);
+    if (moved) setMoveFrom(null);
+    return moved;
+  };
+
+  // Logique hybride pour gérer le clic ET le tutoriel en même temps
+  const handleSquareClick = (square: string) => {
+    if (panelMode === "learning_active" && activeNode) {
+      const sideToMove = currentPath.length % 2 === 0 ? "white" : "black";
+      if (sideToMove !== userColor) return;
+
+      // 1. Premier clic : on enregistre et on demande au hook d'afficher les points verts
+      if (!moveFrom) {
+        setMoveFrom(square);
+        onSquareClick(square);
+        return;
+      }
+
+      // 2. Clic sur la même case : on annule la sélection
+      if (moveFrom === square) {
+        setMoveFrom(null);
+        onSquareClick(square); // Demande au hook d'effacer les points
+        return;
+      }
+
+      // 3. Clic sur une case cible : tentative de mouvement
+      const previewGame = new Chess(currentFen);
+      let previewMove;
+      try {
+        previewMove = previewGame.move({ from: moveFrom, to: square, promotion: "q" });
+      } catch {
+        // Le coup est invalide aux échecs (ex: on clique sur une autre de nos pièces)
+        // Le hook va naturellement basculer l'affichage sur la nouvelle pièce
+        setMoveFrom(square);
+        onSquareClick(square);
+        return;
+      }
+
+      // 4. Le coup est valide aux échecs. Est-il valide pour le TUTO ?
+      const nextMoves = Object.keys(activeNode.children ?? {});
+      if (previewMove && nextMoves.includes(previewMove.san)) {
+        // Coup correct ! On laisse le hook exécuter le coup
+        onSquareClick(square);
+        setCurrentPath((prev) => [...prev, previewMove.san]);
+        setMoveFrom(null);
+      } else {
+        // Mauvais coup pour le tuto ! On bloque l'action.
+        // On simule un re-clic sur la case de départ pour dire au hook de vider l'affichage
+        onSquareClick(moveFrom);
+        setMoveFrom(null);
+      }
+    } else {
+      // Hors apprentissage, on laisse faire le hook à 100%
+      onSquareClick(square);
+    }
   };
 
   const handleStartTutorial = (id: string) => {
@@ -128,8 +196,8 @@ export default function Home() {
 
     setActiveTutorialId(id);
     setCurrentPath([]);
+    setMoveFrom(null);
     setPanelMode("learning_active");
-    // Load the initial position (empty path)
     try {
       const fen = computeFenForPath([]);
       loadPosition(fen);
@@ -139,10 +207,17 @@ export default function Home() {
     }
   };
 
+  const handleNextChapter = () => {
+    if (nextChapter) {
+      handleStartTutorial(nextChapter.id);
+    }
+  };
+
   const handleBackToMenu = () => {
     setPanelMode("menu");
     setActiveTutorialId(null);
     setCurrentPath([]);
+    setMoveFrom(null);
     resetGame();
   };
 
@@ -152,6 +227,7 @@ export default function Home() {
     if (!branchPath) return;
 
     setCurrentPath(branchPath);
+    setMoveFrom(null);
     try {
       const fen = computeFenForPath(branchPath);
       loadPosition(fen);
@@ -204,9 +280,9 @@ export default function Home() {
             onPieceDrop={handlePieceDrop}
             onPieceDragBegin={onPieceDragBegin}
             onPieceDragEnd={onPieceDragEnd}
-            onSquareClick={onSquareClick}
+            onSquareClick={handleSquareClick}
             onSquareRightClick={onSquareRightClick}
-              customArrows={activeNode?.arrows}
+            customArrows={activeNode?.arrows}
           />
         </section>
       </div>
@@ -243,7 +319,7 @@ export default function Home() {
             </p>
           </div>
         ) : (
-          <div className="flex h-full flex-col gap-3">
+          <div className="flex h-full flex-col gap-3 relative">
             <button
               type="button"
               onClick={handleBackToMenu}
@@ -269,13 +345,33 @@ export default function Home() {
             {panelMode === "opening_selector" && <OpeningSelector onSelectOpening={handleStartTutorial} />}
 
             {panelMode === "learning_active" && activeNode && (
-              <LearningPanel
-                currentNode={activeNode}
-                onSaveMove={addSavedMove}
-                hasPreviousBranch={Boolean(previousBranchPath)}
-                onRewindToBranch={handleRewindToBranch}
-                onBackToMenu={handleBackToMenu}
-              />
+              <>
+                <LearningPanel
+                  currentNode={activeNode}
+                  onSaveMove={addSavedMove}
+                  hasPreviousBranch={Boolean(previousBranchPath)}
+                  onRewindToBranch={handleRewindToBranch}
+                  onBackToMenu={handleBackToMenu}
+                />
+                
+                {/* Interface de fin de chapitre */}
+                {isChapterFinished && nextChapter && (
+                  <button 
+                    onClick={handleNextChapter}
+                    className="mt-2 flex w-full items-center justify-center gap-2 rounded-lg bg-[#D4AF37] px-4 py-3 font-bold text-slate-900 shadow-[0_0_15px_rgba(212,175,55,0.2)] transition hover:bg-[#F3E5AB] hover:shadow-[0_0_20px_rgba(212,175,55,0.4)]"
+                  >
+                    Chapitre suivant : {nextChapter.name}
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5">
+                      <path fillRule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.638L10.23 5.29a.75.75 0 1 1 1.04-1.08l5.5 5.25a.75.75 0 0 1 0 1.08l-5.5 5.25a.75.75 0 1 1-1.04-1.08l4.158-3.96H3.75A.75.75 0 0 1 3 10Z" clipRule="evenodd" />
+                    </svg>
+                  </button>
+                )}
+                {isChapterFinished && !nextChapter && (
+                  <div className="mt-2 rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 text-center font-bold text-emerald-400">
+                    🎉 Cours complet terminé !
+                  </div>
+                )}
+              </>
             )}
           </div>
         )}
