@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Chess } from "chess.js";
 import { useChessGame } from "@/hooks/useChessGame";
 import { ChessBoard } from "@/components/chess/ChessBoard";
@@ -9,7 +9,27 @@ import { LearningPanel } from "@/components/chess/LearningPanel";
 import { MasterExplorer } from "@/components/chess/MasterExplorer";
 import { OpeningSelector } from "@/components/chess/OpeningSelector";
 import { useRepertoire } from "@/hooks/useRepertoire";
-import { findNodeByMoveSequence, computeFenForPath, getAllChapters } from "@/lib/data/openings";
+import { findNodeByMoveSequence, computeFenForPath, getAllChapters, openingCourses } from "@/lib/data/openings";
+
+const BLACK_DEFENSE_COURSE_IDS = new Set([
+  "sicilian",
+  "french",
+  "caro_kann",
+  "pirc",
+  "alekhine",
+  "scandinavian",
+  "dutch",
+  "nimzo",
+  "kings_indian",
+  "grunfeld",
+  "slav",
+  "benoni",
+]);
+
+function getUserColorForCourse(courseId?: string | null): "white" | "black" {
+  if (!courseId) return "white";
+  return BLACK_DEFENSE_COURSE_IDS.has(courseId) ? "black" : "white";
+}
 
 export default function Home() {
   const {
@@ -31,6 +51,11 @@ export default function Home() {
   >("menu");
   const [activeTutorialId, setActiveTutorialId] = useState<string | null>(null);
   const [currentPath, setCurrentPath] = useState<string[]>([]);
+  const activeCourse = useMemo(
+    () => openingCourses.find((course) => course.chapters.some((chapter) => chapter.id === activeTutorialId)) ?? null,
+    [activeTutorialId],
+  );
+  const userColor = getUserColorForCourse(activeCourse?.id);
 
   const activeTutorial = getAllChapters().find((chapter) => chapter.id === activeTutorialId) ?? null;
   const activeNode = activeTutorial
@@ -46,6 +71,34 @@ export default function Home() {
   const handlePieceDrop = (sourceSquare: string, targetSquare: string | null) => {
     if (panelMode === "menu") {
       setPanelMode("explorer");
+    }
+    if (panelMode === "learning_active" && activeNode) {
+      if (!targetSquare) return false;
+
+      const sideToMove = currentPath.length % 2 === 0 ? "white" : "black";
+      if (sideToMove !== userColor) {
+        return false;
+      }
+
+      const previewGame = new Chess(currentFen);
+      let previewMove;
+      try {
+        previewMove = previewGame.move({ from: sourceSquare, to: targetSquare, promotion: "q" });
+      } catch {
+        return false;
+      }
+      if (!previewMove) return false;
+
+      const nextMoves = Object.keys(activeNode.children ?? {});
+      if (!nextMoves.includes(previewMove.san)) {
+        return false;
+      }
+
+      const moved = onPieceDrop(sourceSquare, targetSquare);
+      if (moved) {
+        setCurrentPath((prev) => [...prev, previewMove.san]);
+      }
+      return moved;
     }
     return onPieceDrop(sourceSquare, targetSquare);
   };
@@ -67,25 +120,41 @@ export default function Home() {
     }
   };
 
-  const handleBranchSelect = (san: string) => {
-    if (!activeTutorialId) return;
-    const nextPath = [...currentPath, san];
-    setCurrentPath(nextPath);
-
-    try {
-      const nextFen = computeFenForPath(nextPath);
-      loadPosition(nextFen);
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
   const handleBackToMenu = () => {
     setPanelMode("menu");
     setActiveTutorialId(null);
     setCurrentPath([]);
     resetGame();
   };
+
+  useEffect(() => {
+    if (panelMode !== "learning_active" || !activeNode) return;
+
+    const sideToMove = currentPath.length % 2 === 0 ? "white" : "black";
+    const computerColor = userColor === "white" ? "black" : "white";
+    if (sideToMove !== computerColor) return;
+
+    const mainLineMove = Object.keys(activeNode.children ?? {})[0];
+    if (!mainLineMove) return;
+
+    const timer = setTimeout(() => {
+      const previewGame = new Chess(currentFen);
+      let previewMove;
+      try {
+        previewMove = previewGame.move(mainLineMove);
+      } catch {
+        return;
+      }
+      if (!previewMove) return;
+
+      const moved = onPieceDrop(previewMove.from, previewMove.to);
+      if (moved) {
+        setCurrentPath((prev) => [...prev, mainLineMove]);
+      }
+    }, 400);
+
+    return () => clearTimeout(timer);
+  }, [panelMode, activeNode, currentPath, userColor, currentFen, onPieceDrop]);
 
   return (
     <main className="flex min-h-screen items-center justify-start gap-6 bg-slate-900 px-4 py-10 pl-16 text-slate-100">
@@ -95,6 +164,7 @@ export default function Home() {
         <section className="w-full max-w-137.5 border-2 border-[#D4AF37] bg-[#D4AF37]/10 p-2 shadow-2xl shadow-black/40">
           <ChessBoard
             position={currentFen}
+            boardOrientation={userColor}
             currentGame={currentGame}
             squareStyles={squareStyles}
             onPieceDrop={handlePieceDrop}
@@ -167,8 +237,6 @@ export default function Home() {
             {panelMode === "learning_active" && activeNode && (
               <LearningPanel
                 currentNode={activeNode}
-                currentPath={currentPath}
-                onBranchSelect={handleBranchSelect}
                 onSaveMove={addSavedMove}
               />
             )}

@@ -40,6 +40,7 @@ const customPieces = {
 
 type ChessBoardProps = {
   position: string;
+  boardOrientation: "white" | "black";
   currentGame: Chess;
   squareStyles: Record<string, CSSProperties>;
   customArrows?: [string, string][];
@@ -52,6 +53,7 @@ type ChessBoardProps = {
 
 export function ChessBoard({
   position,
+  boardOrientation,
   currentGame,
   squareStyles,
   customArrows,
@@ -73,6 +75,7 @@ export function ChessBoard({
         options={{
           id: "chess-opening-board",
           position,
+          boardOrientation,
           boardStyle: { width: "100%", height: "auto" },
           pieces: customPieces,
           darkSquareStyle: { backgroundColor: "#769656" },

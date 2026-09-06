@@ -2,14 +2,10 @@ import type { TutorialNode } from "@/lib/data/openings";
 
 type LearningPanelProps = {
   currentNode: TutorialNode;
-  currentPath: string[];
-  onBranchSelect: (san: string) => void;
   onSaveMove: (move: string) => void;
 };
 
-export function LearningPanel({ currentNode, currentPath, onBranchSelect, onSaveMove }: LearningPanelProps) {
-  const branchEntries = Object.entries(currentNode.children ?? {});
-
+export function LearningPanel({ currentNode, onSaveMove }: LearningPanelProps) {
   return (
     <section className="flex h-full flex-col rounded-xl border border-slate-600 bg-slate-800/70 p-4 shadow-lg shadow-slate-950/40">
       {currentNode.explanation && (
@@ -28,17 +24,6 @@ export function LearningPanel({ currentNode, currentPath, onBranchSelect, onSave
             Ajouter au répertoire
           </button>
         )}
-
-        {branchEntries.map(([san, _node]) => (
-          <button
-            key={san}
-            type="button"
-            onClick={() => onBranchSelect(san)}
-            className="rounded-lg border border-slate-400/40 bg-slate-700/40 px-4 py-2 text-sm font-semibold text-slate-100 transition hover:border-emerald-300/70 hover:bg-emerald-500/20 hover:text-emerald-100"
-          >
-            Jouer {san}
-          </button>
-        ))}
       </div>
     </section>
   );
