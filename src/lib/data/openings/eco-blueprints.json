@@ -1,0 +1,337 @@
+{
+  "courses": [
+    {
+      "id": "english",
+      "name": "English",
+      "description": "Formation complète sur English",
+      "chapters": [
+        {
+          "id": "english-a20",
+          "eco": "A20",
+          "name": "Anglaise - Sicilienne Inversée",
+          "moves": "1. c4 e5 2. Nc3 Nf6 3. g3"
+        },
+        {
+          "id": "english-a30",
+          "eco": "A30",
+          "name": "Anglaise - Symétrique",
+          "moves": "1. c4 c5 2. Nf3 Nf6 3. g3 g6"
+        }
+      ]
+    },
+    {
+      "id": "reti",
+      "name": "Reti",
+      "description": "Formation complète sur Reti",
+      "chapters": [
+        {
+          "id": "reti-a04",
+          "eco": "A04",
+          "name": "Ouverture Réti",
+          "moves": "1. Nf3 d5 2. c4"
+        }
+      ]
+    },
+    {
+      "id": "benoni",
+      "name": "Benoni",
+      "description": "Formation complète sur Benoni",
+      "chapters": [
+        {
+          "id": "benoni-a43",
+          "eco": "A43",
+          "name": "Ancienne Benoni (Old Benoni)",
+          "moves": "1. d4 c5 2. d5 e5 3. e4 d6"
+        },
+        {
+          "id": "benoni-a57",
+          "eco": "A57",
+          "name": "Gambit Benko (Volga)",
+          "moves": "1. d4 Nf6 2. c4 c5 3. d5 b5 4. cxb5 a6 5. bxa6 Bxa6"
+        },
+        {
+          "id": "benoni-a60",
+          "eco": "A60",
+          "name": "Benoni Moderne",
+          "moves": "1. d4 Nf6 2. c4 c5 3. d5 e6 4. Nc3 exd5 5. cxd5 d6"
+        }
+      ]
+    },
+    {
+      "id": "trompowsky",
+      "name": "Trompowsky",
+      "description": "Formation complète sur Trompowsky",
+      "chapters": [
+        {
+          "id": "trompowsky-a45",
+          "eco": "A45",
+          "name": "Attaque Trompowsky",
+          "moves": "1. d4 Nf6 2. Bg5 Ne4 3. Bf4"
+        }
+      ]
+    },
+    {
+      "id": "scandinavian",
+      "name": "Scandinavian",
+      "description": "Formation complète sur Scandinavian",
+      "chapters": [
+        {
+          "id": "scandinavian-b01",
+          "eco": "B01",
+          "name": "Défense Scandinave",
+          "moves": "1. e4 d5 2. exd5 Qxd5 3. Nc3 Qa5"
+        }
+      ]
+    },
+    {
+      "id": "alekhine",
+      "name": "Alekhine",
+      "description": "Formation complète sur Alekhine",
+      "chapters": [
+        {
+          "id": "alekhine-b02",
+          "eco": "B02",
+          "name": "Défense Alekhine",
+          "moves": "1. e4 Nf6 2. e5 Nd5 3. d4 d6"
+        }
+      ]
+    },
+    {
+      "id": "pirc",
+      "name": "Pirc",
+      "description": "Formation complète sur Pirc",
+      "chapters": [
+        {
+          "id": "pirc-b07",
+          "eco": "B07",
+          "name": "Défense Pirc",
+          "moves": "1. e4 d6 2. d4 Nf6 3. Nc3 g6"
+        }
+      ]
+    },
+    {
+      "id": "caro_kann",
+      "name": "Caro Kann",
+      "description": "Formation complète sur Caro Kann",
+      "chapters": [
+        {
+          "id": "caro_kann-b12",
+          "eco": "B12",
+          "name": "Caro-Kann - Avance",
+          "moves": "1. e4 c6 2. d4 d5 3. e5 Bf5 4. Nf3 e6"
+        },
+        {
+          "id": "caro_kann-b13",
+          "eco": "B13",
+          "name": "Caro-Kann - Échange",
+          "moves": "1. e4 c6 2. d4 d5 3. exd5 cxd5 4. Bd3 Nc6 5. c3"
+        }
+      ]
+    },
+    {
+      "id": "sicilian",
+      "name": "Sicilian",
+      "description": "Formation complète sur Sicilian",
+      "chapters": [
+        {
+          "id": "sicilian-b22",
+          "eco": "B22",
+          "name": "Sicilienne - Alapine",
+          "moves": "1. e4 c5 2. c3 Nf6 3. e5 Nd5"
+        },
+        {
+          "id": "sicilian-b70",
+          "eco": "B70",
+          "name": "Sicilienne - Dragon",
+          "moves": "1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 g6 6. Be3 Bg7 7. f3"
+        },
+        {
+          "id": "sicilian-b90",
+          "eco": "B90",
+          "name": "Sicilienne - Najdorf",
+          "moves": "1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 a6 6. Be3 e5"
+        }
+      ]
+    },
+    {
+      "id": "french",
+      "name": "French",
+      "description": "Formation complète sur French",
+      "chapters": [
+        {
+          "id": "french-c02",
+          "eco": "C02",
+          "name": "Française - Avance",
+          "moves": "1. e4 e6 2. d4 d5 3. e5 c5 4. c3 Nc6 5. Nf3"
+        },
+        {
+          "id": "french-c15",
+          "eco": "C15",
+          "name": "Française - Winawer",
+          "moves": "1. e4 e6 2. d4 d5 3. Nc3 Bb4 4. e5 c5 5. a3 Bxc3+ 6. bxc3"
+        }
+      ]
+    },
+    {
+      "id": "vienna",
+      "name": "Vienna",
+      "description": "Formation complète sur Vienna",
+      "chapters": [
+        {
+          "id": "vienna-c25",
+          "eco": "C25",
+          "name": "Partie Viennoise",
+          "moves": "1. e4 e5 2. Nc3 Nf6 3. Bc4 Bc5"
+        }
+      ]
+    },
+    {
+      "id": "kings_gambit",
+      "name": "Kings Gambit",
+      "description": "Formation complète sur Kings Gambit",
+      "chapters": [
+        {
+          "id": "kings_gambit-c33",
+          "eco": "C33",
+          "name": "Gambit Roi Accepté",
+          "moves": "1. e4 e5 2. f4 exf4 3. Nf3 g5"
+        }
+      ]
+    },
+    {
+      "id": "scotch",
+      "name": "Scotch",
+      "description": "Formation complète sur Scotch",
+      "chapters": [
+        {
+          "id": "scotch-c45",
+          "eco": "C45",
+          "name": "Partie Écossaise",
+          "moves": "1. e4 e5 2. Nf3 Nc6 3. d4 exd4 4. Nxd4 Nf6 5. Nxc6"
+        }
+      ]
+    },
+    {
+      "id": "italian",
+      "name": "Italian",
+      "description": "Formation complète sur Italian",
+      "chapters": [
+        {
+          "id": "italian-c53",
+          "eco": "C53",
+          "name": "Italienne - Giuoco Piano",
+          "moves": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. c3 d6"
+        },
+        {
+          "id": "italian-c55",
+          "eco": "C55",
+          "name": "Italienne - Deux Cavaliers",
+          "moves": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. Ng5"
+        }
+      ]
+    },
+    {
+      "id": "ruy_lopez",
+      "name": "Ruy Lopez",
+      "description": "Formation complète sur Ruy Lopez",
+      "chapters": [
+        {
+          "id": "ruy_lopez-c65",
+          "eco": "C65",
+          "name": "Espagnole - Défense Berlin",
+          "moves": "1. e4 e5 2. Nf3 Nc6 3. Bb5 Nf6 4. O-O Nxe4 5. d4"
+        },
+        {
+          "id": "ruy_lopez-c78",
+          "eco": "C78",
+          "name": "Espagnole - Défense Morphy",
+          "moves": "1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. O-O Be7"
+        }
+      ]
+    },
+    {
+      "id": "london_system",
+      "name": "London System",
+      "description": "Formation complète sur London System",
+      "chapters": [
+        {
+          "id": "london_system-d02",
+          "eco": "D02",
+          "name": "Système de Londres (Classique)",
+          "moves": "1. d4 d5 2. Bf4 Nf6 3. e3 c6 4. Nf3"
+        }
+      ]
+    },
+    {
+      "id": "slav",
+      "name": "Slav",
+      "description": "Formation complète sur Slav",
+      "chapters": [
+        {
+          "id": "slav-d10",
+          "eco": "D10",
+          "name": "Défense Slave",
+          "moves": "1. d4 d5 2. c4 c6 3. Nf3 Nf6 4. Nc3 dxc4 5. a4"
+        }
+      ]
+    },
+    {
+      "id": "queens_gambit",
+      "name": "Queens Gambit",
+      "description": "Formation complète sur Queens Gambit",
+      "chapters": [
+        {
+          "id": "queens_gambit-d20",
+          "eco": "D20",
+          "name": "Gambit Dame Accepté",
+          "moves": "1. d4 d5 2. c4 dxc4 3. Nf3 Nf6 4. e3 e6 5. Bxc4"
+        },
+        {
+          "id": "queens_gambit-d30",
+          "eco": "D30",
+          "name": "Gambit Dame Refusé",
+          "moves": "1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Bg5"
+        }
+      ]
+    },
+    {
+      "id": "grunfeld",
+      "name": "Grunfeld",
+      "description": "Formation complète sur Grunfeld",
+      "chapters": [
+        {
+          "id": "grunfeld-d80",
+          "eco": "D80",
+          "name": "Défense Grünfeld",
+          "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. cxd5 Nxd5 5. e4 Nxc3 6. bxc3"
+        }
+      ]
+    },
+    {
+      "id": "catalan",
+      "name": "Catalan",
+      "description": "Formation complète sur Catalan",
+      "chapters": [
+        {
+          "id": "catalan-e04",
+          "eco": "E04",
+          "name": "Catalane - Ouverte",
+          "moves": "1. d4 Nf6 2. c4 e6 3. g3 d5 4. Bg2 dxc4 5. Nf3 a6 6. O-O"
+        }
+      ]
+    },
+    {
+      "id": "kings_indian",
+      "name": "Kings Indian",
+      "description": "Formation complète sur Kings Indian",
+      "chapters": [
+        {
+          "id": "kings_indian-e90",
+          "eco": "E90",
+          "name": "Est-Indienne - Classique",
+          "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. Nf3 O-O 6. Be2 e5"
+        }
+      ]
+    }
+  ]
+}

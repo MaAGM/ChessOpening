@@ -1,8 +1,27 @@
 export * from "./types";
 
 import { frenchCourse } from "./french";
+import { englishCourse } from "./english";
+import { retiCourse } from "./reti";
+import { benoniCourse } from "./benoni";
+import { trompowskyCourse } from "./trompowsky";
+import { alekhineCourse } from "./alekhine";
+import { pircCourse } from "./pirc";
+import { carokannCourse } from "./carokann";
+import { sicilianCourse } from "./sicilian";
+import { viennaCourse } from "./vienna";
+import { kings_gambitCourse } from "./kings_gambit";
+import { scotchCourse } from "./scotch";
+import { italianCourse } from "./italian";
+import { ruyLopezCourse } from "./ruy_lopez";
+import { londonSystemCourse } from "./london_system";
+import { slavCourse } from "./slav";
+import { queens_gambitCourse } from "./queens_gambit";
+import { grunfeldCourse } from "./grunfeld";
+import { catalanCourse } from "./catalan";
+import { kings_indianCourse } from "./kings_indian";
 
-export const openingCourses = [frenchCourse];
+export const openingCourses = [frenchCourse, englishCourse, retiCourse, benoniCourse, trompowskyCourse, alekhineCourse, pircCourse, carokannCourse, sicilianCourse, viennaCourse, kings_gambitCourse, scotchCourse, italianCourse, ruyLopezCourse, londonSystemCourse, slavCourse, queens_gambitCourse, grunfeldCourse, catalanCourse, kings_indianCourse];
 
 // --- Helpers (same logic we already have) ---------------------------------
 import { Chess } from "chess.js";
