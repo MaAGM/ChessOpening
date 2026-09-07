@@ -61,7 +61,7 @@ function getPreviousBranchPath(
   currentPath: string[],
 ): string[] | null {
   let node: TutorialNode | undefined = rootNode;
-  let previousBranchPath: string[] | null =
+  let firstBranchPath: string[] | null =
     Object.keys(rootNode.children ?? {}).length > 1 ? [] : null;
 
   for (let i = 0; i < currentPath.length; i += 1) {
@@ -70,11 +70,19 @@ function getPreviousBranchPath(
     if (!node) break;
 
     if (Object.keys(node.children ?? {}).length > 1) {
-      previousBranchPath = currentPath.slice(0, i + 1);
+      // On capture UNIQUEMENT la première intersection (la séparation principale)
+      if (firstBranchPath === null) {
+        firstBranchPath = currentPath.slice(0, i + 1);
+      }
     }
   }
 
-  return previousBranchPath;
+  // Si on est déjà sur la séparation principale, on ne propose pas le bouton
+  if (firstBranchPath !== null && firstBranchPath.length === currentPath.length) {
+    return null;
+  }
+
+  return firstBranchPath;
 }
 
 /**
