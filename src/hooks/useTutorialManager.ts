@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Chess } from "chess.js";
 
 import { useRepertoire } from "@/hooks/useRepertoire";
-import type { TutorialNode } from "@/lib/data/openings";
+import type { TutorialNode, OpeningCourse } from "@/lib/data/openings";
 import {
   findNodeByMoveSequence,
   computeFenForPath,
@@ -54,7 +54,7 @@ function getUserColorForCourse(
 
 /**
  * Returns the most recent path where the tutorial branch diverged
- * (i.e. a node with > 1 child) so the UI can offer a “rewind” button.
+ * (i.e. a node with > 1 child) so the UI can offer a “rewind” button.
  */
 function getPreviousBranchPath(
   rootNode: TutorialNode,
@@ -111,7 +111,7 @@ export function useTutorialManager(params: TutorialManagerParams) {
   // ----------------------------------------------------------------------
   const activeCourse = useMemo(
     () =>
-      openingCourses.find((c) =>
+      openingCourses.find((c: OpeningCourse) =>
         c.chapters.some((ch) => ch.id === activeTutorialId),
       ) ?? null,
     [activeTutorialId],
@@ -303,7 +303,14 @@ export function useTutorialManager(params: TutorialManagerParams) {
     const computerColor = userColor === "white" ? "black" : "white";
     if (sideToMove !== computerColor) return;
 
-    const mainLineMove = Object.keys(activeNode.children ?? {})[0];
+    const nextMoves = Object.keys(activeNode.children ?? {});
+    
+    // NOUVEAU : Si l'ordinateur a plusieurs choix, on bloque l'auto-play
+    if (nextMoves.length > 1) {
+      return; 
+    }
+
+    const mainLineMove = nextMoves[0];
     if (!mainLineMove) return;
 
     const timer = setTimeout(() => {
@@ -332,6 +339,31 @@ export function useTutorialManager(params: TutorialManagerParams) {
     onPieceDrop,
   ]);
 
+  // ======================================================================
+  // NOUVEAU : Logique de sélection de la branche (Branch Selector Logic)
+  // ======================================================================
+  const sideToMove = currentPath.length % 2 === 0 ? "white" : "black";
+  const isComputerTurn = sideToMove !== userColor;
+  const branchChoices = Object.keys(activeNode?.children ?? {});
+  const isWaitingForBranchChoice = panelMode === "learning_active" && isComputerTurn && branchChoices.length > 1;
+
+  const handleBranchChoice = (moveSan: string) => {
+    const previewGame = new Chess(currentFen);
+    let previewMove;
+    try {
+      previewMove = previewGame.move(moveSan);
+    } catch {
+      return;
+    }
+    
+    if (previewMove) {
+      const moved = onPieceDrop(previewMove.from, previewMove.to);
+      if (moved) {
+        setCurrentPath((p) => [...p, moveSan]);
+      }
+    }
+  };
+
   // ----------------------------------------------------------------------
   // Return everything the UI components need
   // ----------------------------------------------------------------------
@@ -347,6 +379,12 @@ export function useTutorialManager(params: TutorialManagerParams) {
     nextChapter,
     previousBranchPath,
     userColor,
+    
+    // Variables pour le panneau de choix
+    isWaitingForBranchChoice,
+    branchChoices,
+    handleBranchChoice,
+
     // Interaction handlers
     handlePieceClick: handleSquareClick,
     handlePieceDrop,

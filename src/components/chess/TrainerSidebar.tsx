@@ -26,6 +26,10 @@ type Props = {
   handleRewindToBranch: () => void;
   handleStartTutorial: (id: string) => void;
   handleNextChapter: () => void;
+
+  isWaitingForBranchChoice: boolean;
+  branchChoices: string[];
+  onPlayMove: (moveSan: string) => void;
 };
 
 /**
@@ -47,6 +51,9 @@ export const TrainerSidebar: FC<Props> = ({
   handleStartTutorial,
   handleNextChapter,
   currentFen,
+  isWaitingForBranchChoice,
+  branchChoices,
+  onPlayMove,
 }) => {
   return (
     <aside
@@ -145,6 +152,9 @@ export const TrainerSidebar: FC<Props> = ({
                 hasPreviousBranch={Boolean(previousBranchPath)}
                 onRewindToBranch={handleRewindToBranch}
                 onBackToMenu={handleBackToMenu}
+                isWaitingForBranchChoice={isWaitingForBranchChoice}
+                branchChoices={branchChoices}
+                onPlayMove={onPlayMove}
               />
 
               {/* ------------------------------------------------------------ */}

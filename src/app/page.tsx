@@ -79,6 +79,10 @@ export default function HomePage() {
         handleStartTutorial={tutorial.handleStartTutorial}
         handleNextChapter={tutorial.handleNextChapter}
         currentFen={currentFen}
+        // ── NOUVEAU : Transmission des choix multiples au Sidebar ──
+        isWaitingForBranchChoice={tutorial.isWaitingForBranchChoice}
+        branchChoices={tutorial.branchChoices}
+        onPlayMove={tutorial.handleBranchChoice}
       />
     </main>
   );
