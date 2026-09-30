@@ -26,33 +26,6 @@ export type TutorialManagerParams = {
 };
 
 /**
- * Set of opening IDs that are traditionally played from the **black** side.
- * Used to infer the player colour for a given course.
- */
-const BLACK_DEFENSE_COURSE_IDS = new Set([
-  "sicilian",
-  "french",
-  "caro_kann",
-  "pirc",
-  "alekhine",
-  "scandinavian",
-  "dutch",
-  "nimzo",
-  "kings_indian",
-  "grunfeld",
-  "slav",
-  "benoni",
-]);
-
-/** Infer the colour the user should play for a given course. */
-function getUserColorForCourse(
-  courseId?: string | null,
-): "white" | "black" {
-  if (!courseId) return "white";
-  return BLACK_DEFENSE_COURSE_IDS.has(courseId) ? "black" : "white";
-}
-
-/**
  * Returns the most recent path where the tutorial branch diverged
  * (i.e. a node with > 1 child) so the UI can offer a “rewind” button.
  */
@@ -117,7 +90,8 @@ export function useTutorialManager(params: TutorialManagerParams) {
     [activeTutorialId],
   );
 
-  const userColor = getUserColorForCourse(activeCourse?.id);
+  // Utilisation directe du side provenant du JSON !
+  const userColor = activeCourse?.side ?? "white";
 
   const activeTutorial = getAllChapters().find(
     (c) => c.id === activeTutorialId,
@@ -393,7 +367,6 @@ export function useTutorialManager(params: TutorialManagerParams) {
     handleBackToMenu,
     handleRewindToBranch,
     // Misc helpers (exported for potential external use)
-    getUserColorForCourse,
     getPreviousBranchPath,
   };
 }

@@ -1,11 +1,10 @@
 export type TutorialArrow = [startSquare: string, endSquare: string];
+export type Arrow = [from: string, to: string];
 
 export interface TutorialNode {
-  /** SAN move that led to this node. Omitted only for the root node. */
   move?: string;
   explanation?: string;
-  arrows?: TutorialArrow[];
-  /** Branching children, keyed by the SAN move that leads to each. */
+  arrows?: Arrow[];
   children?: Record<string, TutorialNode>;
 }
 
@@ -13,6 +12,7 @@ export interface TutorialNode {
 export interface OpeningChapter {
   id: string;
   name: string;
+  side?: "white" | "black"; // <-- Ajout ici (optionnel, hérite du cours par défaut)
   root: TutorialNode;
 }
 
@@ -21,6 +21,6 @@ export interface OpeningCourse {
   id: string;
   name: string;
   description: string;
+  side: "white" | "black"; // <-- Ajout ici
   chapters: OpeningChapter[];
 }
-
