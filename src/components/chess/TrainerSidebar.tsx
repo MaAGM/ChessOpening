@@ -1,21 +1,36 @@
 "use client";
 
-import { FC } from "react";
+import { FC, useMemo } from "react";
 
 import { MasterExplorer } from "@/components/chess/MasterExplorer";
 import { OpeningSelector } from "@/components/chess/OpeningSelector";
 import { LearningPanel } from "@/components/chess/LearningPanel";
+import { ReviewPanel } from "@/components/chess/ReviewPanel";
+import { ReviewSetup } from "@/components/chess/ReviewSetup";
+import type { ReviewManager } from "@/hooks/useReviewManager";
+import { useReviewStore } from "@/hooks/useReviewStore";
+import type { PanelMode } from "@/hooks/useTrainerMode";
+import { countReviewChaptersBySide, type Side } from "@/lib/review/reviewRepertoire";
 
 import type { TutorialNode } from "@/lib/data/openings";
 
 type Props = {
-  /** Current UI mode – controlled by the tutorial hook */
-  panelMode: "menu" | "explorer" | "opening_selector" | "learning_active";
+  /** Current UI mode – owned by useTrainerMode */
+  panelMode: PanelMode;
   /** Setter for the UI mode */
-  setPanelMode: (mode: "menu" | "explorer" | "opening_selector" | "learning_active") => void;
+  setPanelMode: (mode: PanelMode) => void;
+
+  /** Couleur choisie en mode révision (null hors révision) */
+  reviewSide: Side | null;
+  /** Lance l'entraînement pour une couleur */
+  onStartReview: (side: Side) => void;
+  /** État et actions de la session de révision (useReviewManager) */
+  review: ReviewManager;
 
   /** Derived data from the tutorial hook */
   activeNode: TutorialNode | null;
+  /** ID du chapitre en cours (null hors tutoriel) */
+  activeChapterId: string | null;
   isChapterFinished: boolean;
   nextChapter: { id: string; name: string } | null;
   previousBranchPath: string[] | null;
@@ -33,8 +48,8 @@ type Props = {
 };
 
 /**
- * The sidebar contains the **menu**, the **explorer**, the **opening selector**
- * and the **learning panel** (shown only when a tutorial is active).
+ * The sidebar contains the **menu**, the **explorer**, the **opening selector**,
+ * the **learning panel** (tutorial) and the **review screens**.
  *
  * All visual logic lives here; the page component only renders this
  * component and passes the hook‑generated props.
@@ -42,7 +57,11 @@ type Props = {
 export const TrainerSidebar: FC<Props> = ({
   panelMode,
   setPanelMode,
+  reviewSide,
+  onStartReview,
+  review,
   activeNode,
+  activeChapterId,
   isChapterFinished,
   nextChapter,
   previousBranchPath,
@@ -55,6 +74,13 @@ export const TrainerSidebar: FC<Props> = ({
   branchChoices,
   onPlayMove,
 }) => {
+  const { isInReview, addToReview, removeFromReview, reviewChapterIds } = useReviewStore();
+  const isChapterInReview = activeChapterId ? isInReview(activeChapterId) : false;
+  const reviewCounts = useMemo(
+    () => countReviewChaptersBySide(reviewChapterIds),
+    [reviewChapterIds],
+  );
+
   return (
     <aside
       className={`flex h-137.5 flex-col rounded-lg border border-slate-700 bg-slate-800/60 p-4 transition-all duration-300 ease-in-out ${
@@ -88,8 +114,8 @@ export const TrainerSidebar: FC<Props> = ({
 
           <button
             type="button"
-            disabled
-            className="cursor-not-allowed rounded-xl border border-amber-400/40 bg-amber-500/20 px-4 py-3 text-left font-semibold text-amber-100 opacity-50 grayscale"
+            onClick={() => setPanelMode("review_setup")}
+            className="rounded-xl border border-amber-400/40 bg-amber-500/20 px-4 py-3 text-left font-semibold text-amber-100 transition hover:border-amber-300/70 hover:bg-amber-500/30"
           >
             Réviser les ouvertures
           </button>
@@ -137,18 +163,26 @@ export const TrainerSidebar: FC<Props> = ({
           )}
 
           {/* ---------------------------------------------------------------- */}
+          {/* Review – side chooser */}
+          {/* ---------------------------------------------------------------- */}
+          {panelMode === "review_setup" && (
+            <ReviewSetup counts={reviewCounts} onStart={onStartReview} />
+          )}
+
+          {/* ---------------------------------------------------------------- */}
+          {/* Review – training session */}
+          {/* ---------------------------------------------------------------- */}
+          {panelMode === "review_active" && reviewSide && (
+            <ReviewPanel side={reviewSide} review={review} />
+          )}
+
+          {/* ---------------------------------------------------------------- */}
           {/* Learning panel – shown when a tutorial is active */}
           {/* ---------------------------------------------------------------- */}
           {panelMode === "learning_active" && activeNode && (
             <>
               <LearningPanel
                 currentNode={activeNode}
-                onSaveMove={(move) => {
-                  // The hook already adds the move to the repertoire when the board
-                  // executes it, but the UI may want to persist it for user history.
-                  // We expose the `addSavedMove` helper from the hook; here we just
-                  // forward the call.
-                }}
                 hasPreviousBranch={Boolean(previousBranchPath)}
                 onRewindToBranch={handleRewindToBranch}
                 onBackToMenu={handleBackToMenu}
@@ -158,8 +192,31 @@ export const TrainerSidebar: FC<Props> = ({
               />
 
               {/* ------------------------------------------------------------ */}
-              {/* End‑of‑chapter UI – gold button / completion banner */}
+              {/* End‑of‑chapter UI – review button, next chapter, banner */}
               {/* ------------------------------------------------------------ */}
+              {isChapterFinished && activeChapterId && (
+                isChapterInReview ? (
+                  <div className="mt-2 flex items-center justify-between rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-4 py-2 text-sm font-semibold text-emerald-300">
+                    <span>✓ Ajouté à vos révisions</span>
+                    <button
+                      type="button"
+                      onClick={() => removeFromReview(activeChapterId)}
+                      className="text-xs font-normal text-slate-400 underline transition hover:text-slate-200"
+                    >
+                      Retirer
+                    </button>
+                  </div>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => addToReview(activeChapterId)}
+                    className="mt-2 w-full rounded-lg border border-emerald-400/40 bg-emerald-500/20 px-4 py-3 text-sm font-semibold text-emerald-100 transition hover:border-emerald-300/80 hover:bg-emerald-500/30"
+                  >
+                    Ajouter à mes révisions
+                  </button>
+                )
+              )}
+
               {isChapterFinished && nextChapter && (
                 <button
                   onClick={handleNextChapter}

@@ -1,15 +1,15 @@
-// Updated OpeningSelector – binary chapter completion and progress bar
+// OpeningSelector – binary chapter completion and progress bar
 "use client";
 
 import { openingCourses, type OpeningCourse } from "@/lib/data/openings";
-import { useRepertoire } from "@/hooks/useRepertoire";
+import { useReviewStore } from "@/hooks/useReviewStore";
 
 type OpeningSelectorProps = {
   onSelectOpening: (id: string) => void;
 };
 
 export function OpeningSelector({ onSelectOpening }: OpeningSelectorProps) {
-  const { completedChapters } = useRepertoire();
+  const { completedChapters } = useReviewStore();
 
     return (
       <section className="flex h-full flex-col gap-3">

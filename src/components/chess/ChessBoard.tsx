@@ -38,12 +38,16 @@ const customPieces = {
   bK: renderCustomPiece("bK"),
 };
 
+const DEFAULT_ARROW_COLOR = "#f59e0b";
+
 type ChessBoardProps = {
   position: string;
   boardOrientation: "white" | "black";
   currentGame: Chess;
   squareStyles: Record<string, CSSProperties>;
   customArrows?: [string, string][];
+  /** Couleur des flèches (orange par défaut ; vert pour les indices de révision). */
+  arrowColor?: string;
   onPieceDrop: (sourceSquare: string, targetSquare: string | null) => boolean;
   onPieceDragBegin: (args: PieceHandlerArgs) => void;
   onPieceDragEnd: () => void;
@@ -57,6 +61,7 @@ export function ChessBoard({
   currentGame,
   squareStyles,
   customArrows,
+  arrowColor = DEFAULT_ARROW_COLOR,
   onPieceDrop,
   onPieceDragBegin,
   onPieceDragEnd,
@@ -66,7 +71,7 @@ export function ChessBoard({
   const boardArrows: Arrow[] = (customArrows ?? []).map(([startSquare, endSquare]) => ({
     startSquare,
     endSquare,
-    color: "#f59e0b",
+    color: arrowColor,
   }));
 
   return (

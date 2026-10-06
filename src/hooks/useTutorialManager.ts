@@ -3,7 +3,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { Chess } from "chess.js";
 
-import { useRepertoire } from "@/hooks/useRepertoire";
+import { useReviewStore } from "@/hooks/useReviewStore";
+import type { PanelMode } from "@/hooks/useTrainerMode";
 import type { TutorialNode, OpeningCourse } from "@/lib/data/openings";
 import {
   findNodeByMoveSequence,
@@ -23,6 +24,10 @@ export type TutorialManagerParams = {
   loadPosition: (fen: string) => void;
   /** Reset the whole game (used when leaving a tutorial) */
   resetGame: () => void;
+  /** Current UI mode – owned by useTrainerMode */
+  panelMode: PanelMode;
+  /** Setter for the UI mode – owned by useTrainerMode */
+  setPanelMode: (mode: PanelMode) => void;
 };
 
 /**
@@ -64,17 +69,21 @@ function getPreviousBranchPath(
  * focused on layout and presentation.
  */
 export function useTutorialManager(params: TutorialManagerParams) {
-  const { currentFen, onPieceDrop, onSquareClick, loadPosition, resetGame } =
-    params;
+  const {
+    currentFen,
+    onPieceDrop,
+    onSquareClick,
+    loadPosition,
+    resetGame,
+    panelMode,
+    setPanelMode,
+  } = params;
 
-  const { addSavedMove } = useRepertoire();
+  const { markComplete } = useReviewStore();
 
   // ----------------------------------------------------------------------
   // UI state that belongs to the tutorial subsystem
   // ----------------------------------------------------------------------
-  const [panelMode, setPanelMode] = useState<
-    "menu" | "explorer" | "opening_selector" | "learning_active"
-  >("menu");
   const [activeTutorialId, setActiveTutorialId] = useState<string | null>(null);
   const [currentPath, setCurrentPath] = useState<string[]>([]);
   const [moveFrom, setMoveFrom] = useState<string | null>(null);
@@ -122,6 +131,16 @@ export function useTutorialManager(params: TutorialManagerParams) {
     currentChapterIndex < activeCourse.chapters.length - 1
       ? activeCourse.chapters[currentChapterIndex + 1]
       : null;
+
+  // ----------------------------------------------------------------------
+  // Chapter completion – marked as soon as the end of the line is reached.
+  // markComplete is idempotent (no-op if already completed).
+  // ----------------------------------------------------------------------
+  useEffect(() => {
+    if (panelMode === "learning_active" && activeTutorialId && isChapterFinished) {
+      markComplete(activeTutorialId);
+    }
+  }, [panelMode, activeTutorialId, isChapterFinished, markComplete]);
 
   // ----------------------------------------------------------------------
   // Interaction handlers (piece drop, click, navigation)
@@ -342,9 +361,6 @@ export function useTutorialManager(params: TutorialManagerParams) {
   // Return everything the UI components need
   // ----------------------------------------------------------------------
   return {
-    // UI state
-    panelMode,
-    setPanelMode,
     // Tutorial state
     activeTutorialId,
     activeCourse,
