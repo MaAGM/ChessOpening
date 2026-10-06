@@ -10,29 +10,153 @@
           "id": "english-a20",
           "eco": "A20",
           "name": "Anglaise - Sicilienne Inversée",
-          "moves": "1. c4 e5 2. Nc3 Nf6 3. g3",
+          "moves": "c4 e5 Nc3 Nf6 g3",
           "comments": [
-            { "text": "1.c4 : l'Anglaise contrôle d5 depuis le flanc. Les Blancs évitent les théories lourdes de 1.e4/1.d4 et visent une structure flexible.", "arrows": [["c2", "c4"], ["c4", "d5"]] },
-            { "text": "1...e5 : les Noirs occupent le centre et jouent une Sicilienne inversée : ils ont un tempo de moins que dans la Sicilienne, mais avec les couleurs échangées.", "arrows": [["e7", "e5"]] },
-            { "text": "2.Nc3 : le cavalier renforce le contrôle de d5 et prépare g3/Bg2. Il empêche aussi ...d5 sans complication immédiate.", "arrows": [["b1", "c3"], ["c3", "d5"]] },
-            { "text": "2...Nf6 : développement naturel qui vise e4 et prépare ...d5 ou ...Bb4 selon la réponse blanche.", "arrows": [["g8", "f6"], ["f6", "e4"]] },
-            { "text": "3.g3 : fianchetto du fou-roi qui pèsera sur la grande diagonale et sur d5/b7. Les Blancs visent un jeu positionnel avec un contrôle durable des cases blanches.", "arrows": [["g2", "g3"], ["f1", "g2"]] },
-            { "text": "Variante terminée ! Les Blancs ont un développement harmonieux et une pression durable sur la case d5. Position saine et riche en plans." }
+            {
+              "text": "1.c4 : l'Anglaise contrôle d5 depuis le flanc. Les Blancs évitent les théories lourdes de 1.e4/1.d4 et visent une structure flexible.",
+              "arrows": [
+                [
+                  "c2",
+                  "c4"
+                ],
+                [
+                  "c4",
+                  "d5"
+                ]
+              ]
+            },
+            {
+              "text": "1...e5 : les Noirs occupent le centre et jouent une Sicilienne inversée : ils ont un tempo de moins que dans la Sicilienne, mais avec les couleurs échangées.",
+              "arrows": [
+                [
+                  "e7",
+                  "e5"
+                ]
+              ]
+            },
+            {
+              "text": "2.Nc3 : le cavalier renforce le contrôle de d5 et prépare g3/Bg2. Il empêche aussi ...d5 sans complication immédiate.",
+              "arrows": [
+                [
+                  "b1",
+                  "c3"
+                ],
+                [
+                  "c3",
+                  "d5"
+                ]
+              ]
+            },
+            {
+              "text": "2...Nf6 : développement naturel qui vise e4 et prépare ...d5 ou ...Bb4 selon la réponse blanche.",
+              "arrows": [
+                [
+                  "g8",
+                  "f6"
+                ],
+                [
+                  "f6",
+                  "e4"
+                ]
+              ]
+            },
+            {
+              "text": "3.g3 : fianchetto du fou-roi qui pèsera sur la grande diagonale et sur d5/b7. Les Blancs visent un jeu positionnel avec un contrôle durable des cases blanches.",
+              "arrows": [
+                [
+                  "g2",
+                  "g3"
+                ],
+                [
+                  "f1",
+                  "g2"
+                ]
+              ]
+            },
+            "Variante terminée ! Cette structure donne un plan clair des deux côtés : développement harmonieux, points de rupture identifiés et priorités stratégiques nettes."
           ]
         },
         {
           "id": "english-a30",
           "eco": "A30",
           "name": "Anglaise - Symétrique",
-          "moves": "1. c4 c5 2. Nf3 Nf6 3. g3 g6",
+          "moves": "c4 c5 Nf3 Nf6 g3 g6",
           "comments": [
-            { "text": "1.c4 : prise de contrôle de d5 et préparation d'un fianchetto. Les Blancs gardent leur structure de pions flexible.", "arrows": [["c2", "c4"], ["c4", "d5"]] },
-            { "text": "1...c5 : réponse symétrique qui contrôle d4. Les Noirs copient les Blancs et misent sur la solidité.", "arrows": [["c7", "c5"], ["c5", "d4"]] },
-            { "text": "2.Nf3 : développement du cavalier vers le centre. Il contrôle d4 et e5 et prépare le roque rapide.", "arrows": [["g1", "f3"], ["f3", "d4"]] },
-            { "text": "2...Nf6 : les Noirs continuent la symétrie et contrôlent d5 et e4.", "arrows": [["g8", "f6"]] },
-            { "text": "3.g3 : fianchetto du fou-roi. Il visera la case b7 et la diagonale a1-h8 pour un jeu sur les cases blanches.", "arrows": [["g2", "g3"], ["f1", "g2"]] },
-            { "text": "3...g6 : les Noirs suivent avec le même fianchetto. Leur fou-roi contrôlera la case b2 et la grande diagonale.", "arrows": [["g7", "g6"], ["f8", "g7"]] },
-            { "text": "Variante terminée ! La symétrie est préservée : position équilibrée et saine, avec un jeu positionnel riche pour les deux camps." }
+            {
+              "text": "1.c4 : prise de contrôle de d5 et préparation d'un fianchetto. Les Blancs gardent leur structure de pions flexible.",
+              "arrows": [
+                [
+                  "c2",
+                  "c4"
+                ],
+                [
+                  "c4",
+                  "d5"
+                ]
+              ]
+            },
+            {
+              "text": "1...c5 : réponse symétrique qui contrôle d4. Les Noirs copient les Blancs et misent sur la solidité.",
+              "arrows": [
+                [
+                  "c7",
+                  "c5"
+                ],
+                [
+                  "c5",
+                  "d4"
+                ]
+              ]
+            },
+            {
+              "text": "2.Nf3 : développement du cavalier vers le centre. Il contrôle d4 et e5 et prépare le roque rapide.",
+              "arrows": [
+                [
+                  "g1",
+                  "f3"
+                ],
+                [
+                  "f3",
+                  "d4"
+                ]
+              ]
+            },
+            {
+              "text": "2...Nf6 : les Noirs continuent la symétrie et contrôlent d5 et e4.",
+              "arrows": [
+                [
+                  "g8",
+                  "f6"
+                ]
+              ]
+            },
+            {
+              "text": "3.g3 : fianchetto du fou-roi. Il visera la case b7 et la diagonale a1-h8 pour un jeu sur les cases blanches.",
+              "arrows": [
+                [
+                  "g2",
+                  "g3"
+                ],
+                [
+                  "f1",
+                  "g2"
+                ]
+              ]
+            },
+            {
+              "text": "3...g6 : les Noirs suivent avec le même fianchetto. Leur fou-roi contrôlera la case b2 et la grande diagonale.",
+              "arrows": [
+                [
+                  "g7",
+                  "g6"
+                ],
+                [
+                  "f8",
+                  "g7"
+                ]
+              ]
+            },
+            "Variante terminée ! Cette structure donne un plan clair des deux côtés : développement harmonieux, points de rupture identifiés et priorités stratégiques nettes."
           ]
         }
       ]
@@ -47,12 +171,48 @@
           "id": "reti-a04",
           "eco": "A04",
           "name": "Ouverture Réti",
-          "moves": "1. Nf3 d5 2. c4",
+          "moves": "Nf3 d5 c4",
           "comments": [
-            { "text": "1.Nf3 : coup hypermoderne. Les Blancs contrôlent e5 et d4 sans engager de pion central, et gardent toutes les transpositions possibles.", "arrows": [["g1", "f3"], ["f3", "e5"], ["f3", "d4"]] },
-            { "text": "1...d5 : les Noirs occupent le centre avec un pion, comme dans une partie classique. Les Blancs vont le contester par le flanc.", "arrows": [["d7", "d5"]] },
-            { "text": "2.c4 : l'idée de Réti. Les Blancs attaquent le centre noir par le flanc, comme dans un Gambit Dame où Nf3 serait déjà joué. Si ...dxc4, ils récupèrent le pion avec un bon développement.", "arrows": [["c2", "c4"], ["c4", "d5"]] },
-            { "text": "Variante terminée ! Les Blancs ont une position souple, hypermoderne et riche en transpositions." }
+            {
+              "text": "1.Nf3 : coup hypermoderne. Les Blancs contrôlent e5 et d4 sans engager de pion central, et gardent toutes les transpositions possibles.",
+              "arrows": [
+                [
+                  "g1",
+                  "f3"
+                ],
+                [
+                  "f3",
+                  "e5"
+                ],
+                [
+                  "f3",
+                  "d4"
+                ]
+              ]
+            },
+            {
+              "text": "1...d5 : les Noirs occupent le centre avec un pion, comme dans une partie classique. Les Blancs vont le contester par le flanc.",
+              "arrows": [
+                [
+                  "d7",
+                  "d5"
+                ]
+              ]
+            },
+            {
+              "text": "2.c4 : l'idée de Réti. Les Blancs attaquent le centre noir par le flanc, comme dans un Gambit Dame où Nf3 serait déjà joué. Si ...dxc4, ils récupèrent le pion avec un bon développement.",
+              "arrows": [
+                [
+                  "c2",
+                  "c4"
+                ],
+                [
+                  "c4",
+                  "d5"
+                ]
+              ]
+            },
+            "Variante terminée ! Cette structure donne un plan clair des deux côtés : développement harmonieux, points de rupture identifiés et priorités stratégiques nettes."
           ]
         }
       ]
@@ -67,53 +227,301 @@
           "id": "benoni-a43",
           "eco": "A43",
           "name": "Ancienne Benoni (Old Benoni)",
-          "moves": "1. d4 c5 2. d5 e5 3. e4 d6",
+          "moves": "d4 c5 d5 e5 e4 d6",
           "comments": [
-            { "text": "1.d4 : ouverture du pion-dame, qui contrôle e5 et prépare un développement classique.", "arrows": [["d2", "d4"]] },
-            { "text": "1...c5 : les Noirs contestent immédiatement d4 et déséquilibrent la partie, sans se contenter de ...d5.", "arrows": [["c7", "c5"], ["c5", "d4"]] },
-            { "text": "2.d5 : les Blancs gagnent de l'espace et ferment le centre, ce qui donne une structure asymétrique typique de la Benoni.", "arrows": [["d4", "d5"]] },
-            { "text": "2...e5 : les Noirs prennent le centre et créent la structure de l'Ancienne Benoni. Ils contrôlent d4 et ouvrent la diagonale du fou-roi.", "arrows": [["e7", "e5"]] },
-            { "text": "3.e4 : les Blancs occupent le centre et prennent l'espace. Ce pion contrôle f5 et d5.", "arrows": [["e2", "e4"]] },
-            { "text": "3...d6 : renforcement de e5 et libération du fou c8. Les Noirs préparent ...Nf6, ...g6 et ...Be7 avec une structure solide.", "arrows": [["d7", "d6"], ["d6", "e5"]] },
-            { "text": "Variante terminée ! Structure centrale bloquée et déséquilibrée : espace pour les Blancs, contre-jeu dynamique pour les Noirs." }
+            {
+              "text": "1.d4 : ouverture du pion-dame, qui contrôle e5 et prépare un développement classique.",
+              "arrows": [
+                [
+                  "d2",
+                  "d4"
+                ]
+              ]
+            },
+            {
+              "text": "1...c5 : les Noirs contestent immédiatement d4 et déséquilibrent la partie, sans se contenter de ...d5.",
+              "arrows": [
+                [
+                  "c7",
+                  "c5"
+                ],
+                [
+                  "c5",
+                  "d4"
+                ]
+              ]
+            },
+            {
+              "text": "2.d5 : les Blancs gagnent de l'espace et ferment le centre, ce qui donne une structure asymétrique typique de la Benoni.",
+              "arrows": [
+                [
+                  "d4",
+                  "d5"
+                ]
+              ]
+            },
+            {
+              "text": "2...e5 : les Noirs prennent le centre et créent la structure de l'Ancienne Benoni. Ils contrôlent d4 et ouvrent la diagonale du fou-roi.",
+              "arrows": [
+                [
+                  "e7",
+                  "e5"
+                ]
+              ]
+            },
+            {
+              "text": "3.e4 : les Blancs occupent le centre et prennent l'espace. Ce pion contrôle f5 et d5.",
+              "arrows": [
+                [
+                  "e2",
+                  "e4"
+                ]
+              ]
+            },
+            {
+              "text": "3...d6 : renforcement de e5 et libération du fou c8. Les Noirs préparent ...Nf6, ...g6 et ...Be7 avec une structure solide.",
+              "arrows": [
+                [
+                  "d7",
+                  "d6"
+                ],
+                [
+                  "d6",
+                  "e5"
+                ]
+              ]
+            },
+            "Variante terminée ! Cette structure donne un plan clair des deux côtés : développement harmonieux, points de rupture identifiés et priorités stratégiques nettes."
           ]
         },
         {
           "id": "benoni-a57",
           "eco": "A57",
           "name": "Gambit Benko (Volga)",
-          "moves": "1. d4 Nf6 2. c4 c5 3. d5 b5 4. cxb5 a6 5. bxa6 Bxa6",
+          "moves": "d4 Nf6 c4 c5 d5 b5 cxb5 a6 bxa6 Bxa6",
           "comments": [
-            { "text": "1.d4 : contrôle du centre par le pion-dame.", "arrows": [["d2", "d4"]] },
-            { "text": "1...Nf6 : développement flexible qui contrôle e4 et d5 et garde toutes les options.", "arrows": [["g8", "f6"]] },
-            { "text": "2.c4 : les Blancs élargissent leur centre et prennent de l'espace à l'aile dame.", "arrows": [["c2", "c4"]] },
-            { "text": "2...c5 : les Noirs défient d4 immédiatement et préparent le Benko ou la Benoni.", "arrows": [["c7", "c5"], ["c5", "d4"]] },
-            { "text": "3.d5 : les Blancs gagnent de l'espace et ferment le centre. C'est le point de départ du Benko.", "arrows": [["d4", "d5"]] },
-            { "text": "3...b5 : le coup clé. Les Noirs sacrifient un pion pour ouvrir les colonnes a et b et obtenir un contre-jeu durable à l'aile dame.", "arrows": [["b7", "b5"], ["b5", "c4"]] },
-            { "text": "4.cxb5 : les Blancs acceptent le pion, ce qui est le principal choix. Ils prennent un avantage matériel.", "arrows": [["c4", "b5"]] },
-            { "text": "4...a6 : deuxième pion offert. L'ouverture de la colonne a donne aux Noirs des lignes pour leurs tours.", "arrows": [["a7", "a6"], ["a6", "b5"]] },
-            { "text": "5.bxa6 : les Blancs acceptent un second pion mais retardent leur développement, ce qui donne des tempi aux Noirs.", "arrows": [["b5", "a6"]] },
-            { "text": "5...Bxa6 : le fou noir prend la diagonale, pèse sur f1 et empêche le roque blanc simple. Le sacrifice devient une pression permanente sur les colonnes a et b.", "arrows": [["c8", "a6"], ["a6", "f1"]] },
-            { "text": "Variante terminée ! Les Noirs ont un pion de moins mais une compensation stratégique durable : bon développement, colonnes ouvertes et pression sur l'aile dame." }
+            {
+              "text": "1.d4 : contrôle du centre par le pion-dame.",
+              "arrows": [
+                [
+                  "d2",
+                  "d4"
+                ]
+              ]
+            },
+            {
+              "text": "1...Nf6 : développement flexible qui contrôle e4 et d5 et garde toutes les options.",
+              "arrows": [
+                [
+                  "g8",
+                  "f6"
+                ]
+              ]
+            },
+            {
+              "text": "2.c4 : les Blancs élargissent leur centre et prennent de l'espace à l'aile dame.",
+              "arrows": [
+                [
+                  "c2",
+                  "c4"
+                ]
+              ]
+            },
+            {
+              "text": "2...c5 : les Noirs défient d4 immédiatement et préparent le Benko ou la Benoni.",
+              "arrows": [
+                [
+                  "c7",
+                  "c5"
+                ],
+                [
+                  "c5",
+                  "d4"
+                ]
+              ]
+            },
+            {
+              "text": "3.d5 : les Blancs gagnent de l'espace et ferment le centre. C'est le point de départ du Benko.",
+              "arrows": [
+                [
+                  "d4",
+                  "d5"
+                ]
+              ]
+            },
+            {
+              "text": "3...b5 : le coup clé. Les Noirs sacrifient un pion pour ouvrir les colonnes a et b et obtenir un contre-jeu durable à l'aile dame.",
+              "arrows": [
+                [
+                  "b7",
+                  "b5"
+                ],
+                [
+                  "b5",
+                  "c4"
+                ]
+              ]
+            },
+            {
+              "text": "4.cxb5 : les Blancs acceptent le pion, ce qui est le principal choix. Ils prennent un avantage matériel.",
+              "arrows": [
+                [
+                  "c4",
+                  "b5"
+                ]
+              ]
+            },
+            {
+              "text": "4...a6 : deuxième pion offert. L'ouverture de la colonne a donne aux Noirs des lignes pour leurs tours.",
+              "arrows": [
+                [
+                  "a7",
+                  "a6"
+                ],
+                [
+                  "a6",
+                  "b5"
+                ]
+              ]
+            },
+            {
+              "text": "5.bxa6 : les Blancs acceptent un second pion mais retardent leur développement, ce qui donne des tempi aux Noirs.",
+              "arrows": [
+                [
+                  "b5",
+                  "a6"
+                ]
+              ]
+            },
+            {
+              "text": "5...Bxa6 : le fou noir prend la diagonale, pèse sur f1 et empêche le roque blanc simple. Le sacrifice devient une pression permanente sur les colonnes a et b.",
+              "arrows": [
+                [
+                  "c8",
+                  "a6"
+                ],
+                [
+                  "a6",
+                  "f1"
+                ]
+              ]
+            },
+            "Variante terminée ! Cette structure donne un plan clair des deux côtés : développement harmonieux, points de rupture identifiés et priorités stratégiques nettes."
           ]
         },
         {
           "id": "benoni-a60",
           "eco": "A60",
           "name": "Benoni Moderne",
-          "moves": "1. d4 Nf6 2. c4 c5 3. d5 e6 4. Nc3 exd5 5. cxd5 d6",
+          "moves": "d4 Nf6 c4 c5 d5 e6 Nc3 exd5 cxd5 d6",
           "comments": [
-            { "text": "1.d4 : contrôle du centre.", "arrows": [["d2", "d4"]] },
-            { "text": "1...Nf6 : développement flexible qui contrôle e4 et d5.", "arrows": [["g8", "f6"]] },
-            { "text": "2.c4 : les Blancs prennent de l'espace à l'aile dame.", "arrows": [["c2", "c4"]] },
-            { "text": "2...c5 : contre-attaque immédiate contre d4, qui déséquilibre la partie.", "arrows": [["c7", "c5"], ["c5", "d4"]] },
-            { "text": "3.d5 : les Blancs avancent, gagnent de l'espace et ferment le centre.", "arrows": [["d4", "d5"]] },
-            { "text": "3...e6 : levier contre d5 qui crée la structure de la Benoni Moderne. Les Noirs préparent ...exd5.", "arrows": [["e7", "e6"], ["e6", "d5"]] },
-            { "text": "4.Nc3 : le cavalier renforce d5 et prépare e4. Les Blancs se préparent à un grand centre.", "arrows": [["b1", "c3"], ["c3", "e4"]] },
-            { "text": "4...exd5 : les Noirs ouvrent la colonne e et créent la majorité à l'aile dame.", "arrows": [["e6", "d5"]] },
-            { "text": "5.cxd5 : les Blancs obtiennent le pion d5 et une majorité centrale.", "arrows": [["c4", "d5"]] },
-            { "text": "5...d6 : les Noirs ouvrent la diagonale du fou c8, contrôlent e5 et préparent ...g6/...Bg7. Ils visent une majorité d'ailes dame et ...b5.", "arrows": [["d7", "d6"], ["d6", "e5"]] },
-            { "text": "Variante terminée ! Structure asymétrique classique : centre pour les Blancs, majorité à l'aile dame et jeu dynamique pour les Noirs." }
+            {
+              "text": "1.d4 : contrôle du centre.",
+              "arrows": [
+                [
+                  "d2",
+                  "d4"
+                ]
+              ]
+            },
+            {
+              "text": "1...Nf6 : développement flexible qui contrôle e4 et d5.",
+              "arrows": [
+                [
+                  "g8",
+                  "f6"
+                ]
+              ]
+            },
+            {
+              "text": "2.c4 : les Blancs prennent de l'espace à l'aile dame.",
+              "arrows": [
+                [
+                  "c2",
+                  "c4"
+                ]
+              ]
+            },
+            {
+              "text": "2...c5 : contre-attaque immédiate contre d4, qui déséquilibre la partie.",
+              "arrows": [
+                [
+                  "c7",
+                  "c5"
+                ],
+                [
+                  "c5",
+                  "d4"
+                ]
+              ]
+            },
+            {
+              "text": "3.d5 : les Blancs avancent, gagnent de l'espace et ferment le centre.",
+              "arrows": [
+                [
+                  "d4",
+                  "d5"
+                ]
+              ]
+            },
+            {
+              "text": "3...e6 : levier contre d5 qui crée la structure de la Benoni Moderne. Les Noirs préparent ...exd5.",
+              "arrows": [
+                [
+                  "e7",
+                  "e6"
+                ],
+                [
+                  "e6",
+                  "d5"
+                ]
+              ]
+            },
+            {
+              "text": "4.Nc3 : le cavalier renforce d5 et prépare e4. Les Blancs se préparent à un grand centre.",
+              "arrows": [
+                [
+                  "b1",
+                  "c3"
+                ],
+                [
+                  "c3",
+                  "e4"
+                ]
+              ]
+            },
+            {
+              "text": "4...exd5 : les Noirs ouvrent la colonne e et créent la majorité à l'aile dame.",
+              "arrows": [
+                [
+                  "e6",
+                  "d5"
+                ]
+              ]
+            },
+            {
+              "text": "5.cxd5 : les Blancs obtiennent le pion d5 et une majorité centrale.",
+              "arrows": [
+                [
+                  "c4",
+                  "d5"
+                ]
+              ]
+            },
+            {
+              "text": "5...d6 : les Noirs ouvrent la diagonale du fou c8, contrôlent e5 et préparent ...g6/...Bg7. Ils visent une majorité d'ailes dame et ...b5.",
+              "arrows": [
+                [
+                  "d7",
+                  "d6"
+                ],
+                [
+                  "d6",
+                  "e5"
+                ]
+              ]
+            },
+            "Variante terminée ! Cette structure donne un plan clair des deux côtés : développement harmonieux, points de rupture identifiés et priorités stratégiques nettes."
           ]
         }
       ]
@@ -128,14 +536,67 @@
           "id": "trompowsky-a45",
           "eco": "A45",
           "name": "Attaque Trompowsky",
-          "moves": "1. d4 Nf6 2. Bg5 Ne4 3. Bf4",
+          "moves": "d4 Nf6 Bg5 Ne4 Bf4 c5 f3 Qa5+ c3 Nf6",
           "comments": [
-            { "text": "1.d4 : contrôle central classique.", "arrows": [["d2", "d4"]] },
-            { "text": "1...Nf6 : développement flexible qui permet une Indienne ou une Défense Est-Indienne.", "arrows": [["g8", "f6"]] },
-            { "text": "2.Bg5 : le coup de la Trompowsky. Les Blancs sortent le fou tôt pour éviter les lignes théoriques et clouer le cavalier.", "arrows": [["c1", "g5"], ["g5", "f6"]] },
-            { "text": "2...Ne4 : les Noirs attaquent le fou en direct et contestent le centre. C'est l'une des réponses principales.", "arrows": [["f6", "e4"], ["e4", "g5"]] },
-            { "text": "3.Bf4 : le fou se retire en gardant la diagonale. Les Blancs jouent ensuite e3, Nd2 ou Nf3 avec une bonne structure.", "arrows": [["g5", "f4"]] },
-            { "text": "Variante terminée ! Les Blancs sortent des sentiers battus avec une position saine et flexible." }
+            {
+              "text": "1.d4 : contrôle central classique.",
+              "arrows": [
+                [
+                  "d2",
+                  "d4"
+                ]
+              ]
+            },
+            {
+              "text": "1...Nf6 : développement flexible qui permet une Indienne ou une Défense Est-Indienne.",
+              "arrows": [
+                [
+                  "g8",
+                  "f6"
+                ]
+              ]
+            },
+            {
+              "text": "2.Bg5 : le coup de la Trompowsky. Les Blancs sortent le fou tôt pour éviter les lignes théoriques et clouer le cavalier.",
+              "arrows": [
+                [
+                  "c1",
+                  "g5"
+                ],
+                [
+                  "g5",
+                  "f6"
+                ]
+              ]
+            },
+            {
+              "text": "2...Ne4 : les Noirs attaquent le fou en direct et contestent le centre. C'est l'une des réponses principales.",
+              "arrows": [
+                [
+                  "f6",
+                  "e4"
+                ],
+                [
+                  "e4",
+                  "g5"
+                ]
+              ]
+            },
+            {
+              "text": "3.Bf4 : le fou se retire en gardant la diagonale. Les Blancs jouent ensuite e3, Nd2 ou Nf3 avec une bonne structure.",
+              "arrows": [
+                [
+                  "g5",
+                  "f4"
+                ]
+              ]
+            },
+            "c5 : Les Noirs avancent le pion avec un but positionnel clair : gagner de l’espace et préparer le plan principal.",
+            "f3 : Les Blancs avancent le pion avec un but positionnel clair : gagner de l’espace et préparer le plan principal.",
+            "Qa5+ : Les Noirs donnent échec pour gagner un tempo critique et imposer leurs menaces immédiates.",
+            "c3 : Les Blancs avancent le pion avec un but positionnel clair : gagner de l’espace et préparer le plan principal.",
+            "Nf6 : Les Noirs améliorent l’activité avec le cavalier, en renforçant la coordination et les cases clés.",
+            "Variante terminée ! Cette structure donne un plan clair des deux côtés : développement harmonieux, points de rupture identifiés et priorités stratégiques nettes."
           ]
         }
       ]
@@ -150,15 +611,81 @@
           "id": "scandinavian-b01",
           "eco": "B01",
           "name": "Défense Scandinave",
-          "moves": "1. e4 d5 2. exd5 Qxd5 3. Nc3 Qa5",
+          "moves": "e4 d5 exd5 Qxd5 Nc3 Qa5 d4 e5 dxe5 Nc6 Nf3 Bb4",
           "comments": [
-            { "text": "1.e4 : occupation du centre.", "arrows": [["e2", "e4"]] },
-            { "text": "1...d5 : réponse directe qui défie le pion e4 et cherche à ouvrir le jeu.", "arrows": [["d7", "d5"], ["d5", "e4"]] },
-            { "text": "2.exd5 : les Blancs prennent le pion, qui est le choix principal.", "arrows": [["e4", "d5"]] },
-            { "text": "2...Qxd5 : les Noirs reprennent avec la dame, ce qui est la Scandinave classique. Le prix est de sortir la dame tôt.", "arrows": [["d8", "d5"]] },
-            { "text": "3.Nc3 : les Blancs gagnent un tempo en attaquant la dame et développent une pièce.", "arrows": [["b1", "c3"], ["c3", "d5"]] },
-            { "text": "3...Qa5 : la dame se retire sur la case a5, ce qui est la retraite classique. Elle reste active et cloue le cavalier c3 contre le roi.", "arrows": [["d5", "a5"], ["a5", "c3"]] },
-            { "text": "Variante terminée ! Les Noirs ont une position solide, une structure saine et un développement plus tranquille." }
+            {
+              "text": "1.e4 : occupation du centre.",
+              "arrows": [
+                [
+                  "e2",
+                  "e4"
+                ]
+              ]
+            },
+            {
+              "text": "1...d5 : réponse directe qui défie le pion e4 et cherche à ouvrir le jeu.",
+              "arrows": [
+                [
+                  "d7",
+                  "d5"
+                ],
+                [
+                  "d5",
+                  "e4"
+                ]
+              ]
+            },
+            {
+              "text": "2.exd5 : les Blancs prennent le pion, qui est le choix principal.",
+              "arrows": [
+                [
+                  "e4",
+                  "d5"
+                ]
+              ]
+            },
+            {
+              "text": "2...Qxd5 : les Noirs reprennent avec la dame, ce qui est la Scandinave classique. Le prix est de sortir la dame tôt.",
+              "arrows": [
+                [
+                  "d8",
+                  "d5"
+                ]
+              ]
+            },
+            {
+              "text": "3.Nc3 : les Blancs gagnent un tempo en attaquant la dame et développent une pièce.",
+              "arrows": [
+                [
+                  "b1",
+                  "c3"
+                ],
+                [
+                  "c3",
+                  "d5"
+                ]
+              ]
+            },
+            {
+              "text": "3...Qa5 : la dame se retire sur la case a5, ce qui est la retraite classique. Elle reste active et cloue le cavalier c3 contre le roi.",
+              "arrows": [
+                [
+                  "d5",
+                  "a5"
+                ],
+                [
+                  "a5",
+                  "c3"
+                ]
+              ]
+            },
+            "d4 : Les Blancs avancent le pion avec un but positionnel clair : gagner de l’espace et préparer le plan principal.",
+            "e5 : Les Noirs avancent le pion avec un but positionnel clair : gagner de l’espace et préparer le plan principal.",
+            "dxe5 : Les Blancs capturent au bon moment pour casser la structure adverse et clarifier les plans favorables.",
+            "Nc6 : Les Noirs améliorent l’activité avec le cavalier, en renforçant la coordination et les cases clés.",
+            "Nf3 : Les Blancs améliorent l’activité avec le cavalier, en renforçant la coordination et les cases clés.",
+            "Bb4 : Les Noirs améliorent l’activité avec le fou, en renforçant la coordination et les cases clés.",
+            "Variante terminée ! Cette structure donne un plan clair des deux côtés : développement harmonieux, points de rupture identifiés et priorités stratégiques nettes."
           ]
         }
       ]
@@ -173,15 +700,75 @@
           "id": "alekhine-b02",
           "eco": "B02",
           "name": "Défense Alekhine",
-          "moves": "1. e4 Nf6 2. e5 Nd5 3. d4 d6",
+          "moves": "e4 Nf6 e5 Nd5 d4 d6",
           "comments": [
-            { "text": "1.e4 : occupation du centre.", "arrows": [["e2", "e4"]] },
-            { "text": "1...Nf6 : provocation hypermoderne. Les Noirs invitent les Blancs à avancer et à s'étendre.", "arrows": [["g8", "f6"], ["f6", "e4"]] },
-            { "text": "2.e5 : les Blancs attaquent le cavalier et gagnent du temps et de l'espace.", "arrows": [["e4", "e5"], ["e5", "f6"]] },
-            { "text": "2...Nd5 : le cavalier se met en sécurité au centre et prépare le contre-jeu.", "arrows": [["f6", "d5"]] },
-            { "text": "3.d4 : les Blancs construisent un grand centre de pions, qui deviendra la cible des Noirs.", "arrows": [["d2", "d4"]] },
-            { "text": "3...d6 : les Noirs mettent le pion e5 en question et cherchent à le saper. C'est l'idée stratégique de la défense : attaquer un centre trop avancé.", "arrows": [["d7", "d6"], ["d6", "e5"]] },
-            { "text": "Variante terminée ! Les Blancs ont un grand centre, les Noirs comptent sur le contre-jeu. Position dynamique et déséquilibrée." }
+            {
+              "text": "1.e4 : occupation du centre.",
+              "arrows": [
+                [
+                  "e2",
+                  "e4"
+                ]
+              ]
+            },
+            {
+              "text": "1...Nf6 : provocation hypermoderne. Les Noirs invitent les Blancs à avancer et à s'étendre.",
+              "arrows": [
+                [
+                  "g8",
+                  "f6"
+                ],
+                [
+                  "f6",
+                  "e4"
+                ]
+              ]
+            },
+            {
+              "text": "2.e5 : les Blancs attaquent le cavalier et gagnent du temps et de l'espace.",
+              "arrows": [
+                [
+                  "e4",
+                  "e5"
+                ],
+                [
+                  "e5",
+                  "f6"
+                ]
+              ]
+            },
+            {
+              "text": "2...Nd5 : le cavalier se met en sécurité au centre et prépare le contre-jeu.",
+              "arrows": [
+                [
+                  "f6",
+                  "d5"
+                ]
+              ]
+            },
+            {
+              "text": "3.d4 : les Blancs construisent un grand centre de pions, qui deviendra la cible des Noirs.",
+              "arrows": [
+                [
+                  "d2",
+                  "d4"
+                ]
+              ]
+            },
+            {
+              "text": "3...d6 : les Noirs mettent le pion e5 en question et cherchent à le saper. C'est l'idée stratégique de la défense : attaquer un centre trop avancé.",
+              "arrows": [
+                [
+                  "d7",
+                  "d6"
+                ],
+                [
+                  "d6",
+                  "e5"
+                ]
+              ]
+            },
+            "Variante terminée ! Cette structure donne un plan clair des deux côtés : développement harmonieux, points de rupture identifiés et priorités stratégiques nettes."
           ]
         }
       ]
@@ -196,15 +783,84 @@
           "id": "pirc-b07",
           "eco": "B07",
           "name": "Défense Pirc",
-          "moves": "1. e4 d6 2. d4 Nf6 3. Nc3 g6",
+          "moves": "e4 d6 d4 Nf6 Nc3 g6 Be3 Bg7 Qd2 c6 f3",
           "comments": [
-            { "text": "1.e4 : occupation du centre.", "arrows": [["e2", "e4"]] },
-            { "text": "1...d6 : les Noirs contrôlent e5 et gardent leur structure souple.", "arrows": [["d7", "d6"], ["d6", "e5"]] },
-            { "text": "2.d4 : les Blancs bâtissent un grand centre de pions.", "arrows": [["d2", "d4"]] },
-            { "text": "2...Nf6 : le cavalier attaque le pion e4 et prépare le développement hypermoderne.", "arrows": [["g8", "f6"], ["f6", "e4"]] },
-            { "text": "3.Nc3 : les Blancs défendent e4 et développent leur cavalier.", "arrows": [["b1", "c3"], ["c3", "e4"]] },
-            { "text": "3...g6 : préparation du fianchetto du fou-roi, qui visera la grande diagonale et le centre blanc.", "arrows": [["g7", "g6"], ["f8", "g7"]] },
-            { "text": "Variante terminée ! Les Noirs laissent le centre aux Blancs pour l'attaquer plus tard. Position flexible et pleine de contre-jeu." }
+            {
+              "text": "1.e4 : occupation du centre.",
+              "arrows": [
+                [
+                  "e2",
+                  "e4"
+                ]
+              ]
+            },
+            {
+              "text": "1...d6 : les Noirs contrôlent e5 et gardent leur structure souple.",
+              "arrows": [
+                [
+                  "d7",
+                  "d6"
+                ],
+                [
+                  "d6",
+                  "e5"
+                ]
+              ]
+            },
+            {
+              "text": "2.d4 : les Blancs bâtissent un grand centre de pions.",
+              "arrows": [
+                [
+                  "d2",
+                  "d4"
+                ]
+              ]
+            },
+            {
+              "text": "2...Nf6 : le cavalier attaque le pion e4 et prépare le développement hypermoderne.",
+              "arrows": [
+                [
+                  "g8",
+                  "f6"
+                ],
+                [
+                  "f6",
+                  "e4"
+                ]
+              ]
+            },
+            {
+              "text": "3.Nc3 : les Blancs défendent e4 et développent leur cavalier.",
+              "arrows": [
+                [
+                  "b1",
+                  "c3"
+                ],
+                [
+                  "c3",
+                  "e4"
+                ]
+              ]
+            },
+            {
+              "text": "3...g6 : préparation du fianchetto du fou-roi, qui visera la grande diagonale et le centre blanc.",
+              "arrows": [
+                [
+                  "g7",
+                  "g6"
+                ],
+                [
+                  "f8",
+                  "g7"
+                ]
+              ]
+            },
+            "Be3 : Les Blancs améliorent l’activité avec le fou, en renforçant la coordination et les cases clés.",
+            "Bg7 : Les Noirs améliorent l’activité avec le fou, en renforçant la coordination et les cases clés.",
+            "Qd2 : Les Blancs améliorent l’activité avec la dame, en renforçant la coordination et les cases clés.",
+            "c6 : Les Noirs avancent le pion avec un but positionnel clair : gagner de l’espace et préparer le plan principal.",
+            "f3 : Les Blancs avancent le pion avec un but positionnel clair : gagner de l’espace et préparer le plan principal.",
+            "Variante terminée ! Cette structure donne un plan clair des deux côtés : développement harmonieux, points de rupture identifiés et priorités stratégiques nettes."
           ]
         }
       ]
@@ -219,35 +875,199 @@
           "id": "caro_kann-b12",
           "eco": "B12",
           "name": "Caro-Kann - Avance",
-          "moves": "1. e4 c6 2. d4 d5 3. e5 Bf5 4. Nf3 e6",
+          "moves": "e4 c6 d4 d5 e5 Bf5 Nf3 e6",
           "comments": [
-            { "text": "1.e4 : occupation du centre.", "arrows": [["e2", "e4"]] },
-            { "text": "1...c6 : les Noirs préparent ...d5 avec un soutien solide du pion c6.", "arrows": [["c7", "c6"], ["c6", "d5"]] },
-            { "text": "2.d4 : les Blancs construisent un grand centre.", "arrows": [["d2", "d4"]] },
-            { "text": "2...d5 : les Noirs contestent le centre.", "arrows": [["d7", "d5"], ["d5", "e4"]] },
-            { "text": "3.e5 : la Variante d'Avance. Les Blancs gagnent de l'espace et ferment le centre.", "arrows": [["e4", "e5"]] },
-            { "text": "3...Bf5 : le fou sort avant ...e6 pour ne pas rester enfermé. C'est l'idée principale de la variante.", "arrows": [["c8", "f5"]] },
-            { "text": "4.Nf3 : développement naturel qui contrôle d4 et e5.", "arrows": [["g1", "f3"]] },
-            { "text": "4...e6 : les Noirs consolident et préparent ...c5 pour attaquer le centre blanc.", "arrows": [["e7", "e6"], ["c6", "c5"]] },
-            { "text": "Variante terminée ! Position solide pour les Noirs : leur fou est actif et ils préparent ...c5." }
+            {
+              "text": "1.e4 : occupation du centre.",
+              "arrows": [
+                [
+                  "e2",
+                  "e4"
+                ]
+              ]
+            },
+            {
+              "text": "1...c6 : les Noirs préparent ...d5 avec un soutien solide du pion c6.",
+              "arrows": [
+                [
+                  "c7",
+                  "c6"
+                ],
+                [
+                  "c6",
+                  "d5"
+                ]
+              ]
+            },
+            {
+              "text": "2.d4 : les Blancs construisent un grand centre.",
+              "arrows": [
+                [
+                  "d2",
+                  "d4"
+                ]
+              ]
+            },
+            {
+              "text": "2...d5 : les Noirs contestent le centre.",
+              "arrows": [
+                [
+                  "d7",
+                  "d5"
+                ],
+                [
+                  "d5",
+                  "e4"
+                ]
+              ]
+            },
+            {
+              "text": "3.e5 : la Variante d'Avance. Les Blancs gagnent de l'espace et ferment le centre.",
+              "arrows": [
+                [
+                  "e4",
+                  "e5"
+                ]
+              ]
+            },
+            {
+              "text": "3...Bf5 : le fou sort avant ...e6 pour ne pas rester enfermé. C'est l'idée principale de la variante.",
+              "arrows": [
+                [
+                  "c8",
+                  "f5"
+                ]
+              ]
+            },
+            {
+              "text": "4.Nf3 : développement naturel qui contrôle d4 et e5.",
+              "arrows": [
+                [
+                  "g1",
+                  "f3"
+                ]
+              ]
+            },
+            {
+              "text": "4...e6 : les Noirs consolident et préparent ...c5 pour attaquer le centre blanc.",
+              "arrows": [
+                [
+                  "e7",
+                  "e6"
+                ],
+                [
+                  "c6",
+                  "c5"
+                ]
+              ]
+            },
+            "Variante terminée ! Cette structure donne un plan clair des deux côtés : développement harmonieux, points de rupture identifiés et priorités stratégiques nettes."
           ]
         },
         {
           "id": "caro_kann-b13",
           "eco": "B13",
           "name": "Caro-Kann - Échange",
-          "moves": "1. e4 c6 2. d4 d5 3. exd5 cxd5 4. Bd3 Nc6 5. c3",
+          "moves": "e4 c6 d4 d5 exd5 cxd5 Bd3 Nc6 c3",
           "comments": [
-            { "text": "1.e4 : occupation du centre.", "arrows": [["e2", "e4"]] },
-            { "text": "1...c6 : les Noirs préparent ...d5 avec un pion soutenu.", "arrows": [["c7", "c6"]] },
-            { "text": "2.d4 : les Blancs construisent un grand centre.", "arrows": [["d2", "d4"]] },
-            { "text": "2...d5 : les Noirs défient le pion e4.", "arrows": [["d7", "d5"], ["d5", "e4"]] },
-            { "text": "3.exd5 : la Variante d'Échange, qui simplifie la structure et évite les complications.", "arrows": [["e4", "d5"]] },
-            { "text": "3...cxd5 : les Noirs reprennent avec le pion c et obtiennent un pion d5 solide.", "arrows": [["c6", "d5"]] },
-            { "text": "4.Bd3 : le fou se développe sur une case active et vise l'aile roi.", "arrows": [["f1", "d3"], ["d3", "h7"]] },
-            { "text": "4...Nc6 : le cavalier presse d4 et prépare ...Nf6 ou ...e5.", "arrows": [["b8", "c6"], ["c6", "d4"]] },
-            { "text": "5.c3 : les Blancs consolident d4 et préparent un jeu positionnel.", "arrows": [["c2", "c3"], ["c3", "d4"]] },
-            { "text": "Variante terminée ! Structure symétrique et équilibrée, avec un jeu positionnel solide pour les deux camps." }
+            {
+              "text": "1.e4 : occupation du centre.",
+              "arrows": [
+                [
+                  "e2",
+                  "e4"
+                ]
+              ]
+            },
+            {
+              "text": "1...c6 : les Noirs préparent ...d5 avec un pion soutenu.",
+              "arrows": [
+                [
+                  "c7",
+                  "c6"
+                ]
+              ]
+            },
+            {
+              "text": "2.d4 : les Blancs construisent un grand centre.",
+              "arrows": [
+                [
+                  "d2",
+                  "d4"
+                ]
+              ]
+            },
+            {
+              "text": "2...d5 : les Noirs défient le pion e4.",
+              "arrows": [
+                [
+                  "d7",
+                  "d5"
+                ],
+                [
+                  "d5",
+                  "e4"
+                ]
+              ]
+            },
+            {
+              "text": "3.exd5 : la Variante d'Échange, qui simplifie la structure et évite les complications.",
+              "arrows": [
+                [
+                  "e4",
+                  "d5"
+                ]
+              ]
+            },
+            {
+              "text": "3...cxd5 : les Noirs reprennent avec le pion c et obtiennent un pion d5 solide.",
+              "arrows": [
+                [
+                  "c6",
+                  "d5"
+                ]
+              ]
+            },
+            {
+              "text": "4.Bd3 : le fou se développe sur une case active et vise l'aile roi.",
+              "arrows": [
+                [
+                  "f1",
+                  "d3"
+                ],
+                [
+                  "d3",
+                  "h7"
+                ]
+              ]
+            },
+            {
+              "text": "4...Nc6 : le cavalier presse d4 et prépare ...Nf6 ou ...e5.",
+              "arrows": [
+                [
+                  "b8",
+                  "c6"
+                ],
+                [
+                  "c6",
+                  "d4"
+                ]
+              ]
+            },
+            {
+              "text": "5.c3 : les Blancs consolident d4 et préparent un jeu positionnel.",
+              "arrows": [
+                [
+                  "c2",
+                  "c3"
+                ],
+                [
+                  "c3",
+                  "d4"
+                ]
+              ]
+            },
+            "Variante terminée ! Cette structure donne un plan clair des deux côtés : développement harmonieux, points de rupture identifiés et priorités stratégiques nettes."
           ]
         }
       ]
@@ -262,58 +1082,404 @@
           "id": "sicilian-b22",
           "eco": "B22",
           "name": "Sicilienne - Alapine",
-          "moves": "1. e4 c5 2. c3 Nf6 3. e5 Nd5",
+          "moves": "e4 c5 c3 Nf6 e5 Nd5 Nf3 Nc6 Bc4 Nb6 Bb3 c4",
           "comments": [
-            { "text": "1.e4 : occupation du centre.", "arrows": [["e2", "e4"]] },
-            { "text": "1...c5 : la Sicilienne, qui déséquilibre la partie dès le premier coup.", "arrows": [["c7", "c5"], ["c5", "d4"]] },
-            { "text": "2.c3 : l'Alapine prépare d4 avec un centre solide, sans les complications de l'Open Sicilien.", "arrows": [["c2", "c3"], ["d2", "d4"]] },
-            { "text": "2...Nf6 : les Noirs attaquent e4 et défient le plan blanc.", "arrows": [["g8", "f6"], ["f6", "e4"]] },
-            { "text": "3.e5 : les Blancs gagnent du temps en attaquant le cavalier.", "arrows": [["e4", "e5"], ["e5", "f6"]] },
-            { "text": "3...Nd5 : le cavalier trouve une case centrale sûre, où il contrôle c3 et e3.", "arrows": [["f6", "d5"], ["d5", "c3"], ["d5", "e3"]] },
-            { "text": "Variante terminée ! Position équilibrée et saine : les Blancs ont le centre, les Noirs un jeu actif." }
+            {
+              "text": "1.e4 : occupation du centre.",
+              "arrows": [
+                [
+                  "e2",
+                  "e4"
+                ]
+              ]
+            },
+            {
+              "text": "1...c5 : la Sicilienne, qui déséquilibre la partie dès le premier coup.",
+              "arrows": [
+                [
+                  "c7",
+                  "c5"
+                ],
+                [
+                  "c5",
+                  "d4"
+                ]
+              ]
+            },
+            {
+              "text": "2.c3 : l'Alapine prépare d4 avec un centre solide, sans les complications de l'Open Sicilien.",
+              "arrows": [
+                [
+                  "c2",
+                  "c3"
+                ],
+                [
+                  "d2",
+                  "d4"
+                ]
+              ]
+            },
+            {
+              "text": "2...Nf6 : les Noirs attaquent e4 et défient le plan blanc.",
+              "arrows": [
+                [
+                  "g8",
+                  "f6"
+                ],
+                [
+                  "f6",
+                  "e4"
+                ]
+              ]
+            },
+            {
+              "text": "3.e5 : les Blancs gagnent du temps en attaquant le cavalier.",
+              "arrows": [
+                [
+                  "e4",
+                  "e5"
+                ],
+                [
+                  "e5",
+                  "f6"
+                ]
+              ]
+            },
+            {
+              "text": "3...Nd5 : le cavalier trouve une case centrale sûre, où il contrôle c3 et e3.",
+              "arrows": [
+                [
+                  "f6",
+                  "d5"
+                ],
+                [
+                  "d5",
+                  "c3"
+                ],
+                [
+                  "d5",
+                  "e3"
+                ]
+              ]
+            },
+            "Nf3 : Les Blancs améliorent l’activité avec le cavalier, en renforçant la coordination et les cases clés.",
+            "Nc6 : Les Noirs améliorent l’activité avec le cavalier, en renforçant la coordination et les cases clés.",
+            "Bc4 : Les Blancs améliorent l’activité avec le fou, en renforçant la coordination et les cases clés.",
+            "Nb6 : Les Noirs améliorent l’activité avec le cavalier, en renforçant la coordination et les cases clés.",
+            "Bb3 : Les Blancs améliorent l’activité avec le fou, en renforçant la coordination et les cases clés.",
+            "c4 : Les Noirs avancent le pion avec un but positionnel clair : gagner de l’espace et préparer le plan principal.",
+            "Variante terminée ! Cette structure donne un plan clair des deux côtés : développement harmonieux, points de rupture identifiés et priorités stratégiques nettes."
           ]
         },
         {
           "id": "sicilian-b70",
           "eco": "B70",
           "name": "Sicilienne - Dragon",
-          "moves": "1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 g6 6. Be3 Bg7 7. f3",
+          "moves": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3",
           "comments": [
-            { "text": "1.e4 : occupation du centre.", "arrows": [["e2", "e4"]] },
-            { "text": "1...c5 : la Sicilienne, réponse la plus combative.", "arrows": [["c7", "c5"]] },
-            { "text": "2.Nf3 : développement qui prépare d4.", "arrows": [["g1", "f3"], ["f3", "d4"]] },
-            { "text": "2...d6 : les Noirs contrôlent e5 et préparent ...Nf6.", "arrows": [["d7", "d6"], ["d6", "e5"]] },
-            { "text": "3.d4 : les Blancs ouvrent le centre.", "arrows": [["d2", "d4"], ["d4", "c5"]] },
-            { "text": "3...cxd4 : les Noirs échangent leur pion c contre le pion d central.", "arrows": [["c5", "d4"]] },
-            { "text": "4.Nxd4 : le cavalier prend une case centrale dominante.", "arrows": [["f3", "d4"]] },
-            { "text": "4...Nf6 : le cavalier attaque e4 et gagne du temps.", "arrows": [["g8", "f6"], ["f6", "e4"]] },
-            { "text": "5.Nc3 : les Blancs défendent e4 et développent.", "arrows": [["b1", "c3"], ["c3", "e4"]] },
-            { "text": "5...g6 : le coup du Dragon. Les Noirs préparent le fianchetto du fou-roi sur la grande diagonale.", "arrows": [["g7", "g6"], ["f8", "g7"]] },
-            { "text": "6.Be3 : le fou prépare l'Attaque Yougoslave avec f3, Qd2, O-O-O et h4.", "arrows": [["c1", "e3"], ["e3", "h6"]] },
-            { "text": "6...Bg7 : le fou-dragon prend la diagonale, et pèse sur d4 et b2.", "arrows": [["f8", "g7"], ["g7", "d4"], ["g7", "b2"]] },
-            { "text": "7.f3 : les Blancs renforcent e4 et se préparent à un roque long avec une attaque à l'aile roi.", "arrows": [["f2", "f3"]] },
-            { "text": "Variante terminée ! Position tranchante : roques opposés, attaques réciproques. Les Noirs ont un jeu très actif." }
+            {
+              "text": "1.e4 : occupation du centre.",
+              "arrows": [
+                [
+                  "e2",
+                  "e4"
+                ]
+              ]
+            },
+            {
+              "text": "1...c5 : la Sicilienne, réponse la plus combative.",
+              "arrows": [
+                [
+                  "c7",
+                  "c5"
+                ]
+              ]
+            },
+            {
+              "text": "2.Nf3 : développement qui prépare d4.",
+              "arrows": [
+                [
+                  "g1",
+                  "f3"
+                ],
+                [
+                  "f3",
+                  "d4"
+                ]
+              ]
+            },
+            {
+              "text": "2...d6 : les Noirs contrôlent e5 et préparent ...Nf6.",
+              "arrows": [
+                [
+                  "d7",
+                  "d6"
+                ],
+                [
+                  "d6",
+                  "e5"
+                ]
+              ]
+            },
+            {
+              "text": "3.d4 : les Blancs ouvrent le centre.",
+              "arrows": [
+                [
+                  "d2",
+                  "d4"
+                ],
+                [
+                  "d4",
+                  "c5"
+                ]
+              ]
+            },
+            {
+              "text": "3...cxd4 : les Noirs échangent leur pion c contre le pion d central.",
+              "arrows": [
+                [
+                  "c5",
+                  "d4"
+                ]
+              ]
+            },
+            {
+              "text": "4.Nxd4 : le cavalier prend une case centrale dominante.",
+              "arrows": [
+                [
+                  "f3",
+                  "d4"
+                ]
+              ]
+            },
+            {
+              "text": "4...Nf6 : le cavalier attaque e4 et gagne du temps.",
+              "arrows": [
+                [
+                  "g8",
+                  "f6"
+                ],
+                [
+                  "f6",
+                  "e4"
+                ]
+              ]
+            },
+            {
+              "text": "5.Nc3 : les Blancs défendent e4 et développent.",
+              "arrows": [
+                [
+                  "b1",
+                  "c3"
+                ],
+                [
+                  "c3",
+                  "e4"
+                ]
+              ]
+            },
+            {
+              "text": "5...g6 : le coup du Dragon. Les Noirs préparent le fianchetto du fou-roi sur la grande diagonale.",
+              "arrows": [
+                [
+                  "g7",
+                  "g6"
+                ],
+                [
+                  "f8",
+                  "g7"
+                ]
+              ]
+            },
+            {
+              "text": "6.Be3 : le fou prépare l'Attaque Yougoslave avec f3, Qd2, O-O-O et h4.",
+              "arrows": [
+                [
+                  "c1",
+                  "e3"
+                ],
+                [
+                  "e3",
+                  "h6"
+                ]
+              ]
+            },
+            {
+              "text": "6...Bg7 : le fou-dragon prend la diagonale, et pèse sur d4 et b2.",
+              "arrows": [
+                [
+                  "f8",
+                  "g7"
+                ],
+                [
+                  "g7",
+                  "d4"
+                ],
+                [
+                  "g7",
+                  "b2"
+                ]
+              ]
+            },
+            {
+              "text": "7.f3 : les Blancs renforcent e4 et se préparent à un roque long avec une attaque à l'aile roi.",
+              "arrows": [
+                [
+                  "f2",
+                  "f3"
+                ]
+              ]
+            },
+            "Variante terminée ! Cette structure donne un plan clair des deux côtés : développement harmonieux, points de rupture identifiés et priorités stratégiques nettes."
           ]
         },
         {
           "id": "sicilian-b90",
           "eco": "B90",
           "name": "Sicilienne - Najdorf",
-          "moves": "1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 a6 6. Be3 e5",
+          "moves": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Be3 e5",
           "comments": [
-            { "text": "1.e4 : occupation du centre.", "arrows": [["e2", "e4"]] },
-            { "text": "1...c5 : la Sicilienne, qui vise un jeu déséquilibré.", "arrows": [["c7", "c5"]] },
-            { "text": "2.Nf3 : développement qui prépare d4.", "arrows": [["g1", "f3"], ["f3", "d4"]] },
-            { "text": "2...d6 : contrôle de e5 et préparation de ...Nf6.", "arrows": [["d7", "d6"], ["d6", "e5"]] },
-            { "text": "3.d4 : ouverture du centre.", "arrows": [["d2", "d4"], ["d4", "c5"]] },
-            { "text": "3...cxd4 : les Noirs échangent leur pion c contre le pion d.", "arrows": [["c5", "d4"]] },
-            { "text": "4.Nxd4 : le cavalier occupe une case centrale.", "arrows": [["f3", "d4"]] },
-            { "text": "4...Nf6 : attaque e4 et gagne du temps.", "arrows": [["g8", "f6"], ["f6", "e4"]] },
-            { "text": "5.Nc3 : les Blancs défendent e4.", "arrows": [["b1", "c3"], ["c3", "e4"]] },
-            { "text": "5...a6 : le coup de Najdorf. Il empêche Nb5 et Bb5+ et prépare ...e5 ou ...b5 avec un gain d'espace à l'aile dame.", "arrows": [["a7", "a6"], ["a6", "b5"]] },
-            { "text": "6.Be3 : l'Attaque anglaise. Le fou se développe et soutient d4, en préparant f3, Qd2 et le roque long.", "arrows": [["c1", "e3"], ["e3", "d4"]] },
-            { "text": "6...e5 : les Noirs chassent le cavalier d4 et prennent le centre.", "arrows": [["e7", "e5"], ["e5", "d4"]] },
-            { "text": "Variante terminée ! Structure riche : les Noirs ont un contre-jeu actif et un centre solide, les Blancs ont l'espace. Position dynamique." }
+            {
+              "text": "1.e4 : occupation du centre.",
+              "arrows": [
+                [
+                  "e2",
+                  "e4"
+                ]
+              ]
+            },
+            {
+              "text": "1...c5 : la Sicilienne, qui vise un jeu déséquilibré.",
+              "arrows": [
+                [
+                  "c7",
+                  "c5"
+                ]
+              ]
+            },
+            {
+              "text": "2.Nf3 : développement qui prépare d4.",
+              "arrows": [
+                [
+                  "g1",
+                  "f3"
+                ],
+                [
+                  "f3",
+                  "d4"
+                ]
+              ]
+            },
+            {
+              "text": "2...d6 : contrôle de e5 et préparation de ...Nf6.",
+              "arrows": [
+                [
+                  "d7",
+                  "d6"
+                ],
+                [
+                  "d6",
+                  "e5"
+                ]
+              ]
+            },
+            {
+              "text": "3.d4 : ouverture du centre.",
+              "arrows": [
+                [
+                  "d2",
+                  "d4"
+                ],
+                [
+                  "d4",
+                  "c5"
+                ]
+              ]
+            },
+            {
+              "text": "3...cxd4 : les Noirs échangent leur pion c contre le pion d.",
+              "arrows": [
+                [
+                  "c5",
+                  "d4"
+                ]
+              ]
+            },
+            {
+              "text": "4.Nxd4 : le cavalier occupe une case centrale.",
+              "arrows": [
+                [
+                  "f3",
+                  "d4"
+                ]
+              ]
+            },
+            {
+              "text": "4...Nf6 : attaque e4 et gagne du temps.",
+              "arrows": [
+                [
+                  "g8",
+                  "f6"
+                ],
+                [
+                  "f6",
+                  "e4"
+                ]
+              ]
+            },
+            {
+              "text": "5.Nc3 : les Blancs défendent e4.",
+              "arrows": [
+                [
+                  "b1",
+                  "c3"
+                ],
+                [
+                  "c3",
+                  "e4"
+                ]
+              ]
+            },
+            {
+              "text": "5...a6 : le coup de Najdorf. Il empêche Nb5 et Bb5+ et prépare ...e5 ou ...b5 avec un gain d'espace à l'aile dame.",
+              "arrows": [
+                [
+                  "a7",
+                  "a6"
+                ],
+                [
+                  "a6",
+                  "b5"
+                ]
+              ]
+            },
+            {
+              "text": "6.Be3 : l'Attaque anglaise. Le fou se développe et soutient d4, en préparant f3, Qd2 et le roque long.",
+              "arrows": [
+                [
+                  "c1",
+                  "e3"
+                ],
+                [
+                  "e3",
+                  "d4"
+                ]
+              ]
+            },
+            {
+              "text": "6...e5 : les Noirs chassent le cavalier d4 et prennent le centre.",
+              "arrows": [
+                [
+                  "e7",
+                  "e5"
+                ],
+                [
+                  "e5",
+                  "d4"
+                ]
+              ]
+            },
+            "Variante terminée ! Cette structure donne un plan clair des deux côtés : développement harmonieux, points de rupture identifiés et priorités stratégiques nettes."
           ]
         }
       ]
@@ -328,38 +1494,248 @@
           "id": "french-c02",
           "eco": "C02",
           "name": "Française - Avance",
-          "moves": "1. e4 e6 2. d4 d5 3. e5 c5 4. c3 Nc6 5. Nf3",
+          "moves": "e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Qb6 Bd3 cxd4 cxd4 Bd7 O-O",
           "comments": [
-            { "text": "1.e4 : occupation du centre.", "arrows": [["e2", "e4"]] },
-            { "text": "1...e6 : les Noirs préparent ...d5 avec une structure solide.", "arrows": [["e7", "e6"]] },
-            { "text": "2.d4 : les Blancs construisent un grand centre.", "arrows": [["d2", "d4"]] },
-            { "text": "2...d5 : les Noirs contestent le centre.", "arrows": [["d7", "d5"], ["d5", "e4"]] },
-            { "text": "3.e5 : la Variante d'Avance. Les Blancs gagnent de l'espace et ferment le centre.", "arrows": [["e4", "e5"]] },
-            { "text": "3...c5 : les Noirs attaquent la base de la chaîne de pions, le pion d4.", "arrows": [["c7", "c5"], ["c5", "d4"]] },
-            { "text": "4.c3 : les Blancs soutiennent d4 et maintiennent la structure.", "arrows": [["c2", "c3"], ["c3", "d4"]] },
-            { "text": "4...Nc6 : le cavalier met d4 sous pression.", "arrows": [["b8", "c6"], ["c6", "d4"]] },
-            { "text": "5.Nf3 : le développement renforce d4 et prépare Bd3.", "arrows": [["g1", "f3"], ["f3", "d4"]] },
-            { "text": "Variante terminée ! Les Blancs ont de l'espace et les Noirs le jeu contre d4. Un bon jeu sur les cases blanches est l'atout des Noirs." }
+            {
+              "text": "1.e4 : occupation du centre.",
+              "arrows": [
+                [
+                  "e2",
+                  "e4"
+                ]
+              ]
+            },
+            {
+              "text": "1...e6 : les Noirs préparent ...d5 avec une structure solide.",
+              "arrows": [
+                [
+                  "e7",
+                  "e6"
+                ]
+              ]
+            },
+            {
+              "text": "2.d4 : les Blancs construisent un grand centre.",
+              "arrows": [
+                [
+                  "d2",
+                  "d4"
+                ]
+              ]
+            },
+            {
+              "text": "2...d5 : les Noirs contestent le centre.",
+              "arrows": [
+                [
+                  "d7",
+                  "d5"
+                ],
+                [
+                  "d5",
+                  "e4"
+                ]
+              ]
+            },
+            {
+              "text": "3.e5 : la Variante d'Avance. Les Blancs gagnent de l'espace et ferment le centre.",
+              "arrows": [
+                [
+                  "e4",
+                  "e5"
+                ]
+              ]
+            },
+            {
+              "text": "3...c5 : les Noirs attaquent la base de la chaîne de pions, le pion d4.",
+              "arrows": [
+                [
+                  "c7",
+                  "c5"
+                ],
+                [
+                  "c5",
+                  "d4"
+                ]
+              ]
+            },
+            {
+              "text": "4.c3 : les Blancs soutiennent d4 et maintiennent la structure.",
+              "arrows": [
+                [
+                  "c2",
+                  "c3"
+                ],
+                [
+                  "c3",
+                  "d4"
+                ]
+              ]
+            },
+            {
+              "text": "4...Nc6 : le cavalier met d4 sous pression.",
+              "arrows": [
+                [
+                  "b8",
+                  "c6"
+                ],
+                [
+                  "c6",
+                  "d4"
+                ]
+              ]
+            },
+            {
+              "text": "5.Nf3 : le développement renforce d4 et prépare Bd3.",
+              "arrows": [
+                [
+                  "g1",
+                  "f3"
+                ],
+                [
+                  "f3",
+                  "d4"
+                ]
+              ]
+            },
+            "Qb6 : Les Noirs améliorent l’activité avec la dame, en renforçant la coordination et les cases clés.",
+            "Bd3 : Les Blancs améliorent l’activité avec le fou, en renforçant la coordination et les cases clés.",
+            "cxd4 : Les Noirs capturent au bon moment pour casser la structure adverse et clarifier les plans favorables.",
+            "cxd4 : Les Blancs capturent au bon moment pour casser la structure adverse et clarifier les plans favorables.",
+            "Bd7 : Les Noirs améliorent l’activité avec le fou, en renforçant la coordination et les cases clés.",
+            "O-O : Les Blancs roquent court pour sécuriser le roi et connecter les tours, ce qui prépare le milieu de jeu actif.",
+            "Variante terminée ! Cette structure donne un plan clair des deux côtés : développement harmonieux, points de rupture identifiés et priorités stratégiques nettes."
           ]
         },
         {
           "id": "french-c15",
           "eco": "C15",
           "name": "Française - Winawer",
-          "moves": "1. e4 e6 2. d4 d5 3. Nc3 Bb4 4. e5 c5 5. a3 Bxc3+ 6. bxc3",
+          "moves": "e4 e6 d4 d5 Nc3 Bb4 e5 c5 a3 Bxc3+ bxc3",
           "comments": [
-            { "text": "1.e4 : occupation du centre.", "arrows": [["e2", "e4"]] },
-            { "text": "1...e6 : préparation de ...d5 avec une structure solide.", "arrows": [["e7", "e6"]] },
-            { "text": "2.d4 : construction d'un grand centre.", "arrows": [["d2", "d4"]] },
-            { "text": "2...d5 : les Noirs contestent le centre.", "arrows": [["d7", "d5"], ["d5", "e4"]] },
-            { "text": "3.Nc3 : le cavalier défend e4 et développe.", "arrows": [["b1", "c3"], ["c3", "e4"]] },
-            { "text": "3...Bb4 : la Winawer. Le fou cloue le cavalier et attaque le centre blanc.", "arrows": [["f8", "b4"], ["b4", "c3"], ["b4", "e1"]] },
-            { "text": "4.e5 : les Blancs gagnent de l'espace et ferment le centre.", "arrows": [["e4", "e5"]] },
-            { "text": "4...c5 : les Noirs attaquent d4, la base de la chaîne.", "arrows": [["c7", "c5"], ["c5", "d4"]] },
-            { "text": "5.a3 : les Blancs forcent le fou à se décider.", "arrows": [["a2", "a3"], ["a3", "b4"]] },
-            { "text": "5...Bxc3+ : les Noirs échangent le fou contre le cavalier et abîment la structure blanche.", "arrows": [["b4", "c3"]] },
-            { "text": "6.bxc3 : les Blancs reprennent avec un pion doublé, mais obtiennent la paire de fous et des chances d'attaque à l'aile roi.", "arrows": [["b2", "c3"]] },
-            { "text": "Variante terminée ! Structure asymétrique et tranchante : les Noirs visent les pions faibles, les Blancs ont la paire de fous et l'initiative." }
+            {
+              "text": "1.e4 : occupation du centre.",
+              "arrows": [
+                [
+                  "e2",
+                  "e4"
+                ]
+              ]
+            },
+            {
+              "text": "1...e6 : préparation de ...d5 avec une structure solide.",
+              "arrows": [
+                [
+                  "e7",
+                  "e6"
+                ]
+              ]
+            },
+            {
+              "text": "2.d4 : construction d'un grand centre.",
+              "arrows": [
+                [
+                  "d2",
+                  "d4"
+                ]
+              ]
+            },
+            {
+              "text": "2...d5 : les Noirs contestent le centre.",
+              "arrows": [
+                [
+                  "d7",
+                  "d5"
+                ],
+                [
+                  "d5",
+                  "e4"
+                ]
+              ]
+            },
+            {
+              "text": "3.Nc3 : le cavalier défend e4 et développe.",
+              "arrows": [
+                [
+                  "b1",
+                  "c3"
+                ],
+                [
+                  "c3",
+                  "e4"
+                ]
+              ]
+            },
+            {
+              "text": "3...Bb4 : la Winawer. Le fou cloue le cavalier et attaque le centre blanc.",
+              "arrows": [
+                [
+                  "f8",
+                  "b4"
+                ],
+                [
+                  "b4",
+                  "c3"
+                ],
+                [
+                  "b4",
+                  "e1"
+                ]
+              ]
+            },
+            {
+              "text": "4.e5 : les Blancs gagnent de l'espace et ferment le centre.",
+              "arrows": [
+                [
+                  "e4",
+                  "e5"
+                ]
+              ]
+            },
+            {
+              "text": "4...c5 : les Noirs attaquent d4, la base de la chaîne.",
+              "arrows": [
+                [
+                  "c7",
+                  "c5"
+                ],
+                [
+                  "c5",
+                  "d4"
+                ]
+              ]
+            },
+            {
+              "text": "5.a3 : les Blancs forcent le fou à se décider.",
+              "arrows": [
+                [
+                  "a2",
+                  "a3"
+                ],
+                [
+                  "a3",
+                  "b4"
+                ]
+              ]
+            },
+            {
+              "text": "5...Bxc3+ : les Noirs échangent le fou contre le cavalier et abîment la structure blanche.",
+              "arrows": [
+                [
+                  "b4",
+                  "c3"
+                ]
+              ]
+            },
+            {
+              "text": "6.bxc3 : les Blancs reprennent avec un pion doublé, mais obtiennent la paire de fous et des chances d'attaque à l'aile roi.",
+              "arrows": [
+                [
+                  "b2",
+                  "c3"
+                ]
+              ]
+            },
+            "Variante terminée ! Cette structure donne un plan clair des deux côtés : développement harmonieux, points de rupture identifiés et priorités stratégiques nettes."
           ]
         }
       ]
@@ -374,15 +1750,79 @@
           "id": "vienna-c25",
           "eco": "C25",
           "name": "Partie Viennoise",
-          "moves": "1. e4 e5 2. Nc3 Nf6 3. Bc4 Bc5",
+          "moves": "e4 e5 Nc3 Nf6 Bc4 Bc5",
           "comments": [
-            { "text": "1.e4 : occupation du centre.", "arrows": [["e2", "e4"]] },
-            { "text": "1...e5 : réponse symétrique, classique.", "arrows": [["e7", "e5"]] },
-            { "text": "2.Nc3 : la Viennoise. Le cavalier prépare f4 et garde toutes les options d'attaque.", "arrows": [["b1", "c3"], ["f2", "f4"]] },
-            { "text": "2...Nf6 : développement qui attaque e4.", "arrows": [["g8", "f6"], ["f6", "e4"]] },
-            { "text": "3.Bc4 : le fou cible f7 et prépare un jeu d'attaque avec d3 ou f4.", "arrows": [["f1", "c4"], ["c4", "f7"]] },
-            { "text": "3...Bc5 : les Noirs répondent en miroir et visent f2, la case faible des Blancs.", "arrows": [["f8", "c5"], ["c5", "f2"]] },
-            { "text": "Variante terminée ! Position symétrique et flexible, avec un jeu actif pour les deux camps." }
+            {
+              "text": "1.e4 : occupation du centre.",
+              "arrows": [
+                [
+                  "e2",
+                  "e4"
+                ]
+              ]
+            },
+            {
+              "text": "1...e5 : réponse symétrique, classique.",
+              "arrows": [
+                [
+                  "e7",
+                  "e5"
+                ]
+              ]
+            },
+            {
+              "text": "2.Nc3 : la Viennoise. Le cavalier prépare f4 et garde toutes les options d'attaque.",
+              "arrows": [
+                [
+                  "b1",
+                  "c3"
+                ],
+                [
+                  "f2",
+                  "f4"
+                ]
+              ]
+            },
+            {
+              "text": "2...Nf6 : développement qui attaque e4.",
+              "arrows": [
+                [
+                  "g8",
+                  "f6"
+                ],
+                [
+                  "f6",
+                  "e4"
+                ]
+              ]
+            },
+            {
+              "text": "3.Bc4 : le fou cible f7 et prépare un jeu d'attaque avec d3 ou f4.",
+              "arrows": [
+                [
+                  "f1",
+                  "c4"
+                ],
+                [
+                  "c4",
+                  "f7"
+                ]
+              ]
+            },
+            {
+              "text": "3...Bc5 : les Noirs répondent en miroir et visent f2, la case faible des Blancs.",
+              "arrows": [
+                [
+                  "f8",
+                  "c5"
+                ],
+                [
+                  "c5",
+                  "f2"
+                ]
+              ]
+            },
+            "Variante terminée ! Cette structure donne un plan clair des deux côtés : développement harmonieux, points de rupture identifiés et priorités stratégiques nettes."
           ]
         }
       ]
@@ -397,15 +1837,75 @@
           "id": "kings_gambit-c33",
           "eco": "C33",
           "name": "Gambit Roi Accepté",
-          "moves": "1. e4 e5 2. f4 exf4 3. Nf3 g5",
+          "moves": "e4 e5 f4 exf4 Nf3 g5",
           "comments": [
-            { "text": "1.e4 : occupation du centre.", "arrows": [["e2", "e4"]] },
-            { "text": "1...e5 : réponse classique.", "arrows": [["e7", "e5"]] },
-            { "text": "2.f4 : le Gambit du Roi. Les Blancs sacrifient un pion pour ouvrir la colonne f et prendre le centre.", "arrows": [["f2", "f4"], ["f4", "e5"]] },
-            { "text": "2...exf4 : les Noirs acceptent le gambit et gagnent un pion.", "arrows": [["e5", "f4"]] },
-            { "text": "3.Nf3 : développement qui empêche ...Qh4+ et vise la reprise du pion f4.", "arrows": [["g1", "f3"], ["d8", "h4"]] },
-            { "text": "3...g5 : la défense principale. Les Noirs défendent leur pion supplémentaire en jouant le pion g5.", "arrows": [["g7", "g5"], ["g5", "f4"]] },
-            { "text": "Variante terminée ! Position tranchante : les Noirs ont un pion de plus et les Blancs de l'initiative." }
+            {
+              "text": "1.e4 : occupation du centre.",
+              "arrows": [
+                [
+                  "e2",
+                  "e4"
+                ]
+              ]
+            },
+            {
+              "text": "1...e5 : réponse classique.",
+              "arrows": [
+                [
+                  "e7",
+                  "e5"
+                ]
+              ]
+            },
+            {
+              "text": "2.f4 : le Gambit du Roi. Les Blancs sacrifient un pion pour ouvrir la colonne f et prendre le centre.",
+              "arrows": [
+                [
+                  "f2",
+                  "f4"
+                ],
+                [
+                  "f4",
+                  "e5"
+                ]
+              ]
+            },
+            {
+              "text": "2...exf4 : les Noirs acceptent le gambit et gagnent un pion.",
+              "arrows": [
+                [
+                  "e5",
+                  "f4"
+                ]
+              ]
+            },
+            {
+              "text": "3.Nf3 : développement qui empêche ...Qh4+ et vise la reprise du pion f4.",
+              "arrows": [
+                [
+                  "g1",
+                  "f3"
+                ],
+                [
+                  "d8",
+                  "h4"
+                ]
+              ]
+            },
+            {
+              "text": "3...g5 : la défense principale. Les Noirs défendent leur pion supplémentaire en jouant le pion g5.",
+              "arrows": [
+                [
+                  "g7",
+                  "g5"
+                ],
+                [
+                  "g5",
+                  "f4"
+                ]
+              ]
+            },
+            "Variante terminée ! Cette structure donne un plan clair des deux côtés : développement harmonieux, points de rupture identifiés et priorités stratégiques nettes."
           ]
         }
       ]
@@ -420,18 +1920,111 @@
           "id": "scotch-c45",
           "eco": "C45",
           "name": "Partie Écossaise",
-          "moves": "1. e4 e5 2. Nf3 Nc6 3. d4 exd4 4. Nxd4 Nf6 5. Nxc6",
+          "moves": "e4 e5 Nf3 Nc6 d4 exd4 Nxd4 Nf6 Nxc6 bxc6 e5 Qe7 Qe2 Nd5",
           "comments": [
-            { "text": "1.e4 : occupation du centre.", "arrows": [["e2", "e4"]] },
-            { "text": "1...e5 : réponse classique.", "arrows": [["e7", "e5"]] },
-            { "text": "2.Nf3 : attaque e5 et développe.", "arrows": [["g1", "f3"], ["f3", "e5"]] },
-            { "text": "2...Nc6 : défend e5 et développe.", "arrows": [["b8", "c6"], ["c6", "e5"]] },
-            { "text": "3.d4 : la Partie Écossaise. Les Blancs ouvrent le centre.", "arrows": [["d2", "d4"], ["d4", "e5"]] },
-            { "text": "3...exd4 : les Noirs prennent le pion.", "arrows": [["e5", "d4"]] },
-            { "text": "4.Nxd4 : le cavalier prend une case dominante au centre.", "arrows": [["f3", "d4"]] },
-            { "text": "4...Nf6 : le cavalier attaque e4 et gagne du temps.", "arrows": [["g8", "f6"], ["f6", "e4"]] },
-            { "text": "5.Nxc6 : les Blancs échangent le cavalier actif et cassent la structure noire avec ...bxc6, ce qui amène un jeu tactique et dynamique.", "arrows": [["d4", "c6"]] },
-            { "text": "Variante terminée ! Position ouverte et active, avec un jeu clair pour les deux camps." }
+            {
+              "text": "1.e4 : occupation du centre.",
+              "arrows": [
+                [
+                  "e2",
+                  "e4"
+                ]
+              ]
+            },
+            {
+              "text": "1...e5 : réponse classique.",
+              "arrows": [
+                [
+                  "e7",
+                  "e5"
+                ]
+              ]
+            },
+            {
+              "text": "2.Nf3 : attaque e5 et développe.",
+              "arrows": [
+                [
+                  "g1",
+                  "f3"
+                ],
+                [
+                  "f3",
+                  "e5"
+                ]
+              ]
+            },
+            {
+              "text": "2...Nc6 : défend e5 et développe.",
+              "arrows": [
+                [
+                  "b8",
+                  "c6"
+                ],
+                [
+                  "c6",
+                  "e5"
+                ]
+              ]
+            },
+            {
+              "text": "3.d4 : la Partie Écossaise. Les Blancs ouvrent le centre.",
+              "arrows": [
+                [
+                  "d2",
+                  "d4"
+                ],
+                [
+                  "d4",
+                  "e5"
+                ]
+              ]
+            },
+            {
+              "text": "3...exd4 : les Noirs prennent le pion.",
+              "arrows": [
+                [
+                  "e5",
+                  "d4"
+                ]
+              ]
+            },
+            {
+              "text": "4.Nxd4 : le cavalier prend une case dominante au centre.",
+              "arrows": [
+                [
+                  "f3",
+                  "d4"
+                ]
+              ]
+            },
+            {
+              "text": "4...Nf6 : le cavalier attaque e4 et gagne du temps.",
+              "arrows": [
+                [
+                  "g8",
+                  "f6"
+                ],
+                [
+                  "f6",
+                  "e4"
+                ]
+              ]
+            },
+            {
+              "text": "5.Nxc6 : les Blancs échangent le cavalier actif et cassent la structure noire avec ...bxc6, ce qui amène un jeu tactique et dynamique.",
+              "arrows": [
+                [
+                  "d4",
+                  "c6"
+                ]
+              ]
+            },
+            "bxc6 : Les Noirs capturent au bon moment pour casser la structure adverse et clarifier les plans favorables.",
+            "e5 : Les Blancs avancent le pion avec un but positionnel clair : gagner de l’espace et préparer le plan principal.",
+            "Qe7 : Les Noirs améliorent l’activité avec la dame, en renforçant la coordination et les cases clés.",
+            "Qe2 : Les Blancs améliorent l’activité avec la dame, en renforçant la coordination et les cases clés.",
+            "Nd5 : Les Noirs améliorent l’activité avec le cavalier, en renforçant la coordination et les cases clés.",
+            "Variante terminée ! Cette structure donne un plan clair des deux côtés : développement harmonieux, points de rupture identifiés et priorités stratégiques nettes."
           ]
         }
       ]
@@ -446,33 +2039,200 @@
           "id": "italian-c53",
           "eco": "C53",
           "name": "Italienne - Giuoco Piano",
-          "moves": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. c3 d6",
+          "moves": "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 d6 d4 exd4 cxd4",
           "comments": [
-            { "text": "1.e4 : occupation du centre.", "arrows": [["e2", "e4"]] },
-            { "text": "1...e5 : réponse classique.", "arrows": [["e7", "e5"]] },
-            { "text": "2.Nf3 : attaque e5 et développe.", "arrows": [["g1", "f3"], ["f3", "e5"]] },
-            { "text": "2...Nc6 : défend e5.", "arrows": [["b8", "c6"], ["c6", "e5"]] },
-            { "text": "3.Bc4 : le fou vise f7, le point faible.", "arrows": [["f1", "c4"], ["c4", "f7"]] },
-            { "text": "3...Bc5 : les Noirs répondent en miroir et visent f2.", "arrows": [["f8", "c5"], ["c5", "f2"]] },
-            { "text": "4.c3 : les Blancs préparent d4 pour prendre le centre.", "arrows": [["c2", "c3"], ["d2", "d4"]] },
-            { "text": "4...d6 : les Noirs consolident e5 et préparent le développement du fou c8.", "arrows": [["d7", "d6"], ["d6", "e5"]] },
-            { "text": "Variante terminée ! Position équilibrée et solide, avec un jeu positionnel riche." }
+            {
+              "text": "1.e4 : occupation du centre.",
+              "arrows": [
+                [
+                  "e2",
+                  "e4"
+                ]
+              ]
+            },
+            {
+              "text": "1...e5 : réponse classique.",
+              "arrows": [
+                [
+                  "e7",
+                  "e5"
+                ]
+              ]
+            },
+            {
+              "text": "2.Nf3 : attaque e5 et développe.",
+              "arrows": [
+                [
+                  "g1",
+                  "f3"
+                ],
+                [
+                  "f3",
+                  "e5"
+                ]
+              ]
+            },
+            {
+              "text": "2...Nc6 : défend e5.",
+              "arrows": [
+                [
+                  "b8",
+                  "c6"
+                ],
+                [
+                  "c6",
+                  "e5"
+                ]
+              ]
+            },
+            {
+              "text": "3.Bc4 : le fou vise f7, le point faible.",
+              "arrows": [
+                [
+                  "f1",
+                  "c4"
+                ],
+                [
+                  "c4",
+                  "f7"
+                ]
+              ]
+            },
+            {
+              "text": "3...Bc5 : les Noirs répondent en miroir et visent f2.",
+              "arrows": [
+                [
+                  "f8",
+                  "c5"
+                ],
+                [
+                  "c5",
+                  "f2"
+                ]
+              ]
+            },
+            {
+              "text": "4.c3 : les Blancs préparent d4 pour prendre le centre.",
+              "arrows": [
+                [
+                  "c2",
+                  "c3"
+                ],
+                [
+                  "d2",
+                  "d4"
+                ]
+              ]
+            },
+            {
+              "text": "4...d6 : les Noirs consolident e5 et préparent le développement du fou c8.",
+              "arrows": [
+                [
+                  "d7",
+                  "d6"
+                ],
+                [
+                  "d6",
+                  "e5"
+                ]
+              ]
+            },
+            "d4 : Les Blancs avancent le pion avec un but positionnel clair : gagner de l’espace et préparer le plan principal.",
+            "exd4 : Les Noirs capturent au bon moment pour casser la structure adverse et clarifier les plans favorables.",
+            "cxd4 : Les Blancs capturent au bon moment pour casser la structure adverse et clarifier les plans favorables.",
+            "Variante terminée ! Cette structure donne un plan clair des deux côtés : développement harmonieux, points de rupture identifiés et priorités stratégiques nettes."
           ]
         },
         {
           "id": "italian-c55",
           "eco": "C55",
           "name": "Italienne - Deux Cavaliers",
-          "moves": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. Ng5",
+          "moves": "e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5",
           "comments": [
-            { "text": "1.e4 : occupation du centre.", "arrows": [["e2", "e4"]] },
-            { "text": "1...e5 : réponse classique.", "arrows": [["e7", "e5"]] },
-            { "text": "2.Nf3 : attaque e5 et développe.", "arrows": [["g1", "f3"], ["f3", "e5"]] },
-            { "text": "2...Nc6 : défend e5.", "arrows": [["b8", "c6"], ["c6", "e5"]] },
-            { "text": "3.Bc4 : le fou vise f7.", "arrows": [["f1", "c4"], ["c4", "f7"]] },
-            { "text": "3...Nf6 : la Défense des Deux Cavaliers. Les Noirs contre-attaquent e4 au lieu de défendre passivement.", "arrows": [["g8", "f6"], ["f6", "e4"]] },
-            { "text": "4.Ng5 : les Blancs menacent Nxf7 et cherchent l'initiative. Les Noirs répondent avec ...d5, un coup de piège dans la théorie.", "arrows": [["f3", "g5"], ["g5", "f7"]] },
-            { "text": "Variante terminée ! Position tranchante, pleine de tactique et d'initiative des deux côtés." }
+            {
+              "text": "1.e4 : occupation du centre.",
+              "arrows": [
+                [
+                  "e2",
+                  "e4"
+                ]
+              ]
+            },
+            {
+              "text": "1...e5 : réponse classique.",
+              "arrows": [
+                [
+                  "e7",
+                  "e5"
+                ]
+              ]
+            },
+            {
+              "text": "2.Nf3 : attaque e5 et développe.",
+              "arrows": [
+                [
+                  "g1",
+                  "f3"
+                ],
+                [
+                  "f3",
+                  "e5"
+                ]
+              ]
+            },
+            {
+              "text": "2...Nc6 : défend e5.",
+              "arrows": [
+                [
+                  "b8",
+                  "c6"
+                ],
+                [
+                  "c6",
+                  "e5"
+                ]
+              ]
+            },
+            {
+              "text": "3.Bc4 : le fou vise f7.",
+              "arrows": [
+                [
+                  "f1",
+                  "c4"
+                ],
+                [
+                  "c4",
+                  "f7"
+                ]
+              ]
+            },
+            {
+              "text": "3...Nf6 : la Défense des Deux Cavaliers. Les Noirs contre-attaquent e4 au lieu de défendre passivement.",
+              "arrows": [
+                [
+                  "g8",
+                  "f6"
+                ],
+                [
+                  "f6",
+                  "e4"
+                ]
+              ]
+            },
+            {
+              "text": "4.Ng5 : les Blancs menacent Nxf7 et cherchent l'initiative. Les Noirs répondent avec ...d5, un coup de piège dans la théorie.",
+              "arrows": [
+                [
+                  "f3",
+                  "g5"
+                ],
+                [
+                  "g5",
+                  "f7"
+                ]
+              ]
+            },
+            "Variante terminée ! Cette structure donne un plan clair des deux côtés : développement harmonieux, points de rupture identifiés et priorités stratégiques nettes."
           ]
         }
       ]
@@ -487,37 +2247,245 @@
           "id": "ruy_lopez-c65",
           "eco": "C65",
           "name": "Espagnole - Défense Berlin",
-          "moves": "1. e4 e5 2. Nf3 Nc6 3. Bb5 Nf6 4. O-O Nxe4 5. d4",
+          "moves": "e4 e5 Nf3 Nc6 Bb5 Nf6 O-O Nxe4 d4",
           "comments": [
-            { "text": "1.e4 : occupation du centre.", "arrows": [["e2", "e4"]] },
-            { "text": "1...e5 : réponse classique.", "arrows": [["e7", "e5"]] },
-            { "text": "2.Nf3 : attaque e5 et développe.", "arrows": [["g1", "f3"], ["f3", "e5"]] },
-            { "text": "2...Nc6 : défend e5.", "arrows": [["b8", "c6"], ["c6", "e5"]] },
-            { "text": "3.Bb5 : la Ruy Lopez. Le fou met la pression sur le défenseur de e5.", "arrows": [["f1", "b5"], ["b5", "c6"]] },
-            { "text": "3...Nf6 : la Défense Berlin, très solide, qui contre-attaque e4.", "arrows": [["g8", "f6"], ["f6", "e4"]] },
-            { "text": "4.O-O : les Blancs roquent et laissent le pion e4 en prise, pour un jeu positionnel.", "arrows": [["e1", "g1"], ["h1", "f1"]] },
-            { "text": "4...Nxe4 : les Noirs prennent le pion et gagnent le matériel.", "arrows": [["f6", "e4"]] },
-            { "text": "5.d4 : les Blancs ouvrent le centre et récupèrent le pion avec un bon développement.", "arrows": [["d2", "d4"], ["d4", "e5"]] },
-            { "text": "Variante terminée ! Position solide pour les Noirs, qui ont un bon développement. Le jeu de finale est équilibré." }
+            {
+              "text": "1.e4 : occupation du centre.",
+              "arrows": [
+                [
+                  "e2",
+                  "e4"
+                ]
+              ]
+            },
+            {
+              "text": "1...e5 : réponse classique.",
+              "arrows": [
+                [
+                  "e7",
+                  "e5"
+                ]
+              ]
+            },
+            {
+              "text": "2.Nf3 : attaque e5 et développe.",
+              "arrows": [
+                [
+                  "g1",
+                  "f3"
+                ],
+                [
+                  "f3",
+                  "e5"
+                ]
+              ]
+            },
+            {
+              "text": "2...Nc6 : défend e5.",
+              "arrows": [
+                [
+                  "b8",
+                  "c6"
+                ],
+                [
+                  "c6",
+                  "e5"
+                ]
+              ]
+            },
+            {
+              "text": "3.Bb5 : la Ruy Lopez. Le fou met la pression sur le défenseur de e5.",
+              "arrows": [
+                [
+                  "f1",
+                  "b5"
+                ],
+                [
+                  "b5",
+                  "c6"
+                ]
+              ]
+            },
+            {
+              "text": "3...Nf6 : la Défense Berlin, très solide, qui contre-attaque e4.",
+              "arrows": [
+                [
+                  "g8",
+                  "f6"
+                ],
+                [
+                  "f6",
+                  "e4"
+                ]
+              ]
+            },
+            {
+              "text": "4.O-O : les Blancs roquent et laissent le pion e4 en prise, pour un jeu positionnel.",
+              "arrows": [
+                [
+                  "e1",
+                  "g1"
+                ],
+                [
+                  "h1",
+                  "f1"
+                ]
+              ]
+            },
+            {
+              "text": "4...Nxe4 : les Noirs prennent le pion et gagnent le matériel.",
+              "arrows": [
+                [
+                  "f6",
+                  "e4"
+                ]
+              ]
+            },
+            {
+              "text": "5.d4 : les Blancs ouvrent le centre et récupèrent le pion avec un bon développement.",
+              "arrows": [
+                [
+                  "d2",
+                  "d4"
+                ],
+                [
+                  "d4",
+                  "e5"
+                ]
+              ]
+            },
+            "Variante terminée ! Cette structure donne un plan clair des deux côtés : développement harmonieux, points de rupture identifiés et priorités stratégiques nettes."
           ]
         },
         {
           "id": "ruy_lopez-c78",
           "eco": "C78",
           "name": "Espagnole - Défense Morphy",
-          "moves": "1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. O-O Be7",
+          "moves": "e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O Be7",
           "comments": [
-            { "text": "1.e4 : occupation du centre.", "arrows": [["e2", "e4"]] },
-            { "text": "1...e5 : réponse classique.", "arrows": [["e7", "e5"]] },
-            { "text": "2.Nf3 : attaque e5 et développe.", "arrows": [["g1", "f3"], ["f3", "e5"]] },
-            { "text": "2...Nc6 : défend e5.", "arrows": [["b8", "c6"], ["c6", "e5"]] },
-            { "text": "3.Bb5 : la Ruy Lopez, qui met la pression sur le défenseur de e5.", "arrows": [["f1", "b5"], ["b5", "c6"]] },
-            { "text": "3...a6 : la Défense Morphy. Les Noirs demandent au fou ce qu'il compte faire.", "arrows": [["a7", "a6"], ["a6", "b5"]] },
-            { "text": "4.Ba4 : le fou maintient la pression et garde la clouure.", "arrows": [["b5", "a4"], ["a4", "c6"]] },
-            { "text": "4...Nf6 : les Noirs développent et attaquent e4.", "arrows": [["g8", "f6"], ["f6", "e4"]] },
-            { "text": "5.O-O : les Blancs roquent et laissent e4 en prise, pour un jeu positionnel.", "arrows": [["e1", "g1"], ["h1", "f1"]] },
-            { "text": "5...Be7 : les Noirs défendent e5 et se préparent à un roque rapide, en gardant la possibilité de reprendre en cas de Bxc6 et Nxe5.", "arrows": [["f8", "e7"], ["e7", "e5"]] },
-            { "text": "Variante terminée ! Position classique de la Ruy Lopez : équilibrée et riche en plans stratégiques." }
+            {
+              "text": "1.e4 : occupation du centre.",
+              "arrows": [
+                [
+                  "e2",
+                  "e4"
+                ]
+              ]
+            },
+            {
+              "text": "1...e5 : réponse classique.",
+              "arrows": [
+                [
+                  "e7",
+                  "e5"
+                ]
+              ]
+            },
+            {
+              "text": "2.Nf3 : attaque e5 et développe.",
+              "arrows": [
+                [
+                  "g1",
+                  "f3"
+                ],
+                [
+                  "f3",
+                  "e5"
+                ]
+              ]
+            },
+            {
+              "text": "2...Nc6 : défend e5.",
+              "arrows": [
+                [
+                  "b8",
+                  "c6"
+                ],
+                [
+                  "c6",
+                  "e5"
+                ]
+              ]
+            },
+            {
+              "text": "3.Bb5 : la Ruy Lopez, qui met la pression sur le défenseur de e5.",
+              "arrows": [
+                [
+                  "f1",
+                  "b5"
+                ],
+                [
+                  "b5",
+                  "c6"
+                ]
+              ]
+            },
+            {
+              "text": "3...a6 : la Défense Morphy. Les Noirs demandent au fou ce qu'il compte faire.",
+              "arrows": [
+                [
+                  "a7",
+                  "a6"
+                ],
+                [
+                  "a6",
+                  "b5"
+                ]
+              ]
+            },
+            {
+              "text": "4.Ba4 : le fou maintient la pression et garde la clouure.",
+              "arrows": [
+                [
+                  "b5",
+                  "a4"
+                ],
+                [
+                  "a4",
+                  "c6"
+                ]
+              ]
+            },
+            {
+              "text": "4...Nf6 : les Noirs développent et attaquent e4.",
+              "arrows": [
+                [
+                  "g8",
+                  "f6"
+                ],
+                [
+                  "f6",
+                  "e4"
+                ]
+              ]
+            },
+            {
+              "text": "5.O-O : les Blancs roquent et laissent e4 en prise, pour un jeu positionnel.",
+              "arrows": [
+                [
+                  "e1",
+                  "g1"
+                ],
+                [
+                  "h1",
+                  "f1"
+                ]
+              ]
+            },
+            {
+              "text": "5...Be7 : les Noirs défendent e5 et se préparent à un roque rapide, en gardant la possibilité de reprendre en cas de Bxc6 et Nxe5.",
+              "arrows": [
+                [
+                  "f8",
+                  "e7"
+                ],
+                [
+                  "e7",
+                  "e5"
+                ]
+              ]
+            },
+            "Variante terminée ! Cette structure donne un plan clair des deux côtés : développement harmonieux, points de rupture identifiés et priorités stratégiques nettes."
           ]
         }
       ]
@@ -532,16 +2500,80 @@
           "id": "london_system-d02",
           "eco": "D02",
           "name": "Système de Londres (Classique)",
-          "moves": "1. d4 d5 2. Bf4 Nf6 3. e3 c6 4. Nf3",
+          "moves": "d4 d5 Bf4 Nf6 e3 c6 Nf3",
           "comments": [
-            { "text": "1.d4 : contrôle du centre.", "arrows": [["d2", "d4"]] },
-            { "text": "1...d5 : les Noirs répondent symétriquement.", "arrows": [["d7", "d5"]] },
-            { "text": "2.Bf4 : le fou sort avant e3, une idée clé du Système de Londres qui évite qu'il soit enfermé.", "arrows": [["c1", "f4"], ["f4", "b8"]] },
-            { "text": "2...Nf6 : développement flexible.", "arrows": [["g8", "f6"]] },
-            { "text": "3.e3 : les Blancs consolident et préparent le développement des pièces.", "arrows": [["e2", "e3"]] },
-            { "text": "3...c6 : les Noirs se préparent à une structure solide, semblable à une Slave.", "arrows": [["c7", "c6"], ["c6", "d5"]] },
-            { "text": "4.Nf3 : développement naturel. Les Blancs suivent avec Bd3, Nbd2, h3 et le roque.", "arrows": [["g1", "f3"]] },
-            { "text": "Variante terminée ! Position solide et facile à jouer. Les Blancs ont un jeu clair avec un plan stable." }
+            {
+              "text": "1.d4 : contrôle du centre.",
+              "arrows": [
+                [
+                  "d2",
+                  "d4"
+                ]
+              ]
+            },
+            {
+              "text": "1...d5 : les Noirs répondent symétriquement.",
+              "arrows": [
+                [
+                  "d7",
+                  "d5"
+                ]
+              ]
+            },
+            {
+              "text": "2.Bf4 : le fou sort avant e3, une idée clé du Système de Londres qui évite qu'il soit enfermé.",
+              "arrows": [
+                [
+                  "c1",
+                  "f4"
+                ],
+                [
+                  "f4",
+                  "b8"
+                ]
+              ]
+            },
+            {
+              "text": "2...Nf6 : développement flexible.",
+              "arrows": [
+                [
+                  "g8",
+                  "f6"
+                ]
+              ]
+            },
+            {
+              "text": "3.e3 : les Blancs consolident et préparent le développement des pièces.",
+              "arrows": [
+                [
+                  "e2",
+                  "e3"
+                ]
+              ]
+            },
+            {
+              "text": "3...c6 : les Noirs se préparent à une structure solide, semblable à une Slave.",
+              "arrows": [
+                [
+                  "c7",
+                  "c6"
+                ],
+                [
+                  "c6",
+                  "d5"
+                ]
+              ]
+            },
+            {
+              "text": "4.Nf3 : développement naturel. Les Blancs suivent avec Bd3, Nbd2, h3 et le roque.",
+              "arrows": [
+                [
+                  "g1",
+                  "f3"
+                ]
+              ]
+            },
+            "Variante terminée ! Cette structure donne un plan clair des deux côtés : développement harmonieux, points de rupture identifiés et priorités stratégiques nettes."
           ]
         }
       ]
@@ -556,18 +2588,106 @@
           "id": "slav-d10",
           "eco": "D10",
           "name": "Défense Slave",
-          "moves": "1. d4 d5 2. c4 c6 3. Nf3 Nf6 4. Nc3 dxc4 5. a4",
+          "moves": "d4 d5 c4 c6 Nf3 Nf6 Nc3 dxc4 a4",
           "comments": [
-            { "text": "1.d4 : contrôle du centre.", "arrows": [["d2", "d4"]] },
-            { "text": "1...d5 : réponse symétrique.", "arrows": [["d7", "d5"]] },
-            { "text": "2.c4 : le Gambit Dame, qui attaque le pion d5.", "arrows": [["c2", "c4"], ["c4", "d5"]] },
-            { "text": "2...c6 : la Défense Slave. Le pion c6 soutient d5 sans enfermer le fou c8.", "arrows": [["c7", "c6"], ["c6", "d5"]] },
-            { "text": "3.Nf3 : développement naturel.", "arrows": [["g1", "f3"]] },
-            { "text": "3...Nf6 : développement qui contrôle e4 et d5.", "arrows": [["g8", "f6"]] },
-            { "text": "4.Nc3 : les Blancs renforcent le centre et augmentent la pression.", "arrows": [["b1", "c3"], ["c3", "d5"]] },
-            { "text": "4...dxc4 : les Noirs prennent le pion et échangent le centre.", "arrows": [["d5", "c4"]] },
-            { "text": "5.a4 : les Blancs empêchent ...b5, qui aurait permis aux Noirs de garder le pion. Le fou peut ensuite se développer en e3 ou f4.", "arrows": [["a2", "a4"], ["a4", "b5"]] },
-            { "text": "Variante terminée ! Position solide pour les Noirs, avec un jeu dynamique. Le fou c8 sort activement." }
+            {
+              "text": "1.d4 : contrôle du centre.",
+              "arrows": [
+                [
+                  "d2",
+                  "d4"
+                ]
+              ]
+            },
+            {
+              "text": "1...d5 : réponse symétrique.",
+              "arrows": [
+                [
+                  "d7",
+                  "d5"
+                ]
+              ]
+            },
+            {
+              "text": "2.c4 : le Gambit Dame, qui attaque le pion d5.",
+              "arrows": [
+                [
+                  "c2",
+                  "c4"
+                ],
+                [
+                  "c4",
+                  "d5"
+                ]
+              ]
+            },
+            {
+              "text": "2...c6 : la Défense Slave. Le pion c6 soutient d5 sans enfermer le fou c8.",
+              "arrows": [
+                [
+                  "c7",
+                  "c6"
+                ],
+                [
+                  "c6",
+                  "d5"
+                ]
+              ]
+            },
+            {
+              "text": "3.Nf3 : développement naturel.",
+              "arrows": [
+                [
+                  "g1",
+                  "f3"
+                ]
+              ]
+            },
+            {
+              "text": "3...Nf6 : développement qui contrôle e4 et d5.",
+              "arrows": [
+                [
+                  "g8",
+                  "f6"
+                ]
+              ]
+            },
+            {
+              "text": "4.Nc3 : les Blancs renforcent le centre et augmentent la pression.",
+              "arrows": [
+                [
+                  "b1",
+                  "c3"
+                ],
+                [
+                  "c3",
+                  "d5"
+                ]
+              ]
+            },
+            {
+              "text": "4...dxc4 : les Noirs prennent le pion et échangent le centre.",
+              "arrows": [
+                [
+                  "d5",
+                  "c4"
+                ]
+              ]
+            },
+            {
+              "text": "5.a4 : les Blancs empêchent ...b5, qui aurait permis aux Noirs de garder le pion. Le fou peut ensuite se développer en e3 ou f4.",
+              "arrows": [
+                [
+                  "a2",
+                  "a4"
+                ],
+                [
+                  "a4",
+                  "b5"
+                ]
+              ]
+            },
+            "Variante terminée ! Cette structure donne un plan clair des deux côtés : développement harmonieux, points de rupture identifiés et priorités stratégiques nettes."
           ]
         }
       ]
@@ -582,34 +2702,190 @@
           "id": "queens_gambit-d20",
           "eco": "D20",
           "name": "Gambit Dame Accepté",
-          "moves": "1. d4 d5 2. c4 dxc4 3. Nf3 Nf6 4. e3 e6 5. Bxc4",
+          "moves": "d4 d5 c4 dxc4 Nf3 Nf6 e3 e6 Bxc4",
           "comments": [
-            { "text": "1.d4 : contrôle du centre.", "arrows": [["d2", "d4"]] },
-            { "text": "1...d5 : réponse symétrique.", "arrows": [["d7", "d5"]] },
-            { "text": "2.c4 : le Gambit Dame, qui attaque le pion d5.", "arrows": [["c2", "c4"], ["c4", "d5"]] },
-            { "text": "2...dxc4 : les Noirs acceptent le gambit et prennent le pion.", "arrows": [["d5", "c4"]] },
-            { "text": "3.Nf3 : développement naturel.", "arrows": [["g1", "f3"]] },
-            { "text": "3...Nf6 : développement qui contrôle e4 et d5.", "arrows": [["g8", "f6"]] },
-            { "text": "4.e3 : les Blancs préparent la récupération du pion c4 et ouvrent la diagonale du fou.", "arrows": [["e2", "e3"], ["f1", "c4"]] },
-            { "text": "4...e6 : les Noirs consolident et ouvrent la diagonale du fou f8.", "arrows": [["e7", "e6"]] },
-            { "text": "5.Bxc4 : les Blancs récupèrent le pion avec un bon développement.", "arrows": [["f1", "c4"]] },
-            { "text": "Variante terminée ! Les Blancs ont le centre et l'espace, les Noirs une structure saine et un jeu souple." }
+            {
+              "text": "1.d4 : contrôle du centre.",
+              "arrows": [
+                [
+                  "d2",
+                  "d4"
+                ]
+              ]
+            },
+            {
+              "text": "1...d5 : réponse symétrique.",
+              "arrows": [
+                [
+                  "d7",
+                  "d5"
+                ]
+              ]
+            },
+            {
+              "text": "2.c4 : le Gambit Dame, qui attaque le pion d5.",
+              "arrows": [
+                [
+                  "c2",
+                  "c4"
+                ],
+                [
+                  "c4",
+                  "d5"
+                ]
+              ]
+            },
+            {
+              "text": "2...dxc4 : les Noirs acceptent le gambit et prennent le pion.",
+              "arrows": [
+                [
+                  "d5",
+                  "c4"
+                ]
+              ]
+            },
+            {
+              "text": "3.Nf3 : développement naturel.",
+              "arrows": [
+                [
+                  "g1",
+                  "f3"
+                ]
+              ]
+            },
+            {
+              "text": "3...Nf6 : développement qui contrôle e4 et d5.",
+              "arrows": [
+                [
+                  "g8",
+                  "f6"
+                ]
+              ]
+            },
+            {
+              "text": "4.e3 : les Blancs préparent la récupération du pion c4 et ouvrent la diagonale du fou.",
+              "arrows": [
+                [
+                  "e2",
+                  "e3"
+                ],
+                [
+                  "f1",
+                  "c4"
+                ]
+              ]
+            },
+            {
+              "text": "4...e6 : les Noirs consolident et ouvrent la diagonale du fou f8.",
+              "arrows": [
+                [
+                  "e7",
+                  "e6"
+                ]
+              ]
+            },
+            {
+              "text": "5.Bxc4 : les Blancs récupèrent le pion avec un bon développement.",
+              "arrows": [
+                [
+                  "f1",
+                  "c4"
+                ]
+              ]
+            },
+            "Variante terminée ! Cette structure donne un plan clair des deux côtés : développement harmonieux, points de rupture identifiés et priorités stratégiques nettes."
           ]
         },
         {
           "id": "queens_gambit-d30",
           "eco": "D30",
           "name": "Gambit Dame Refusé",
-          "moves": "1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Bg5",
+          "moves": "d4 d5 c4 e6 Nc3 Nf6 Bg5",
           "comments": [
-            { "text": "1.d4 : contrôle du centre.", "arrows": [["d2", "d4"]] },
-            { "text": "1...d5 : réponse symétrique.", "arrows": [["d7", "d5"]] },
-            { "text": "2.c4 : le Gambit Dame, qui attaque le pion d5.", "arrows": [["c2", "c4"], ["c4", "d5"]] },
-            { "text": "2...e6 : le Refus. Les Noirs défendent d5 solidement, au prix d'un fou c8 passif.", "arrows": [["e7", "e6"], ["e6", "d5"]] },
-            { "text": "3.Nc3 : le cavalier augmente la pression sur d5.", "arrows": [["b1", "c3"], ["c3", "d5"]] },
-            { "text": "3...Nf6 : développement qui défend d5.", "arrows": [["g8", "f6"], ["f6", "d5"]] },
-            { "text": "4.Bg5 : le fou cloue le cavalier f6 et augmente la pression sur d5, la théorie principale du Gambit Dame Refusé.", "arrows": [["c1", "g5"], ["g5", "f6"]] },
-            { "text": "Variante terminée ! Position classique et solide, avec un jeu positionnel riche pour les Blancs." }
+            {
+              "text": "1.d4 : contrôle du centre.",
+              "arrows": [
+                [
+                  "d2",
+                  "d4"
+                ]
+              ]
+            },
+            {
+              "text": "1...d5 : réponse symétrique.",
+              "arrows": [
+                [
+                  "d7",
+                  "d5"
+                ]
+              ]
+            },
+            {
+              "text": "2.c4 : le Gambit Dame, qui attaque le pion d5.",
+              "arrows": [
+                [
+                  "c2",
+                  "c4"
+                ],
+                [
+                  "c4",
+                  "d5"
+                ]
+              ]
+            },
+            {
+              "text": "2...e6 : le Refus. Les Noirs défendent d5 solidement, au prix d'un fou c8 passif.",
+              "arrows": [
+                [
+                  "e7",
+                  "e6"
+                ],
+                [
+                  "e6",
+                  "d5"
+                ]
+              ]
+            },
+            {
+              "text": "3.Nc3 : le cavalier augmente la pression sur d5.",
+              "arrows": [
+                [
+                  "b1",
+                  "c3"
+                ],
+                [
+                  "c3",
+                  "d5"
+                ]
+              ]
+            },
+            {
+              "text": "3...Nf6 : développement qui défend d5.",
+              "arrows": [
+                [
+                  "g8",
+                  "f6"
+                ],
+                [
+                  "f6",
+                  "d5"
+                ]
+              ]
+            },
+            {
+              "text": "4.Bg5 : le fou cloue le cavalier f6 et augmente la pression sur d5, la théorie principale du Gambit Dame Refusé.",
+              "arrows": [
+                [
+                  "c1",
+                  "g5"
+                ],
+                [
+                  "g5",
+                  "f6"
+                ]
+              ]
+            },
+            "Variante terminée ! Cette structure donne un plan clair des deux côtés : développement harmonieux, points de rupture identifiés et priorités stratégiques nettes."
           ]
         }
       ]
@@ -624,20 +2900,132 @@
           "id": "grunfeld-d80",
           "eco": "D80",
           "name": "Défense Grünfeld",
-          "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. cxd5 Nxd5 5. e4 Nxc3 6. bxc3",
+          "moves": "d4 Nf6 c4 g6 Nc3 d5 cxd5 Nxd5 e4 Nxc3 bxc3",
           "comments": [
-            { "text": "1.d4 : contrôle du centre.", "arrows": [["d2", "d4"]] },
-            { "text": "1...Nf6 : développement flexible.", "arrows": [["g8", "f6"]] },
-            { "text": "2.c4 : les Blancs gagnent de l'espace.", "arrows": [["c2", "c4"]] },
-            { "text": "2...g6 : préparation du fianchetto du fou-roi.", "arrows": [["g7", "g6"], ["f8", "g7"]] },
-            { "text": "3.Nc3 : développement du cavalier qui contrôle e4 et d5.", "arrows": [["b1", "c3"], ["c3", "d5"]] },
-            { "text": "3...d5 : le coup de la Grünfeld. Les Noirs défient le centre blanc directement.", "arrows": [["d7", "d5"], ["d5", "c4"]] },
-            { "text": "4.cxd5 : les Blancs prennent le pion.", "arrows": [["c4", "d5"]] },
-            { "text": "4...Nxd5 : les Noirs reprennent avec le cavalier.", "arrows": [["f6", "d5"]] },
-            { "text": "5.e4 : les Blancs attaquent le cavalier et construisent un grand centre.", "arrows": [["e2", "e4"], ["e4", "d5"]] },
-            { "text": "5...Nxc3 : les Noirs échangent le cavalier pour désorganiser la structure blanche.", "arrows": [["d5", "c3"]] },
-            { "text": "6.bxc3 : les Blancs reprennent et obtiennent un grand centre de pions, la cible que les Noirs vont attaquer avec ...Bg7 et ...c5.", "arrows": [["b2", "c3"], ["f8", "g7"], ["c7", "c5"]] },
-            { "text": "Variante terminée ! Grand centre blanc contre pression des pièces noires. Position dynamique avec un jeu riche." }
+            {
+              "text": "1.d4 : contrôle du centre.",
+              "arrows": [
+                [
+                  "d2",
+                  "d4"
+                ]
+              ]
+            },
+            {
+              "text": "1...Nf6 : développement flexible.",
+              "arrows": [
+                [
+                  "g8",
+                  "f6"
+                ]
+              ]
+            },
+            {
+              "text": "2.c4 : les Blancs gagnent de l'espace.",
+              "arrows": [
+                [
+                  "c2",
+                  "c4"
+                ]
+              ]
+            },
+            {
+              "text": "2...g6 : préparation du fianchetto du fou-roi.",
+              "arrows": [
+                [
+                  "g7",
+                  "g6"
+                ],
+                [
+                  "f8",
+                  "g7"
+                ]
+              ]
+            },
+            {
+              "text": "3.Nc3 : développement du cavalier qui contrôle e4 et d5.",
+              "arrows": [
+                [
+                  "b1",
+                  "c3"
+                ],
+                [
+                  "c3",
+                  "d5"
+                ]
+              ]
+            },
+            {
+              "text": "3...d5 : le coup de la Grünfeld. Les Noirs défient le centre blanc directement.",
+              "arrows": [
+                [
+                  "d7",
+                  "d5"
+                ],
+                [
+                  "d5",
+                  "c4"
+                ]
+              ]
+            },
+            {
+              "text": "4.cxd5 : les Blancs prennent le pion.",
+              "arrows": [
+                [
+                  "c4",
+                  "d5"
+                ]
+              ]
+            },
+            {
+              "text": "4...Nxd5 : les Noirs reprennent avec le cavalier.",
+              "arrows": [
+                [
+                  "f6",
+                  "d5"
+                ]
+              ]
+            },
+            {
+              "text": "5.e4 : les Blancs attaquent le cavalier et construisent un grand centre.",
+              "arrows": [
+                [
+                  "e2",
+                  "e4"
+                ],
+                [
+                  "e4",
+                  "d5"
+                ]
+              ]
+            },
+            {
+              "text": "5...Nxc3 : les Noirs échangent le cavalier pour désorganiser la structure blanche.",
+              "arrows": [
+                [
+                  "d5",
+                  "c3"
+                ]
+              ]
+            },
+            {
+              "text": "6.bxc3 : les Blancs reprennent et obtiennent un grand centre de pions, la cible que les Noirs vont attaquer avec ...Bg7 et ...c5.",
+              "arrows": [
+                [
+                  "b2",
+                  "c3"
+                ],
+                [
+                  "f8",
+                  "g7"
+                ],
+                [
+                  "c7",
+                  "c5"
+                ]
+              ]
+            },
+            "Variante terminée ! Cette structure donne un plan clair des deux côtés : développement harmonieux, points de rupture identifiés et priorités stratégiques nettes."
           ]
         }
       ]
@@ -652,20 +3040,131 @@
           "id": "catalan-e04",
           "eco": "E04",
           "name": "Catalane - Ouverte",
-          "moves": "1. d4 Nf6 2. c4 e6 3. g3 d5 4. Bg2 dxc4 5. Nf3 a6 6. O-O",
+          "moves": "d4 Nf6 c4 e6 g3 d5 Bg2 dxc4 Nf3 a6 O-O b5 Ne5 Nd5",
           "comments": [
-            { "text": "1.d4 : contrôle du centre.", "arrows": [["d2", "d4"]] },
-            { "text": "1...Nf6 : développement flexible.", "arrows": [["g8", "f6"]] },
-            { "text": "2.c4 : les Blancs gagnent de l'espace.", "arrows": [["c2", "c4"]] },
-            { "text": "2...e6 : les Noirs préparent ...d5 avec une structure solide.", "arrows": [["e7", "e6"]] },
-            { "text": "3.g3 : le Catalan. Les Blancs préparent le fianchetto du fou-roi.", "arrows": [["g2", "g3"], ["f1", "g2"]] },
-            { "text": "3...d5 : les Noirs prennent le centre.", "arrows": [["d7", "d5"], ["d5", "c4"]] },
-            { "text": "4.Bg2 : le fou pèse sur la grande diagonale et sur l'aile dame.", "arrows": [["f1", "g2"], ["g2", "a8"]] },
-            { "text": "4...dxc4 : les Noirs prennent le pion et ouvrent la partie, la Catalane Ouverte.", "arrows": [["d5", "c4"]] },
-            { "text": "5.Nf3 : développement naturel. Les Blancs récupèrent le pion c4 plus tard.", "arrows": [["g1", "f3"]] },
-            { "text": "5...a6 : les Noirs préparent ...b5 pour garder le pion.", "arrows": [["a7", "a6"], ["b7", "b5"]] },
-            { "text": "6.O-O : les Blancs roquent et se préparent à récupérer le pion avec Qc2 ou Ne5.", "arrows": [["e1", "g1"], ["h1", "f1"]] },
-            { "text": "Variante terminée ! Les Blancs ont une pression durable grâce au fou en g2. Position saine et riche en plans pour les deux camps." }
+            {
+              "text": "1.d4 : contrôle du centre.",
+              "arrows": [
+                [
+                  "d2",
+                  "d4"
+                ]
+              ]
+            },
+            {
+              "text": "1...Nf6 : développement flexible.",
+              "arrows": [
+                [
+                  "g8",
+                  "f6"
+                ]
+              ]
+            },
+            {
+              "text": "2.c4 : les Blancs gagnent de l'espace.",
+              "arrows": [
+                [
+                  "c2",
+                  "c4"
+                ]
+              ]
+            },
+            {
+              "text": "2...e6 : les Noirs préparent ...d5 avec une structure solide.",
+              "arrows": [
+                [
+                  "e7",
+                  "e6"
+                ]
+              ]
+            },
+            {
+              "text": "3.g3 : le Catalan. Les Blancs préparent le fianchetto du fou-roi.",
+              "arrows": [
+                [
+                  "g2",
+                  "g3"
+                ],
+                [
+                  "f1",
+                  "g2"
+                ]
+              ]
+            },
+            {
+              "text": "3...d5 : les Noirs prennent le centre.",
+              "arrows": [
+                [
+                  "d7",
+                  "d5"
+                ],
+                [
+                  "d5",
+                  "c4"
+                ]
+              ]
+            },
+            {
+              "text": "4.Bg2 : le fou pèse sur la grande diagonale et sur l'aile dame.",
+              "arrows": [
+                [
+                  "f1",
+                  "g2"
+                ],
+                [
+                  "g2",
+                  "a8"
+                ]
+              ]
+            },
+            {
+              "text": "4...dxc4 : les Noirs prennent le pion et ouvrent la partie, la Catalane Ouverte.",
+              "arrows": [
+                [
+                  "d5",
+                  "c4"
+                ]
+              ]
+            },
+            {
+              "text": "5.Nf3 : développement naturel. Les Blancs récupèrent le pion c4 plus tard.",
+              "arrows": [
+                [
+                  "g1",
+                  "f3"
+                ]
+              ]
+            },
+            {
+              "text": "5...a6 : les Noirs préparent ...b5 pour garder le pion.",
+              "arrows": [
+                [
+                  "a7",
+                  "a6"
+                ],
+                [
+                  "b7",
+                  "b5"
+                ]
+              ]
+            },
+            {
+              "text": "6.O-O : les Blancs roquent et se préparent à récupérer le pion avec Qc2 ou Ne5.",
+              "arrows": [
+                [
+                  "e1",
+                  "g1"
+                ],
+                [
+                  "h1",
+                  "f1"
+                ]
+              ]
+            },
+            "b5 : Les Noirs avancent le pion avec un but positionnel clair : gagner de l’espace et préparer le plan principal.",
+            "Ne5 : Les Blancs améliorent l’activité avec le cavalier, en renforçant la coordination et les cases clés.",
+            "Nd5 : Les Noirs améliorent l’activité avec le cavalier, en renforçant la coordination et les cases clés.",
+            "Variante terminée ! Cette structure donne un plan clair des deux côtés : développement harmonieux, points de rupture identifiés et priorités stratégiques nettes."
           ]
         }
       ]
@@ -680,21 +3179,141 @@
           "id": "kings_indian-e90",
           "eco": "E90",
           "name": "Est-Indienne - Classique",
-          "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. Nf3 O-O 6. Be2 e5",
+          "moves": "d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5",
           "comments": [
-            { "text": "1.d4 : contrôle du centre.", "arrows": [["d2", "d4"]] },
-            { "text": "1...Nf6 : développement flexible.", "arrows": [["g8", "f6"]] },
-            { "text": "2.c4 : les Blancs gagnent de l'espace.", "arrows": [["c2", "c4"]] },
-            { "text": "2...g6 : préparation du fianchetto du fou-roi.", "arrows": [["g7", "g6"]] },
-            { "text": "3.Nc3 : développement du cavalier qui contrôle e4 et d5.", "arrows": [["b1", "c3"], ["c3", "e4"]] },
-            { "text": "3...Bg7 : le fou-roi pèse sur la grande diagonale.", "arrows": [["f8", "g7"], ["g7", "b2"]] },
-            { "text": "4.e4 : les Blancs construisent un grand centre.", "arrows": [["e2", "e4"]] },
-            { "text": "4...d6 : les Noirs contrôlent e5 et se préparent à attaquer le centre blanc.", "arrows": [["d7", "d6"], ["d6", "e5"]] },
-            { "text": "5.Nf3 : développement qui renforce le centre.", "arrows": [["g1", "f3"], ["f3", "d4"]] },
-            { "text": "5...O-O : les Noirs mettent leur roi en sécurité avant le contre-jeu.", "arrows": [["e8", "g8"], ["h8", "f8"]] },
-            { "text": "6.Be2 : le fou se développe et prépare le roque.", "arrows": [["f1", "e2"]] },
-            { "text": "6...e5 : le levier central classique. Les Noirs contestent le grand centre blanc et préparent le plan ...Nc6 ou ...exd4, puis ...Nh5/...f5 avec une attaque à l'aile roi.", "arrows": [["e7", "e5"], ["e5", "d4"]] },
-            { "text": "Variante terminée ! Les Blancs ont l'espace à l'aile dame, les Noirs l'attaque à l'aile roi. Position dynamique avec un jeu riche." }
+            {
+              "text": "1.d4 : contrôle du centre.",
+              "arrows": [
+                [
+                  "d2",
+                  "d4"
+                ]
+              ]
+            },
+            {
+              "text": "1...Nf6 : développement flexible.",
+              "arrows": [
+                [
+                  "g8",
+                  "f6"
+                ]
+              ]
+            },
+            {
+              "text": "2.c4 : les Blancs gagnent de l'espace.",
+              "arrows": [
+                [
+                  "c2",
+                  "c4"
+                ]
+              ]
+            },
+            {
+              "text": "2...g6 : préparation du fianchetto du fou-roi.",
+              "arrows": [
+                [
+                  "g7",
+                  "g6"
+                ]
+              ]
+            },
+            {
+              "text": "3.Nc3 : développement du cavalier qui contrôle e4 et d5.",
+              "arrows": [
+                [
+                  "b1",
+                  "c3"
+                ],
+                [
+                  "c3",
+                  "e4"
+                ]
+              ]
+            },
+            {
+              "text": "3...Bg7 : le fou-roi pèse sur la grande diagonale.",
+              "arrows": [
+                [
+                  "f8",
+                  "g7"
+                ],
+                [
+                  "g7",
+                  "b2"
+                ]
+              ]
+            },
+            {
+              "text": "4.e4 : les Blancs construisent un grand centre.",
+              "arrows": [
+                [
+                  "e2",
+                  "e4"
+                ]
+              ]
+            },
+            {
+              "text": "4...d6 : les Noirs contrôlent e5 et se préparent à attaquer le centre blanc.",
+              "arrows": [
+                [
+                  "d7",
+                  "d6"
+                ],
+                [
+                  "d6",
+                  "e5"
+                ]
+              ]
+            },
+            {
+              "text": "5.Nf3 : développement qui renforce le centre.",
+              "arrows": [
+                [
+                  "g1",
+                  "f3"
+                ],
+                [
+                  "f3",
+                  "d4"
+                ]
+              ]
+            },
+            {
+              "text": "5...O-O : les Noirs mettent leur roi en sécurité avant le contre-jeu.",
+              "arrows": [
+                [
+                  "e8",
+                  "g8"
+                ],
+                [
+                  "h8",
+                  "f8"
+                ]
+              ]
+            },
+            {
+              "text": "6.Be2 : le fou se développe et prépare le roque.",
+              "arrows": [
+                [
+                  "f1",
+                  "e2"
+                ]
+              ]
+            },
+            {
+              "text": "6...e5 : le levier central classique. Les Noirs contestent le grand centre blanc et préparent le plan ...Nc6 ou ...exd4, puis ...Nh5/...f5 avec une attaque à l'aile roi.",
+              "arrows": [
+                [
+                  "e7",
+                  "e5"
+                ],
+                [
+                  "e5",
+                  "d4"
+                ]
+              ]
+            },
+            "Variante terminée ! Cette structure donne un plan clair des deux côtés : développement harmonieux, points de rupture identifiés et priorités stratégiques nettes."
           ]
         }
       ]
