@@ -1,5 +1,6 @@
 "use client";
 
+import type { CSSProperties } from "react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Chess, type Square } from "chess.js";
 
@@ -32,6 +33,8 @@ export type ReviewManagerParams = {
   onSquareClick: (square: string) => void;
   /** Reset the board to the starting position */
   resetGame: () => void;
+  /** Clear selection + move dots after a refused move */
+  clearSelection: () => void;
   /** Current UI mode – owned by useTrainerMode */
   panelMode: PanelMode;
   /** Side the user trains with – owned by useTrainerMode */
@@ -40,6 +43,8 @@ export type ReviewManagerParams = {
 
 export type ReviewFeedback = {
   message: string;
+  /** Case d'arrivée du mauvais coup, surlignée en rouge */
+  wrongSquare: string;
   /** Flèches vers les bons coups, affichées sur l'échiquier */
   arrows: Arrow[];
 };
@@ -58,7 +63,15 @@ const EMPTY_STATS: ReviewStats = { completedLines: 0, perfectLines: 0, mistakes:
  * `panelMode` / `reviewSide` et pilote le plateau via les callbacks de useChessGame.
  */
 export function useReviewManager(params: ReviewManagerParams) {
-  const { currentFen, onPieceDrop, onSquareClick, resetGame, panelMode, reviewSide } = params;
+  const {
+    currentFen,
+    onPieceDrop,
+    onSquareClick,
+    resetGame,
+    clearSelection,
+    panelMode,
+    reviewSide,
+  } = params;
 
   const { reviewChapterIds } = useReviewStore();
 
@@ -134,7 +147,7 @@ export function useReviewManager(params: ReviewManagerParams) {
   }, []);
 
   /** Coup légal mais hors répertoire : on compte l'erreur et on affiche les bons coups. */
-  const registerMistake = () => {
+  const registerMistake = (wrongSquare: string) => {
     if (!node) return;
     lineMistakesRef.current += 1;
     setStats((s) => ({ ...s, mistakes: s.mistakes + 1 }));
@@ -147,6 +160,7 @@ export function useReviewManager(params: ReviewManagerParams) {
 
     setFeedback({
       message: `Ce coup n'est pas dans votre répertoire. ${hint}`,
+      wrongSquare,
       arrows: getHintArrows(currentFen, node),
     });
   };
@@ -164,14 +178,20 @@ export function useReviewManager(params: ReviewManagerParams) {
   // Interactions du joueur
   // ----------------------------------------------------------------------
   const handlePieceDrop = (sourceSquare: string, targetSquare: string | null) => {
-    if (!isPlayerTurn || !node || !targetSquare) return false;
+    // Coup refusé : la pièce revient et on efface sélection + points d'aide.
+    const reject = () => {
+      clearSelection();
+      return false;
+    };
+
+    if (!isPlayerTurn || !node || !targetSquare) return reject();
 
     const move = previewMove(sourceSquare, targetSquare);
-    if (!move) return false; // coup illégal : la pièce revient, pas d'erreur comptée
+    if (!move) return reject(); // coup illégal : pas d'erreur comptée
 
     if (!getExpectedMoves(node).includes(move.san)) {
-      registerMistake();
-      return false; // la pièce revient sur sa case
+      registerMistake(targetSquare);
+      return reject();
     }
 
     const moved = onPieceDrop(sourceSquare, targetSquare);
@@ -217,7 +237,7 @@ export function useReviewManager(params: ReviewManagerParams) {
       onSquareClick(square); // useChessGame applique le coup
       advance(move.san, node.children[move.san]);
     } else {
-      registerMistake();
+      registerMistake(square);
       onSquareClick(moveFrom); // désélectionne côté useChessGame
       setMoveFrom(null);
     }
@@ -270,15 +290,27 @@ export function useReviewManager(params: ReviewManagerParams) {
     setStats(EMPTY_STATS);
   };
 
+  /** Surlignage rouge de la case d'arrivée du dernier mauvais coup. */
+  const errorSquares = useMemo<Record<string, CSSProperties>>(
+    () =>
+      feedback ? { [feedback.wrongSquare]: { backgroundColor: "rgba(239, 68, 68, 0.45)" } } : {},
+    [feedback],
+  );
+
+  /** Vrai quand une ligne est en cours (au moins un coup joué, pas encore terminée). */
+  const canRestartLine = isReviewMode && path.length > 0 && !isLineFinished;
+
   return {
     // État
     hasRepertoire: tree !== null,
     isPlayerTurn,
     isComputerTurn,
     isLineFinished,
+    canRestartLine,
     finishedLineMistakes,
     feedback,
     hintArrows: feedback?.arrows ?? [],
+    errorSquares,
     currentChapterNames,
     stats,
 

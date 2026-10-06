@@ -16,12 +16,13 @@ import { italianCourse } from "./italian";
 import { ruyLopezCourse } from "./ruy_lopez";
 import { londonSystemCourse } from "./london_system";
 import { slavCourse } from "./slav";
+import { scandinavianCourse } from "./scandinavian";
 import { queens_gambitCourse } from "./queens_gambit";
 import { grunfeldCourse } from "./grunfeld";
 import { catalanCourse } from "./catalan";
 import { kings_indianCourse } from "./kings_indian";
 
-export const openingCourses = [frenchCourse, englishCourse, retiCourse, benoniCourse, trompowskyCourse, alekhineCourse, pircCourse, carokannCourse, sicilianCourse, viennaCourse, kings_gambitCourse, scotchCourse, italianCourse, ruyLopezCourse, londonSystemCourse, slavCourse, queens_gambitCourse, grunfeldCourse, catalanCourse, kings_indianCourse];
+export const openingCourses = [frenchCourse, englishCourse, retiCourse, benoniCourse, trompowskyCourse, alekhineCourse, pircCourse, carokannCourse, sicilianCourse, viennaCourse, kings_gambitCourse, scotchCourse, italianCourse, ruyLopezCourse, londonSystemCourse, slavCourse, scandinavianCourse, queens_gambitCourse, grunfeldCourse, catalanCourse, kings_indianCourse];
 
 // --- Helpers (same logic we already have) ---------------------------------
 import { Chess } from "chess.js";

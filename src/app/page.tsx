@@ -26,6 +26,7 @@ export default function HomePage() {
     onPieceDragEnd,
     onSquareClick,
     onSquareRightClick,
+    clearSelection,
     resetGame,
     loadPosition,
   } = useChessGame();
@@ -44,6 +45,7 @@ export default function HomePage() {
     onSquareClick,
     loadPosition,
     resetGame,
+    clearSelection,
     panelMode,
     setPanelMode,
   });
@@ -53,6 +55,7 @@ export default function HomePage() {
     onPieceDrop,
     onSquareClick,
     resetGame,
+    clearSelection,
     panelMode,
     reviewSide,
   });
@@ -91,7 +94,7 @@ export default function HomePage() {
             position={currentFen}
             boardOrientation={boardOrientation}
             currentGame={currentGame}
-            squareStyles={squareStyles}
+            squareStyles={isReviewMode ? { ...squareStyles, ...review.errorSquares } : squareStyles}
             onPieceDrop={isReviewMode ? review.handlePieceDrop : tutorial.handlePieceDrop}
             onPieceDragBegin={onPieceDragBegin}
             onPieceDragEnd={onPieceDragEnd}

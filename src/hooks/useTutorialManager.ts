@@ -24,6 +24,8 @@ export type TutorialManagerParams = {
   loadPosition: (fen: string) => void;
   /** Reset the whole game (used when leaving a tutorial) */
   resetGame: () => void;
+  /** Clear selection + move dots after a refused move */
+  clearSelection: () => void;
   /** Current UI mode – owned by useTrainerMode */
   panelMode: PanelMode;
   /** Setter for the UI mode – owned by useTrainerMode */
@@ -75,6 +77,7 @@ export function useTutorialManager(params: TutorialManagerParams) {
     onSquareClick,
     loadPosition,
     resetGame,
+    clearSelection,
     panelMode,
     setPanelMode,
   } = params;
@@ -153,10 +156,16 @@ export function useTutorialManager(params: TutorialManagerParams) {
 
     // If we are currently in tutorial mode, enforce the tutorial tree
     if (panelMode === "learning_active" && activeNode) {
-      if (!targetSquare) return false;
+      // Coup refusé : on efface aussi la sélection et les points d'aide.
+      const reject = () => {
+        clearSelection();
+        return false;
+      };
+
+      if (!targetSquare) return reject();
 
       const sideToMove = currentPath.length % 2 === 0 ? "white" : "black";
-      if (sideToMove !== userColor) return false;
+      if (sideToMove !== userColor) return reject();
 
       const previewGame = new Chess(currentFen);
       let previewMove;
@@ -167,12 +176,12 @@ export function useTutorialManager(params: TutorialManagerParams) {
           promotion: "q",
         });
       } catch {
-        return false;
+        return reject();
       }
-      if (!previewMove) return false;
+      if (!previewMove) return reject();
 
       const allowedMoves = Object.keys(activeNode.children ?? {});
-      if (!allowedMoves.includes(previewMove.san)) return false;
+      if (!allowedMoves.includes(previewMove.san)) return reject();
 
       const moved = onPieceDrop(sourceSquare, targetSquare);
       if (moved) {

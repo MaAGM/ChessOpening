@@ -11,6 +11,7 @@ export function ReviewPanel({ side, review }: ReviewPanelProps) {
     hasRepertoire,
     isPlayerTurn,
     isLineFinished,
+    canRestartLine,
     finishedLineMistakes,
     feedback,
     currentChapterNames,
@@ -52,9 +53,20 @@ export function ReviewPanel({ side, review }: ReviewPanelProps) {
           </button>
         </div>
       ) : (
-        <p className="text-sm text-slate-200">
-          {isPlayerTurn ? "À vous de jouer." : "L'adversaire joue…"}
-        </p>
+        <div className="flex items-center justify-between gap-3">
+          <p className="text-sm text-slate-200">
+            {isPlayerTurn ? "À vous de jouer." : "L'adversaire joue…"}
+          </p>
+          {canRestartLine && (
+            <button
+              type="button"
+              onClick={restartLine}
+              className="text-xs text-slate-400 underline transition hover:text-slate-200"
+            >
+              Recommencer la ligne
+            </button>
+          )}
+        </div>
       )}
 
       {/* Retour d'erreur */}

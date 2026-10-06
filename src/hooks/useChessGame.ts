@@ -131,6 +131,16 @@ export function useChessGame() {
     setOptionSquares({});
   };
 
+  /**
+   * Efface la sélection et les points d'aide. À appeler quand un mode
+   * d'entraînement refuse un coup sans passer par onPieceDrop : sinon les
+   * points restent affichés et la sélection interne reste désynchronisée.
+   */
+  const clearSelection = () => {
+    setSelectedSquare(null);
+    setOptionSquares({});
+  };
+
   const onSquareRightClick = (square: string) => {
     setRightClickedSquares((prev) => {
       if (prev[square]) {
@@ -231,6 +241,7 @@ export function useChessGame() {
     onPieceDragEnd,
     onSquareClick,
     onSquareRightClick,
+    clearSelection,
     goToMove,
     resetGame,
     loadPosition,
