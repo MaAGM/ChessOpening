@@ -6,7 +6,9 @@ import {
   getServerSnapshot,
   getSnapshot,
   markChapterComplete,
+  recordPositionResult,
   removeReviewChapter,
+  resetPositionStats,
   subscribe,
 } from "@/lib/review/reviewStore";
 
@@ -27,8 +29,12 @@ export function useReviewStore() {
     completedChapters: state.completedChapters,
     reviewChapterIds,
     isInReview,
+    /** Statistiques de répétition espacée, indexées par clé de position. */
+    positionStats: state.positions,
     addToReview: addReviewChapter,
     removeFromReview: removeReviewChapter,
     markComplete: markChapterComplete,
+    recordResult: recordPositionResult,
+    resetStats: resetPositionStats,
   };
 }

@@ -14,7 +14,14 @@ const REVIEW_HINT_ARROW_COLOR = "#22c55e";
 
 export default function HomePage() {
   // ----------------------------------------------------------------------
-  // Core board state (from the generic chess hook)
+  // Navigation state (which screen the sidebar shows, review side)
+  // ----------------------------------------------------------------------
+  const { panelMode, setPanelMode, reviewSide, setReviewSide } = useTrainerMode();
+
+  // ----------------------------------------------------------------------
+  // Core board state (from the generic chess hook).
+  // Les flèches ← → de l'historique sont coupées pendant l'entraînement : la
+  // position affichée y pilote la partie, elle ne doit pas changer en cours de ligne.
   // ----------------------------------------------------------------------
   const {
     currentFen,
@@ -29,12 +36,7 @@ export default function HomePage() {
     clearSelection,
     resetGame,
     loadPosition,
-  } = useChessGame();
-
-  // ----------------------------------------------------------------------
-  // Navigation state (which screen the sidebar shows, review side)
-  // ----------------------------------------------------------------------
-  const { panelMode, setPanelMode, reviewSide, setReviewSide } = useTrainerMode();
+  } = useChessGame({ navigationEnabled: panelMode !== "review_active" });
 
   // ----------------------------------------------------------------------
   // One manager per mode – each one drives the board through the same callbacks

@@ -9,7 +9,12 @@ import { getOpeningName } from "@/lib/openings/lookup";
 
 const initialFen = new Chess().fen();
 
-export function useChessGame() {
+export type UseChessGameOptions = {
+  /** Active les flèches ← → pour revenir dans l'historique (désactivé pendant l'entraînement). */
+  navigationEnabled?: boolean;
+};
+
+export function useChessGame({ navigationEnabled = true }: UseChessGameOptions = {}) {
   const [game, setGame] = useState(() => new Chess());
   const [history, setHistory] = useState<string[]>([initialFen]);
   const [sanHistory, setSanHistory] = useState<string[]>([]);
@@ -38,6 +43,8 @@ export function useChessGame() {
   }, [currentFen, historyIndex]);
 
   useEffect(() => {
+    if (!navigationEnabled) return;
+
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "ArrowUp" || e.key === "ArrowDown") {
         e.preventDefault();
@@ -55,7 +62,7 @@ export function useChessGame() {
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [history.length]);
+  }, [history.length, navigationEnabled]);
 
   const applyMove = (sourceSquare: Square, targetSquare: Square) => {
     let nextHistory = history;

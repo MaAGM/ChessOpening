@@ -7,20 +7,20 @@ import { Chess, type Square } from "chess.js";
 import { useReviewStore } from "@/hooks/useReviewStore";
 import type { PanelMode } from "@/hooks/useTrainerMode";
 import type { Arrow } from "@/lib/data/openings/types";
+import { fenTurn } from "@/lib/review/positionKey";
 import {
-  buildReviewTreeForSide,
-  getReviewChapters,
-  type Side,
-} from "@/lib/review/reviewRepertoire";
-import {
+  evaluatePlayerMove,
   getExpectedMoves,
   getHintArrows,
-  getNodeAtPath,
-  isLeaf,
-  pickRandomChild,
+  getNode,
+  isLeafNode,
   sanToSquares,
-  type ReviewNode,
-} from "@/lib/review/reviewTree";
+  type GraphNode,
+  type MoveEvaluation,
+} from "@/lib/review/reviewGraph";
+import { buildReviewGraphForSide, getReviewChapters } from "@/lib/review/reviewRepertoire";
+import { pickWeightedMove, summarizeCards, type CardSummary } from "@/lib/review/reviewSelection";
+import type { Side } from "@/lib/review/types";
 
 const COMPUTER_MOVE_DELAY_MS = 400;
 
@@ -56,11 +56,22 @@ export type ReviewStats = {
 };
 
 const EMPTY_STATS: ReviewStats = { completedLines: 0, perfectLines: 0, mistakes: 0 };
+const EMPTY_SUMMARY: CardSummary = { total: 0, new: 0, due: 0, learning: 0, mastered: 0 };
+
+type AcceptedMove = Extract<MoveEvaluation, { kind: "book" | "transposition" }>;
 
 /**
- * Gameplay du mode Révision : le joueur est testé sur l'arbre fusionné de ses
- * chapitres sauvegardés. Il ne possède ni le mode ni l'échiquier : il lit
- * `panelMode` / `reviewSide` et pilote le plateau via les callbacks de useChessGame.
+ * Gameplay du mode Révision.
+ *
+ * L'état de la partie est la POSITION courante (clé dérivée de la FEN), pas un
+ * chemin de coups : une position atteinte par un ordre de coups inhabituel est
+ * reconnue, et ses statistiques sont partagées quel que soit le chemin.
+ *
+ * Le joueur est testé sur le graphe de positions de ses chapitres sauvegardés.
+ * Chaque position où c'est à lui de jouer est une fiche de répétition espacée :
+ * juste du premier coup = réussite, au moins une erreur = échec.
+ * Les réponses de l'ordinateur sont tirées au hasard, pondérées par l'urgence
+ * des fiches de chaque branche.
  */
 export function useReviewManager(params: ReviewManagerParams) {
   const {
@@ -73,25 +84,33 @@ export function useReviewManager(params: ReviewManagerParams) {
     reviewSide,
   } = params;
 
-  const { reviewChapterIds } = useReviewStore();
+  const { reviewChapterIds, positionStats, recordResult } = useReviewStore();
 
   // ----------------------------------------------------------------------
   // État de la session
   // ----------------------------------------------------------------------
-  const [path, setPath] = useState<string[]>([]);
   const [moveFrom, setMoveFrom] = useState<string | null>(null);
   const [feedback, setFeedback] = useState<ReviewFeedback | null>(null);
+  const [notice, setNotice] = useState<string | null>(null);
   const [stats, setStats] = useState<ReviewStats>(EMPTY_STATS);
   /** Erreurs de la dernière ligne terminée (null tant que la ligne est en cours) */
   const [finishedLineMistakes, setFinishedLineMistakes] = useState<number | null>(null);
+  /** Horloge pour les statistiques affichées, mise à jour dans les gestionnaires d'événements */
+  const [now, setNow] = useState(() => Date.now());
+
   /** Erreurs de la ligne en cours (ref : lu dans des callbacks asynchrones) */
   const lineMistakesRef = useRef(0);
+  /** Positions déjà ratées pendant cette ligne : elles ne seront pas promues au bon coup. */
+  const failedKeysRef = useRef<Set<string>>(new Set());
 
-  // onPieceDrop est recréé à chaque rendu par useChessGame : on garde la dernière
-  // version dans une ref pour que le timer de l'ordinateur ne soit pas relancé en boucle.
+  // onPieceDrop est recréé à chaque rendu par useChessGame, et les statistiques
+  // changent après chaque coup : on garde la dernière version dans des refs pour
+  // que le timer de l'ordinateur ne soit pas relancé en boucle.
   const onPieceDropRef = useRef(onPieceDrop);
+  const positionStatsRef = useRef(positionStats);
   useEffect(() => {
     onPieceDropRef.current = onPieceDrop;
+    positionStatsRef.current = positionStats;
   });
 
   // ----------------------------------------------------------------------
@@ -99,60 +118,72 @@ export function useReviewManager(params: ReviewManagerParams) {
   // ----------------------------------------------------------------------
   const isReviewMode = panelMode === "review_active" && reviewSide !== null;
 
-  const tree = useMemo(
+  const graph = useMemo(
     () =>
-      isReviewMode && reviewSide ? buildReviewTreeForSide(reviewSide, reviewChapterIds) : null,
+      isReviewMode && reviewSide ? buildReviewGraphForSide(reviewSide, reviewChapterIds) : null,
     [isReviewMode, reviewSide, reviewChapterIds],
   );
 
-  const node = useMemo(() => (tree ? getNodeAtPath(tree, path) : null), [tree, path]);
+  /** Nœud de la position affichée (null si elle n'est pas dans le répertoire). */
+  const node = useMemo(() => (graph ? getNode(graph, currentFen) : null), [graph, currentFen]);
 
-  const sideToMove: Side = path.length % 2 === 0 ? "white" : "black";
-  const isLineFinished = node !== null && isLeaf(node);
-  const isPlayerTurn = isReviewMode && node !== null && !isLineFinished && sideToMove === reviewSide;
-  const isComputerTurn =
-    isReviewMode && node !== null && !isLineFinished && sideToMove !== reviewSide;
+  const turn = fenTurn(currentFen);
+  const isLineFinished = node !== null && isLeafNode(node);
+  const isOutOfRepertoire = isReviewMode && graph !== null && node === null;
+  const isPlayerTurn = isReviewMode && node !== null && !isLineFinished && turn === reviewSide;
+  const isComputerTurn = isReviewMode && node !== null && !isLineFinished && turn !== reviewSide;
 
   const chapterNameById = useMemo(() => {
     if (!reviewSide) return new Map<string, string>();
     return new Map(getReviewChapters(reviewSide, reviewChapterIds).map((c) => [c.id, c.name]));
   }, [reviewSide, reviewChapterIds]);
 
-  /** Chapitres dont une ligne passe par la position courante (vide à la racine). */
+  /** Chapitres dont une ligne passe par la position courante (vide au départ). */
   const currentChapterNames = useMemo(() => {
-    if (!node || path.length === 0) return [];
+    if (!node || !graph || node.key === graph.startKey) return [];
     return node.chapterIds
       .map((id) => chapterNameById.get(id))
       .filter((name): name is string => Boolean(name));
-  }, [node, path.length, chapterNameById]);
+  }, [node, graph, chapterNameById]);
+
+  /** Répartition des fiches du répertoire : nouvelles, à réviser, maîtrisées… */
+  const cardSummary = useMemo(
+    () =>
+      graph && reviewSide ? summarizeCards(graph, reviewSide, positionStats, now) : EMPTY_SUMMARY,
+    [graph, reviewSide, positionStats, now],
+  );
 
   // ----------------------------------------------------------------------
   // Actions internes
   // ----------------------------------------------------------------------
-  /** Enregistre un coup valide (joueur ou ordinateur) et détecte la fin de ligne. */
-  const advance = useCallback((san: string, nextNode: ReviewNode) => {
-    setPath((p) => [...p, san]);
-    setFeedback(null);
-    setMoveFrom(null);
-
-    if (isLeaf(nextNode)) {
-      const mistakes = lineMistakesRef.current;
-      setFinishedLineMistakes(mistakes);
-      setStats((s) => ({
-        ...s,
-        completedLines: s.completedLines + 1,
-        perfectLines: s.perfectLines + (mistakes === 0 ? 1 : 0),
-      }));
-    }
+  const finishLine = useCallback(() => {
+    const mistakes = lineMistakesRef.current;
+    setFinishedLineMistakes(mistakes);
+    setStats((s) => ({
+      ...s,
+      completedLines: s.completedLines + 1,
+      perfectLines: s.perfectLines + (mistakes === 0 ? 1 : 0),
+    }));
   }, []);
 
+  /** Note une fiche (position) dans le store et rafraîchit l'horloge d'affichage. */
+  const recordCard = (key: string, success: boolean) => {
+    recordResult(key, success);
+    setNow(Date.now());
+  };
+
   /** Coup légal mais hors répertoire : on compte l'erreur et on affiche les bons coups. */
-  const registerMistake = (wrongSquare: string) => {
-    if (!node) return;
+  const registerMistake = (current: GraphNode, wrongSquare: string) => {
     lineMistakesRef.current += 1;
     setStats((s) => ({ ...s, mistakes: s.mistakes + 1 }));
 
-    const expected = getExpectedMoves(node);
+    // Un seul échec par passage sur la position, même après plusieurs essais ratés.
+    if (!failedKeysRef.current.has(current.key)) {
+      failedKeysRef.current.add(current.key);
+      recordCard(current.key, false);
+    }
+
+    const expected = getExpectedMoves(current);
     const hint =
       expected.length > 1
         ? `Coups possibles : ${expected.join(", ")}.`
@@ -161,17 +192,25 @@ export function useReviewManager(params: ReviewManagerParams) {
     setFeedback({
       message: `Ce coup n'est pas dans votre répertoire. ${hint}`,
       wrongSquare,
-      arrows: getHintArrows(currentFen, node),
+      arrows: getHintArrows(currentFen, current),
     });
   };
 
-  /** Joue le coup sur une copie de la position ; null s'il est illégal. */
-  const previewMove = (from: string, to: string) => {
-    try {
-      return new Chess(currentFen).move({ from, to, promotion: "q" });
-    } catch {
-      return null;
-    }
+  /** Coup accepté du joueur (répertoire ou transposition) : note la fiche, détecte la fin de ligne. */
+  const acceptPlayerMove = (current: GraphNode, move: AcceptedMove) => {
+    if (!failedKeysRef.current.has(current.key)) recordCard(current.key, true);
+    failedKeysRef.current.delete(current.key);
+
+    setFeedback(null);
+    setMoveFrom(null);
+    setNotice(
+      move.kind === "transposition"
+        ? `Transposition reconnue : ${move.san} mène à une position de votre répertoire.`
+        : null,
+    );
+
+    const next = graph?.nodes.get(move.nextKey);
+    if (next && isLeafNode(next)) finishLine();
   };
 
   // ----------------------------------------------------------------------
@@ -184,23 +223,22 @@ export function useReviewManager(params: ReviewManagerParams) {
       return false;
     };
 
-    if (!isPlayerTurn || !node || !targetSquare) return reject();
+    if (!isPlayerTurn || !node || !graph || !targetSquare) return reject();
 
-    const move = previewMove(sourceSquare, targetSquare);
-    if (!move) return reject(); // coup illégal : pas d'erreur comptée
-
-    if (!getExpectedMoves(node).includes(move.san)) {
-      registerMistake(targetSquare);
+    const evaluation = evaluatePlayerMove(graph, currentFen, sourceSquare, targetSquare);
+    if (evaluation.kind === "illegal") return reject(); // pas d'erreur comptée
+    if (evaluation.kind === "mistake") {
+      registerMistake(node, targetSquare);
       return reject();
     }
 
     const moved = onPieceDrop(sourceSquare, targetSquare);
-    if (moved) advance(move.san, node.children[move.san]);
+    if (moved) acceptPlayerMove(node, evaluation);
     return moved;
   };
 
   const handleSquareClick = (square: string) => {
-    if (!isPlayerTurn || !node) return;
+    if (!isPlayerTurn || !node || !graph) return;
 
     const position = new Chess(currentFen);
     const clicked = position.get(square as Square);
@@ -230,49 +268,57 @@ export function useReviewManager(params: ReviewManagerParams) {
     }
 
     // 4) Tentative de coup
-    const move = previewMove(moveFrom, square);
-    if (!move) return; // destination illégale : on garde la sélection
+    const evaluation = evaluatePlayerMove(graph, currentFen, moveFrom, square);
+    if (evaluation.kind === "illegal") return; // destination illégale : on garde la sélection
 
-    if (getExpectedMoves(node).includes(move.san)) {
-      onSquareClick(square); // useChessGame applique le coup
-      advance(move.san, node.children[move.san]);
-    } else {
-      registerMistake(square);
+    if (evaluation.kind === "mistake") {
+      registerMistake(node, square);
       onSquareClick(moveFrom); // désélectionne côté useChessGame
       setMoveFrom(null);
+      return;
     }
+
+    onSquareClick(square); // useChessGame applique le coup
+    acceptPlayerMove(node, evaluation);
   };
 
   // ----------------------------------------------------------------------
-  // Coup automatique de l'ordinateur (réponse tirée au hasard dans l'arbre)
+  // Coup automatique de l'ordinateur : réponse tirée selon l'urgence des fiches
   // ----------------------------------------------------------------------
   useEffect(() => {
-    if (!isComputerTurn || !node) return;
+    if (!isComputerTurn || !node || !graph || !reviewSide) return;
 
     const timer = setTimeout(() => {
-      const pick = pickRandomChild(node);
-      if (!pick) return;
+      const san = pickWeightedMove(graph, node, {
+        playerSide: reviewSide,
+        stats: positionStatsRef.current,
+        now: Date.now(),
+      });
+      if (!san) return;
 
-      const squares = sanToSquares(currentFen, pick.san);
+      const squares = sanToSquares(currentFen, san);
       if (!squares) return;
 
       if (onPieceDropRef.current(squares.from, squares.to)) {
-        advance(pick.san, pick.node);
+        setFeedback(null);
+        const next = graph.nodes.get(node.edges[san]);
+        if (next && isLeafNode(next)) finishLine();
       }
     }, COMPUTER_MOVE_DELAY_MS);
 
     return () => clearTimeout(timer);
-  }, [isComputerTurn, node, currentFen, advance]);
+  }, [isComputerTurn, node, graph, reviewSide, currentFen, finishLine]);
 
   // ----------------------------------------------------------------------
   // Contrôle de session
   // ----------------------------------------------------------------------
   const clearLineState = () => {
-    setPath([]);
     setMoveFrom(null);
     setFeedback(null);
+    setNotice(null);
     setFinishedLineMistakes(null);
     lineMistakesRef.current = 0;
+    failedKeysRef.current.clear();
   };
 
   /** Nouvelle ligne : l'échiquier repart de la position initiale. */
@@ -282,12 +328,14 @@ export function useReviewManager(params: ReviewManagerParams) {
   };
 
   /**
-   * Remet la session à zéro (stats comprises), sans toucher à l'échiquier.
+   * Remet la session à zéro (compteurs de session compris), sans toucher à l'échiquier
+   * ni aux statistiques de répétition espacée, qui sont persistantes.
    * À appeler au démarrage d'une révision et au retour au menu.
    */
   const resetSession = () => {
     clearLineState();
     setStats(EMPTY_STATS);
+    setNow(Date.now());
   };
 
   /** Surlignage rouge de la case d'arrivée du dernier mauvais coup. */
@@ -297,22 +345,28 @@ export function useReviewManager(params: ReviewManagerParams) {
     [feedback],
   );
 
-  /** Vrai quand une ligne est en cours (au moins un coup joué, pas encore terminée). */
-  const canRestartLine = isReviewMode && path.length > 0 && !isLineFinished;
+  /** Vrai quand une ligne est en cours (hors position de départ) ou quand on est sorti du répertoire. */
+  const canRestartLine =
+    isReviewMode &&
+    !isLineFinished &&
+    (isOutOfRepertoire || (node !== null && graph !== null && node.key !== graph.startKey));
 
   return {
     // État
-    hasRepertoire: tree !== null,
+    hasRepertoire: graph !== null,
     isPlayerTurn,
     isComputerTurn,
     isLineFinished,
+    isOutOfRepertoire,
     canRestartLine,
     finishedLineMistakes,
     feedback,
+    notice,
     hintArrows: feedback?.arrows ?? [],
     errorSquares,
     currentChapterNames,
     stats,
+    cardSummary,
 
     // Handlers
     handlePieceDrop,

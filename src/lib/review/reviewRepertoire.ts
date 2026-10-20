@@ -1,8 +1,9 @@
 import { openingCourses } from "@/lib/data/openings";
 import type { OpeningChapter } from "@/lib/data/openings";
-import { buildReviewTree, type ReviewNode } from "./reviewTree";
+import { buildReviewGraph, type ReviewGraph } from "./reviewGraph";
+import type { Side } from "./types";
 
-export type Side = "white" | "black";
+export type { Side };
 
 /**
  * Chapitres sauvegardés pour une couleur donnée.
@@ -18,10 +19,10 @@ export function getReviewChapters(side: Side, chapterIds: string[]): OpeningChap
   );
 }
 
-/** Arbre fusionné de tout le répertoire d'une couleur, ou null s'il est vide. */
-export function buildReviewTreeForSide(side: Side, chapterIds: string[]): ReviewNode | null {
+/** Graphe de positions du répertoire d'une couleur, ou null s'il est vide. */
+export function buildReviewGraphForSide(side: Side, chapterIds: string[]): ReviewGraph | null {
   const chapters = getReviewChapters(side, chapterIds);
-  return chapters.length > 0 ? buildReviewTree(chapters) : null;
+  return chapters.length > 0 ? buildReviewGraph(chapters) : null;
 }
 
 /** Nombre de chapitres sauvegardés par couleur (pour activer/désactiver Blancs / Noirs). */
