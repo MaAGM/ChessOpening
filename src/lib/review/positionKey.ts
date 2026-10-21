@@ -21,3 +21,11 @@ export function toPositionKey(fen: string): PositionKey {
 export function fenTurn(fen: string): Side {
   return fen.trim().split(/\s+/)[1] === "b" ? "black" : "white";
 }
+
+/**
+ * FEN complète reconstruite à partir d'une clé de position (case en passant
+ * absente, compteurs à 0 / 1). Sert à stocker une FEN lisible côté serveur.
+ */
+export function fenFromPositionKey(key: PositionKey): string {
+  return `${key} - 0 1`;
+}

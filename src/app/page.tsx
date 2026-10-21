@@ -1,5 +1,6 @@
 "use client";
 
+import { useAuthSyncBootstrap } from "@/hooks/useAuth";
 import { useChessGame } from "@/hooks/useChessGame";
 import { useReviewManager } from "@/hooks/useReviewManager";
 import { useTrainerMode } from "@/hooks/useTrainerMode";
@@ -13,6 +14,9 @@ import { TrainerSidebar } from "@/components/chess/TrainerSidebar";
 const REVIEW_HINT_ARROW_COLOR = "#22c55e";
 
 export default function HomePage() {
+  // Authentification Supabase + synchronisation cloud (sans effet en mode invité)
+  useAuthSyncBootstrap();
+
   // ----------------------------------------------------------------------
   // Navigation state (which screen the sidebar shows, review side)
   // ----------------------------------------------------------------------

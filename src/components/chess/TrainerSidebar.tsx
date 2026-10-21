@@ -5,6 +5,7 @@ import { FC, useMemo } from "react";
 import { MasterExplorer } from "@/components/chess/MasterExplorer";
 import { OpeningSelector } from "@/components/chess/OpeningSelector";
 import { LearningPanel } from "@/components/chess/LearningPanel";
+import { AccountPanel } from "@/components/chess/AccountPanel";
 import { ReviewPanel } from "@/components/chess/ReviewPanel";
 import { ReviewSetup } from "@/components/chess/ReviewSetup";
 import type { ReviewManager } from "@/hooks/useReviewManager";
@@ -91,7 +92,7 @@ export const TrainerSidebar: FC<Props> = ({
       {/* MENU – displayed when panelMode === "menu" */}
       {/* ------------------------------------------------------------------ */}
       {panelMode === "menu" ? (
-        <div className="flex h-full flex-col justify-center gap-4">
+        <div className="flex h-full flex-col justify-center gap-4 overflow-y-auto">
           <h2 className="text-center text-sm font-semibold uppercase tracking-wide text-slate-300">
             Chess Opening Trainer
           </h2>
@@ -123,6 +124,8 @@ export const TrainerSidebar: FC<Props> = ({
           <p className="text-center text-xs text-slate-500">
             Jouez un coup sur l&apos;échiquier pour commencer.
           </p>
+
+          <AccountPanel />
         </div>
       ) : (
         // ------------------------------------------------------------------

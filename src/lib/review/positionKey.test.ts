@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { Chess } from "chess.js";
-import { fenTurn, toPositionKey } from "./positionKey";
+import { fenFromPositionKey, fenTurn, toPositionKey } from "./positionKey";
 
 const fenAfter = (...sans: string[]) => {
   const game = new Chess();
@@ -39,5 +39,14 @@ describe("fenTurn", () => {
   it("lit le camp au trait", () => {
     expect(fenTurn(new Chess().fen())).toBe("white");
     expect(fenTurn(fenAfter("e4"))).toBe("black");
+  });
+});
+
+describe("fenFromPositionKey", () => {
+  it("reconstruit une FEN valide qui redonne la même clé", () => {
+    const key = toPositionKey(fenAfter("e4", "e5", "Nf3"));
+    const fen = fenFromPositionKey(key);
+    expect(() => new Chess(fen)).not.toThrow();
+    expect(toPositionKey(fen)).toBe(key);
   });
 });

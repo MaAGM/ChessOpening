@@ -1,8 +1,9 @@
 import { SRS_CONFIG, clampBox, nextStats, type PositionStats } from "./srs";
 
-// La clé garde son nom d'origine : la version du format est dans les données,
-// ce qui permet de migrer sans perdre ce qui a déjà été enregistré.
-const STORAGE_KEY = "chess-opening:review-store-v1";
+// Invité : la clé garde son nom d'origine (la version du format est dans les données).
+const GUEST_STORAGE_KEY = "chess-opening:review-store-v1";
+// Connecté : un cache hors ligne par utilisateur, séparé des données d'invité.
+const USER_STORAGE_PREFIX = "chess-opening:review-store-v2:user:";
 // Ancienne clé : lue une seule fois pour migrer les chapitres déjà complétés.
 const LEGACY_COMPLETED_KEY = "chess-opening:completed-chapters-v2";
 const STORE_VERSION = 2;
@@ -20,6 +21,22 @@ export type ReviewStoreState = {
   /** Statistiques de répétition espacée, indexées par clé de position. */
   positions: Record<string, PositionStats>;
 };
+
+/** Où l'état est lu et écrit en local : mode invité ou cache d'un utilisateur connecté. */
+export type StorageScope = { kind: "guest" } | { kind: "user"; userId: string };
+
+/**
+ * Origine d'un changement :
+ *  - local    : action de l'utilisateur dans l'application (à synchroniser) ;
+ *  - remote   : état fusionné avec le cloud (déjà synchronisé) ;
+ *  - external : modification venue d'un autre onglet (cet onglet n'a rien à pousser).
+ */
+export type ChangeSource = "local" | "remote" | "external";
+export type ChangeListener = (
+  prev: ReviewStoreState,
+  next: ReviewStoreState,
+  source: ChangeSource,
+) => void;
 
 // ---------------------------------------------------------------------------
 // Utilitaires
@@ -40,12 +57,25 @@ function nonNegativeInt(value: unknown): number {
   return typeof value === "number" && Number.isFinite(value) && value > 0 ? Math.floor(value) : 0;
 }
 
-function createEmptyState(): ReviewStoreState {
+export function createEmptyState(): ReviewStoreState {
   return { version: STORE_VERSION, reviewChapters: {}, completedChapters: [], positions: {} };
 }
 
 /** Snapshot serveur (SSR + hydratation) : référence stable, jamais mutée. */
 const EMPTY_STATE: ReviewStoreState = Object.freeze(createEmptyState());
+
+/** Vrai si l'état contient au moins une donnée (chapitre, chapitre complété ou statistique). */
+export function hasStateData(state: ReviewStoreState): boolean {
+  return (
+    Object.keys(state.reviewChapters).length > 0 ||
+    state.completedChapters.length > 0 ||
+    Object.keys(state.positions).length > 0
+  );
+}
+
+function storageKeyOf(scope: StorageScope): string {
+  return scope.kind === "guest" ? GUEST_STORAGE_KEY : USER_STORAGE_PREFIX + scope.userId;
+}
 
 function readLegacyCompleted(): string[] {
   try {
@@ -112,11 +142,12 @@ export function sanitizeState(raw: unknown): ReviewStoreState | null {
   };
 }
 
-function load(): ReviewStoreState {
+/** Lit l'état persisté d'un périmètre (invité ou utilisateur), sans toucher au cache. */
+function loadScope(scope: StorageScope): ReviewStoreState {
   if (!hasBrowserStorage()) return EMPTY_STATE;
 
   try {
-    const raw = window.localStorage.getItem(STORAGE_KEY);
+    const raw = window.localStorage.getItem(storageKeyOf(scope));
     if (raw) {
       const parsed = sanitizeState(JSON.parse(raw));
       if (parsed) return parsed;
@@ -125,41 +156,58 @@ function load(): ReviewStoreState {
     // JSON corrompu : on retombe sur la migration / l'état vide.
   }
 
-  // Première utilisation du store : migration depuis l'ancienne clé.
-  return { ...createEmptyState(), completedChapters: readLegacyCompleted() };
+  // Première utilisation : migration de l'ancienne clé (mode invité uniquement).
+  return scope.kind === "guest"
+    ? { ...createEmptyState(), completedChapters: readLegacyCompleted() }
+    : createEmptyState();
 }
 
 function persist(state: ReviewStoreState): void {
   if (!hasBrowserStorage()) return;
   try {
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    window.localStorage.setItem(storageKeyOf(scope), JSON.stringify(state));
   } catch (error) {
     // Quota dépassé, navigation privée, etc. : l'état en mémoire reste valide.
     console.warn("[reviewStore] Persistance impossible :", error);
   }
 }
 
+function removeKey(key: string): void {
+  if (!hasBrowserStorage()) return;
+  try {
+    window.localStorage.removeItem(key);
+  } catch {
+    // Sans importance : la clé sera simplement relue plus tard.
+  }
+}
+
 // ---------------------------------------------------------------------------
 // Store externe (contrat useSyncExternalStore)
 // ---------------------------------------------------------------------------
+let scope: StorageScope = { kind: "guest" };
 let cache: ReviewStoreState | null = null;
 const listeners = new Set<() => void>();
+const changeListeners = new Set<ChangeListener>();
 
 function notify(): void {
   listeners.forEach((listener) => listener());
 }
 
-function commit(next: ReviewStoreState): void {
+function commit(next: ReviewStoreState, source: ChangeSource): void {
+  const prev = getSnapshot();
   cache = next;
   persist(next);
   notify();
+  changeListeners.forEach((listener) => listener(prev, next, source));
 }
 
 /** Synchronisation entre onglets : un seul handler global pour tous les abonnés. */
 function onStorageEvent(event: StorageEvent): void {
-  if (event.key === STORAGE_KEY || event.key === null) {
-    cache = load();
+  if (event.key === storageKeyOf(scope) || event.key === null) {
+    const prev = getSnapshot();
+    cache = loadScope(scope);
     notify();
+    changeListeners.forEach((listener) => listener(prev, cache!, "external"));
   }
 }
 
@@ -174,7 +222,7 @@ export function subscribe(listener: () => void): () => void {
 }
 
 export function getSnapshot(): ReviewStoreState {
-  if (cache === null) cache = load();
+  if (cache === null) cache = loadScope(scope);
   return cache;
 }
 
@@ -183,28 +231,81 @@ export function getServerSnapshot(): ReviewStoreState {
 }
 
 // ---------------------------------------------------------------------------
+// Périmètre de stockage (invité / connecté) et synchronisation
+// ---------------------------------------------------------------------------
+export function getStorageScope(): StorageScope {
+  return scope;
+}
+
+/** Bascule entre le mode invité et le cache d'un utilisateur : l'état affiché est rechargé. */
+export function setStorageScope(next: StorageScope): void {
+  if (storageKeyOf(next) === storageKeyOf(scope) && cache !== null) return;
+  scope = next;
+  cache = loadScope(next);
+  notify();
+}
+
+/** Abonnement aux changements, avec leur origine (sert au moteur de synchronisation). */
+export function subscribeToChanges(listener: ChangeListener): () => void {
+  changeListeners.add(listener);
+  return () => {
+    changeListeners.delete(listener);
+  };
+}
+
+/** État enregistré en mode invité (lu depuis le localStorage, sans changer de périmètre). */
+export function readGuestState(): ReviewStoreState {
+  return loadScope({ kind: "guest" });
+}
+
+/** Supprime les données d'invité (après leur migration réussie vers le compte). */
+export function clearGuestState(): void {
+  removeKey(GUEST_STORAGE_KEY);
+  removeKey(LEGACY_COMPLETED_KEY);
+  if (scope.kind === "guest") {
+    cache = createEmptyState();
+    notify();
+  }
+}
+
+/** Supprime le cache hors ligne d'un utilisateur (à la déconnexion, une fois tout synchronisé). */
+export function clearUserCache(userId: string): void {
+  removeKey(storageKeyOf({ kind: "user", userId }));
+}
+
+/** Applique un état fusionné avec le cloud : persisté et affiché, sans être re-poussé. */
+export function applyRemoteState(next: ReviewStoreState): void {
+  const prev = getSnapshot();
+  if (JSON.stringify(prev) === JSON.stringify(next)) return;
+  commit(next, "remote");
+}
+
+// ---------------------------------------------------------------------------
 // Actions (références stables, utilisables hors React)
 // ---------------------------------------------------------------------------
 export function addReviewChapter(chapterId: string): void {
   const state = getSnapshot();
   if (has(state.reviewChapters, chapterId)) return;
-  commit({
-    ...state,
-    reviewChapters: { ...state.reviewChapters, [chapterId]: { addedAt: Date.now() } },
-  });
+  commit(
+    {
+      ...state,
+      reviewChapters: { ...state.reviewChapters, [chapterId]: { addedAt: Date.now() } },
+    },
+    "local",
+  );
 }
 
 export function removeReviewChapter(chapterId: string): void {
   const state = getSnapshot();
   if (!has(state.reviewChapters, chapterId)) return;
   const { [chapterId]: _removed, ...rest } = state.reviewChapters;
-  commit({ ...state, reviewChapters: rest });
+  commit({ ...state, reviewChapters: rest }, "local");
 }
 
 export function markChapterComplete(chapterId: string): void {
   const state = getSnapshot();
   if (state.completedChapters.includes(chapterId)) return;
-  commit({ ...state, completedChapters: [...state.completedChapters, chapterId] });
+  commit({ ...state, completedChapters: [...state.completedChapters, chapterId] }, "local");
 }
 
 /** Enregistre le résultat d'une fiche (position) : juste du premier coup ou non. */
@@ -214,18 +315,19 @@ export function recordPositionResult(
   now: number = Date.now(),
 ): void {
   const state = getSnapshot();
-  commit({
-    ...state,
-    positions: {
-      ...state.positions,
-      [positionKey]: nextStats(has(state.positions, positionKey) ? state.positions[positionKey] : undefined, success, now),
+  const previous = has(state.positions, positionKey) ? state.positions[positionKey] : undefined;
+  commit(
+    {
+      ...state,
+      positions: { ...state.positions, [positionKey]: nextStats(previous, success, now) },
     },
-  });
+    "local",
+  );
 }
 
 /** Efface toutes les statistiques de répétition espacée (les chapitres sont conservés). */
 export function resetPositionStats(): void {
   const state = getSnapshot();
   if (Object.keys(state.positions).length === 0) return;
-  commit({ ...state, positions: {} });
+  commit({ ...state, positions: {} }, "local");
 }
