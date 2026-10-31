@@ -2,6 +2,8 @@
 
 import { useAuthSyncBootstrap } from "@/hooks/useAuth";
 import { useChessGame } from "@/hooks/useChessGame";
+import { useRepertoireEditor } from "@/hooks/useRepertoireEditor";
+import { useRepertoireStore } from "@/hooks/useRepertoireStore";
 import { useReviewManager } from "@/hooks/useReviewManager";
 import { useTrainerMode } from "@/hooks/useTrainerMode";
 import { useTutorialManager } from "@/hooks/useTutorialManager";
@@ -20,7 +22,15 @@ export default function HomePage() {
   // ----------------------------------------------------------------------
   // Navigation state (which screen the sidebar shows, review side)
   // ----------------------------------------------------------------------
-  const { panelMode, setPanelMode, reviewSide, setReviewSide } = useTrainerMode();
+  const {
+    panelMode,
+    setPanelMode,
+    reviewSide,
+    setReviewSide,
+    editingRepertoireId,
+    setEditingRepertoireId,
+  } = useTrainerMode();
+  const { getRepertoire } = useRepertoireStore();
 
   // ----------------------------------------------------------------------
   // Core board state (from the generic chess hook).
@@ -40,7 +50,9 @@ export default function HomePage() {
     clearSelection,
     resetGame,
     loadPosition,
-  } = useChessGame({ navigationEnabled: panelMode !== "review_active" });
+  } = useChessGame({
+    navigationEnabled: panelMode !== "review_active" && panelMode !== "repertoire_editor",
+  });
 
   // ----------------------------------------------------------------------
   // One manager per mode – each one drives the board through the same callbacks
@@ -66,13 +78,25 @@ export default function HomePage() {
     reviewSide,
   });
 
+  const editor = useRepertoireEditor({
+    repertoireId: editingRepertoireId,
+    panelMode,
+    currentFen,
+    onPieceDrop,
+    onSquareClick,
+    loadPosition,
+    clearSelection,
+  });
+
   // ----------------------------------------------------------------------
   // Mode transitions shared by the sidebar
   // ----------------------------------------------------------------------
   const handleBackToMenu = () => {
     tutorial.handleBackToMenu(); // repasse en "menu" et remet l'échiquier à zéro
     review.resetSession();
+    editor.resetSession();
     setReviewSide(null);
+    setEditingRepertoireId(null);
   };
 
   const handleStartReview = (side: Side) => {
@@ -82,11 +106,34 @@ export default function HomePage() {
     setPanelMode("review_active");
   };
 
+  const handleOpenRepertoire = (id: string) => {
+    resetGame();
+    editor.resetSession();
+    setEditingRepertoireId(id);
+    setPanelMode("repertoire_editor");
+  };
+
+  const handleCloseRepertoire = () => {
+    resetGame();
+    editor.resetSession();
+    setEditingRepertoireId(null);
+    setPanelMode("repertoire_list");
+  };
+
   // ----------------------------------------------------------------------
   // Board wiring: the active mode decides who handles moves, arrows, orientation
   // ----------------------------------------------------------------------
   const isReviewMode = panelMode === "review_active";
-  const boardOrientation = isReviewMode && reviewSide ? reviewSide : tutorial.userColor;
+  const isEditorMode = panelMode === "repertoire_editor";
+  const editingRepertoire =
+    panelMode === "repertoire_editor" && editingRepertoireId
+      ? getRepertoire(editingRepertoireId)
+      : null;
+  // En révision : la couleur choisie ; dans l'éditeur : celle du répertoire ouvert.
+  const boardOrientation =
+    isReviewMode && reviewSide
+      ? reviewSide
+      : (editingRepertoire?.side ?? tutorial.userColor);
 
   return (
     <main className="flex min-h-screen items-center justify-start gap-6 bg-slate-900 px-4 py-10 pl-16 text-slate-100">
@@ -101,12 +148,30 @@ export default function HomePage() {
             boardOrientation={boardOrientation}
             currentGame={currentGame}
             squareStyles={isReviewMode ? { ...squareStyles, ...review.errorSquares } : squareStyles}
-            onPieceDrop={isReviewMode ? review.handlePieceDrop : tutorial.handlePieceDrop}
+            onPieceDrop={
+              isEditorMode
+                ? editor.handlePieceDrop
+                : isReviewMode
+                  ? review.handlePieceDrop
+                  : tutorial.handlePieceDrop
+            }
             onPieceDragBegin={onPieceDragBegin}
             onPieceDragEnd={onPieceDragEnd}
-            onSquareClick={isReviewMode ? review.handleSquareClick : tutorial.handlePieceClick}
+            onSquareClick={
+              isEditorMode
+                ? editor.handleSquareClick
+                : isReviewMode
+                  ? review.handleSquareClick
+                  : tutorial.handlePieceClick
+            }
             onSquareRightClick={onSquareRightClick}
-            customArrows={isReviewMode ? review.hintArrows : tutorial.activeNode?.arrows}
+            customArrows={
+              isEditorMode
+                ? editor.currentNode?.arrows
+                : isReviewMode
+                  ? review.hintArrows
+                  : tutorial.activeNode?.arrows
+            }
             arrowColor={isReviewMode ? REVIEW_HINT_ARROW_COLOR : undefined}
           />
         </section>
@@ -118,6 +183,9 @@ export default function HomePage() {
         setPanelMode={setPanelMode}
         reviewSide={reviewSide}
         onStartReview={handleStartReview}
+        editor={editor}
+        onOpenRepertoire={handleOpenRepertoire}
+        onCloseRepertoire={handleCloseRepertoire}
         review={review}
         activeNode={tutorial.activeNode}
         activeChapterId={tutorial.activeTutorialId}

@@ -9,7 +9,9 @@ export type PanelMode =
   | "opening_selector"
   | "learning_active"
   | "review_setup"
-  | "review_active";
+  | "review_active"
+  | "repertoire_list"
+  | "repertoire_editor";
 
 /**
  * État global de navigation de l'application : quel écran la sidebar affiche
@@ -21,6 +23,15 @@ export type PanelMode =
 export function useTrainerMode() {
   const [panelMode, setPanelMode] = useState<PanelMode>("menu");
   const [reviewSide, setReviewSide] = useState<Side | null>(null);
+  /** Répertoire ouvert dans l'éditeur (mode repertoire_editor). */
+  const [editingRepertoireId, setEditingRepertoireId] = useState<string | null>(null);
 
-  return { panelMode, setPanelMode, reviewSide, setReviewSide };
+  return {
+    panelMode,
+    setPanelMode,
+    reviewSide,
+    setReviewSide,
+    editingRepertoireId,
+    setEditingRepertoireId,
+  };
 }

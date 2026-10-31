@@ -7,6 +7,9 @@ import { OpeningSelector } from "@/components/chess/OpeningSelector";
 import { LearningPanel } from "@/components/chess/LearningPanel";
 import { AccountPanel } from "@/components/chess/AccountPanel";
 import { ReviewPanel } from "@/components/chess/ReviewPanel";
+import { RepertoireEditorPanel } from "@/components/repertoire/RepertoireEditorPanel";
+import type { RepertoireEditor } from "@/hooks/useRepertoireEditor";
+import { RepertoireListPanel } from "@/components/repertoire/RepertoireListPanel";
 import { ReviewSetup } from "@/components/chess/ReviewSetup";
 import type { ReviewManager } from "@/hooks/useReviewManager";
 import { useReviewStore } from "@/hooks/useReviewStore";
@@ -25,6 +28,12 @@ type Props = {
   reviewSide: Side | null;
   /** Lance l'entraînement pour une couleur */
   onStartReview: (side: Side) => void;
+  /** État et actions de l'éditeur de répertoire (useRepertoireEditor) */
+  editor: RepertoireEditor;
+  /** Ouvre un répertoire dans l'éditeur */
+  onOpenRepertoire: (id: string) => void;
+  /** Ferme l'éditeur et revient à la liste des répertoires */
+  onCloseRepertoire: () => void;
   /** État et actions de la session de révision (useReviewManager) */
   review: ReviewManager;
 
@@ -48,6 +57,20 @@ type Props = {
   onPlayMove: (moveSan: string) => void;
 };
 
+/** Largeur du panneau selon l'écran affiché (classes complètes pour Tailwind). */
+function sidebarWidthClass(mode: PanelMode): string {
+  switch (mode) {
+    case "opening_selector":
+      return "w-225";
+    case "repertoire_list":
+      return "w-96";
+    case "repertoire_editor":
+      return "w-120";
+    default:
+      return "w-80";
+  }
+}
+
 /**
  * The sidebar contains the **menu**, the **explorer**, the **opening selector**,
  * the **learning panel** (tutorial) and the **review screens**.
@@ -60,6 +83,9 @@ export const TrainerSidebar: FC<Props> = ({
   setPanelMode,
   reviewSide,
   onStartReview,
+  editor,
+  onOpenRepertoire,
+  onCloseRepertoire,
   review,
   activeNode,
   activeChapterId,
@@ -85,7 +111,7 @@ export const TrainerSidebar: FC<Props> = ({
   return (
     <aside
       className={`flex h-137.5 flex-col rounded-lg border border-slate-700 bg-slate-800/60 p-4 transition-all duration-300 ease-in-out ${
-        panelMode === "opening_selector" ? "w-225" : "w-80"
+        sidebarWidthClass(panelMode)
       }`}
     >
       {/* ------------------------------------------------------------------ */}
@@ -107,8 +133,8 @@ export const TrainerSidebar: FC<Props> = ({
 
           <button
             type="button"
-            disabled
-            className="cursor-not-allowed rounded-xl border border-blue-400/40 bg-blue-500/20 px-4 py-3 text-left font-semibold text-blue-100 opacity-50 grayscale"
+            onClick={() => setPanelMode("repertoire_list")}
+            className="rounded-xl border border-blue-400/40 bg-blue-500/20 px-4 py-3 text-left font-semibold text-blue-100 transition hover:border-blue-300/70 hover:bg-blue-500/30"
           >
             Mettre à jour son répertoire
           </button>
@@ -135,7 +161,7 @@ export const TrainerSidebar: FC<Props> = ({
           {/* Back button – always visible when not in the root menu */}
           <button
             type="button"
-            onClick={handleBackToMenu}
+            onClick={panelMode === "repertoire_editor" ? onCloseRepertoire : handleBackToMenu}
             className="flex w-fit items-center gap-2 rounded-lg border border-slate-600 bg-slate-700/40 px-3 py-1.5 text-sm font-medium text-slate-300 transition hover:border-[#D4AF37]/60 hover:bg-slate-700/70 hover:text-[#D4AF37]"
           >
             <svg
@@ -150,7 +176,7 @@ export const TrainerSidebar: FC<Props> = ({
                 clipRule="evenodd"
               />
             </svg>
-            Retour
+            {panelMode === "repertoire_editor" ? "Mes répertoires" : "Retour"}
           </button>
 
           {/* ---------------------------------------------------------------- */}
@@ -178,6 +204,12 @@ export const TrainerSidebar: FC<Props> = ({
           {panelMode === "review_active" && reviewSide && (
             <ReviewPanel side={reviewSide} review={review} />
           )}
+
+          {/* ---------------------------------------------------------------- */}
+          {/* Répertoires – liste de gestion et éditeur */}
+          {/* ---------------------------------------------------------------- */}
+          {panelMode === "repertoire_list" && <RepertoireListPanel onOpen={onOpenRepertoire} />}
+          {panelMode === "repertoire_editor" && <RepertoireEditorPanel editor={editor} />}
 
           {/* ---------------------------------------------------------------- */}
           {/* Learning panel – shown when a tutorial is active */}
