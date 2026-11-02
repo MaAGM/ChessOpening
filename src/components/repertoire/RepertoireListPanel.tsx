@@ -199,6 +199,9 @@ export function RepertoireListPanel({ onOpen }: RepertoireListPanelProps) {
                       onEdit={() => setForm({ kind: "edit", id: repertoire.id })}
                       onDuplicate={() => store.duplicateRepertoire(repertoire.id)}
                       onDelete={() => store.deleteRepertoire(repertoire.id)}
+                      onToggleReview={(enabled) =>
+                        store.updateRepertoireMeta(repertoire.id, { reviewEnabled: enabled })
+                      }
                     />
                   ))}
                 </div>

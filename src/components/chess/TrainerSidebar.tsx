@@ -12,9 +12,10 @@ import type { RepertoireEditor } from "@/hooks/useRepertoireEditor";
 import { RepertoireListPanel } from "@/components/repertoire/RepertoireListPanel";
 import { ReviewSetup } from "@/components/chess/ReviewSetup";
 import type { ReviewManager } from "@/hooks/useReviewManager";
+import { useRepertoireStore } from "@/hooks/useRepertoireStore";
 import { useReviewStore } from "@/hooks/useReviewStore";
 import type { PanelMode } from "@/hooks/useTrainerMode";
-import { countReviewChaptersBySide, type Side } from "@/lib/review/reviewRepertoire";
+import { countReviewSourcesBySide, type Side } from "@/lib/review/reviewRepertoire";
 
 import type { TutorialNode } from "@/lib/data/openings";
 
@@ -102,10 +103,11 @@ export const TrainerSidebar: FC<Props> = ({
   onPlayMove,
 }) => {
   const { isInReview, addToReview, removeFromReview, reviewChapterIds } = useReviewStore();
+  const { repertoires } = useRepertoireStore();
   const isChapterInReview = activeChapterId ? isInReview(activeChapterId) : false;
   const reviewCounts = useMemo(
-    () => countReviewChaptersBySide(reviewChapterIds),
-    [reviewChapterIds],
+    () => countReviewSourcesBySide(reviewChapterIds, repertoires),
+    [reviewChapterIds, repertoires],
   );
 
   return (

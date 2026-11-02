@@ -4,6 +4,7 @@ import type { CSSProperties } from "react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Chess, type Square } from "chess.js";
 
+import { useRepertoireStore } from "@/hooks/useRepertoireStore";
 import { useReviewStore } from "@/hooks/useReviewStore";
 import type { PanelMode } from "@/hooks/useTrainerMode";
 import type { Arrow } from "@/lib/data/openings/types";
@@ -18,7 +19,8 @@ import {
   type GraphNode,
   type MoveEvaluation,
 } from "@/lib/review/reviewGraph";
-import { buildReviewGraphForSide, getReviewChapters } from "@/lib/review/reviewRepertoire";
+import { buildReviewGraph } from "@/lib/review/reviewGraph";
+import { getReviewSources } from "@/lib/review/reviewRepertoire";
 import { pickWeightedMove, summarizeCards, type CardSummary } from "@/lib/review/reviewSelection";
 import type { Side } from "@/lib/review/types";
 
@@ -85,6 +87,7 @@ export function useReviewManager(params: ReviewManagerParams) {
   } = params;
 
   const { reviewChapterIds, positionStats, recordResult } = useReviewStore();
+  const { repertoires } = useRepertoireStore();
 
   // ----------------------------------------------------------------------
   // État de la session
@@ -118,11 +121,13 @@ export function useReviewManager(params: ReviewManagerParams) {
   // ----------------------------------------------------------------------
   const isReviewMode = panelMode === "review_active" && reviewSide !== null;
 
-  const graph = useMemo(
-    () =>
-      isReviewMode && reviewSide ? buildReviewGraphForSide(reviewSide, reviewChapterIds) : null,
-    [isReviewMode, reviewSide, reviewChapterIds],
+  // Sources de la révision : chapitres ajoutés + répertoires dont l'interrupteur est activé.
+  const sources = useMemo(
+    () => (isReviewMode && reviewSide ? getReviewSources(reviewSide, reviewChapterIds, repertoires) : []),
+    [isReviewMode, reviewSide, reviewChapterIds, repertoires],
   );
+
+  const graph = useMemo(() => (sources.length > 0 ? buildReviewGraph(sources) : null), [sources]);
 
   /** Nœud de la position affichée (null si elle n'est pas dans le répertoire). */
   const node = useMemo(() => (graph ? getNode(graph, currentFen) : null), [graph, currentFen]);
@@ -133,18 +138,15 @@ export function useReviewManager(params: ReviewManagerParams) {
   const isPlayerTurn = isReviewMode && node !== null && !isLineFinished && turn === reviewSide;
   const isComputerTurn = isReviewMode && node !== null && !isLineFinished && turn !== reviewSide;
 
-  const chapterNameById = useMemo(() => {
-    if (!reviewSide) return new Map<string, string>();
-    return new Map(getReviewChapters(reviewSide, reviewChapterIds).map((c) => [c.id, c.name]));
-  }, [reviewSide, reviewChapterIds]);
+  const sourceNameById = useMemo(() => new Map(sources.map((s) => [s.id, s.name])), [sources]);
 
-  /** Chapitres dont une ligne passe par la position courante (vide au départ). */
+  /** Chapitres et répertoires dont une ligne passe par la position courante (vide au départ). */
   const currentChapterNames = useMemo(() => {
     if (!node || !graph || node.key === graph.startKey) return [];
     return node.chapterIds
-      .map((id) => chapterNameById.get(id))
+      .map((id) => sourceNameById.get(id))
       .filter((name): name is string => Boolean(name));
-  }, [node, graph, chapterNameById]);
+  }, [node, graph, sourceNameById]);
 
   /** Répartition des fiches du répertoire : nouvelles, à réviser, maîtrisées… */
   const cardSummary = useMemo(

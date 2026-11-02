@@ -11,6 +11,8 @@ type RepertoireCardProps = {
   onEdit: () => void;
   onDuplicate: () => void;
   onDelete: () => void;
+  /** Active ou désactive la participation de ce répertoire à la révision. */
+  onToggleReview: (enabled: boolean) => void;
 };
 
 export function RepertoireCard({
@@ -19,6 +21,7 @@ export function RepertoireCard({
   onEdit,
   onDuplicate,
   onDelete,
+  onToggleReview,
 }: RepertoireCardProps) {
   const [confirmingDelete, setConfirmingDelete] = useState(false);
   const isWhite = repertoire.side === "white";
@@ -42,6 +45,33 @@ export function RepertoireCard({
           </p>
         </div>
       </div>
+
+      <div className="flex items-center gap-2">
+        <button
+          type="button"
+          role="switch"
+          aria-checked={repertoire.reviewEnabled}
+          aria-label={`Inclure « ${repertoire.name} » dans la révision`}
+          onClick={() => onToggleReview(!repertoire.reviewEnabled)}
+          className={`relative h-5 w-9 shrink-0 rounded-full transition ${
+            repertoire.reviewEnabled ? "bg-emerald-500" : "bg-slate-600"
+          }`}
+        >
+          <span
+            className={`absolute top-0.5 h-4 w-4 rounded-full bg-white transition-all ${
+              repertoire.reviewEnabled ? "left-[1.1rem]" : "left-0.5"
+            }`}
+          />
+        </button>
+        <span className="text-xs text-slate-300">
+          {repertoire.reviewEnabled ? "Proposé en révision" : "Exclu de la révision"}
+        </span>
+      </div>
+      {repertoire.reviewEnabled && repertoire.children.length === 0 && (
+        <p className="text-xs text-slate-500">
+          Sans coups, ce répertoire n&apos;est pas encore proposé en révision.
+        </p>
+      )}
 
       {confirmingDelete ? (
         <div className="flex flex-col gap-2 rounded-lg border border-rose-500/40 bg-rose-500/10 p-2">
