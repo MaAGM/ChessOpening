@@ -395,3 +395,5 @@ export function useTutorialManager(params: TutorialManagerParams) {
     getPreviousBranchPath,
   };
 }
+
+export type TutorialManager = ReturnType<typeof useTutorialManager>;

@@ -8,54 +8,44 @@ import { LearningPanel } from "@/components/chess/LearningPanel";
 import { AccountPanel } from "@/components/chess/AccountPanel";
 import { ReviewPanel } from "@/components/chess/ReviewPanel";
 import { RepertoireEditorPanel } from "@/components/repertoire/RepertoireEditorPanel";
-import type { RepertoireEditor } from "@/hooks/useRepertoireEditor";
 import { RepertoireListPanel } from "@/components/repertoire/RepertoireListPanel";
 import { ReviewSetup } from "@/components/chess/ReviewSetup";
+import { Button } from "@/components/ui/Button";
+import { Callout } from "@/components/ui/Callout";
+import type { RepertoireEditor } from "@/hooks/useRepertoireEditor";
 import type { ReviewManager } from "@/hooks/useReviewManager";
 import { useRepertoireStore } from "@/hooks/useRepertoireStore";
 import { useReviewStore } from "@/hooks/useReviewStore";
 import type { PanelMode } from "@/hooks/useTrainerMode";
+import type { TutorialManager } from "@/hooks/useTutorialManager";
 import { countReviewSourcesBySide, type Side } from "@/lib/review/reviewRepertoire";
 
-import type { TutorialNode } from "@/lib/data/openings";
-
-type Props = {
+/** Écran courant et transitions entre écrans (possédés par la page). */
+export type TrainerNavigation = {
   /** Current UI mode – owned by useTrainerMode */
   panelMode: PanelMode;
-  /** Setter for the UI mode */
   setPanelMode: (mode: PanelMode) => void;
-
   /** Couleur choisie en mode révision (null hors révision) */
   reviewSide: Side | null;
+  /** Retour au menu principal (réinitialise toutes les sessions) */
+  onBackToMenu: () => void;
   /** Lance l'entraînement pour une couleur */
   onStartReview: (side: Side) => void;
-  /** État et actions de l'éditeur de répertoire (useRepertoireEditor) */
-  editor: RepertoireEditor;
   /** Ouvre un répertoire dans l'éditeur */
   onOpenRepertoire: (id: string) => void;
   /** Ferme l'éditeur et revient à la liste des répertoires */
   onCloseRepertoire: () => void;
+};
+
+type Props = {
+  navigation: TrainerNavigation;
+  /** État et actions du tutoriel (useTutorialManager) */
+  tutorial: TutorialManager;
   /** État et actions de la session de révision (useReviewManager) */
   review: ReviewManager;
-
-  /** Derived data from the tutorial hook */
-  activeNode: TutorialNode | null;
-  /** ID du chapitre en cours (null hors tutoriel) */
-  activeChapterId: string | null;
-  isChapterFinished: boolean;
-  nextChapter: { id: string; name: string } | null;
-  previousBranchPath: string[] | null;
+  /** État et actions de l'éditeur de répertoire (useRepertoireEditor) */
+  editor: RepertoireEditor;
   currentFen: string;
-
-  /** Callback helpers from the tutorial hook */
-  handleBackToMenu: () => void;
-  handleRewindToBranch: () => void;
-  handleStartTutorial: (id: string) => void;
-  handleNextChapter: () => void;
-
-  isWaitingForBranchChoice: boolean;
-  branchChoices: string[];
-  onPlayMove: (moveSan: string) => void;
 };
 
 /** Largeur du panneau selon l'écran affiché (classes complètes pour Tailwind). */
@@ -79,29 +69,30 @@ function sidebarWidthClass(mode: PanelMode): string {
  * All visual logic lives here; the page component only renders this
  * component and passes the hook‑generated props.
  */
-export const TrainerSidebar: FC<Props> = ({
-  panelMode,
-  setPanelMode,
-  reviewSide,
-  onStartReview,
-  editor,
-  onOpenRepertoire,
-  onCloseRepertoire,
-  review,
-  activeNode,
-  activeChapterId,
-  isChapterFinished,
-  nextChapter,
-  previousBranchPath,
-  handleBackToMenu,
-  handleRewindToBranch,
-  handleStartTutorial,
-  handleNextChapter,
-  currentFen,
-  isWaitingForBranchChoice,
-  branchChoices,
-  onPlayMove,
-}) => {
+export const TrainerSidebar: FC<Props> = ({ navigation, tutorial, review, editor, currentFen }) => {
+  const {
+    panelMode,
+    setPanelMode,
+    reviewSide,
+    onBackToMenu,
+    onStartReview,
+    onOpenRepertoire,
+    onCloseRepertoire,
+  } = navigation;
+  const {
+    activeNode,
+    activeTutorialId: activeChapterId,
+    isChapterFinished,
+    nextChapter,
+    previousBranchPath,
+    isWaitingForBranchChoice,
+    branchChoices,
+    handleBranchChoice,
+    handleRewindToBranch,
+    handleStartTutorial,
+    handleNextChapter,
+  } = tutorial;
+
   const { isInReview, addToReview, removeFromReview, reviewChapterIds } = useReviewStore();
   const { repertoires } = useRepertoireStore();
   const isChapterInReview = activeChapterId ? isInReview(activeChapterId) : false;
@@ -161,10 +152,10 @@ export const TrainerSidebar: FC<Props> = ({
         // ------------------------------------------------------------------
         <div className="flex h-full flex-col gap-3 relative">
           {/* Back button – always visible when not in the root menu */}
-          <button
-            type="button"
-            onClick={panelMode === "repertoire_editor" ? onCloseRepertoire : handleBackToMenu}
-            className="flex w-fit items-center gap-2 rounded-lg border border-slate-600 bg-slate-700/40 px-3 py-1.5 text-sm font-medium text-slate-300 transition hover:border-[#D4AF37]/60 hover:bg-slate-700/70 hover:text-[#D4AF37]"
+          <Button
+            variant="secondary"
+            onClick={panelMode === "repertoire_editor" ? onCloseRepertoire : onBackToMenu}
+            className="flex w-fit items-center gap-2"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -179,7 +170,7 @@ export const TrainerSidebar: FC<Props> = ({
               />
             </svg>
             {panelMode === "repertoire_editor" ? "Mes répertoires" : "Retour"}
-          </button>
+          </Button>
 
           {/* ---------------------------------------------------------------- */}
           {/* Explorer – shown when panelMode === "explorer" */}
@@ -222,10 +213,10 @@ export const TrainerSidebar: FC<Props> = ({
                 currentNode={activeNode}
                 hasPreviousBranch={Boolean(previousBranchPath)}
                 onRewindToBranch={handleRewindToBranch}
-                onBackToMenu={handleBackToMenu}
+                onBackToMenu={onBackToMenu}
                 isWaitingForBranchChoice={isWaitingForBranchChoice}
                 branchChoices={branchChoices}
-                onPlayMove={onPlayMove}
+                onPlayMove={handleBranchChoice}
               />
 
               {/* ------------------------------------------------------------ */}
@@ -233,31 +224,35 @@ export const TrainerSidebar: FC<Props> = ({
               {/* ------------------------------------------------------------ */}
               {isChapterFinished && activeChapterId && (
                 isChapterInReview ? (
-                  <div className="mt-2 flex items-center justify-between rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-4 py-2 text-sm font-semibold text-emerald-300">
+                  <Callout
+                    tone="success"
+                    className="mt-2 flex items-center justify-between px-4 py-2 text-sm font-semibold text-emerald-300"
+                  >
                     <span>✓ Ajouté à vos révisions</span>
-                    <button
-                      type="button"
+                    <Button
+                      variant="link"
                       onClick={() => removeFromReview(activeChapterId)}
-                      className="text-xs font-normal text-slate-400 underline transition hover:text-slate-200"
+                      className="font-normal"
                     >
                       Retirer
-                    </button>
-                  </div>
+                    </Button>
+                  </Callout>
                 ) : (
-                  <button
-                    type="button"
+                  <Button
+                    tone="emerald"
                     onClick={() => addToReview(activeChapterId)}
-                    className="mt-2 w-full rounded-lg border border-emerald-400/40 bg-emerald-500/20 px-4 py-3 text-sm font-semibold text-emerald-100 transition hover:border-emerald-300/80 hover:bg-emerald-500/30"
+                    className="mt-2 w-full px-4 py-3 text-sm"
                   >
                     Ajouter à mes révisions
-                  </button>
+                  </Button>
                 )
               )}
 
               {isChapterFinished && nextChapter && (
-                <button
+                <Button
+                  variant="primary"
                   onClick={handleNextChapter}
-                  className="mt-2 flex w-full items-center justify-center gap-2 rounded-lg bg-[#D4AF37] px-4 py-3 font-bold text-slate-900 shadow-[0_0_15px_rgba(212,175,55,0.2)] transition hover:bg-[#F3E5AB] hover:shadow-[0_0_20px_rgba(212,175,55,0.4)]"
+                  className="mt-2 flex w-full items-center justify-center gap-2"
                 >
                   Chapitre suivant : {nextChapter.name}
                   <svg
@@ -272,13 +267,16 @@ export const TrainerSidebar: FC<Props> = ({
                       clipRule="evenodd"
                     />
                   </svg>
-                </button>
+                </Button>
               )}
 
               {isChapterFinished && !nextChapter && (
-                <div className="mt-2 rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 text-center font-bold text-emerald-400">
+                <Callout
+                  tone="success"
+                  className="mt-2 px-4 py-3 text-center font-bold text-emerald-400"
+                >
                   🎉 Cours complet terminé !
-                </div>
+                </Callout>
               )}
             </>
           )}

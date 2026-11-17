@@ -8,12 +8,12 @@ import { useReviewManager } from "@/hooks/useReviewManager";
 import { useTrainerMode } from "@/hooks/useTrainerMode";
 import { useTutorialManager } from "@/hooks/useTutorialManager";
 import type { Side } from "@/lib/review/reviewRepertoire";
+import { resolveBoardController } from "@/lib/trainer/boardController";
 
 import { OpeningName } from "@/components/chess/OpeningName";
 import { ChessBoard } from "@/components/chess/ChessBoard";
-import { TrainerSidebar } from "@/components/chess/TrainerSidebar";
-
-const REVIEW_HINT_ARROW_COLOR = "#22c55e";
+import { TrainerSidebar, type TrainerNavigation } from "@/components/chess/TrainerSidebar";
+import { TrainerLayout } from "@/components/layout/TrainerLayout";
 
 export default function HomePage() {
   // Authentification Supabase + synchronisation cloud (sans effet en mode invité)
@@ -120,93 +120,78 @@ export default function HomePage() {
     setPanelMode("repertoire_list");
   };
 
+  const navigation: TrainerNavigation = {
+    panelMode,
+    setPanelMode,
+    reviewSide,
+    onBackToMenu: handleBackToMenu,
+    onStartReview: handleStartReview,
+    onOpenRepertoire: handleOpenRepertoire,
+    onCloseRepertoire: handleCloseRepertoire,
+  };
+
   // ----------------------------------------------------------------------
-  // Board wiring: the active mode decides who handles moves, arrows, orientation
+  // Board wiring: l'écran actif décide qui reçoit les coups, les flèches, l'orientation
   // ----------------------------------------------------------------------
-  const isReviewMode = panelMode === "review_active";
-  const isEditorMode = panelMode === "repertoire_editor";
   const editingRepertoire =
     panelMode === "repertoire_editor" && editingRepertoireId
       ? getRepertoire(editingRepertoireId)
       : null;
-  // En révision : la couleur choisie ; dans l'éditeur : celle du répertoire ouvert.
-  const boardOrientation =
-    isReviewMode && reviewSide
-      ? reviewSide
-      : (editingRepertoire?.side ?? tutorial.userColor);
+
+  const board = resolveBoardController({
+    panelMode,
+    baseSquareStyles: squareStyles,
+    editor: {
+      handlePieceDrop: editor.handlePieceDrop,
+      handleSquareClick: editor.handleSquareClick,
+      lastMoveSquares: editor.lastMoveSquares,
+      currentNode: editor.currentNode,
+      side: editingRepertoire?.side ?? null,
+    },
+    review: {
+      handlePieceDrop: review.handlePieceDrop,
+      handleSquareClick: review.handleSquareClick,
+      errorSquares: review.errorSquares,
+      hintArrows: review.hintArrows,
+      side: reviewSide,
+    },
+    tutorial: {
+      handlePieceDrop: tutorial.handlePieceDrop,
+      handleSquareClick: tutorial.handlePieceClick,
+      activeNode: tutorial.activeNode,
+      userColor: tutorial.userColor,
+    },
+  });
 
   return (
-    <main className="flex min-h-screen items-center justify-start gap-6 bg-slate-900 px-4 py-10 pl-16 text-slate-100">
-      <div className="flex flex-col gap-4">
-        {/* Opening title */}
-        <OpeningName name={openingName} />
-
-        {/* Chess board */}
-        <section className="w-full max-w-137.5 border-2 border-[#D4AF37] bg-[#D4AF37]/10 p-2 shadow-2xl shadow-black/40">
-          <ChessBoard
-            position={currentFen}
-            boardOrientation={boardOrientation}
-            currentGame={currentGame}
-            squareStyles={
-              isEditorMode
-                ? { ...editor.lastMoveSquares, ...squareStyles }
-                : isReviewMode
-                  ? { ...squareStyles, ...review.errorSquares }
-                  : squareStyles
-            }
-            onPieceDrop={
-              isEditorMode
-                ? editor.handlePieceDrop
-                : isReviewMode
-                  ? review.handlePieceDrop
-                  : tutorial.handlePieceDrop
-            }
-            onPieceDragBegin={onPieceDragBegin}
-            onPieceDragEnd={onPieceDragEnd}
-            onSquareClick={
-              isEditorMode
-                ? editor.handleSquareClick
-                : isReviewMode
-                  ? review.handleSquareClick
-                  : tutorial.handlePieceClick
-            }
-            onSquareRightClick={onSquareRightClick}
-            customArrows={
-              isEditorMode
-                ? editor.currentNode?.arrows
-                : isReviewMode
-                  ? review.hintArrows
-                  : tutorial.activeNode?.arrows
-            }
-            arrowColor={isReviewMode ? REVIEW_HINT_ARROW_COLOR : undefined}
-          />
-        </section>
-      </div>
-
-      {/* Sidebar: menu, explorer, opening selector, learning UI, review UI */}
-      <TrainerSidebar
-        panelMode={panelMode}
-        setPanelMode={setPanelMode}
-        reviewSide={reviewSide}
-        onStartReview={handleStartReview}
-        editor={editor}
-        onOpenRepertoire={handleOpenRepertoire}
-        onCloseRepertoire={handleCloseRepertoire}
-        review={review}
-        activeNode={tutorial.activeNode}
-        activeChapterId={tutorial.activeTutorialId}
-        isChapterFinished={tutorial.isChapterFinished}
-        nextChapter={tutorial.nextChapter}
-        previousBranchPath={tutorial.previousBranchPath}
-        handleBackToMenu={handleBackToMenu}
-        handleRewindToBranch={tutorial.handleRewindToBranch}
-        handleStartTutorial={tutorial.handleStartTutorial}
-        handleNextChapter={tutorial.handleNextChapter}
-        currentFen={currentFen}
-        isWaitingForBranchChoice={tutorial.isWaitingForBranchChoice}
-        branchChoices={tutorial.branchChoices}
-        onPlayMove={tutorial.handleBranchChoice}
-      />
-    </main>
+    <TrainerLayout
+      boardHeader={<OpeningName name={openingName} />}
+      board={
+        <ChessBoard
+          position={currentFen}
+          boardOrientation={board.orientation}
+          currentGame={currentGame}
+          squareStyles={board.squareStyles}
+          onPieceDrop={board.onPieceDrop}
+          onPieceDragBegin={onPieceDragBegin}
+          onPieceDragEnd={onPieceDragEnd}
+          onSquareClick={board.onSquareClick}
+          onSquareRightClick={onSquareRightClick}
+          customArrows={board.arrows}
+          arrowColor={board.arrowColor}
+        />
+      }
+      // boardAside : future barre d'évaluation (Stockfish)
+      panel={
+        <TrainerSidebar
+          navigation={navigation}
+          tutorial={tutorial}
+          review={review}
+          editor={editor}
+          currentFen={currentFen}
+        />
+      }
+      // coach : futur panneau Coach IA
+    />
   );
 }

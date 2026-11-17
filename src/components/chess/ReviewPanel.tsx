@@ -1,3 +1,6 @@
+import { Button } from "@/components/ui/Button";
+import { Callout } from "@/components/ui/Callout";
+import { Panel } from "@/components/ui/Panel";
 import type { ReviewManager } from "@/hooks/useReviewManager";
 import type { Side } from "@/lib/review/types";
 
@@ -26,9 +29,9 @@ export function ReviewPanel({ side, review }: ReviewPanelProps) {
 
   if (!hasRepertoire) {
     return (
-      <section className="rounded-xl border border-slate-600 bg-slate-800/70 p-4 text-sm text-slate-300">
+      <Panel className="text-sm text-slate-300">
         Aucun chapitre dans votre répertoire pour les {sideLabel}.
-      </section>
+      </Panel>
     );
   }
 
@@ -36,70 +39,58 @@ export function ReviewPanel({ side, review }: ReviewPanelProps) {
     cardSummary.total > 0 ? Math.round((cardSummary.mastered / cardSummary.total) * 100) : 0;
 
   return (
-    <section className="flex flex-col gap-3 rounded-xl border border-slate-600 bg-slate-800/70 p-4 shadow-lg shadow-slate-950/40">
+    <Panel className="flex flex-col gap-3 shadow-lg shadow-slate-950/40">
       <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-300">
         Entraînement · {sideLabel}
       </h2>
 
       {/* Statut de la partie */}
       {isLineFinished ? (
-        <div className="flex flex-col gap-3 rounded-lg border border-emerald-500/30 bg-emerald-500/10 p-3">
+        <Callout tone="success" className="flex flex-col gap-3 p-3">
           <p className="text-sm font-semibold text-emerald-300">Ligne terminée</p>
           <p className="text-sm text-emerald-100">
             {finishedLineMistakes === 0
               ? "Sans faute, bravo !"
               : `${finishedLineMistakes} erreur${finishedLineMistakes === 1 ? "" : "s"} sur cette ligne.`}
           </p>
-          <button
-            type="button"
-            onClick={restartLine}
-            className="rounded-lg border border-emerald-400/40 bg-emerald-500/20 px-4 py-2 text-sm font-semibold text-emerald-100 transition hover:border-emerald-300/80 hover:bg-emerald-500/30"
-          >
+          <Button tone="emerald" onClick={restartLine} className="px-4 py-2 text-sm">
             Ligne suivante
-          </button>
-        </div>
+          </Button>
+        </Callout>
       ) : isOutOfRepertoire ? (
-        <div className="flex flex-col gap-3 rounded-lg border border-amber-500/30 bg-amber-500/10 p-3">
+        <Callout tone="warning" className="flex flex-col gap-3 p-3">
           <p className="text-sm text-amber-100">
             Cette position n&apos;est pas dans votre répertoire.
           </p>
-          <button
-            type="button"
-            onClick={restartLine}
-            className="rounded-lg border border-amber-400/40 bg-amber-500/20 px-4 py-2 text-sm font-semibold text-amber-100 transition hover:border-amber-300/80 hover:bg-amber-500/30"
-          >
+          <Button tone="amber" onClick={restartLine} className="px-4 py-2 text-sm">
             Recommencer la ligne
-          </button>
-        </div>
+          </Button>
+        </Callout>
       ) : (
         <div className="flex items-center justify-between gap-3">
           <p className="text-sm text-slate-200">
             {isPlayerTurn ? "À vous de jouer." : "L'adversaire joue…"}
           </p>
           {canRestartLine && (
-            <button
-              type="button"
-              onClick={restartLine}
-              className="text-xs text-slate-400 underline transition hover:text-slate-200"
-            >
+            <Button variant="link" onClick={restartLine}>
               Recommencer la ligne
-            </button>
+            </Button>
           )}
         </div>
       )}
 
       {/* Transposition reconnue */}
       {notice && !isLineFinished && (
-        <p className="rounded-lg border border-indigo-500/40 bg-indigo-500/10 p-3 text-sm leading-relaxed text-indigo-100">
+        <Callout as="p" tone="info" className="p-3 text-sm leading-relaxed text-indigo-100">
           {notice}
-        </p>
+        </Callout>
       )}
 
       {/* Retour d'erreur */}
       {feedback && !isLineFinished && (
-        <p className="rounded-lg border border-rose-500/40 bg-rose-500/10 p-3 text-sm leading-relaxed text-rose-200">
+        <Callout as="p" tone="danger" className="p-3 text-sm leading-relaxed text-rose-200">
           {feedback.message}
-        </p>
+        </Callout>
       )}
 
       {/* Chapitres concernés par la position */}
@@ -142,6 +133,6 @@ export function ReviewPanel({ side, review }: ReviewPanelProps) {
         {stats.completedLines > 1 ? "s" : ""} · {stats.perfectLines} sans faute · {stats.mistakes}{" "}
         erreur{stats.mistakes > 1 ? "s" : ""}
       </p>
-    </section>
+    </Panel>
   );
 }
