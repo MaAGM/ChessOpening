@@ -576,6 +576,54 @@ describe("useRepertoireEditor", () => {
     });
   });
 
+  describe("transpositions et dernier coup", () => {
+    const play = (result: { current: ReturnType<typeof useHarness> }, moves: [string, string][]) => {
+      for (const [from, to] of moves) {
+        act(() => {
+          result.current.editor.handlePieceDrop(from, to);
+        });
+      }
+    };
+
+    it("repère les deux nœuds qui aboutissent à la même position", () => {
+      const id = newRepertoire();
+      const { result } = renderHook(() => useHarness(id));
+
+      // 1.d4 Nf6 2.c4 e6 3.Nc3, puis, depuis le début, 1.c4 e6 2.Nc3 Nf6 3.d4
+      play(result, [["d2", "d4"], ["g8", "f6"], ["c2", "c4"], ["e7", "e6"], ["b1", "c3"]]);
+      expect(result.current.editor.transpositions.size).toBe(0);
+
+      act(() => result.current.editor.goTo("root"));
+      play(result, [["c2", "c4"], ["e7", "e6"], ["b1", "c3"], ["g8", "f6"], ["d2", "d4"]]);
+
+      expect(result.current.editor.transpositions.size).toBe(2);
+      const [a, b] = [...result.current.editor.transpositions.keys()];
+      expect(result.current.editor.transpositions.get(a)).toEqual([b]);
+    });
+
+    it("surligne le dernier coup du nœud affiché, y compris après une navigation", () => {
+      const id = newRepertoire();
+      const { result } = renderHook(() => useHarness(id));
+      expect(result.current.editor.lastMoveSquares).toEqual({}); // position initiale
+
+      play(result, [["e2", "e4"], ["e7", "e5"]]);
+      expect(Object.keys(result.current.editor.lastMoveSquares).sort()).toEqual(["e5", "e7"]);
+
+      act(() => result.current.editor.move("back")); // l'échiquier est rechargé : on retrouve e2-e4
+      expect(Object.keys(result.current.editor.lastMoveSquares).sort()).toEqual(["e2", "e4"]);
+
+      act(() => result.current.editor.goTo("root"));
+      expect(result.current.editor.lastMoveSquares).toEqual({});
+    });
+
+    it("surligne aussi le roque (roi de e1 à g1)", () => {
+      const id = newRepertoire();
+      const { result } = renderHook(() => useHarness(id));
+      play(result, [["e2", "e4"], ["e7", "e5"], ["g1", "f3"], ["b8", "c6"], ["f1", "c4"], ["g8", "f6"], ["e1", "g1"]]);
+      expect(Object.keys(result.current.editor.lastMoveSquares).sort()).toEqual(["e1", "g1"]);
+    });
+  });
+
   describe("session et robustesse", () => {
     it("remet le curseur et l'historique à zéro", () => {
       const id = newRepertoire();

@@ -65,4 +65,9 @@ export type RepertoireStoreState = {
   repertoires: Record<string, Repertoire>;
   /** Ordre d'affichage (ids de répertoires). */
   order: string[];
+  /**
+   * Pierres tombales : id d'un répertoire supprimé -> date de suppression (ms).
+   * Elles propagent les suppressions d'un appareil à l'autre (`deleted_at` dans le cloud).
+   */
+  deleted: Record<string, number>;
 };

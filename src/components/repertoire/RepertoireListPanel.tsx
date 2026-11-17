@@ -3,6 +3,11 @@
 import { useMemo, useState } from "react";
 import { useRepertoireStore } from "@/hooks/useRepertoireStore";
 import {
+  formatBytes,
+  getLocalStorageUsageBytes,
+  storageUsageRatio,
+} from "@/lib/browser/storageUsage";
+import {
   filterBySide,
   formatMoveCount,
   groupByCategory,
@@ -61,6 +66,10 @@ export function RepertoireListPanel({ onOpen }: RepertoireListPanelProps) {
 
   const editing = form?.kind === "edit" ? store.getRepertoire(form.id) : null;
 
+  // Espace occupé par les données du site : on prévient avant que la sauvegarde n'échoue.
+  const storageBytes = useMemo(() => getLocalStorageUsageBytes(), [store.repertoires]); // eslint-disable-line react-hooks/exhaustive-deps
+  const storageNearlyFull = storageUsageRatio(storageBytes) >= 0.8;
+
   /** Création d'un répertoire à partir d'un PGN analysé. */
   const handleImportSubmit = (analysis: PgnAnalysis) => (values: RepertoireFormValues): string | null => {
     const result = store.addRepertoire({
@@ -104,6 +113,17 @@ export function RepertoireListPanel({ onOpen }: RepertoireListPanelProps) {
           className="rounded-lg border border-rose-500/40 bg-rose-500/10 p-3 text-xs leading-relaxed text-rose-200"
         >
           {store.persistError}
+        </p>
+      )}
+
+      {storageNearlyFull && (
+        <p
+          role="status"
+          className="rounded-lg border border-amber-500/40 bg-amber-500/10 p-3 text-xs leading-relaxed text-amber-100"
+        >
+          L&apos;espace de stockage du navigateur est presque plein ({formatBytes(storageBytes)} utilisés
+          sur environ 5 Mo). Exportez vos répertoires en PGN pour les sauvegarder, puis supprimez ceux
+          dont vous n&apos;avez plus besoin.
         </p>
       )}
 

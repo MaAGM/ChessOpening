@@ -10,6 +10,7 @@ import {
   deleteBranch,
   demoteVariation,
   findInvalidNodeIds,
+  findTranspositions,
   getAdjacentVariationId,
   getChildren,
   getFenAt,
@@ -364,5 +365,49 @@ describe("computeFensIncremental", () => {
   it("écarte toujours un coup illégal", () => {
     const root: TreeRoot = { children: [{ id: "bad", san: "Qh5", children: [] }] };
     expect(computeFensIncremental(root, new Map()).has("bad")).toBe(false);
+  });
+});
+
+describe("findTranspositions", () => {
+  it("repère les nœuds qui aboutissent à la même position par des ordres de coups différents", () => {
+    // 1.d4 Nf6 2.c4 e6 3.Nc3  et  1.c4 e6 2.Nc3 Nf6 3.d4 : même position finale
+    const { root, ids } = build(
+      ["d4", "Nf6", "c4", "e6", "Nc3"],
+      ["c4", "e6", "Nc3", "Nf6", "d4"],
+    );
+    const found = findTranspositions(computeFens(root));
+
+    const a = ids["d4 Nf6 c4 e6 Nc3"];
+    const b = ids["c4 e6 Nc3 Nf6 d4"];
+    expect(found.get(a)).toEqual([b]);
+    expect(found.get(b)).toEqual([a]);
+    expect(found.size).toBe(2); // les positions intermédiaires sont toutes différentes
+  });
+
+  it("regroupe plus de deux occurrences d'une même position", () => {
+    const { root, ids } = build(
+      ["e4", "e5", "Nf3", "Nc6"],
+      ["Nf3", "Nc6", "e4", "e5"],
+      ["e4", "Nc6", "Nf3", "e5"],
+    );
+    const found = findTranspositions(computeFens(root));
+    const nodes = [ids["e4 e5 Nf3 Nc6"], ids["Nf3 Nc6 e4 e5"], ids["e4 Nc6 Nf3 e5"]];
+
+    for (const id of nodes) {
+      expect([...found.get(id)!].sort()).toEqual(nodes.filter((other) => other !== id).sort());
+    }
+  });
+
+  it("ne signale rien dans un arbre sans transposition, ni pour la position initiale", () => {
+    const { root } = build(["e4", "e5", "Nf3"], ["e4", "c5"], ["d4", "d5"]);
+    expect(findTranspositions(computeFens(root)).size).toBe(0);
+    expect(findTranspositions(new Map([[ROOT_ID, INITIAL_FEN]])).size).toBe(0);
+  });
+
+  it("ne rapproche pas un nœud de la position initiale elle-même", () => {
+    // Après 1.Nf3 Nf6 2.Ng1 Ng8, la position initiale est retrouvée : elle n'appartient à
+    // aucun autre nœud de l'arbre, ce n'est donc pas une transposition à signaler.
+    const { root } = build(["Nf3", "Nf6", "Ng1", "Ng8"]);
+    expect(findTranspositions(computeFens(root)).size).toBe(0);
   });
 });

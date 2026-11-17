@@ -1,30 +1,61 @@
 import type { Session, User } from "@supabase/supabase-js";
 import { getSupabaseClient } from "@/lib/supabase/client";
 import { createSupabaseReviewRemote } from "@/lib/supabase/reviewRemote";
-import {
-  applyRemoteState,
-  clearGuestState,
-  clearUserCache,
-  getSnapshot,
-  hasStateData,
-  readGuestState,
-  setStorageScope,
-  subscribeToChanges,
-  type ReviewStoreState,
-  type StorageScope,
-} from "@/lib/review/reviewStore";
+import { createSupabaseRepertoireRemote } from "@/lib/supabase/repertoireRemote";
+import * as reviewStore from "@/lib/review/reviewStore";
+import type { StorageScope } from "@/lib/review/reviewStore";
+import * as repertoireStore from "@/lib/repertoire/repertoireStore";
 import { ReviewSyncEngine } from "@/lib/review/reviewSync";
-import { updateSyncStatus } from "@/lib/review/syncStatus";
+import { RepertoireSyncEngine } from "@/lib/repertoire/repertoireSync";
+import { createSyncStatusChannel, updateSyncStatus } from "@/lib/review/syncStatus";
 import { setAuthState, type AuthState, type AuthUser } from "./authStore";
+
+// ===========================================================================
+// Cibles de synchronisation : un store à périmètre + son moteur
+// ===========================================================================
+
+export type SyncEnginePort<S> = {
+  attach(userId: string, guestState: S | null): Promise<boolean>;
+  detach(): Promise<boolean>;
+};
+
+/** Ce que le contrôleur utilise d'un store qui a un périmètre invité / utilisateur. */
+export type ScopedStorePort<S> = {
+  setStorageScope(scope: StorageScope): void;
+  readGuestState(): S;
+  clearUserCache(userId: string): void;
+  /** Vrai si les données d'invité méritent d'être migrées vers le compte. */
+  hasData(state: S): boolean;
+};
+
+/**
+ * Une cible = un store et son moteur, avec leur propre cycle de vie. Le contrôleur ne
+ * connaît que cette interface : les révisions et les répertoires ne partagent rien.
+ */
+export type SyncTarget = {
+  signIn(userId: string): Promise<void>;
+  signOut(userId: string): Promise<void>;
+};
+
+export function createSyncTarget<S>(store: ScopedStorePort<S>, engine: SyncEnginePort<S>): SyncTarget {
+  return {
+    async signIn(userId) {
+      // Les données d'invité sont lues AVANT de basculer sur le cache de l'utilisateur.
+      const guest = store.readGuestState();
+      store.setStorageScope({ kind: "user", userId });
+      await engine.attach(userId, store.hasData(guest) ? guest : null);
+    },
+    async signOut(userId) {
+      const synced = await engine.detach();
+      store.setStorageScope({ kind: "guest" });
+      if (synced) store.clearUserCache(userId);
+    },
+  };
+}
 
 // ===========================================================================
 // Contrôleur : réagit aux changements de session (testable, sans Supabase réel)
 // ===========================================================================
-
-export type SyncEnginePort = {
-  attach(userId: string, guestState: ReviewStoreState | null): Promise<boolean>;
-  detach(): Promise<boolean>;
-};
 
 export type AuthSyncDeps = {
   /** Client Supabase (seul `auth.onAuthStateChange` est utilisé) ; null si non configuré. */
@@ -35,12 +66,8 @@ export type AuthSyncDeps = {
       ): { data: { subscription: { unsubscribe(): void } } };
     };
   } | null;
-  engine: SyncEnginePort;
-  store: {
-    setStorageScope(scope: StorageScope): void;
-    readGuestState(): ReviewStoreState;
-    clearUserCache(userId: string): void;
-  };
+  /** Stores synchronisés (révisions, répertoires), traités en parallèle. */
+  targets: SyncTarget[];
   setAuthState(patch: Partial<AuthState>): void;
 };
 
@@ -62,7 +89,7 @@ export function toAuthUser(user: User): AuthUser {
 }
 
 /**
- * Orchestre le passage invité <-> connecté.
+ * Orchestre le passage invité <-> connecté, pour chaque cible.
  *
  *  - connexion : lit les données d'invité, bascule sur le cache de l'utilisateur, puis le
  *    moteur fusionne cache + cloud + invité et pousse la différence (auto-migration) ;
@@ -88,10 +115,7 @@ export function createAuthSyncController(deps: AuthSyncDeps) {
   async function signInFlow(user: User): Promise<void> {
     activeUserId = user.id;
     deps.setAuthState({ status: "authenticated", user: toAuthUser(user) });
-
-    const guest = deps.store.readGuestState();
-    deps.store.setStorageScope({ kind: "user", userId: user.id });
-    await deps.engine.attach(user.id, hasStateData(guest) ? guest : null);
+    await Promise.all(deps.targets.map((target) => target.signIn(user.id)));
   }
 
   async function signOutFlow(): Promise<void> {
@@ -99,9 +123,7 @@ export function createAuthSyncController(deps: AuthSyncDeps) {
     activeUserId = null;
     if (!userId) return;
 
-    const synced = await deps.engine.detach();
-    deps.store.setStorageScope({ kind: "guest" });
-    if (synced) deps.store.clearUserCache(userId);
+    await Promise.all(deps.targets.map((target) => target.signOut(userId)));
     deps.setAuthState({ status: "guest", user: null });
   }
 
@@ -170,46 +192,71 @@ export function startAuthSync(): void {
   const client = getSupabaseClient();
   if (!client) {
     updateSyncStatus({ state: "disabled" });
-    controller = createAuthSyncController({
-      client: null,
-      engine: { attach: async () => false, detach: async () => false },
-      store: { setStorageScope, readGuestState, clearUserCache },
-      setAuthState,
-    });
+    controller = createAuthSyncController({ client: null, targets: [], setAuthState });
     controller.start();
     return;
   }
 
-  const engine = new ReviewSyncEngine({
+  // Deux moteurs indépendants, chacun avec son canal d'état (combinés pour l'affichage).
+  const reviewEngine = new ReviewSyncEngine({
     remote: createSupabaseReviewRemote(client),
-    getState: getSnapshot,
-    applyRemoteState,
-    setStatus: updateSyncStatus,
-    onGuestMigrated: clearGuestState,
+    getState: reviewStore.getSnapshot,
+    applyRemoteState: reviewStore.applyRemoteState,
+    setStatus: createSyncStatusChannel("review"),
+    onGuestMigrated: reviewStore.clearGuestState,
   });
+  const repertoireEngine = new RepertoireSyncEngine({
+    remote: createSupabaseRepertoireRemote(client),
+    getState: repertoireStore.getSnapshot,
+    applyRemoteState: repertoireStore.applyRemoteState,
+    setStatus: createSyncStatusChannel("repertoires"),
+    onGuestMigrated: repertoireStore.clearGuestState,
+  });
+  const engines = [reviewEngine, repertoireEngine];
 
   // Chaque action locale est envoyée au cloud ; les changements venus du cloud
   // ou d'un autre onglet ne sont pas renvoyés.
-  subscribeToChanges((_prev, _next, source) => {
-    if (source === "local") engine.notifyLocalChange();
+  reviewStore.subscribeToChanges((_prev, _next, source) => {
+    if (source === "local") reviewEngine.notifyLocalChange();
+  });
+  repertoireStore.subscribeToChanges((_prev, _next, source) => {
+    if (source === "local") repertoireEngine.notifyLocalChange();
   });
 
-  window.addEventListener("online", () => engine.handleOnline());
+  window.addEventListener("online", () => engines.forEach((engine) => engine.handleOnline()));
 
   let lastRefresh = 0;
   document.addEventListener("visibilitychange", () => {
     if (document.visibilityState === "hidden") {
-      void engine.flush(); // dernier envoi avant de quitter l'onglet
+      engines.forEach((engine) => void engine.flush()); // dernier envoi avant de quitter l'onglet
     } else if (Date.now() - lastRefresh > REFRESH_MIN_INTERVAL_MS) {
       lastRefresh = Date.now();
-      void engine.refresh(); // récupère les progrès faits sur un autre appareil
+      engines.forEach((engine) => void engine.refresh()); // progrès faits sur un autre appareil
     }
   });
 
   controller = createAuthSyncController({
     client,
-    engine,
-    store: { setStorageScope, readGuestState, clearUserCache },
+    targets: [
+      createSyncTarget(
+        {
+          setStorageScope: reviewStore.setStorageScope,
+          readGuestState: reviewStore.readGuestState,
+          clearUserCache: reviewStore.clearUserCache,
+          hasData: reviewStore.hasStateData,
+        },
+        reviewEngine,
+      ),
+      createSyncTarget(
+        {
+          setStorageScope: repertoireStore.setStorageScope,
+          readGuestState: repertoireStore.readGuestState,
+          clearUserCache: repertoireStore.clearUserCache,
+          hasData: repertoireStore.hasRepertoireData,
+        },
+        repertoireEngine,
+      ),
+    ],
     setAuthState,
   });
   controller.start();

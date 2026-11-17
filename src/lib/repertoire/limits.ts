@@ -7,3 +7,11 @@ export const REPERTOIRE_LIMITS = {
   maxCommentLength: 2000,
   maxPgnBytes: 2 * 1024 * 1024,
 } as const;
+
+export type LimitStatus = "ok" | "near" | "full";
+
+/** Où en est-on par rapport à une limite : confortable, proche (90 % par défaut) ou atteinte. */
+export function getLimitStatus(count: number, max: number, nearRatio = 0.9): LimitStatus {
+  if (count >= max) return "full";
+  return count >= max * nearRatio ? "near" : "ok";
+}

@@ -3,6 +3,8 @@
 import { useState } from "react";
 import type { RepertoireEditor } from "@/hooks/useRepertoireEditor";
 import { formatMoveCount } from "@/lib/repertoire/grouping";
+import { REPERTOIRE_LIMITS, getLimitStatus } from "@/lib/repertoire/limits";
+import { EDITOR_SHORTCUTS } from "@/lib/repertoire/shortcuts";
 import { countNodes } from "@/lib/repertoire/repertoireTree";
 import { EditorToolbar } from "./EditorToolbar";
 import { MoveInspector } from "./MoveInspector";
@@ -19,6 +21,7 @@ export function RepertoireEditorPanel({ editor }: RepertoireEditorPanelProps) {
   const { repertoire } = editor;
   const [pgnMode, setPgnMode] = useState<"import" | "export" | null>(null);
   const [importMessage, setImportMessage] = useState<string | null>(null);
+  const [showShortcuts, setShowShortcuts] = useState(false);
 
   if (!repertoire) {
     return (
@@ -29,6 +32,8 @@ export function RepertoireEditorPanel({ editor }: RepertoireEditorPanelProps) {
   }
 
   const pending = editor.pendingDelete;
+  const nodeCount = countNodes(repertoire);
+  const limitStatus = getLimitStatus(nodeCount, REPERTOIRE_LIMITS.maxNodes);
 
   const openPgn = (mode: "import" | "export") => {
     setImportMessage(null);
@@ -92,6 +97,17 @@ export function RepertoireEditorPanel({ editor }: RepertoireEditorPanelProps) {
           >
             ✕
           </button>
+        </p>
+      )}
+
+      {limitStatus !== "ok" && (
+        <p
+          role="status"
+          className="rounded-lg border border-amber-500/40 bg-amber-500/10 p-2 text-xs leading-relaxed text-amber-100"
+        >
+          {limitStatus === "full"
+            ? `Limite atteinte : ${REPERTOIRE_LIMITS.maxNodes} coups. Les nouveaux coups sont refusés : supprimez des branches ou répartissez vos lignes dans plusieurs répertoires.`
+            : `Ce répertoire approche de la limite (${nodeCount} / ${REPERTOIRE_LIMITS.maxNodes} coups). Exportez-le en PGN et répartissez vos lignes dans plusieurs répertoires.`}
         </p>
       )}
 
@@ -171,8 +187,29 @@ export function RepertoireEditorPanel({ editor }: RepertoireEditorPanelProps) {
             <VariationTree
               root={editor.root}
               fens={editor.fens}
+              transpositions={editor.transpositions}
               cursorId={editor.cursorId}
               onSelect={editor.goTo}
+              emptyContent={
+                <div className="flex flex-col gap-2">
+                  <p className="font-medium text-slate-100">Ce répertoire est vide.</p>
+                  <ol className="list-decimal pl-4 text-xs leading-relaxed text-slate-400">
+                    <li>Jouez vos coups sur l&apos;échiquier : chaque coup crée la ligne.</li>
+                    <li>
+                      Revenez en arrière (← ou un clic dans l&apos;arbre) et jouez une alternative
+                      pour ajouter une variante.
+                    </li>
+                    <li>Ou importez un PGN (étude Lichess, partie annotée…).</li>
+                  </ol>
+                  <button
+                    type="button"
+                    onClick={() => openPgn("import")}
+                    className="w-fit rounded-lg border border-sky-400/40 bg-sky-500/15 px-3 py-1.5 text-xs font-semibold text-sky-100 transition hover:bg-sky-500/25"
+                  >
+                    Importer un PGN
+                  </button>
+                </div>
+              }
             />
           </div>
 
@@ -183,9 +220,26 @@ export function RepertoireEditorPanel({ editor }: RepertoireEditorPanelProps) {
             onSetComment={(nodeId, comment) => editor.annotate(nodeId, { comment })}
           />
 
-          <p className="text-[11px] leading-relaxed text-slate-500">
-            ← → naviguer · ↑ ↓ changer de variante · Début / Fin · Suppr supprimer · Ctrl+Z annuler
-          </p>
+          <div>
+            <button
+              type="button"
+              aria-expanded={showShortcuts}
+              onClick={() => setShowShortcuts((open) => !open)}
+              className="text-[11px] text-slate-400 underline transition hover:text-slate-200"
+            >
+              Raccourcis clavier
+            </button>
+            {showShortcuts && (
+              <dl className="mt-1 grid grid-cols-[auto_1fr] gap-x-3 gap-y-0.5 text-[11px] text-slate-400">
+                {EDITOR_SHORTCUTS.map((shortcut) => (
+                  <div key={shortcut.keys} className="contents">
+                    <dt className="font-medium text-slate-200">{shortcut.keys}</dt>
+                    <dd>{shortcut.description}</dd>
+                  </div>
+                ))}
+              </dl>
+            )}
+          </div>
         </>
       )}
     </section>

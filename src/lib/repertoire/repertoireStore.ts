@@ -9,22 +9,32 @@ import {
   type RepertoireStoreState,
 } from "./types";
 import type { Side } from "@/lib/review/types";
+import type { StorageScope } from "@/lib/review/reviewStore";
 
 /**
  * Store des répertoires de l'utilisateur.
  *
- * VOLONTAIREMENT local à l'appareil, indépendant du mode invité / connecté : tant que
- * la synchronisation cloud des répertoires n'existe pas, lier ce store au compte ferait
- * disparaître les répertoires d'un invité à sa connexion. Il suffira, le moment venu,
- * de lui donner un périmètre comme à `reviewStore`.
+ * Comme `reviewStore`, il a un périmètre (`StorageScope`) : la clé d'invité, ou un cache
+ * hors ligne par utilisateur connecté, synchronisé avec la table `user_repertoires`
+ * (voir `repertoireSync.ts` et `authSync.ts`). Les suppressions laissent une pierre tombale
+ * (`deleted`) pour être propagées aux autres appareils.
  */
-const STORAGE_KEY = "chess-opening:repertoires-v1";
+// Invité : la clé garde son nom d'origine (les données existantes restent lisibles).
+const GUEST_STORAGE_KEY = "chess-opening:repertoires-v1";
+// Connecté : un cache hors ligne par utilisateur, séparé des données d'invité.
+const USER_STORAGE_PREFIX = "chess-opening:repertoires-v1:user:";
 const STORE_VERSION = 1;
 
 export type RepertoireError = "invalid-name" | "not-found" | "limit-reached" | "invalid-order";
 export type StoreResult<T> = { ok: true; value: T } | { ok: false; error: RepertoireError };
 
-export type ChangeSource = "local" | "external";
+/**
+ * Origine d'un changement :
+ *  - local    : action de l'utilisateur (à synchroniser) ;
+ *  - remote   : état fusionné avec le cloud (déjà synchronisé) ;
+ *  - external : modification venue d'un autre onglet (cet onglet n'a rien à pousser).
+ */
+export type ChangeSource = "local" | "remote" | "external";
 export type ChangeListener = (
   prev: RepertoireStoreState,
   next: RepertoireStoreState,
@@ -46,18 +56,40 @@ function has(obj: object, key: string): boolean {
   return Object.prototype.hasOwnProperty.call(obj, key);
 }
 
-function createEmptyState(): RepertoireStoreState {
-  return { version: STORE_VERSION, repertoires: {}, order: [] };
+function isTimestamp(value: unknown): value is number {
+  return typeof value === "number" && Number.isFinite(value);
+}
+
+export function createEmptyRepertoireState(): RepertoireStoreState {
+  return { version: STORE_VERSION, repertoires: {}, order: [], deleted: {} };
 }
 
 /** Snapshot serveur (SSR + hydratation) : référence stable, jamais mutée. */
-const EMPTY_STATE: RepertoireStoreState = Object.freeze(createEmptyState());
+const EMPTY_STATE: RepertoireStoreState = Object.freeze(createEmptyRepertoireState());
+
+/** Vrai si l'état contient au moins un répertoire (les pierres tombales seules ne comptent pas). */
+export function hasRepertoireData(state: RepertoireStoreState): boolean {
+  return state.order.length > 0;
+}
+
+function storageKeyOf(scope: StorageScope): string {
+  return scope.kind === "guest" ? GUEST_STORAGE_KEY : USER_STORAGE_PREFIX + scope.userId;
+}
 
 function createRepertoireId(): string {
   if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
     return crypto.randomUUID();
   }
   return `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`;
+}
+
+/**
+ * Date d'une nouvelle modification : toujours postérieure à la version modifiée, même si
+ * l'horloge de cet appareil retarde sur celle de l'appareil qui l'a écrite. Sans cela, la
+ * modification perdrait la résolution des conflits (et serait refusée par le serveur).
+ */
+function nextTimestamp(previous: number): number {
+  return Math.max(Date.now(), previous + 1);
 }
 
 function normalizeName(name: string): string | null {
@@ -76,7 +108,7 @@ function normalizeComment(comment: string | undefined): string | undefined {
 }
 
 // ---------------------------------------------------------------------------
-// Validation des données lues dans le localStorage
+// Validation des données lues (localStorage ou cloud)
 // ---------------------------------------------------------------------------
 function sanitizeArrows(raw: unknown): [string, string][] | undefined {
   if (!Array.isArray(raw)) return undefined;
@@ -133,12 +165,13 @@ function sanitizeOrigin(raw: unknown): RepertoireOrigin {
   return { kind: "custom" };
 }
 
-function sanitizeRepertoire(raw: unknown): Repertoire | null {
+/** Valide et nettoie un répertoire (lu dans le localStorage ou reçu du cloud) ; null s'il est inutilisable. */
+export function sanitizeRepertoire(raw: unknown): Repertoire | null {
   if (!isRecord(raw)) return null;
   if (typeof raw.id !== "string" || raw.id === "") return null;
   if (raw.side !== "white" && raw.side !== "black") return null;
 
-  const createdAt = typeof raw.createdAt === "number" ? raw.createdAt : Date.now();
+  const createdAt = isTimestamp(raw.createdAt) ? raw.createdAt : Date.now();
   const comment = typeof raw.comment === "string" ? normalizeComment(raw.comment) : undefined;
 
   return {
@@ -151,7 +184,7 @@ function sanitizeRepertoire(raw: unknown): Repertoire | null {
     children: sanitizeNodes(raw.children, 1, new Set()),
     origin: sanitizeOrigin(raw.origin),
     createdAt,
-    updatedAt: typeof raw.updatedAt === "number" ? raw.updatedAt : createdAt,
+    updatedAt: isTimestamp(raw.updatedAt) ? raw.updatedAt : createdAt,
   };
 }
 
@@ -180,13 +213,23 @@ export function sanitizeRepertoireState(raw: unknown): RepertoireStoreState | nu
     .sort((a, b) => a.createdAt - b.createdAt);
   order.push(...missing.map((r) => r.id));
 
-  return { version: STORE_VERSION, repertoires, order };
+  // Pierres tombales (absentes des données d'avant la synchronisation). Un répertoire
+  // présent l'emporte toujours sur une pierre tombale incohérente : on ne perd rien.
+  const deleted: Record<string, number> = {};
+  if (isRecord(raw.deleted)) {
+    for (const [id, deletedAt] of Object.entries(raw.deleted)) {
+      if (id !== "" && isTimestamp(deletedAt) && !has(repertoires, id)) deleted[id] = deletedAt;
+    }
+  }
+
+  return { version: STORE_VERSION, repertoires, order, deleted };
 }
 
-function load(): RepertoireStoreState {
+/** Lit l'état persisté d'un périmètre (invité ou utilisateur), sans toucher au cache. */
+function loadScope(target: StorageScope): RepertoireStoreState {
   if (!hasBrowserStorage()) return EMPTY_STATE;
   try {
-    const raw = window.localStorage.getItem(STORAGE_KEY);
+    const raw = window.localStorage.getItem(storageKeyOf(target));
     if (raw) {
       const parsed = sanitizeRepertoireState(JSON.parse(raw));
       if (parsed) return parsed;
@@ -194,7 +237,16 @@ function load(): RepertoireStoreState {
   } catch {
     // JSON corrompu : on repart d'un état vide plutôt que de bloquer l'application.
   }
-  return createEmptyState();
+  return createEmptyRepertoireState();
+}
+
+function removeKey(key: string): void {
+  if (!hasBrowserStorage()) return;
+  try {
+    window.localStorage.removeItem(key);
+  } catch {
+    // Sans importance : la clé sera simplement relue plus tard.
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -228,7 +280,7 @@ export function subscribePersistError(listener: () => void): () => void {
 function persist(state: RepertoireStoreState): void {
   if (!hasBrowserStorage()) return;
   try {
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    window.localStorage.setItem(storageKeyOf(scope), JSON.stringify(state));
     setPersistError(null);
   } catch (error) {
     console.warn("[repertoireStore] Persistance impossible :", error);
@@ -242,6 +294,7 @@ function persist(state: RepertoireStoreState): void {
 // ---------------------------------------------------------------------------
 // Store externe (contrat useSyncExternalStore)
 // ---------------------------------------------------------------------------
+let scope: StorageScope = { kind: "guest" };
 let cache: RepertoireStoreState | null = null;
 const listeners = new Set<() => void>();
 const changeListeners = new Set<ChangeListener>();
@@ -250,19 +303,19 @@ function notify(): void {
   listeners.forEach((listener) => listener());
 }
 
-function commit(next: RepertoireStoreState): void {
+function commit(next: RepertoireStoreState, source: ChangeSource = "local"): void {
   const prev = getSnapshot();
   cache = next;
   persist(next);
   notify();
-  changeListeners.forEach((listener) => listener(prev, next, "local"));
+  changeListeners.forEach((listener) => listener(prev, next, source));
 }
 
 /** Synchronisation entre onglets. */
 function onStorageEvent(event: StorageEvent): void {
-  if (event.key !== STORAGE_KEY && event.key !== null) return;
+  if (event.key !== storageKeyOf(scope) && event.key !== null) return;
   const prev = getSnapshot();
-  cache = load();
+  cache = loadScope(scope);
   notify();
   changeListeners.forEach((listener) => listener(prev, cache!, "external"));
 }
@@ -277,7 +330,7 @@ export function subscribe(listener: () => void): () => void {
 }
 
 export function getSnapshot(): RepertoireStoreState {
-  if (cache === null) cache = load();
+  if (cache === null) cache = loadScope(scope);
   return cache;
 }
 
@@ -285,12 +338,53 @@ export function getServerSnapshot(): RepertoireStoreState {
   return EMPTY_STATE;
 }
 
-/** Abonnement aux changements, avec leur origine (servira à la synchronisation cloud). */
+/** Abonnement aux changements, avec leur origine (sert au moteur de synchronisation). */
 export function subscribeToChanges(listener: ChangeListener): () => void {
   changeListeners.add(listener);
   return () => {
     changeListeners.delete(listener);
   };
+}
+
+// ---------------------------------------------------------------------------
+// Périmètre de stockage (invité / connecté) et synchronisation
+// ---------------------------------------------------------------------------
+export function getStorageScope(): StorageScope {
+  return scope;
+}
+
+/** Bascule entre le mode invité et le cache d'un utilisateur : l'état affiché est rechargé. */
+export function setStorageScope(next: StorageScope): void {
+  if (storageKeyOf(next) === storageKeyOf(scope) && cache !== null) return;
+  scope = next;
+  cache = loadScope(next);
+  notify();
+}
+
+/** État enregistré en mode invité (lu depuis le localStorage, sans changer de périmètre). */
+export function readGuestState(): RepertoireStoreState {
+  return loadScope({ kind: "guest" });
+}
+
+/** Supprime les données d'invité (après leur migration réussie vers le compte). */
+export function clearGuestState(): void {
+  removeKey(GUEST_STORAGE_KEY);
+  if (scope.kind === "guest") {
+    cache = createEmptyRepertoireState();
+    notify();
+  }
+}
+
+/** Supprime le cache hors ligne d'un utilisateur (à la déconnexion, une fois tout synchronisé). */
+export function clearUserCache(userId: string): void {
+  removeKey(storageKeyOf({ kind: "user", userId }));
+}
+
+/** Applique un état fusionné avec le cloud : persisté et affiché, sans être re-poussé. */
+export function applyRemoteState(next: RepertoireStoreState): void {
+  const prev = getSnapshot();
+  if (JSON.stringify(prev) === JSON.stringify(next)) return;
+  commit(next, "remote");
 }
 
 // ---------------------------------------------------------------------------
@@ -375,7 +469,7 @@ export function updateRepertoireMeta(id: string, patch: RepertoireMetaPatch): St
     next.comment === current.comment;
   if (unchanged) return { ok: true, value: null };
 
-  next.updatedAt = Date.now();
+  next.updatedAt = nextTimestamp(current.updatedAt);
   commit({ ...state, repertoires: { ...state.repertoires, [id]: next } });
   return { ok: true, value: null };
 }
@@ -389,17 +483,26 @@ export function updateRepertoireTree(id: string, children: RepertoireNode[]): St
 
   commit({
     ...state,
-    repertoires: { ...state.repertoires, [id]: { ...current, children, updatedAt: Date.now() } },
+    repertoires: {
+      ...state.repertoires,
+      [id]: { ...current, children, updatedAt: nextTimestamp(current.updatedAt) },
+    },
   });
   return { ok: true, value: null };
 }
 
+/** Supprime un répertoire et laisse une pierre tombale (suppression douce côté cloud). */
 export function deleteRepertoire(id: string): StoreResult<null> {
   const state = getSnapshot();
   if (!has(state.repertoires, id)) return { ok: false, error: "not-found" };
 
-  const { [id]: _removed, ...rest } = state.repertoires;
-  commit({ ...state, repertoires: rest, order: state.order.filter((other) => other !== id) });
+  const { [id]: removed, ...rest } = state.repertoires;
+  commit({
+    ...state,
+    repertoires: rest,
+    order: state.order.filter((other) => other !== id),
+    deleted: { ...state.deleted, [id]: nextTimestamp(removed.updatedAt) },
+  });
   return { ok: true, value: null };
 }
 
@@ -420,7 +523,11 @@ export function duplicateRepertoire(id: string): StoreResult<string> {
   });
 }
 
-/** Réordonne les répertoires : `order` doit contenir exactement les identifiants existants. */
+/**
+ * Réordonne les répertoires : `order` doit contenir exactement les identifiants existants.
+ * Les répertoires qui changent de place reçoivent une nouvelle date de modification : leur
+ * position est synchronisée avec eux (`data.position`) et doit gagner les conflits.
+ */
 export function reorderRepertoires(order: string[]): StoreResult<null> {
   const state = getSnapshot();
   const sameSet =
@@ -428,7 +535,15 @@ export function reorderRepertoires(order: string[]): StoreResult<null> {
     new Set(order).size === order.length &&
     order.every((id) => has(state.repertoires, id));
   if (!sameSet) return { ok: false, error: "invalid-order" };
+  if (order.every((id, index) => state.order[index] === id)) return { ok: true, value: null };
 
-  commit({ ...state, order });
+  const repertoires = { ...state.repertoires };
+  order.forEach((id, index) => {
+    if (state.order[index] !== id) {
+      repertoires[id] = { ...repertoires[id], updatedAt: nextTimestamp(repertoires[id].updatedAt) };
+    }
+  });
+
+  commit({ ...state, repertoires, order });
   return { ok: true, value: null };
 }

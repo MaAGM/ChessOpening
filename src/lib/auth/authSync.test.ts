@@ -1,8 +1,8 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import type { Session } from "@supabase/supabase-js";
-import { createAuthSyncController, toAuthUser, type AuthSyncDeps } from "./authSync";
+import { createAuthSyncController, createSyncTarget, toAuthUser, type AuthSyncDeps } from "./authSync";
 import type { AuthState } from "./authStore";
-import type { ReviewStoreState } from "@/lib/review/reviewStore";
+import { hasStateData, type ReviewStoreState } from "@/lib/review/reviewStore";
 
 const emptyState = (): ReviewStoreState => ({
   version: 2,
@@ -55,8 +55,7 @@ describe("createAuthSyncController", () => {
                 },
               },
             },
-      engine,
-      store,
+      targets: [createSyncTarget({ ...store, hasData: hasStateData }, engine)],
       setAuthState: (patch) => authStates.push(patch),
     };
     const controller = createAuthSyncController(deps);
@@ -179,13 +178,71 @@ describe("createAuthSyncController", () => {
           },
         },
       },
-      engine: { attach: async () => true, detach: async () => true },
-      store: { setStorageScope() {}, readGuestState: emptyState, clearUserCache() {} },
+      targets: [],
       setAuthState() {},
     });
     controller.start();
     controller.start();
     expect(subscriptions).toBe(1);
+  });
+
+  it("connecte et déconnecte chaque cible (révisions et répertoires) avec ses propres données", async () => {
+    let emit: ((event: string, session: Session | null) => void) | null = null;
+    const makeTarget = (guest: { items: string[] }) => {
+      const store = {
+        setStorageScope: vi.fn(),
+        readGuestState: vi.fn(() => guest),
+        clearUserCache: vi.fn(),
+        hasData: (state: { items: string[] }) => state.items.length > 0,
+      };
+      const engine = {
+        attach: vi.fn<(userId: string, guest: { items: string[] } | null) => Promise<boolean>>(
+          async () => true,
+        ),
+        detach: vi.fn(async () => true),
+      };
+      return { store, engine, target: createSyncTarget(store, engine) };
+    };
+    const review = makeTarget({ items: [] });
+    const repertoires = makeTarget({ items: ["r1"] });
+
+    const controller = createAuthSyncController({
+      client: {
+        auth: {
+          onAuthStateChange: (callback) => {
+            emit = callback;
+            return { data: { subscription: { unsubscribe() {} } } };
+          },
+        },
+      },
+      targets: [review.target, repertoires.target],
+      setAuthState() {},
+    });
+    controller.start();
+
+    emit!("SIGNED_IN", session("u1"));
+    await vi.advanceTimersByTimeAsync(0);
+    await controller.idle();
+
+    expect(review.engine.attach).toHaveBeenCalledWith("u1", null);
+    expect(repertoires.engine.attach).toHaveBeenCalledWith("u1", { items: ["r1"] });
+    for (const t of [review, repertoires]) {
+      expect(t.store.setStorageScope).toHaveBeenCalledWith({ kind: "user", userId: "u1" });
+      // l'invité est lu avant de basculer de périmètre
+      expect(t.store.readGuestState.mock.invocationCallOrder[0]).toBeLessThan(
+        t.store.setStorageScope.mock.invocationCallOrder[0],
+      );
+    }
+
+    emit!("SIGNED_OUT", null);
+    await vi.advanceTimersByTimeAsync(0);
+    await controller.idle();
+
+    for (const t of [review, repertoires]) {
+      expect(t.engine.detach).toHaveBeenCalledTimes(1);
+      expect(t.store.setStorageScope).toHaveBeenLastCalledWith({ kind: "guest" });
+      expect(t.store.clearUserCache).toHaveBeenCalledWith("u1");
+    }
   });
 });
 

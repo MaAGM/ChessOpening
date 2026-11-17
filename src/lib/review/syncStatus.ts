@@ -37,6 +37,40 @@ export function getServerSyncStatus(): SyncStatus {
   return DISABLED_STATUS;
 }
 
+/** Du plus au moins important : l'interface affiche l'état le plus préoccupant. */
+const STATE_PRIORITY: SyncState[] = ["error", "offline", "syncing", "idle", "disabled"];
+
+/**
+ * Combine les états de plusieurs moteurs (révisions, répertoires) en un seul :
+ * l'état le plus préoccupant l'emporte, avec son message d'erreur ; la dernière
+ * synchronisation est la plus ancienne des moteurs actifs.
+ */
+export function combineSyncStatuses(list: SyncStatus[]): SyncStatus {
+  const state = STATE_PRIORITY.find((s) => list.some((status) => status.state === s)) ?? "disabled";
+  const error =
+    state === "error" || state === "offline"
+      ? (list.find((status) => status.state === state)?.error ?? null)
+      : null;
+  const times = list
+    .filter((status) => status.state !== "disabled" && status.lastSyncedAt !== null)
+    .map((status) => status.lastSyncedAt as number);
+  return { state, lastSyncedAt: times.length > 0 ? Math.min(...times) : null, error };
+}
+
+const channels = new Map<string, SyncStatus>();
+
+/**
+ * Canal d'état propre à un moteur de synchronisation : chaque moteur écrit dans le sien,
+ * et l'état global (celui affiché) est recalculé à partir de tous les canaux.
+ */
+export function createSyncStatusChannel(name: string): (patch: Partial<SyncStatus>) => void {
+  channels.set(name, DISABLED_STATUS);
+  return (patch) => {
+    channels.set(name, { ...(channels.get(name) ?? DISABLED_STATUS), ...patch });
+    updateSyncStatus(combineSyncStatuses([...channels.values()]));
+  };
+}
+
 export function updateSyncStatus(patch: Partial<SyncStatus>): void {
   const next = { ...status, ...patch };
   if (

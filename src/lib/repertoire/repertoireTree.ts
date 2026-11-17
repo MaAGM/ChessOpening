@@ -1,4 +1,5 @@
 import { Chess } from "chess.js";
+import { toPositionKey } from "@/lib/review/positionKey";
 import { REPERTOIRE_LIMITS } from "./limits";
 import { ROOT_ID, type RepertoireNode, type TreeRoot } from "./types";
 
@@ -183,6 +184,29 @@ export function computeFensIncremental(
 
   visit(root.children, INITIAL_FEN);
   return fens;
+}
+
+/**
+ * Transpositions : nœuds qui aboutissent à la même position qu'un autre nœud du même arbre
+ * (par un autre ordre de coups). Clé : id du nœud ; valeur : ids des autres nœuds de cette
+ * position. Seuls les nœuds concernés figurent dans la table. `fens` vient de `computeFens`.
+ */
+export function findTranspositions(fens: ReadonlyMap<string, string>): Map<string, string[]> {
+  const groups = new Map<string, string[]>();
+  for (const [id, fen] of fens) {
+    if (id === ROOT_ID) continue;
+    const key = toPositionKey(fen);
+    const group = groups.get(key);
+    if (group) group.push(id);
+    else groups.set(key, [id]);
+  }
+
+  const transpositions = new Map<string, string[]>();
+  for (const ids of groups.values()) {
+    if (ids.length < 2) continue;
+    for (const id of ids) transpositions.set(id, ids.filter((other) => other !== id));
+  }
+  return transpositions;
 }
 
 /** Ids des nœuds dont le coup est illégal dans leur position. */

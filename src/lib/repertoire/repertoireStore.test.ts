@@ -308,6 +308,135 @@ describe("repertoireStore (avec localStorage factice)", () => {
       expect(listener).not.toHaveBeenCalled();
     });
   });
+
+  describe("synchronisation : dates, pierres tombales et ordre", () => {
+    it("laisse une pierre tombale postérieure à la dernière modification", async () => {
+      vi.useFakeTimers();
+      vi.setSystemTime(1_000);
+      const store = await load();
+      const id = unwrap(store.createRepertoire({ name: "A", side: "white" }));
+
+      vi.setSystemTime(4_000);
+      unwrap(store.deleteRepertoire(id));
+
+      expect(store.getSnapshot().deleted).toEqual({ [id]: 4_000 });
+      expect(JSON.parse(data[STORAGE_KEY]).deleted).toEqual({ [id]: 4_000 });
+    });
+
+    it("date chaque modification après la version précédente, même si l'horloge recule", async () => {
+      vi.useFakeTimers();
+      vi.setSystemTime(10_000);
+      const store = await load();
+      const id = unwrap(store.createRepertoire({ name: "A", side: "white" }));
+
+      vi.setSystemTime(2_000); // horloge en retard sur celle qui a écrit la version courante
+      store.updateRepertoireMeta(id, { name: "B" });
+      expect(store.getSnapshot().repertoires[id].updatedAt).toBe(10_001);
+      store.updateRepertoireTree(id, [node("a", "e4")]);
+      expect(store.getSnapshot().repertoires[id].updatedAt).toBe(10_002);
+      store.deleteRepertoire(id);
+      expect(store.getSnapshot().deleted[id]).toBe(10_003);
+    });
+
+    it("ne date à nouveau que les répertoires qui changent de place", async () => {
+      vi.useFakeTimers();
+      vi.setSystemTime(1_000);
+      const store = await load();
+      const a = unwrap(store.createRepertoire({ name: "A", side: "white" }));
+      const b = unwrap(store.createRepertoire({ name: "B", side: "white" }));
+      const c = unwrap(store.createRepertoire({ name: "C", side: "white" }));
+
+      vi.setSystemTime(9_000);
+      unwrap(store.reorderRepertoires([b, a, c]));
+      const { repertoires } = store.getSnapshot();
+      expect([repertoires[a].updatedAt, repertoires[b].updatedAt, repertoires[c].updatedAt]).toEqual([
+        9_000, 9_000, 1_000,
+      ]);
+    });
+
+    it("ignore un réordonnancement identique", async () => {
+      const store = await load();
+      const a = unwrap(store.createRepertoire({ name: "A", side: "white" }));
+      const before = store.getSnapshot();
+      unwrap(store.reorderRepertoires([a]));
+      expect(store.getSnapshot()).toBe(before);
+    });
+  });
+
+  describe("périmètre invité / connecté", () => {
+    const USER_KEY = "chess-opening:repertoires-v1:user:u1";
+
+    it("sépare les données d'invité du cache de chaque utilisateur", async () => {
+      const store = await load();
+      const guestId = unwrap(store.createRepertoire({ name: "Invité", side: "white" }));
+
+      store.setStorageScope({ kind: "user", userId: "u1" });
+      expect(store.getStorageScope()).toEqual({ kind: "user", userId: "u1" });
+      expect(store.getSnapshot().order).toEqual([]);
+
+      const userId = unwrap(store.createRepertoire({ name: "Compte", side: "black" }));
+      expect(JSON.parse(data[USER_KEY]).order).toEqual([userId]);
+      expect(JSON.parse(data[STORAGE_KEY]).order).toEqual([guestId]);
+      expect(store.readGuestState().order).toEqual([guestId]);
+
+      store.setStorageScope({ kind: "guest" });
+      expect(store.getSnapshot().order).toEqual([guestId]);
+    });
+
+    it("efface les données d'invité après migration et le cache à la déconnexion", async () => {
+      const store = await load();
+      unwrap(store.createRepertoire({ name: "Invité", side: "white" }));
+      store.clearGuestState();
+      expect(data[STORAGE_KEY]).toBeUndefined();
+      expect(store.getSnapshot().order).toEqual([]);
+
+      store.setStorageScope({ kind: "user", userId: "u1" });
+      unwrap(store.createRepertoire({ name: "Compte", side: "black" }));
+      store.setStorageScope({ kind: "guest" });
+      store.clearUserCache("u1");
+      expect(data[USER_KEY]).toBeUndefined();
+    });
+
+    it("applique un état venu du cloud avec la source « remote », sauf s'il est identique", async () => {
+      const store = await load();
+      const sources: string[] = [];
+      store.subscribeToChanges((_prev, _next, source) => sources.push(source));
+
+      const remote = {
+        version: 1 as const,
+        repertoires: {
+          r1: {
+            id: "r1",
+            name: "Cloud",
+            side: "white" as const,
+            category: null,
+            reviewEnabled: true,
+            children: [],
+            origin: { kind: "custom" as const },
+            createdAt: 1,
+            updatedAt: 1,
+          },
+        },
+        order: ["r1"],
+        deleted: { old: 5 },
+      };
+      store.applyRemoteState(remote);
+      store.applyRemoteState(JSON.parse(JSON.stringify(remote)));
+
+      expect(sources).toEqual(["remote"]);
+      expect(store.getSnapshot().repertoires.r1.name).toBe("Cloud");
+      expect(JSON.parse(data[STORAGE_KEY]).deleted).toEqual({ old: 5 });
+    });
+
+    it("signale la présence de données à migrer", async () => {
+      const store = await load();
+      expect(store.hasRepertoireData(store.getSnapshot())).toBe(false);
+      const id = unwrap(store.createRepertoire({ name: "A", side: "white" }));
+      expect(store.hasRepertoireData(store.getSnapshot())).toBe(true);
+      store.deleteRepertoire(id);
+      expect(store.hasRepertoireData(store.getSnapshot())).toBe(false); // pierres tombales seules
+    });
+  });
 });
 
 // ---------------------------------------------------------------------------
@@ -428,5 +557,18 @@ describe("sanitizeRepertoireState", () => {
       ),
     )!;
     expect(result.order).toEqual(["c", "b", "a"]);
+  });
+
+  it("lit les données d'avant la synchronisation (sans pierres tombales)", () => {
+    expect(sanitizeRepertoireState(state([valid()]))!.deleted).toEqual({});
+  });
+
+  it("garde les pierres tombales valides, sauf pour un répertoire encore présent", () => {
+    const result = sanitizeRepertoireState({
+      ...state([valid()]),
+      deleted: { r1: 50, gone: 70, bad: "hier", "": 3 },
+    })!;
+    expect(result.deleted).toEqual({ gone: 70 });
+    expect(result.repertoires.r1).toBeDefined();
   });
 });

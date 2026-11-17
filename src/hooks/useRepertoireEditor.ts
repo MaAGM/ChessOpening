@@ -1,5 +1,6 @@
 "use client";
 
+import type { CSSProperties } from "react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Chess, type Square } from "chess.js";
 
@@ -33,7 +34,9 @@ import {
   INITIAL_FEN,
   computeFensIncremental,
   countNodes,
+  findTranspositions,
   getNode,
+  getParentId,
   getPathIds,
   mergeTrees,
   updateNode,
@@ -41,6 +44,7 @@ import {
 } from "@/lib/repertoire/repertoireTree";
 import { ROOT_ID, type MoveSymbol, type RepertoireNode, type TreeRoot } from "@/lib/repertoire/types";
 import { toPositionKey } from "@/lib/review/positionKey";
+import { sanToSquares } from "@/lib/review/reviewGraph";
 
 export type RepertoireEditorParams = {
   /** Répertoire ouvert dans l'éditeur. */
@@ -139,6 +143,23 @@ export function useRepertoireEditor(params: RepertoireEditorParams) {
     [root, cursorId],
   );
   const state: EditorState = { children, cursorId };
+
+  /** Nœuds qui aboutissent à la même position qu'un autre nœud de l'arbre. */
+  const transpositions = useMemo(() => findTranspositions(fens), [fens]);
+
+  /** Cases du dernier coup (celui qui mène au nœud affiché), pour les surligner sur l'échiquier. */
+  const lastMoveSquares = useMemo<Record<string, CSSProperties>>(() => {
+    if (!isActive || cursorId === ROOT_ID) return {};
+    const node = getNode(root, cursorId);
+    const parentId = getParentId(root, cursorId);
+    const parentFen = parentId ? fens.get(parentId) : undefined;
+    if (!node || !parentFen) return {};
+
+    const squares = sanToSquares(parentFen, node.san);
+    if (!squares) return {};
+    const style: CSSProperties = { backgroundColor: "rgba(245, 236, 142, 0.6)" };
+    return { [squares.from]: style, [squares.to]: style };
+  }, [isActive, cursorId, root, fens]);
 
   /** Coups illégaux (données corrompues) : absents de la table des positions. */
   const invalidCount = countNodes(root) - (fens.size - 1);
@@ -469,6 +490,8 @@ export function useRepertoireEditor(params: RepertoireEditorParams) {
     isActive,
     root,
     fens,
+    transpositions,
+    lastMoveSquares,
     cursorId,
     cursorPly,
     currentNode,

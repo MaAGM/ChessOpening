@@ -147,7 +147,13 @@ export default function HomePage() {
             position={currentFen}
             boardOrientation={boardOrientation}
             currentGame={currentGame}
-            squareStyles={isReviewMode ? { ...squareStyles, ...review.errorSquares } : squareStyles}
+            squareStyles={
+              isEditorMode
+                ? { ...editor.lastMoveSquares, ...squareStyles }
+                : isReviewMode
+                  ? { ...squareStyles, ...review.errorSquares }
+                  : squareStyles
+            }
             onPieceDrop={
               isEditorMode
                 ? editor.handlePieceDrop

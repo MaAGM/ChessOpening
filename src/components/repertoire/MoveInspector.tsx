@@ -119,6 +119,15 @@ function InspectorBody({
         onBlur={commit}
         className="resize-none rounded-md border border-slate-600 bg-slate-900 px-2 py-1.5 text-xs leading-relaxed text-slate-100 placeholder:text-slate-500"
       />
+      {draft.length >= REPERTOIRE_LIMITS.maxCommentLength * 0.8 && (
+        <p
+          className={`text-right text-[11px] ${
+            draft.length >= REPERTOIRE_LIMITS.maxCommentLength ? "text-rose-300" : "text-amber-300"
+          }`}
+        >
+          {draft.length} / {REPERTOIRE_LIMITS.maxCommentLength}
+        </p>
+      )}
     </section>
   );
 }

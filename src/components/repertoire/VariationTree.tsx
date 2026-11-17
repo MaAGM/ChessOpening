@@ -1,11 +1,14 @@
 "use client";
 
 import { Fragment, useEffect, useRef, type ReactNode, type RefObject } from "react";
-import { formatMove } from "@/lib/repertoire/notation";
+import { formatLine, formatMove } from "@/lib/repertoire/notation";
+import { getPathSans } from "@/lib/repertoire/repertoireTree";
 import { ROOT_ID, type RepertoireNode, type TreeRoot } from "@/lib/repertoire/types";
 
 type TreeContext = {
+  root: TreeRoot;
   fens: ReadonlyMap<string, string>;
+  transpositions: ReadonlyMap<string, string[]>;
   cursorId: string;
   onSelect: (id: string) => void;
   activeRef: RefObject<HTMLButtonElement | null>;
@@ -46,6 +49,26 @@ function MoveToken({
   );
 }
 
+/** Signale qu'une autre ligne du répertoire aboutit à la même position ; un clic y mène. */
+function TranspositionBadge({ others, ctx }: { others: string[]; ctx: TreeContext }) {
+  const target = others[0];
+  const line = formatLine(getPathSans(ctx.root, target));
+  const more = others.length > 1 ? ` (et ${others.length - 1} autre${others.length > 2 ? "s" : ""})` : "";
+  const label = `Même position qu'après ${line}${more}`;
+
+  return (
+    <button
+      type="button"
+      title={`${label} — cliquer pour y aller`}
+      aria-label={`${label}. Aller à cette position.`}
+      onClick={() => ctx.onSelect(target)}
+      className="mr-0.5 rounded px-1 text-[10px] text-sky-300 transition hover:bg-sky-500/20"
+    >
+      ⇄
+    </button>
+  );
+}
+
 /**
  * Une ligne : la suite principale se déroule à plat, et chaque alternative à un coup
  * s'affiche en retrait juste après lui. La boucle évite une récursion par coup : seule
@@ -62,7 +85,10 @@ function Line({ siblings, ply, ctx }: { siblings: RepertoireNode[]; ply: number;
 
     parts.push(
       <Fragment key={main.id}>
-        <MoveToken node={main} ply={currentPly} showNumber={needsNumber} ctx={ctx} />{" "}
+        <MoveToken node={main} ply={currentPly} showNumber={needsNumber} ctx={ctx} />
+        {ctx.transpositions.get(main.id) && (
+          <TranspositionBadge others={ctx.transpositions.get(main.id)!} ctx={ctx} />
+        )}{" "}
       </Fragment>,
     );
 
@@ -88,12 +114,25 @@ function Line({ siblings, ply, ctx }: { siblings: RepertoireNode[]; ply: number;
 type VariationTreeProps = {
   root: TreeRoot;
   fens: ReadonlyMap<string, string>;
+  /** Nœuds qui aboutissent à la même position qu'un autre nœud (voir findTranspositions). */
+  transpositions?: ReadonlyMap<string, string[]>;
   cursorId: string;
   onSelect: (id: string) => void;
+  /** Contenu affiché à la place du texte par défaut quand l'arbre est vide. */
+  emptyContent?: ReactNode;
 };
 
 /** Arbre des variantes sous forme de liste de coups, avec les variantes en retrait. */
-export function VariationTree({ root, fens, cursorId, onSelect }: VariationTreeProps) {
+const NO_TRANSPOSITIONS: ReadonlyMap<string, string[]> = new Map();
+
+export function VariationTree({
+  root,
+  fens,
+  transpositions = NO_TRANSPOSITIONS,
+  cursorId,
+  onSelect,
+  emptyContent,
+}: VariationTreeProps) {
   const activeRef = useRef<HTMLButtonElement | null>(null);
 
   // Le coup affiché reste visible quand on navigue au clavier dans une longue ligne.
@@ -101,7 +140,7 @@ export function VariationTree({ root, fens, cursorId, onSelect }: VariationTreeP
     activeRef.current?.scrollIntoView?.({ block: "nearest", inline: "nearest" });
   }, [cursorId]);
 
-  const ctx: TreeContext = { fens, cursorId, onSelect, activeRef };
+  const ctx: TreeContext = { root, fens, transpositions, cursorId, onSelect, activeRef };
 
   return (
     <div className="text-sm leading-7">
@@ -119,9 +158,11 @@ export function VariationTree({ root, fens, cursorId, onSelect }: VariationTreeP
       </button>
 
       {root.children.length === 0 ? (
-        <p className="text-slate-400">
-          Aucun coup pour l&apos;instant. Jouez votre premier coup sur l&apos;échiquier.
-        </p>
+        (emptyContent ?? (
+          <p className="text-slate-400">
+            Aucun coup pour l&apos;instant. Jouez votre premier coup sur l&apos;échiquier.
+          </p>
+        ))
       ) : (
         <div>
           <Line siblings={root.children} ply={0} ctx={ctx} />
