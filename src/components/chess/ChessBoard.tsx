@@ -48,6 +48,9 @@ type ChessBoardProps = {
   customArrows?: [string, string][];
   /** Couleur des flèches (orange par défaut ; vert pour les indices de révision). */
   arrowColor?: string;
+  /** Flèche du meilleur coup Stockfish, dessinée avec sa propre couleur. */
+  engineArrow?: [string, string] | null;
+  engineArrowColor?: string;
   onPieceDrop: (sourceSquare: string, targetSquare: string | null) => boolean;
   onPieceDragBegin: (args: PieceHandlerArgs) => void;
   onPieceDragEnd: () => void;
@@ -62,6 +65,8 @@ export function ChessBoard({
   squareStyles,
   customArrows,
   arrowColor = DEFAULT_ARROW_COLOR,
+  engineArrow = null,
+  engineArrowColor = DEFAULT_ARROW_COLOR,
   onPieceDrop,
   onPieceDragBegin,
   onPieceDragEnd,
@@ -73,6 +78,13 @@ export function ChessBoard({
     endSquare,
     color: arrowColor,
   }));
+  // Une flèche déjà dessinée par l'écran (cours, indice) n'est pas doublée.
+  if (
+    engineArrow &&
+    !boardArrows.some((a) => a.startSquare === engineArrow[0] && a.endSquare === engineArrow[1])
+  ) {
+    boardArrows.push({ startSquare: engineArrow[0], endSquare: engineArrow[1], color: engineArrowColor });
+  }
 
   return (
     <div className="select-none bg-[#769656]">

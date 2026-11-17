@@ -20,6 +20,9 @@
 # production
 /build
 
+# moteur Stockfish copié depuis node_modules (scripts/copy-stockfish.mjs)
+/public/engine/
+
 # misc
 .DS_Store
 *.pem

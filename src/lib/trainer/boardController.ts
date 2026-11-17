@@ -12,6 +12,9 @@ export type BoardArrow = [string, string];
 /** Couleur des flèches d'indice en révision (les autres modes gardent la couleur par défaut de l'échiquier). */
 export const REVIEW_HINT_ARROW_COLOR = "#22c55e";
 
+/** Couleur de la flèche du meilleur coup Stockfish (distincte des flèches de cours). */
+export const ENGINE_ARROW_COLOR = "#3b82f6";
+
 /** Ce que chaque écran expose à l'échiquier (sous-ensemble structurel de son manager). */
 export type BoardInteraction = {
   handlePieceDrop: (source: string, target: string | null) => boolean;
@@ -44,6 +47,8 @@ export type BoardControllerInput = {
   editor: EditorBoardSource;
   review: ReviewBoardSource;
   tutorial: TutorialBoardSource;
+  /** Meilleur coup du moteur pour la position affichée (`null` / absent : aucun). */
+  engineBestMove?: BoardArrow | null;
 };
 
 /** Contrat unique entre l'écran actif et l'échiquier. */
@@ -56,12 +61,24 @@ export type BoardController = {
   arrowColor: string | undefined;
   onPieceDrop: (source: string, target: string | null) => boolean;
   onSquareClick: (square: string) => void;
+  /** Barre d'évaluation et flèche du moteur affichées sur cet écran. */
+  showEngine: boolean;
+  /** Flèche du meilleur coup (`null` si masquée ou inconnue). */
+  engineArrow: BoardArrow | null;
 };
 
 export function boardModeKind(panelMode: PanelMode): BoardModeKind {
   if (panelMode === "repertoire_editor") return "editor";
   if (panelMode === "review_active") return "review";
   return "tutorial";
+}
+
+/**
+ * L'analyse Stockfish est masquée pendant les exercices (révision, apprentissage
+ * d'une ligne) : elle donnerait la réponse. Elle reste disponible ailleurs.
+ */
+export function engineAllowed(panelMode: PanelMode): boolean {
+  return panelMode !== "review_active" && panelMode !== "learning_active";
 }
 
 /**
@@ -74,6 +91,8 @@ export function boardModeKind(panelMode: PanelMode): BoardModeKind {
 export function resolveBoardController(input: BoardControllerInput): BoardController {
   const { panelMode, baseSquareStyles, editor, review, tutorial } = input;
   const kind = boardModeKind(panelMode);
+  const showEngine = engineAllowed(panelMode);
+  const engine = { showEngine, engineArrow: showEngine ? (input.engineBestMove ?? null) : null };
 
   switch (kind) {
     case "editor":
@@ -85,6 +104,7 @@ export function resolveBoardController(input: BoardControllerInput): BoardContro
         arrowColor: undefined,
         onPieceDrop: editor.handlePieceDrop,
         onSquareClick: editor.handleSquareClick,
+        ...engine,
       };
     case "review":
       return {
@@ -95,6 +115,7 @@ export function resolveBoardController(input: BoardControllerInput): BoardContro
         arrowColor: REVIEW_HINT_ARROW_COLOR,
         onPieceDrop: review.handlePieceDrop,
         onSquareClick: review.handleSquareClick,
+        ...engine,
       };
     case "tutorial":
       return {
@@ -105,6 +126,7 @@ export function resolveBoardController(input: BoardControllerInput): BoardContro
         arrowColor: undefined,
         onPieceDrop: tutorial.handlePieceDrop,
         onSquareClick: tutorial.handleSquareClick,
+        ...engine,
       };
   }
 }

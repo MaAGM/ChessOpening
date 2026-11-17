@@ -3,8 +3,10 @@ import { describe, expect, it, vi } from "vitest";
 import type { PanelMode } from "@/hooks/useTrainerMode";
 
 import {
+  ENGINE_ARROW_COLOR,
   REVIEW_HINT_ARROW_COLOR,
   boardModeKind,
+  engineAllowed,
   resolveBoardController,
   type BoardControllerInput,
 } from "./boardController";
@@ -107,5 +109,48 @@ describe("resolveBoardController", () => {
     const input = makeInput("menu");
     input.tutorial.activeNode = null;
     expect(resolveBoardController(input).arrows).toBeUndefined();
+  });
+});
+
+describe("analyse moteur", () => {
+  it("engineAllowed : masquée pendant les exercices uniquement", () => {
+    expect(engineAllowed("review_active")).toBe(false);
+    expect(engineAllowed("learning_active")).toBe(false);
+    const allowed: PanelMode[] = [
+      "menu",
+      "explorer",
+      "opening_selector",
+      "review_setup",
+      "repertoire_list",
+      "repertoire_editor",
+    ];
+    for (const mode of allowed) expect(engineAllowed(mode)).toBe(true);
+  });
+
+  it("transmet la flèche du meilleur coup sans toucher aux flèches de l'écran", () => {
+    for (const mode of ["repertoire_editor", "menu"] as PanelMode[]) {
+      const c = resolveBoardController(makeInput(mode, { engineBestMove: ["e2", "e4"] }));
+      expect(c.showEngine).toBe(true);
+      expect(c.engineArrow).toEqual(["e2", "e4"]);
+    }
+    const editor = resolveBoardController(makeInput("repertoire_editor", { engineBestMove: ["e2", "e4"] }));
+    expect(editor.arrows).toEqual([["g1", "f3"]]);
+  });
+
+  it("masque la flèche en révision et en apprentissage", () => {
+    for (const mode of ["review_active", "learning_active"] as PanelMode[]) {
+      const c = resolveBoardController(makeInput(mode, { engineBestMove: ["e2", "e4"] }));
+      expect(c.showEngine).toBe(false);
+      expect(c.engineArrow).toBeNull();
+    }
+  });
+
+  it("sans meilleur coup connu : aucune flèche moteur", () => {
+    expect(resolveBoardController(makeInput("menu")).engineArrow).toBeNull();
+    expect(resolveBoardController(makeInput("menu", { engineBestMove: null })).engineArrow).toBeNull();
+  });
+
+  it("couleur moteur distincte des autres flèches", () => {
+    expect(ENGINE_ARROW_COLOR).not.toBe(REVIEW_HINT_ARROW_COLOR);
   });
 });

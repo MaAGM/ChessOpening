@@ -2,16 +2,19 @@
 
 import { useAuthSyncBootstrap } from "@/hooks/useAuth";
 import { useChessGame } from "@/hooks/useChessGame";
+import { useEngineAnalysis } from "@/hooks/useEngineAnalysis";
 import { useRepertoireEditor } from "@/hooks/useRepertoireEditor";
 import { useRepertoireStore } from "@/hooks/useRepertoireStore";
 import { useReviewManager } from "@/hooks/useReviewManager";
 import { useTrainerMode } from "@/hooks/useTrainerMode";
 import { useTutorialManager } from "@/hooks/useTutorialManager";
 import type { Side } from "@/lib/review/reviewRepertoire";
-import { resolveBoardController } from "@/lib/trainer/boardController";
+import { uciToSquares } from "@/lib/engine";
+import { ENGINE_ARROW_COLOR, engineAllowed, resolveBoardController } from "@/lib/trainer/boardController";
 
 import { OpeningName } from "@/components/chess/OpeningName";
 import { ChessBoard } from "@/components/chess/ChessBoard";
+import { EvalBar } from "@/components/chess/EvalBar";
 import { TrainerSidebar, type TrainerNavigation } from "@/components/chess/TrainerSidebar";
 import { TrainerLayout } from "@/components/layout/TrainerLayout";
 
@@ -133,6 +136,10 @@ export default function HomePage() {
   // ----------------------------------------------------------------------
   // Board wiring: l'écran actif décide qui reçoit les coups, les flèches, l'orientation
   // ----------------------------------------------------------------------
+  // Analyse Stockfish locale (coupée pendant la révision et l'apprentissage)
+  const engine = useEngineAnalysis(currentFen, engineAllowed(panelMode));
+  const engineBestMove = engine.analysis?.bestMove ? uciToSquares(engine.analysis.bestMove) : null;
+
   const editingRepertoire =
     panelMode === "repertoire_editor" && editingRepertoireId
       ? getRepertoire(editingRepertoireId)
@@ -161,6 +168,7 @@ export default function HomePage() {
       activeNode: tutorial.activeNode,
       userColor: tutorial.userColor,
     },
+    engineBestMove,
   });
 
   return (
@@ -179,9 +187,15 @@ export default function HomePage() {
           onSquareRightClick={onSquareRightClick}
           customArrows={board.arrows}
           arrowColor={board.arrowColor}
+          engineArrow={board.engineArrow}
+          engineArrowColor={ENGINE_ARROW_COLOR}
         />
       }
-      // boardAside : future barre d'évaluation (Stockfish)
+      boardAside={
+        board.showEngine ? (
+          <EvalBar analysis={engine.analysis} status={engine.status} orientation={board.orientation} />
+        ) : undefined
+      }
       panel={
         <TrainerSidebar
           navigation={navigation}
