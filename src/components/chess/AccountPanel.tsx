@@ -20,15 +20,14 @@ const SYNC_DOT = {
   offline: "bg-amber-400",
 } as const;
 
-/** Compte et synchronisation : connexion par lien e-mail ou Google, état de la synchro. */
+/** Compte et synchronisation : connexion avec Google, état de la synchro. */
 export function AccountPanel() {
-  const { status, user, configured, signInWithMagicLink, signInWithGoogle, signOut } = useAuth();
+  const { status, user, configured, signInWithGoogle, signOut } = useAuth();
   const sync = useSyncStatus();
 
   const [open, setOpen] = useState(false);
-  const [email, setEmail] = useState("");
   const [busy, setBusy] = useState(false);
-  const [message, setMessage] = useState<{ kind: "ok" | "error"; text: string } | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   if (!configured) {
     return (
@@ -74,26 +73,13 @@ export function AccountPanel() {
   }
 
   // Invité
-  const handleMagicLink = async () => {
-    if (!email.trim()) return;
-    setBusy(true);
-    setMessage(null);
-    const { error } = await signInWithMagicLink(email);
-    setBusy(false);
-    setMessage(
-      error
-        ? { kind: "error", text: error }
-        : { kind: "ok", text: "Lien envoyé : consultez votre boîte mail." },
-    );
-  };
-
   const handleGoogle = async () => {
     setBusy(true);
-    setMessage(null);
-    const { error } = await signInWithGoogle(); // redirige vers Google en cas de succès
-    if (error) {
+    setError(null);
+    const result = await signInWithGoogle(); // redirige vers Google en cas de succès
+    if (result.error) {
       setBusy(false);
-      setMessage({ kind: "error", text: error });
+      setError(result.error);
     }
   };
 
@@ -113,36 +99,16 @@ export function AccountPanel() {
             Votre progression actuelle sera automatiquement transférée vers votre compte.
           </p>
 
-          <input
-            type="email"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-            placeholder="vous@exemple.com"
-            autoComplete="email"
-            className="rounded-lg border border-slate-600 bg-slate-900 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500"
-          />
-          <button
-            type="button"
-            disabled={busy || !email.trim()}
-            onClick={() => void handleMagicLink()}
-            className="rounded-lg border border-emerald-400/40 bg-emerald-500/20 px-3 py-2 font-semibold text-emerald-100 transition hover:bg-emerald-500/30 disabled:cursor-not-allowed disabled:opacity-50"
-          >
-            Recevoir un lien de connexion
-          </button>
           <button
             type="button"
             disabled={busy}
             onClick={() => void handleGoogle()}
-            className="rounded-lg border border-slate-500 bg-slate-700/50 px-3 py-2 font-semibold text-slate-100 transition hover:bg-slate-700 disabled:cursor-not-allowed disabled:opacity-50"
+            className="rounded-lg border border-emerald-400/40 bg-emerald-500/20 px-3 py-2 font-semibold text-emerald-100 transition hover:bg-emerald-500/30 disabled:cursor-not-allowed disabled:opacity-50"
           >
-            Continuer avec Google
+            {busy ? "Redirection vers Google…" : "Continuer avec Google"}
           </button>
 
-          {message && (
-            <p className={message.kind === "ok" ? "text-xs text-emerald-300" : "text-xs text-rose-300"}>
-              {message.text}
-            </p>
-          )}
+          {error && <p className="text-xs text-rose-300">{error}</p>}
         </>
       )}
     </div>

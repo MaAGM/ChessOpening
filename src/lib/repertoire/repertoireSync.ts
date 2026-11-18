@@ -160,7 +160,7 @@ export function diffRepertoireStates(
 // Moteur de synchronisation (algorithme commun : src/lib/sync/syncEngine.ts)
 // ===========================================================================
 
-/** Accès à la table `user_repertoires` (implémenté avec Supabase, remplaçable dans les tests). */
+/** Accès à la table `userRepertoires` (implémenté avec Convex, remplaçable dans les tests). */
 export type RepertoireRemote = SyncRemote<RepertoireStoreState, RepertoireChangeSet>;
 
 export type RepertoireSyncEngineDeps = Omit<

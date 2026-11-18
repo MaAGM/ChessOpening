@@ -1,7 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import type { Session } from "@supabase/supabase-js";
-import { createAuthSyncController, createSyncTarget, toAuthUser, type AuthSyncDeps } from "./authSync";
-import type { AuthState } from "./authStore";
+import { createAuthSyncController, createSyncTarget, type AuthSource, type AuthSyncDeps } from "./authSync";
+import type { AuthState, AuthUser } from "./authStore";
 import { hasStateData, type ReviewStoreState } from "@/lib/review/reviewStore";
 
 const emptyState = (): ReviewStoreState => ({
@@ -16,21 +15,31 @@ const guestWithData = (): ReviewStoreState => ({
   reviewChapters: { c1: { addedAt: 1 } },
 });
 
-const session = (id: string): Session =>
-  ({
-    user: {
-      id,
-      email: `${id}@exemple.fr`,
-      user_metadata: { full_name: "Ada Lovelace", picture: "https://img/a.png" },
-    },
-  }) as unknown as Session;
+const user = (id: string): AuthUser => ({
+  id,
+  email: `${id}@exemple.fr`,
+  fullName: "Ada Lovelace",
+  avatarUrl: "https://img/a.png",
+});
+
+/** Fausse source de session : `emit` simule ce que le fournisseur d'authentification signale. */
+function fakeSource() {
+  let listener: ((u: AuthUser | null) => void) | null = null;
+  const unsubscribe = vi.fn();
+  const subscribe = vi.fn((l: (u: AuthUser | null) => void) => {
+    listener = l;
+    return unsubscribe;
+  });
+  const source: AuthSource = { subscribe };
+  return { source, subscribe, unsubscribe, emit: (u: AuthUser | null) => listener!(u) };
+}
 
 describe("createAuthSyncController", () => {
   beforeEach(() => vi.useFakeTimers());
   afterEach(() => vi.useRealTimers());
 
-  function setup(options: { guest?: ReviewStoreState; client?: boolean; detachResult?: boolean } = {}) {
-    let emit: ((event: string, session: Session | null) => void) | null = null;
+  function setup(options: { guest?: ReviewStoreState; configured?: boolean; detachResult?: boolean } = {}) {
+    const fake = fakeSource();
     const engine = {
       attach: vi.fn(async () => true),
       detach: vi.fn(async () => options.detachResult ?? true),
@@ -41,20 +50,9 @@ describe("createAuthSyncController", () => {
       clearUserCache: vi.fn(),
     };
     const authStates: Partial<AuthState>[] = [];
-    const unsubscribe = vi.fn();
 
     const deps: AuthSyncDeps = {
-      client:
-        options.client === false
-          ? null
-          : {
-              auth: {
-                onAuthStateChange: (callback) => {
-                  emit = callback;
-                  return { data: { subscription: { unsubscribe } } };
-                },
-              },
-            },
+      source: options.configured === false ? null : fake.source,
       targets: [createSyncTarget({ ...store, hasData: hasStateData }, engine)],
       setAuthState: (patch) => authStates.push(patch),
     };
@@ -65,17 +63,17 @@ describe("createAuthSyncController", () => {
       engine,
       store,
       authStates,
-      unsubscribe,
-      send: async (event: string, s: Session | null) => {
-        emit!(event, s);
+      unsubscribe: fake.unsubscribe,
+      send: async (u: AuthUser | null) => {
+        fake.emit(u);
         await vi.advanceTimersByTimeAsync(0);
         await controller.idle();
       },
     };
   }
 
-  it("reste en mode invité quand Supabase n'est pas configuré", () => {
-    const t = setup({ client: false });
+  it("reste en mode invité quand le backend n'est pas configuré", () => {
+    const t = setup({ configured: false });
     t.controller.start();
     expect(t.authStates).toEqual([{ status: "guest", user: null }]);
   });
@@ -83,7 +81,7 @@ describe("createAuthSyncController", () => {
   it("reste invité sans toucher au stockage quand il n'y a pas de session", async () => {
     const t = setup();
     t.controller.start();
-    await t.send("INITIAL_SESSION", null);
+    await t.send(null);
 
     expect(t.authStates.at(-1)).toEqual({ status: "guest", user: null });
     expect(t.store.setStorageScope).not.toHaveBeenCalled();
@@ -94,7 +92,7 @@ describe("createAuthSyncController", () => {
     const guest = guestWithData();
     const t = setup({ guest });
     t.controller.start();
-    await t.send("SIGNED_IN", session("u1"));
+    await t.send(user("u1"));
 
     expect(t.store.setStorageScope).toHaveBeenCalledWith({ kind: "user", userId: "u1" });
     expect(t.engine.attach).toHaveBeenCalledWith("u1", guest);
@@ -107,26 +105,36 @@ describe("createAuthSyncController", () => {
   it("ne transmet rien quand il n'y a pas de données d'invité", async () => {
     const t = setup();
     t.controller.start();
-    await t.send("SIGNED_IN", session("u1"));
+    await t.send(user("u1"));
     expect(t.engine.attach).toHaveBeenCalledWith("u1", null);
   });
 
   it("ignore les événements répétés pour le même utilisateur", async () => {
     const t = setup({ guest: guestWithData() });
     t.controller.start();
-    await t.send("INITIAL_SESSION", session("u1"));
-    await t.send("TOKEN_REFRESHED", session("u1"));
-    await t.send("SIGNED_IN", session("u1")); // émis aussi au retour sur l'onglet
+    await t.send(user("u1")); // session initiale
+    await t.send(user("u1")); // jeton rafraîchi
+    await t.send(user("u1")); // retour sur l'onglet
 
     expect(t.engine.attach).toHaveBeenCalledTimes(1);
     expect(t.store.setStorageScope).toHaveBeenCalledTimes(1);
   });
 
+  it("met à jour le profil affiché sans reconnecter quand l'utilisateur ne change pas", async () => {
+    const t = setup();
+    t.controller.start();
+    await t.send(user("u1"));
+    await t.send({ ...user("u1"), fullName: "Ada King" });
+
+    expect(t.engine.attach).toHaveBeenCalledTimes(1);
+    expect(t.authStates.at(-1)).toMatchObject({ status: "authenticated", user: { fullName: "Ada King" } });
+  });
+
   it("à la déconnexion, détache, repasse en invité et efface le cache s'il est synchronisé", async () => {
     const t = setup({ detachResult: true });
     t.controller.start();
-    await t.send("SIGNED_IN", session("u1"));
-    await t.send("SIGNED_OUT", null);
+    await t.send(user("u1"));
+    await t.send(null);
 
     expect(t.engine.detach).toHaveBeenCalledTimes(1);
     expect(t.store.setStorageScope).toHaveBeenLastCalledWith({ kind: "guest" });
@@ -137,8 +145,8 @@ describe("createAuthSyncController", () => {
   it("conserve le cache de l'utilisateur si tout n'était pas synchronisé", async () => {
     const t = setup({ detachResult: false });
     t.controller.start();
-    await t.send("SIGNED_IN", session("u1"));
-    await t.send("SIGNED_OUT", null);
+    await t.send(user("u1"));
+    await t.send(null);
 
     expect(t.store.setStorageScope).toHaveBeenLastCalledWith({ kind: "guest" });
     expect(t.store.clearUserCache).not.toHaveBeenCalled();
@@ -147,8 +155,8 @@ describe("createAuthSyncController", () => {
   it("gère le passage direct d'un utilisateur à un autre", async () => {
     const t = setup();
     t.controller.start();
-    await t.send("SIGNED_IN", session("u1"));
-    await t.send("SIGNED_IN", session("u2"));
+    await t.send(user("u1"));
+    await t.send(user("u2"));
 
     expect(t.engine.detach).toHaveBeenCalledTimes(1);
     expect(t.engine.attach).toHaveBeenNthCalledWith(2, "u2", null);
@@ -160,34 +168,30 @@ describe("createAuthSyncController", () => {
     t.controller.start();
     // Deux événements émis coup sur coup, avant que le premier ne soit traité
     t.controller.start();
-    await t.send("SIGNED_IN", session("u1"));
-    await t.send("SIGNED_OUT", null);
+    await t.send(user("u1"));
+    await t.send(null);
 
     const order = [t.engine.attach.mock.invocationCallOrder[0], t.engine.detach.mock.invocationCallOrder[0]];
     expect(order[0]).toBeLessThan(order[1]);
   });
 
   it("ne s'abonne qu'une fois même si start est appelé plusieurs fois", () => {
-    let subscriptions = 0;
-    const controller = createAuthSyncController({
-      client: {
-        auth: {
-          onAuthStateChange: () => {
-            subscriptions += 1;
-            return { data: { subscription: { unsubscribe() {} } } };
-          },
-        },
-      },
-      targets: [],
-      setAuthState() {},
-    });
+    const fake = fakeSource();
+    const controller = createAuthSyncController({ source: fake.source, targets: [], setAuthState() {} });
     controller.start();
     controller.start();
-    expect(subscriptions).toBe(1);
+    expect(fake.subscribe).toHaveBeenCalledTimes(1);
+  });
+
+  it("se désabonne de la source à l'arrêt", () => {
+    const t = setup();
+    t.controller.start();
+    t.controller.stop();
+    expect(t.unsubscribe).toHaveBeenCalledTimes(1);
   });
 
   it("connecte et déconnecte chaque cible (révisions et répertoires) avec ses propres données", async () => {
-    let emit: ((event: string, session: Session | null) => void) | null = null;
+    const fake = fakeSource();
     const makeTarget = (guest: { items: string[] }) => {
       const store = {
         setStorageScope: vi.fn(),
@@ -207,20 +211,13 @@ describe("createAuthSyncController", () => {
     const repertoires = makeTarget({ items: ["r1"] });
 
     const controller = createAuthSyncController({
-      client: {
-        auth: {
-          onAuthStateChange: (callback) => {
-            emit = callback;
-            return { data: { subscription: { unsubscribe() {} } } };
-          },
-        },
-      },
+      source: fake.source,
       targets: [review.target, repertoires.target],
       setAuthState() {},
     });
     controller.start();
 
-    emit!("SIGNED_IN", session("u1"));
+    fake.emit(user("u1"));
     await vi.advanceTimersByTimeAsync(0);
     await controller.idle();
 
@@ -234,7 +231,7 @@ describe("createAuthSyncController", () => {
       );
     }
 
-    emit!("SIGNED_OUT", null);
+    fake.emit(null);
     await vi.advanceTimersByTimeAsync(0);
     await controller.idle();
 
@@ -243,21 +240,5 @@ describe("createAuthSyncController", () => {
       expect(t.store.setStorageScope).toHaveBeenLastCalledWith({ kind: "guest" });
       expect(t.store.clearUserCache).toHaveBeenCalledWith("u1");
     }
-  });
-});
-
-describe("toAuthUser", () => {
-  it("lit le nom et l'avatar dans les métadonnées (Google : name / picture)", () => {
-    const user = toAuthUser({
-      id: "u1",
-      email: "a@b.c",
-      user_metadata: { name: "Ada", picture: "https://img/p.png" },
-    } as never);
-    expect(user).toEqual({ id: "u1", email: "a@b.c", fullName: "Ada", avatarUrl: "https://img/p.png" });
-  });
-
-  it("renvoie null pour les champs absents", () => {
-    const user = toAuthUser({ id: "u1", email: undefined, user_metadata: {} } as never);
-    expect(user).toEqual({ id: "u1", email: null, fullName: null, avatarUrl: null });
   });
 });

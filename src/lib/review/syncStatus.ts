@@ -1,6 +1,6 @@
 /** État de la synchronisation cloud, affiché dans l'interface. */
 export type SyncState =
-  | "disabled" // invité, ou Supabase non configuré : rien à synchroniser
+  | "disabled" // invité, ou Convex non configuré : rien à synchroniser
   | "idle" // tout est synchronisé
   | "syncing"
   | "error" // échec : une nouvelle tentative est programmée

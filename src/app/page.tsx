@@ -19,7 +19,7 @@ import { TrainerSidebar, type TrainerNavigation } from "@/components/chess/Train
 import { TrainerLayout } from "@/components/layout/TrainerLayout";
 
 export default function HomePage() {
-  // Authentification Supabase + synchronisation cloud (sans effet en mode invité)
+  // Authentification Better Auth (Convex) + synchronisation cloud (sans effet en mode invité)
   useAuthSyncBootstrap();
 
   // ----------------------------------------------------------------------

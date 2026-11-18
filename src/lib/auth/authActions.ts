@@ -1,43 +1,48 @@
-import { getSupabaseClient } from "@/lib/supabase/client";
+import { authClient } from "./authClient";
+import { flushPendingSync } from "./authSync";
+import { isConvexConfigured } from "@/lib/convex/client";
 
 export type AuthResult = { error: string | null };
 
 const NOT_CONFIGURED: AuthResult = {
-  error: "Supabase n'est pas configuré (variables d'environnement manquantes).",
+  error: "Convex n'est pas configuré (variables d'environnement manquantes).",
 };
 
+function errorMessage(error: { message?: string } | null | undefined): string | null {
+  if (!error) return null;
+  return error.message || "La connexion a échoué.";
+}
+
 /**
- * Envoie un lien de connexion par e-mail. Le compte est créé à la première connexion.
- * L'URL de retour doit figurer dans Authentication > URL Configuration > Redirect URLs.
+ * Redirige vers Google (Better Auth). Le compte est créé à la première connexion ; au retour,
+ * la progression d'invité est fusionnée avec celle du compte (authSync).
  */
-export async function signInWithMagicLink(email: string): Promise<AuthResult> {
-  const client = getSupabaseClient();
-  if (!client) return NOT_CONFIGURED;
-
-  const { error } = await client.auth.signInWithOtp({
-    email: email.trim(),
-    options: { emailRedirectTo: window.location.origin },
-  });
-  return { error: error ? error.message : null };
-}
-
-/** Redirige vers Google (le fournisseur doit être activé dans le dashboard Supabase). */
 export async function signInWithGoogle(): Promise<AuthResult> {
-  const client = getSupabaseClient();
-  if (!client) return NOT_CONFIGURED;
+  if (!isConvexConfigured) return NOT_CONFIGURED;
 
-  const { error } = await client.auth.signInWithOAuth({
-    provider: "google",
-    options: { redirectTo: window.location.origin },
-  });
-  return { error: error ? error.message : null };
+  try {
+    const { error } = await authClient.signIn.social({
+      provider: "google",
+      callbackURL: window.location.href,
+    });
+    return { error: errorMessage(error) };
+  } catch (error) {
+    return { error: error instanceof Error ? error.message : String(error) };
+  }
 }
 
-/** Déconnecte cet appareil uniquement (les autres sessions du compte restent ouvertes). */
+/**
+ * Déconnecte cet appareil. Les changements en attente sont envoyés d'abord : une fois la
+ * session fermée, ils ne pourraient plus l'être (le cache local est alors conservé).
+ */
 export async function signOut(): Promise<AuthResult> {
-  const client = getSupabaseClient();
-  if (!client) return NOT_CONFIGURED;
+  if (!isConvexConfigured) return NOT_CONFIGURED;
 
-  const { error } = await client.auth.signOut({ scope: "local" });
-  return { error: error ? error.message : null };
+  try {
+    await flushPendingSync();
+    const { error } = await authClient.signOut();
+    return { error: errorMessage(error) };
+  } catch (error) {
+    return { error: error instanceof Error ? error.message : String(error) };
+  }
 }

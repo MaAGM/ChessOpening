@@ -1,20 +1,21 @@
 # Tâches reportées
 
-## Avant la mise en production (Phase 2)
-- [ ] Ajouter l'URL de production dans Supabase > Authentication > URL Configuration
-      (Site URL + Redirect URLs).
-- [ ] Renseigner NEXT_PUBLIC_SUPABASE_URL / NEXT_PUBLIC_SUPABASE_ANON_KEY chez l'hébergeur
-      (jamais la clé service_role dans une variable NEXT_PUBLIC_).
-- [ ] Configurer un SMTP personnalisé (le service d'e-mail intégré est limité, prévu pour les tests).
-- [ ] Régénérer database.types.ts : npx supabase gen types typescript --project-id owatqazpopcnwaxdniqp
-- [ ] Vérifier l'isolation entre deux comptes + Dashboard > Advisors (sécurité).
+## Avant la mise en production (Convex + Better Auth)
+- [ ] Créer le déploiement de prod : `npx convex deploy`.
+- [ ] Sur le déploiement de prod : `npx convex env set` pour BETTER_AUTH_SECRET (nouveau secret),
+      SITE_URL (URL publique de l'app), GOOGLE_CLIENT_ID et GOOGLE_CLIENT_SECRET.
+- [ ] Google Cloud : ajouter l'URI de redirection `https://<domaine>/api/auth/callback/google`.
+- [ ] Renseigner NEXT_PUBLIC_CONVEX_URL / NEXT_PUBLIC_CONVEX_SITE_URL (prod) chez l'hébergeur.
+- [ ] Vérifier l'isolation entre deux comptes sur le déploiement de prod.
+- [ ] Décommissionner le projet Supabase (owatqazpopcnwaxdniqp), qui n'est plus utilisé.
 
 ## Compte et synchronisation (plus tard)
 - [ ] Propager les suppressions d'un appareil à l'autre (tombstones) : aujourd'hui,
       la fusion garde la version la plus récente.
 - [ ] Connexion par mot de passe, suppression de compte dans l'interface.
 - [ ] Bouton « Réinitialiser ma progression » (l'action resetStats existe déjà dans useReviewStore).
-- [ ] Passer à @supabase/ssr si du rendu serveur authentifié est ajouté.
+- [ ] Rendu serveur authentifié : `convexBetterAuthNextJs().preloadAuthQuery` si besoin.
+- [ ] Répertoires > 900 Kio : découper `data` sur plusieurs documents (limite de 1 Mio par document Convex).
 
 ## Mode Révision
 - [ ] Bouton « Indice » avant de jouer (flèches vertes ; à décider si ça compte comme erreur).

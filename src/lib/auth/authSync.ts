@@ -1,12 +1,8 @@
-import type { Session, User } from "@supabase/supabase-js";
-import { getSupabaseClient } from "@/lib/supabase/client";
-import { createSupabaseReviewRemote } from "@/lib/supabase/reviewRemote";
-import { createSupabaseRepertoireRemote } from "@/lib/supabase/repertoireRemote";
 import * as reviewStore from "@/lib/review/reviewStore";
 import type { StorageScope } from "@/lib/review/reviewStore";
 import * as repertoireStore from "@/lib/repertoire/repertoireStore";
-import { ReviewSyncEngine } from "@/lib/review/reviewSync";
-import { RepertoireSyncEngine } from "@/lib/repertoire/repertoireSync";
+import { ReviewSyncEngine, type ReviewRemote } from "@/lib/review/reviewSync";
+import { RepertoireSyncEngine, type RepertoireRemote } from "@/lib/repertoire/repertoireSync";
 import { createSyncStatusChannel, updateSyncStatus } from "@/lib/review/syncStatus";
 import { setAuthState, type AuthState, type AuthUser } from "./authStore";
 
@@ -54,39 +50,39 @@ export function createSyncTarget<S>(store: ScopedStorePort<S>, engine: SyncEngin
 }
 
 // ===========================================================================
-// Contrôleur : réagit aux changements de session (testable, sans Supabase réel)
+// Source de session : interface neutre (implémentée avec Convex + Better Auth)
+// ===========================================================================
+
+/**
+ * Écoute de la session, indépendante du fournisseur d'authentification.
+ *
+ * `subscribe` appelle `listener` avec l'utilisateur connecté, ou null pour un invité : une
+ * première fois dès que la session est connue, puis à chaque changement. La même valeur peut
+ * être émise plusieurs fois (jeton rafraîchi, onglet revenu au premier plan) : le contrôleur
+ * l'ignore. Renvoie la fonction de désabonnement.
+ */
+export type AuthSource = {
+  subscribe(listener: (user: AuthUser | null) => void): () => void;
+};
+
+/** Tout ce qui dépend du backend : la session et l'accès au cloud des deux stores. */
+export type SyncBackend = {
+  authSource: AuthSource;
+  reviewRemote: ReviewRemote;
+  repertoireRemote: RepertoireRemote;
+};
+
+// ===========================================================================
+// Contrôleur : réagit aux changements de session (testable, sans backend réel)
 // ===========================================================================
 
 export type AuthSyncDeps = {
-  /** Client Supabase (seul `auth.onAuthStateChange` est utilisé) ; null si non configuré. */
-  client: {
-    auth: {
-      onAuthStateChange(
-        callback: (event: string, session: Session | null) => void,
-      ): { data: { subscription: { unsubscribe(): void } } };
-    };
-  } | null;
+  /** Source de session ; null si le backend n'est pas configuré (mode invité permanent). */
+  source: AuthSource | null;
   /** Stores synchronisés (révisions, répertoires), traités en parallèle. */
   targets: SyncTarget[];
   setAuthState(patch: Partial<AuthState>): void;
 };
-
-export function toAuthUser(user: User): AuthUser {
-  const meta = user.user_metadata ?? {};
-  const pick = (...keys: string[]): string | null => {
-    for (const key of keys) {
-      const value = meta[key];
-      if (typeof value === "string" && value.length > 0) return value;
-    }
-    return null;
-  };
-  return {
-    id: user.id,
-    email: user.email ?? null,
-    fullName: pick("full_name", "name"),
-    avatarUrl: pick("avatar_url", "picture"),
-  };
-}
 
 /**
  * Orchestre le passage invité <-> connecté, pour chaque cible.
@@ -112,9 +108,9 @@ export function createAuthSyncController(deps: AuthSyncDeps) {
     return chain;
   };
 
-  async function signInFlow(user: User): Promise<void> {
+  async function signInFlow(user: AuthUser): Promise<void> {
     activeUserId = user.id;
-    deps.setAuthState({ status: "authenticated", user: toAuthUser(user) });
+    deps.setAuthState({ status: "authenticated", user });
     await Promise.all(deps.targets.map((target) => target.signIn(user.id)));
   }
 
@@ -127,12 +123,10 @@ export function createAuthSyncController(deps: AuthSyncDeps) {
     deps.setAuthState({ status: "guest", user: null });
   }
 
-  async function handleSession(session: Session | null): Promise<void> {
-    const user = session?.user ?? null;
-
+  async function handleUser(user: AuthUser | null): Promise<void> {
     if (user) {
       if (activeUserId === user.id) {
-        deps.setAuthState({ status: "authenticated", user: toAuthUser(user) });
+        deps.setAuthState({ status: "authenticated", user }); // profil éventuellement modifié
         return;
       }
       if (activeUserId) await signOutFlow(); // changement direct d'utilisateur
@@ -148,19 +142,18 @@ export function createAuthSyncController(deps: AuthSyncDeps) {
     if (started) return;
     started = true;
 
-    if (!deps.client) {
+    if (!deps.source) {
       deps.setAuthState({ status: "guest", user: null });
       return;
     }
 
-    const { data } = deps.client.auth.onAuthStateChange((_event, session) => {
-      // Ne jamais appeler Supabase directement dans ce callback (risque de blocage) :
-      // le traitement est différé puis mis en file.
+    unsubscribe = deps.source.subscribe((user) => {
+      // Ne jamais appeler le backend directement dans ce callback (certains clients s'y
+      // bloquent) : le traitement est différé puis mis en file.
       setTimeout(() => {
-        void enqueue(() => handleSession(session));
+        void enqueue(() => handleUser(user));
       }, 0);
     });
-    unsubscribe = () => data.subscription.unsubscribe();
   }
 
   function stop(): void {
@@ -174,7 +167,7 @@ export function createAuthSyncController(deps: AuthSyncDeps) {
     stop,
     /** Attend la fin des traitements en cours (utile aux tests). */
     idle: (): Promise<void> => chain,
-    handleSession: (session: Session | null) => enqueue(() => handleSession(session)),
+    handleUser: (user: AuthUser | null) => enqueue(() => handleUser(user)),
   };
 }
 
@@ -184,35 +177,48 @@ export function createAuthSyncController(deps: AuthSyncDeps) {
 const REFRESH_MIN_INTERVAL_MS = 60_000;
 
 let controller: ReturnType<typeof createAuthSyncController> | null = null;
+let activeEngines: { flush(): Promise<boolean> }[] = [];
 
-/** Démarre l'authentification et la synchronisation (idempotent, navigateur uniquement). */
-export function startAuthSync(): void {
+/**
+ * Envoie immédiatement les changements en attente (à appeler AVANT de fermer la session :
+ * ensuite, le cloud n'est plus joignable). Renvoie vrai si tout est synchronisé.
+ */
+export async function flushPendingSync(): Promise<boolean> {
+  const results = await Promise.all(activeEngines.map((engine) => engine.flush()));
+  return results.every(Boolean);
+}
+
+/**
+ * Démarre l'authentification et la synchronisation (idempotent, navigateur uniquement).
+ * `backend` est null quand le backend n'est pas configuré : l'application reste en mode invité.
+ */
+export function startAuthSync(backend: SyncBackend | null): void {
   if (typeof window === "undefined" || controller) return;
 
-  const client = getSupabaseClient();
-  if (!client) {
+  if (!backend) {
     updateSyncStatus({ state: "disabled" });
-    controller = createAuthSyncController({ client: null, targets: [], setAuthState });
+    controller = createAuthSyncController({ source: null, targets: [], setAuthState });
     controller.start();
     return;
   }
 
   // Deux moteurs indépendants, chacun avec son canal d'état (combinés pour l'affichage).
   const reviewEngine = new ReviewSyncEngine({
-    remote: createSupabaseReviewRemote(client),
+    remote: backend.reviewRemote,
     getState: reviewStore.getSnapshot,
     applyRemoteState: reviewStore.applyRemoteState,
     setStatus: createSyncStatusChannel("review"),
     onGuestMigrated: reviewStore.clearGuestState,
   });
   const repertoireEngine = new RepertoireSyncEngine({
-    remote: createSupabaseRepertoireRemote(client),
+    remote: backend.repertoireRemote,
     getState: repertoireStore.getSnapshot,
     applyRemoteState: repertoireStore.applyRemoteState,
     setStatus: createSyncStatusChannel("repertoires"),
     onGuestMigrated: repertoireStore.clearGuestState,
   });
   const engines = [reviewEngine, repertoireEngine];
+  activeEngines = engines;
 
   // Chaque action locale est envoyée au cloud ; les changements venus du cloud
   // ou d'un autre onglet ne sont pas renvoyés.
@@ -236,7 +242,7 @@ export function startAuthSync(): void {
   });
 
   controller = createAuthSyncController({
-    client,
+    source: backend.authSource,
     targets: [
       createSyncTarget(
         {

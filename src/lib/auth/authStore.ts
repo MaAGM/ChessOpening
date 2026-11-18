@@ -1,4 +1,4 @@
-import { isSupabaseConfigured } from "@/lib/supabase/client";
+import { isConvexConfigured } from "@/lib/convex/client";
 
 export type AuthUser = {
   id: string;
@@ -11,7 +11,7 @@ export type AuthState = {
   /** loading : session pas encore lue ; guest : invité ; authenticated : connecté */
   status: "loading" | "guest" | "authenticated";
   user: AuthUser | null;
-  /** Faux si les variables d'environnement Supabase manquent (mode invité permanent). */
+  /** Faux si les variables d'environnement Convex manquent (mode invité permanent). */
   configured: boolean;
 };
 
@@ -21,7 +21,7 @@ const SERVER_STATE: AuthState = Object.freeze({
   configured: false,
 });
 
-let state: AuthState = { status: "loading", user: null, configured: isSupabaseConfigured };
+let state: AuthState = { status: "loading", user: null, configured: isConvexConfigured };
 const listeners = new Set<() => void>();
 
 export function subscribeAuth(listener: () => void): () => void {

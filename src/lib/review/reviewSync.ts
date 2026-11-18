@@ -143,7 +143,7 @@ export function diffStates(prev: ReviewStoreState, next: ReviewStoreState): Chan
 // Moteur de synchronisation (algorithme commun : src/lib/sync/syncEngine.ts)
 // ===========================================================================
 
-/** Accès au cloud (implémenté avec Supabase, remplaçable dans les tests). */
+/** Accès au cloud (implémenté avec Convex, remplaçable dans les tests). */
 export type ReviewRemote = SyncRemote<ReviewStoreState, ChangeSet>;
 
 export type SyncEngineDeps = Omit<GenericSyncEngineDeps<ReviewStoreState, ChangeSet>, "strategy">;

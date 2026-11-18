@@ -6,7 +6,7 @@ import type { SyncStatus } from "@/lib/review/syncStatus";
  * périmètre et son propre cycle de vie : seul l'algorithme est commun.
  */
 
-/** Accès au cloud (implémenté avec Supabase, remplaçable dans les tests). */
+/** Accès au cloud (implémenté avec Convex, remplaçable dans les tests). */
 export interface SyncRemote<S, C> {
   fetchState(userId: string): Promise<S>;
   pushChanges(userId: string, changes: C): Promise<void>;
