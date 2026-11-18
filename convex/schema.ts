@@ -2,7 +2,7 @@ import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";
 
 /**
- * Schéma Convex de ChessmateTheory (équivalent de supabase/schema/phase2 + phase3, conservés en archive).
+ * Schéma Convex de ChessmateTheory (équivalent des scripts SQL archivés dans docs/archive/supabase/).
  *
  * - `userId` est `identity.tokenIdentifier` (émetteur + utilisateur Better Auth), lu côté serveur : le client
  *   ne choisit jamais l'utilisateur d'une écriture (équivalent des politiques RLS).
@@ -61,4 +61,30 @@ export default defineSchema({
   })
     .index("by_userId_and_repertoireId", ["userId", "repertoireId"])
     .index("by_userId_and_updatedAt", ["userId", "updatedAt"]),
+
+  /**
+   * Suivi d'utilisation du Coach IA : une ligne par utilisateur et par jour (UTC, « AAAA-MM-JJ »).
+   * Les quotas eux-mêmes sont appliqués par le composant `rateLimiter` ; cette table sert au suivi
+   * (appels facturés, réponses servies par le cache, tokens consommés).
+   */
+  coachUsage: defineTable({
+    userId: v.string(),
+    day: v.string(),
+    requests: v.number(),
+    cachedHits: v.number(),
+    inputTokens: v.number(),
+    outputTokens: v.number(),
+    updatedAt: v.number(),
+  }).index("by_userId_and_day", ["userId", "day"]),
+
+  /**
+   * Explications déjà produites, indexées par l'empreinte SHA-256 de (modèle, consignes, prompt).
+   * La réponse ne dépend que du prompt : la même erreur ne coûte qu'un appel au LLM.
+   */
+  coachExplanations: defineTable({
+    hash: v.string(),
+    model: v.string(),
+    text: v.string(),
+    createdAt: v.number(),
+  }).index("by_hash", ["hash"]),
 });

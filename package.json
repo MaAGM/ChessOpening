@@ -11,7 +11,9 @@
     "postinstall": "node scripts/copy-stockfish.mjs"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^1.10.0",
     "@convex-dev/better-auth": "^0.13.0",
+    "@convex-dev/rate-limiter": "^0.4.3",
     "better-auth": "1.7.25",
     "chess.js": "^1.4.0",
     "convex": "^1.51.0",

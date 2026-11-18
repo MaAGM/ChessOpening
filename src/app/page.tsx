@@ -1,8 +1,11 @@
 "use client";
 
-import { useAuthSyncBootstrap } from "@/hooks/useAuth";
+import { useMemo } from "react";
+
+import { useAuth, useAuthSyncBootstrap } from "@/hooks/useAuth";
 import { useChessGame } from "@/hooks/useChessGame";
-import { useEngineAnalysis } from "@/hooks/useEngineAnalysis";
+import { useCoach } from "@/hooks/useCoach";
+import { getCoachEngine, useEngineAnalysis } from "@/hooks/useEngineAnalysis";
 import { useRepertoireEditor } from "@/hooks/useRepertoireEditor";
 import { useRepertoireStore } from "@/hooks/useRepertoireStore";
 import { useReviewManager } from "@/hooks/useReviewManager";
@@ -10,10 +13,13 @@ import { useTrainerMode } from "@/hooks/useTrainerMode";
 import { useTutorialManager } from "@/hooks/useTutorialManager";
 import type { Side } from "@/lib/review/reviewRepertoire";
 import { uciToSquares } from "@/lib/engine";
+import { getConvexClient } from "@/lib/convex/client";
+import { createCoachExplainer } from "@/lib/convex/coachRemote";
 import { ENGINE_ARROW_COLOR, engineAllowed, resolveBoardController } from "@/lib/trainer/boardController";
 
 import { OpeningName } from "@/components/chess/OpeningName";
 import { ChessBoard } from "@/components/chess/ChessBoard";
+import { CoachPanel, type CoachAccess } from "@/components/chess/CoachPanel";
 import { EvalBar } from "@/components/chess/EvalBar";
 import { TrainerSidebar, type TrainerNavigation } from "@/components/chess/TrainerSidebar";
 import { TrainerLayout } from "@/components/layout/TrainerLayout";
@@ -79,6 +85,28 @@ export default function HomePage() {
     clearSelection,
     panelMode,
     reviewSide,
+  });
+
+  // ----------------------------------------------------------------------
+  // Coach IA : verdict local à chaque erreur de révision, explication du LLM (connecté)
+  // ----------------------------------------------------------------------
+  const { status: authStatus, configured: authConfigured, signInWithGoogle } = useAuth();
+  const coachAccess: CoachAccess = !authConfigured
+    ? "unconfigured"
+    : authStatus === "authenticated"
+      ? "authenticated"
+      : authStatus === "guest"
+        ? "guest"
+        : "loading";
+  const coachExplainer = useMemo(() => {
+    const client = coachAccess === "authenticated" ? getConvexClient() : null;
+    return client ? createCoachExplainer(client) : null;
+  }, [coachAccess]);
+  const coach = useCoach({
+    mistake: review.lastMistake,
+    openingName,
+    getEngine: getCoachEngine,
+    explainer: coachExplainer,
   });
 
   const editor = useRepertoireEditor({
@@ -205,7 +233,11 @@ export default function HomePage() {
           currentFen={currentFen}
         />
       }
-      // coach : futur panneau Coach IA
+      coach={
+        panelMode === "review_active" ? (
+          <CoachPanel coach={coach} access={coachAccess} onSignIn={() => void signInWithGoogle()} />
+        ) : undefined
+      }
     />
   );
 }

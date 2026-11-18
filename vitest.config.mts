@@ -8,7 +8,7 @@ export default defineConfig({
   test: {
     environment: "node",
     include: ["src/**/*.test.{ts,tsx}", "tests/convex/**/*.test.ts"],
-    // convex-test doit être transformé par Vitest (import.meta.glob des modules Convex)
-    server: { deps: { inline: ["convex-test"] } },
+    // convex-test et les composants testés (sources .ts, import.meta.glob) doivent être transformés par Vitest (import.meta.glob des modules Convex)
+    server: { deps: { inline: ["convex-test", "@convex-dev/rate-limiter", "@convex-dev/batch-worker"] } },
   },
 });

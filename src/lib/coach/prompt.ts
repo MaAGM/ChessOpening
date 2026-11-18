@@ -2,6 +2,7 @@ import type { Arrow } from "@/lib/data/openings/types";
 import { formatMove, SYMBOL_LABELS } from "@/lib/repertoire/notation";
 import type { MoveSymbol } from "@/lib/repertoire/types";
 import type { Side } from "@/lib/review/types";
+import { COACH_SYSTEM_PROMPT } from "./systemPrompt";
 import type {
   BookMove,
   CoachContext,
@@ -89,16 +90,8 @@ const VERDICT_INSTRUCTIONS: Record<CoachVerdict, string[]> = {
   ],
 };
 
-const SYSTEM_PROMPT = [
-  "Tu es un entraîneur d'échecs bienveillant et précis. Tu aides un joueur à mémoriser son répertoire d'ouvertures pendant une séance de révision.",
-  "Le joueur vient de jouer un coup qui ne figure pas dans son répertoire. Explique-lui l'écart de façon pédagogique.",
-  "Règles :",
-  "1. Appuie-toi uniquement sur les données fournies (annotations du répertoire, analyse du moteur). N'invente aucune variante, évaluation ou référence théorique.",
-  "2. Cite les coups en notation algébrique abrégée, exactement comme dans les données.",
-  "3. Respecte le verdict fourni : il est calculé à partir du moteur et ne doit pas être contredit.",
-  "4. Les évaluations sont données du point de vue du joueur (+ = avantage pour lui) ; traduis-les en mots plutôt que de répéter les chiffres.",
-  "5. Réponds en français, en tutoyant le joueur, en 150 mots au maximum, sans titre ni liste à puces.",
-].join("\n");
+/** Consignes système partagées avec l'action Convex (voir `systemPrompt.ts`). */
+const SYSTEM_PROMPT = COACH_SYSTEM_PROMPT;
 
 function formatSymbol(symbol: MoveSymbol | undefined): string {
   return symbol ? ` (${SYMBOL_LABELS[symbol]})` : "";

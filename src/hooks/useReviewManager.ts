@@ -7,6 +7,7 @@ import { Chess, type Square } from "chess.js";
 import { useRepertoireStore } from "@/hooks/useRepertoireStore";
 import { useReviewStore } from "@/hooks/useReviewStore";
 import type { PanelMode } from "@/hooks/useTrainerMode";
+import { toAnnotatedSources, type CoachMistake } from "@/lib/coach";
 import type { Arrow } from "@/lib/data/openings/types";
 import { fenTurn } from "@/lib/review/positionKey";
 import {
@@ -25,6 +26,9 @@ import { pickWeightedMove, summarizeCards, type CardSummary } from "@/lib/review
 import type { Side } from "@/lib/review/types";
 
 const COMPUTER_MOVE_DELAY_MS = 400;
+
+/** Coup hors répertoire transmis au Coach ; `id` change à chaque nouvelle erreur. */
+export type ReviewMistake = CoachMistake & { id: number };
 
 export type ReviewManagerParams = {
   /** Current board position in FEN */
@@ -101,6 +105,10 @@ export function useReviewManager(params: ReviewManagerParams) {
   /** Horloge pour les statistiques affichées, mise à jour dans les gestionnaires d'événements */
   const [now, setNow] = useState(() => Date.now());
 
+  /** Dernier coup hors répertoire, pour le Coach (null en début de ligne). */
+  const [lastMistake, setLastMistake] = useState<ReviewMistake | null>(null);
+  const mistakeIdRef = useRef(0);
+
   /** Erreurs de la ligne en cours (ref : lu dans des callbacks asynchrones) */
   const lineMistakesRef = useRef(0);
   /** Positions déjà ratées pendant cette ligne : elles ne seront pas promues au bon coup. */
@@ -175,8 +183,16 @@ export function useReviewManager(params: ReviewManagerParams) {
   };
 
   /** Coup légal mais hors répertoire : on compte l'erreur et on affiche les bons coups. */
-  const registerMistake = (current: GraphNode, wrongSquare: string) => {
+  const registerMistake = (current: GraphNode, wrongSquare: string, playedSan: string) => {
     lineMistakesRef.current += 1;
+    // Erreur transmise au Coach (analyse locale + explication) : sources passant par la position.
+    mistakeIdRef.current += 1;
+    setLastMistake({
+      id: mistakeIdRef.current,
+      fenBefore: currentFen,
+      playedSan,
+      sources: toAnnotatedSources(sources, repertoires, current.chapterIds),
+    });
     setStats((s) => ({ ...s, mistakes: s.mistakes + 1 }));
 
     // Un seul échec par passage sur la position, même après plusieurs essais ratés.
@@ -230,7 +246,7 @@ export function useReviewManager(params: ReviewManagerParams) {
     const evaluation = evaluatePlayerMove(graph, currentFen, sourceSquare, targetSquare);
     if (evaluation.kind === "illegal") return reject(); // pas d'erreur comptée
     if (evaluation.kind === "mistake") {
-      registerMistake(node, targetSquare);
+      registerMistake(node, targetSquare, evaluation.san);
       return reject();
     }
 
@@ -274,7 +290,7 @@ export function useReviewManager(params: ReviewManagerParams) {
     if (evaluation.kind === "illegal") return; // destination illégale : on garde la sélection
 
     if (evaluation.kind === "mistake") {
-      registerMistake(node, square);
+      registerMistake(node, square, evaluation.san);
       onSquareClick(moveFrom); // désélectionne côté useChessGame
       setMoveFrom(null);
       return;
@@ -319,6 +335,7 @@ export function useReviewManager(params: ReviewManagerParams) {
     setFeedback(null);
     setNotice(null);
     setFinishedLineMistakes(null);
+    setLastMistake(null);
     lineMistakesRef.current = 0;
     failedKeysRef.current.clear();
   };
@@ -364,6 +381,7 @@ export function useReviewManager(params: ReviewManagerParams) {
     finishedLineMistakes,
     feedback,
     notice,
+    lastMistake,
     hintArrows: feedback?.arrows ?? [],
     errorSquares,
     currentChapterNames,
