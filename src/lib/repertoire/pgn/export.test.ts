@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { openingCourses } from "@/lib/data/openings";
-import { repertoireFromChapter } from "../convert";
+import { loadAllCourses } from "@/lib/data/openings";
+import { repertoireFromLesson } from "../convert";
 import { exportPgn } from "./export";
 import { importPgn } from "./import";
 import { parsePgn } from "./parse";
@@ -174,17 +174,17 @@ describe("export puis import : aller-retour", () => {
     expect(plain(roundTrip(tree))).toEqual(plain(tree));
   });
 
-  it("restitue les 105 chapitres du catalogue Masterclass à l'identique", () => {
-    let chapters = 0;
-    for (const course of openingCourses) {
-      for (const chapter of course.chapters) {
-        const draft = repertoireFromChapter(chapter, { name: course.name, side: course.side });
+  it("restitue les 105 cours du catalogue Masterclass à l'identique", async () => {
+    let lessons = 0;
+    for (const course of await loadAllCourses()) {
+      for (const lesson of course.chapters.flatMap((chapter) => chapter.lessons)) {
+        const draft = repertoireFromLesson(lesson, { name: course.name, side: course.side });
         const tree: TreeRoot = { children: draft.children };
-        expect(plain(roundTrip(tree.children)), chapter.id).toEqual(plain(tree.children));
-        chapters += 1;
+        expect(plain(roundTrip(tree.children)), lesson.id).toEqual(plain(tree.children));
+        lessons += 1;
       }
     }
-    expect(chapters).toBeGreaterThan(0);
+    expect(lessons).toBe(105);
   });
 
   it("réimporte une suite de chapitres exportés comme un seul arbre fusionné", () => {

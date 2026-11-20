@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { openingCourses } from "@/lib/data/openings";
+import { loadAllCourses } from "@/lib/data/openings";
 import type { TutorialNode } from "@/lib/data/openings/types";
 import { buildReviewGraph, getExpectedMoves, getNode } from "@/lib/review/reviewGraph";
-import { fromTutorialRoot, repertoireFromChapter, toTutorialRoot } from "./convert";
+import { fromTutorialRoot, repertoireFromLesson, toTutorialRoot } from "./convert";
 import { INITIAL_FEN, countNodes, findInvalidNodeIds } from "./repertoireTree";
 import type { TreeRoot } from "./types";
 
@@ -70,14 +70,14 @@ describe("un répertoire alimente le moteur de révision", () => {
   });
 });
 
-describe("repertoireFromChapter (données réelles)", () => {
-  it("convertit un chapitre Masterclass en brouillon de répertoire valide", () => {
-    const course = openingCourses[0];
-    const chapter = course.chapters[0];
-    const draft = repertoireFromChapter(chapter, { name: course.name, side: course.side });
+describe("repertoireFromLesson (données réelles)", () => {
+  it("convertit un cours Masterclass en brouillon de répertoire valide", async () => {
+    const [course] = await loadAllCourses();
+    const lesson = course.chapters[0].lessons[0];
+    const draft = repertoireFromLesson(lesson, { name: course.name, side: course.side });
 
-    expect(draft.name).toBe(chapter.name);
-    expect(draft.side).toBe(chapter.side ?? course.side);
+    expect(draft.name).toBe(lesson.title);
+    expect(draft.side).toBe(course.side);
     expect(draft.category).toBe(course.name);
     expect(draft.reviewEnabled).toBe(true);
     expect(draft.origin).toEqual({ kind: "custom" });
@@ -85,11 +85,11 @@ describe("repertoireFromChapter (données réelles)", () => {
     expect(findInvalidNodeIds(draft)).toEqual([]); // tous les coups sont légaux
   });
 
-  it("convertit sans erreur tous les chapitres du catalogue", () => {
-    for (const course of openingCourses) {
-      for (const chapter of course.chapters) {
-        const draft = repertoireFromChapter(chapter, { name: course.name, side: course.side });
-        expect(findInvalidNodeIds(draft), chapter.id).toEqual([]);
+  it("convertit sans erreur tous les cours du catalogue", async () => {
+    for (const course of await loadAllCourses()) {
+      for (const lesson of course.chapters.flatMap((chapter) => chapter.lessons)) {
+        const draft = repertoireFromLesson(lesson, { name: course.name, side: course.side });
+        expect(findInvalidNodeIds(draft), lesson.id).toEqual([]);
       }
     }
   });

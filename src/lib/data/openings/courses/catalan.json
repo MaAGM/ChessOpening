@@ -1,0 +1,101 @@
+{
+  "id": "catalan",
+  "name": "Catalan",
+  "description": "Formation complète sur Catalan",
+  "side": "white",
+  "eco": [
+    "E04",
+    "E08",
+    "E09",
+    "E05",
+    "E06"
+  ],
+  "chapters": [
+    {
+      "id": "catalan-c1",
+      "title": "Les fondations",
+      "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+      "stage": "foundations",
+      "lessons": [
+        {
+          "id": "catalan-c1-l1",
+          "legacyIds": [
+            "catalan-m1"
+          ],
+          "title": "Catalane - Ouverte",
+          "eco": "E04",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 1... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 2. c4 {c4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc2c4]} 2... e6 {e6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e6]} 3. g3 {g3 : Les Blancs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Gg2g3]} 3... d5 {d5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d5]} 4. Bg2 {Bg2 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf1g2]} 4... dxc4 {dxc4 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gd5c4]} 5. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 5... a6 {a6 : Les Noirs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Ga7a6]} 6. O-O {O-O : Les Blancs sécurisent le roi et activent les tours pour le milieu de jeu. [%cal Ge1g1]} 6... b5 {b5 : Les Noirs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Gb7b5]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "catalan-c1-l2",
+          "legacyIds": [
+            "catalan-m2"
+          ],
+          "title": "Catalan Opening: Closed",
+          "eco": "E08",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 1... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 2. c4 {c4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc2c4]} 2... e6 {e6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e6]} 3. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 3... d5 {d5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d5]} 4. g3 {g3 : Les Blancs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Gg2g3]} 4... Be7 {Be7 : Les Noirs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf8e7]} 5. Bg2 {Bg2 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf1g2]} 5... O-O {O-O : Les Noirs sécurisent le roi et activent les tours pour le milieu de jeu. [%cal Ge8g8]} 6. O-O {O-O : Les Blancs sécurisent le roi et activent les tours pour le milieu de jeu. [%cal Ge1g1]} 6... Nbd7 {Nbd7 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb8d7]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        }
+      ]
+    },
+    {
+      "id": "catalan-c2",
+      "title": "Lignes théoriques",
+      "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
+      "stage": "theory",
+      "lessons": [
+        {
+          "id": "catalan-c2-l1",
+          "legacyIds": [
+            "catalan-m3"
+          ],
+          "title": "Catalan: Closed, Main Line, 9.e4 Bb7 10.b3",
+          "eco": "E09",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 1... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 2. c4 {c4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc2c4]} 2... e6 {e6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e6]} 3. g3 {g3 : Les Blancs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Gg2g3]} 3... d5 {d5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d5]} 4. Bg2 {Bg2 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf1g2]} 4... Be7 {Be7 : Les Noirs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf8e7]} 5. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 5... O-O {O-O : Les Noirs sécurisent le roi et activent les tours pour le milieu de jeu. [%cal Ge8g8]} 6. O-O {O-O : Les Blancs sécurisent le roi et activent les tours pour le milieu de jeu. [%cal Ge1g1]} 6... Nbd7 {Nbd7 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb8d7]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "catalan-c2-l2",
+          "legacyIds": [
+            "catalan-m4"
+          ],
+          "title": "Catalan: Open, Classical, 8.a4 Bd7 9.Qxc4",
+          "eco": "E05",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 1... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 2. c4 {c4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc2c4]} 2... e6 {e6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e6]} 3. g3 {g3 : Les Blancs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Gg2g3]} 3... d5 {d5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d5]} 4. Bg2 {Bg2 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf1g2]} 4... dxc4 {dxc4 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gd5c4]} 5. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 5... Be7 {Be7 : Les Noirs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf8e7]} 6. O-O {O-O : Les Blancs sécurisent le roi et activent les tours pour le milieu de jeu. [%cal Ge1g1]} 6... O-O {O-O : Les Noirs sécurisent le roi et activent les tours pour le milieu de jeu. [%cal Ge8g8]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "catalan-c2-l3",
+          "legacyIds": [
+            "catalan-m5"
+          ],
+          "title": "Catalan: Closed, 6.O-O c6 7.Qc2 b6",
+          "eco": "E06",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 1... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 2. c4 {c4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc2c4]} 2... e6 {e6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e6]} 3. g3 {g3 : Les Blancs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Gg2g3]} 3... d5 {d5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d5]} 4. Bg2 {Bg2 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf1g2]} 4... Be7 {Be7 : Les Noirs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf8e7]} 5. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 5... O-O {O-O : Les Noirs sécurisent le roi et activent les tours pour le milieu de jeu. [%cal Ge8g8]} 6. O-O {O-O : Les Blancs sécurisent le roi et activent les tours pour le milieu de jeu. [%cal Ge1g1]} 6... c6 {c6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc7c6]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        }
+      ]
+    }
+  ]
+}

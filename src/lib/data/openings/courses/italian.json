@@ -1,0 +1,100 @@
+{
+  "id": "italian",
+  "name": "Italian",
+  "description": "Formation complète sur Italian",
+  "side": "white",
+  "eco": [
+    "C53",
+    "C55",
+    "C54",
+    "C51"
+  ],
+  "chapters": [
+    {
+      "id": "italian-c1",
+      "title": "Les fondations",
+      "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+      "stage": "foundations",
+      "lessons": [
+        {
+          "id": "italian-c1-l1",
+          "legacyIds": [
+            "italian-m1"
+          ],
+          "title": "Italienne - Giuoco Piano",
+          "eco": "C53",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. e4 {e4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e4]} 1... e5 {e5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e5]} 2. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 2... Nc6 {Nc6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb8c6]} 3. Bc4 {Bc4 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf1c4]} 3... Bc5 {Bc5 : Les Noirs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf8c5]} 4. c3 {c3 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc2c3]} 4... d6 {d6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d6]} 5. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 5... exd4 {exd4 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Ge5d4]} 6. cxd4 {cxd4 : Les Blancs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gc3d4]} 6... Bb6 {Bb6 : Les Noirs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gc5b6]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "italian-c1-l2",
+          "legacyIds": [
+            "italian-m2"
+          ],
+          "title": "Italienne - Deux Cavaliers",
+          "eco": "C55",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. e4 {e4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e4]} 1... e5 {e5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e5]} 2. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 2... Nc6 {Nc6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb8c6]} 3. Bc4 {Bc4 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf1c4]} 3... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 4. Ng5 {Ng5 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gf3g5]} 4... d5 {d5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d5]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        }
+      ]
+    },
+    {
+      "id": "italian-c2",
+      "title": "Lignes théoriques",
+      "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
+      "stage": "theory",
+      "lessons": [
+        {
+          "id": "italian-c2-l1",
+          "legacyIds": [
+            "italian-m3"
+          ],
+          "title": "Italian Game: Classical Variation, Greco Gambit, Moeller-Therkatz Attack",
+          "eco": "C54",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. e4 {e4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e4]} 1... e5 {e5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e5]} 2. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 2... Nc6 {Nc6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb8c6]} 3. Bc4 {Bc4 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf1c4]} 3... Bc5 {Bc5 : Les Noirs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf8c5]} 4. c3 {c3 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc2c3]} 4... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 5. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 5... exd4 {exd4 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Ge5d4]} 6. cxd4 {cxd4 : Les Blancs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gc3d4]} 6... Bb4+ {Bb4+ : Les Noirs imposent un échec intermédiaire qui force une défense précise. [%cal Gc5b4]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "italian-c2-l2",
+          "legacyIds": [
+            "italian-m4"
+          ],
+          "title": "Two Knights: Max Lange, 6.e5 d5",
+          "eco": "C55",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. e4 {e4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e4]} 1... e5 {e5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e5]} 2. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 2... Nc6 {Nc6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb8c6]} 3. Bc4 {Bc4 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf1c4]} 3... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 4. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 4... exd4 {exd4 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Ge5d4]} 5. O-O {O-O : Les Blancs sécurisent le roi et activent les tours pour le milieu de jeu. [%cal Ge1g1]} 5... Bc5 {Bc5 : Les Noirs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf8c5]} 6. e5 {e5 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge4e5]} 6... d5 {d5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d5]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "italian-c2-l3",
+          "legacyIds": [
+            "italian-m5"
+          ],
+          "title": "Italian Game: Evans Gambit, Fraser Attack",
+          "eco": "C51",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. e4 {e4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e4]} 1... e5 {e5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e5]} 2. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 2... Nc6 {Nc6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb8c6]} 3. Bc4 {Bc4 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf1c4]} 3... Bc5 {Bc5 : Les Noirs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf8c5]} 4. b4 {b4 : Les Blancs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Gb2b4]} 4... Bxb4 {Bxb4 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gc5b4]} 5. c3 {c3 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc2c3]} 5... Bc5 {Bc5 : Les Noirs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gb4c5]} 6. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 6... exd4 {exd4 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Ge5d4]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        }
+      ]
+    }
+  ]
+}

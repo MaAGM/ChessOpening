@@ -30,7 +30,9 @@ export function ReviewPanel({ side, review }: ReviewPanelProps) {
   if (!hasRepertoire) {
     return (
       <Panel className="text-sm text-slate-300">
-        Aucun chapitre dans votre répertoire pour les {sideLabel}.
+        {review.isLoadingLessons
+          ? "Chargement de vos cours…"
+          : `Aucun cours dans votre répertoire pour les ${sideLabel}.`}
       </Panel>
     );
   }

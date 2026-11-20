@@ -10,7 +10,6 @@ import { RepertoireEditorPanel } from "@/components/repertoire/RepertoireEditorP
 import { RepertoireListPanel } from "@/components/repertoire/RepertoireListPanel";
 import { ReviewSetup } from "@/components/chess/ReviewSetup";
 import { Button } from "@/components/ui/Button";
-import { Callout } from "@/components/ui/Callout";
 import type { RepertoireEditor } from "@/hooks/useRepertoireEditor";
 import type { ReviewManager } from "@/hooks/useReviewManager";
 import { useRepertoireStore } from "@/hooks/useRepertoireStore";
@@ -47,10 +46,10 @@ type Props = {
 };
 
 /** Largeur du panneau selon l'écran affiché (classes complètes pour Tailwind). */
-function sidebarWidthClass(mode: PanelMode): string {
+function sidebarWidthClass(mode: PanelMode, courseOpen: boolean): string {
   switch (mode) {
     case "opening_selector":
-      return "w-225";
+      return courseOpen ? "w-120" : "w-225";
     case "repertoire_list":
       return "w-96";
     case "repertoire_editor":
@@ -77,32 +76,26 @@ export const TrainerSidebar: FC<Props> = ({ navigation, tutorial, review, editor
     onOpenRepertoire,
     onCloseRepertoire,
   } = navigation;
-  const {
-    activeNode,
-    activeTutorialId: activeChapterId,
-    isChapterFinished,
-    nextChapter,
-    previousBranchPath,
-    isWaitingForBranchChoice,
-    branchChoices,
-    handleBranchChoice,
-    handleRewindToBranch,
-    handleStartTutorial,
-    handleNextChapter,
-  } = tutorial;
-
-  const { isInReview, addToReview, removeFromReview, reviewChapterIds } = useReviewStore();
+  const { reviewChapterIds } = useReviewStore();
   const { repertoires } = useRepertoireStore();
-  const isChapterInReview = activeChapterId ? isInReview(activeChapterId) : false;
   const reviewCounts = useMemo(
     () => countReviewSourcesBySide(reviewChapterIds, repertoires),
     [reviewChapterIds, repertoires],
   );
 
+  // « Retour » : du cours vers les chapitres de l'ouverture, de l'éditeur vers la liste,
+  // sinon vers le menu.
+  const back =
+    panelMode === "repertoire_editor"
+      ? { onClick: onCloseRepertoire, label: "Mes répertoires" }
+      : panelMode === "learning_active"
+        ? { onClick: tutorial.handleBackToCourse, label: "Chapitres" }
+        : { onClick: onBackToMenu, label: "Retour" };
+
   return (
     <aside
       className={`flex h-137.5 flex-col rounded-lg border border-slate-700 bg-slate-800/60 p-4 transition-all duration-300 ease-in-out ${
-        sidebarWidthClass(panelMode)
+        sidebarWidthClass(panelMode, tutorial.selectedCourseId !== null)
       }`}
     >
       {/* ------------------------------------------------------------------ */}
@@ -116,7 +109,10 @@ export const TrainerSidebar: FC<Props> = ({ navigation, tutorial, review, editor
 
           <button
             type="button"
-            onClick={() => setPanelMode("opening_selector")}
+            onClick={() => {
+              tutorial.handleCloseCourse();
+              setPanelMode("opening_selector");
+            }}
             className="rounded-xl border border-emerald-400/40 bg-emerald-500/20 px-4 py-3 text-left font-semibold text-emerald-100 transition hover:border-emerald-300/70 hover:bg-emerald-500/30"
           >
             Apprendre une ouverture
@@ -152,7 +148,7 @@ export const TrainerSidebar: FC<Props> = ({ navigation, tutorial, review, editor
           {/* Back button – always visible when not in the root menu */}
           <Button
             variant="secondary"
-            onClick={panelMode === "repertoire_editor" ? onCloseRepertoire : onBackToMenu}
+            onClick={back.onClick}
             className="flex w-fit items-center gap-2"
           >
             <svg
@@ -167,14 +163,21 @@ export const TrainerSidebar: FC<Props> = ({ navigation, tutorial, review, editor
                 clipRule="evenodd"
               />
             </svg>
-            {panelMode === "repertoire_editor" ? "Mes répertoires" : "Retour"}
+            {back.label}
           </Button>
 
           {/* ---------------------------------------------------------------- */}
           {/* Opening selector – shown when panelMode === "opening_selector" */}
           {/* ---------------------------------------------------------------- */}
           {panelMode === "opening_selector" && (
-            <OpeningSelector onSelectOpening={handleStartTutorial} />
+            <OpeningSelector
+              selectedCourse={tutorial.courseEntry}
+              isLoading={tutorial.isCourseLoading}
+              loadError={tutorial.loadError}
+              onOpenCourse={tutorial.handleOpenCourse}
+              onCloseCourse={tutorial.handleCloseCourse}
+              onStartLesson={tutorial.handleStartLesson}
+            />
           )}
 
           {/* ---------------------------------------------------------------- */}
@@ -200,79 +203,7 @@ export const TrainerSidebar: FC<Props> = ({ navigation, tutorial, review, editor
           {/* ---------------------------------------------------------------- */}
           {/* Learning panel – shown when a tutorial is active */}
           {/* ---------------------------------------------------------------- */}
-          {panelMode === "learning_active" && activeNode && (
-            <>
-              <LearningPanel
-                currentNode={activeNode}
-                hasPreviousBranch={Boolean(previousBranchPath)}
-                onRewindToBranch={handleRewindToBranch}
-                onBackToMenu={onBackToMenu}
-                isWaitingForBranchChoice={isWaitingForBranchChoice}
-                branchChoices={branchChoices}
-                onPlayMove={handleBranchChoice}
-              />
-
-              {/* ------------------------------------------------------------ */}
-              {/* End‑of‑chapter UI – review button, next chapter, banner */}
-              {/* ------------------------------------------------------------ */}
-              {isChapterFinished && activeChapterId && (
-                isChapterInReview ? (
-                  <Callout
-                    tone="success"
-                    className="mt-2 flex items-center justify-between px-4 py-2 text-sm font-semibold text-emerald-300"
-                  >
-                    <span>✓ Ajouté à vos révisions</span>
-                    <Button
-                      variant="link"
-                      onClick={() => removeFromReview(activeChapterId)}
-                      className="font-normal"
-                    >
-                      Retirer
-                    </Button>
-                  </Callout>
-                ) : (
-                  <Button
-                    tone="emerald"
-                    onClick={() => addToReview(activeChapterId)}
-                    className="mt-2 w-full px-4 py-3 text-sm"
-                  >
-                    Ajouter à mes révisions
-                  </Button>
-                )
-              )}
-
-              {isChapterFinished && nextChapter && (
-                <Button
-                  variant="primary"
-                  onClick={handleNextChapter}
-                  className="mt-2 flex w-full items-center justify-center gap-2"
-                >
-                  Chapitre suivant : {nextChapter.name}
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    className="h-5 w-5"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M3 10a.75.75 0 0 1 .75-.75h10.638L10.23 5.29a.75.75 0 1 1 1.04-1.08l5.5 5.25a.75.75 0 0 1 0 1.08l-5.5 5.25a.75.75 0 1 1-1.04-1.08l4.158-3.96H3.75A.75.75 0 0 1 3 10Z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </Button>
-              )}
-
-              {isChapterFinished && !nextChapter && (
-                <Callout
-                  tone="success"
-                  className="mt-2 px-4 py-3 text-center font-bold text-emerald-400"
-                >
-                  🎉 Cours complet terminé !
-                </Callout>
-              )}
-            </>
-          )}
+          {panelMode === "learning_active" && <LearningPanel tutorial={tutorial} />}
         </div>
       )}
     </aside>

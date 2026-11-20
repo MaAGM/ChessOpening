@@ -1,0 +1,99 @@
+{
+  "id": "vienna",
+  "name": "Vienna",
+  "description": "Formation complète sur Vienna",
+  "side": "white",
+  "eco": [
+    "C25",
+    "C27",
+    "C29"
+  ],
+  "chapters": [
+    {
+      "id": "vienna-c1",
+      "title": "Les fondations",
+      "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+      "stage": "foundations",
+      "lessons": [
+        {
+          "id": "vienna-c1-l1",
+          "legacyIds": [
+            "vienna-m1"
+          ],
+          "title": "Partie Viennoise",
+          "eco": "C25",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. e4 {e4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e4]} 1... e5 {e5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e5]} 2. Nc3 {Nc3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb1c3]} 2... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 3. Bc4 {Bc4 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf1c4]} 3... Bc5 {Bc5 : Les Noirs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf8c5]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "vienna-c1-l2",
+          "legacyIds": [
+            "vienna-m2"
+          ],
+          "title": "Vienna: 3.Bc4 Nxe4 4.Qh5 Nd6 5.Bb3 Nc6",
+          "eco": "C27",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. e4 {e4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e4]} 1... e5 {e5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e5]} 2. Nc3 {Nc3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb1c3]} 2... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 3. Bc4 {Bc4 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf1c4]} 3... Nxe4 {Nxe4 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gf6e4]} 4. Qh5 {Qh5 : Les Blancs développent le dame avec un gain de coordination et de contrôle des cases clés. [%cal Gd1h5]} 4... Nd6 {Nd6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Ge4d6]} 5. Bb3 {Bb3 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gc4b3]} 5... Nc6 {Nc6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb8c6]} 6. Nb5 {Nb5 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gc3b5]} 6... g6 {g6 : Les Noirs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Gg7g6]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        }
+      ]
+    },
+    {
+      "id": "vienna-c2",
+      "title": "Lignes théoriques",
+      "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
+      "stage": "theory",
+      "lessons": [
+        {
+          "id": "vienna-c2-l1",
+          "legacyIds": [
+            "vienna-m3"
+          ],
+          "title": "Vienna Gambit, with Max Lange Defense: Pierce Gambit",
+          "eco": "C25",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. e4 {e4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e4]} 1... e5 {e5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e5]} 2. Nc3 {Nc3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb1c3]} 2... Nc6 {Nc6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb8c6]} 3. f4 {f4 : Les Blancs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Gf2f4]} 3... exf4 {exf4 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Ge5f4]} 4. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 4... g5 {g5 : Les Noirs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Gg7g5]} 5. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 5... g4 {g4 : Les Noirs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Gg5g4]} 6. Bc4 {Bc4 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf1c4]} 6... gxf3 {gxf3 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gg4f3]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "vienna-c2-l2",
+          "legacyIds": [
+            "vienna-m4"
+          ],
+          "title": "Vienna Gambit, with Max Lange Defense: Hamppe-Muzio Gambit",
+          "eco": "C25",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. e4 {e4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e4]} 1... e5 {e5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e5]} 2. Nc3 {Nc3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb1c3]} 2... Nc6 {Nc6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb8c6]} 3. f4 {f4 : Les Blancs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Gf2f4]} 3... exf4 {exf4 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Ge5f4]} 4. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 4... g5 {g5 : Les Noirs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Gg7g5]} 5. Bc4 {Bc4 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf1c4]} 5... g4 {g4 : Les Noirs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Gg5g4]} 6. O-O {O-O : Les Blancs sécurisent le roi et activent les tours pour le milieu de jeu. [%cal Ge1g1]} 6... gxf3 {gxf3 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gg4f3]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "vienna-c2-l3",
+          "legacyIds": [
+            "vienna-m5"
+          ],
+          "title": "Vienna Game, Würzburger Trap",
+          "eco": "C29",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. e4 {e4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e4]} 1... e5 {e5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e5]} 2. Nc3 {Nc3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb1c3]} 2... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 3. f4 {f4 : Les Blancs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Gf2f4]} 3... d5 {d5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d5]} 4. fxe5 {fxe5 : Les Blancs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gf4e5]} 4... Nxe4 {Nxe4 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gf6e4]} 5. d3 {d3 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d3]} 5... Qh4+ {Qh4+ : Les Noirs imposent un échec intermédiaire qui force une défense précise. [%cal Gd8h4]} 6. g3 {g3 : Les Blancs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Gg2g3]} 6... Nxg3 {Nxg3 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Ge4g3]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        }
+      ]
+    }
+  ]
+}

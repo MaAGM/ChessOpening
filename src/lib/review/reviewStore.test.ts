@@ -6,13 +6,28 @@ describe("sanitizeState", () => {
   it("migre la version 1 (sans statistiques) vers la version 2 sans rien perdre", () => {
     const state = sanitizeState({
       version: 1,
-      reviewChapters: { "french-m1": { addedAt: 123 } },
-      completedChapters: ["french-m1", "french-m1", 42],
+      reviewChapters: { "mon-cours": { addedAt: 123 } },
+      completedChapters: ["mon-cours", "mon-cours", 42],
     });
     expect(state).toEqual({
       version: 2,
-      reviewChapters: { "french-m1": { addedAt: 123 } },
-      completedChapters: ["french-m1"],
+      reviewChapters: { "mon-cours": { addedAt: 123 } },
+      completedChapters: ["mon-cours"],
+      positions: {},
+    });
+  });
+
+  it("traduit les anciens identifiants de cours (french-m1) vers les nouveaux", () => {
+    const state = sanitizeState({
+      version: 2,
+      reviewChapters: { "french-m1": { addedAt: 123 }, "french-c1-l1": { addedAt: 50 } },
+      completedChapters: ["french-m1", "french-m3"],
+      positions: {},
+    });
+    expect(state).toEqual({
+      version: 2,
+      reviewChapters: { "french-c1-l1": { addedAt: 50 } },
+      completedChapters: ["french-c1-l1", "french-c2-l1"],
       positions: {},
     });
   });
@@ -94,23 +109,52 @@ describe("reviewStore (avec localStorage factice)", () => {
 
   it("relit des statistiques déjà persistées au rechargement", async () => {
     const first = await import("./reviewStore");
-    first.addReviewChapter("french-m1");
+    first.addReviewChapter("french-c1-l1");
     first.recordPositionResult("pos-1", true, 1000);
 
     vi.resetModules();
     const second = await import("./reviewStore");
     const state = second.getSnapshot();
-    expect(Object.keys(state.reviewChapters)).toEqual(["french-m1"]);
+    expect(Object.keys(state.reviewChapters)).toEqual(["french-c1-l1"]);
     expect(state.positions["pos-1"].box).toBe(2);
   });
 
   it("efface les statistiques en gardant les chapitres", async () => {
     const store = await import("./reviewStore");
-    store.addReviewChapter("french-m1");
+    store.addReviewChapter("french-c1-l1");
     store.recordPositionResult("pos-1", true, 1000);
     store.resetPositionStats();
 
     expect(store.getSnapshot().positions).toEqual({});
-    expect(Object.keys(store.getSnapshot().reviewChapters)).toEqual(["french-m1"]);
+    expect(Object.keys(store.getSnapshot().reviewChapters)).toEqual(["french-c1-l1"]);
+  });
+
+  it("migre les anciens identifiants de l'ancienne clé des chapitres complétés", async () => {
+    data["chess-opening:completed-chapters-v2"] = JSON.stringify(["sicilian-m3"]);
+    const store = await import("./reviewStore");
+    expect(store.getSnapshot().completedChapters).toEqual(["sicilian-c2-l1"]);
+  });
+
+  it("migre un état persisté avec les anciens identifiants et le réécrit au prochain changement", async () => {
+    data[STORAGE_KEY] = JSON.stringify({
+      version: 2,
+      reviewChapters: { "french-m2": { addedAt: 5 } },
+      completedChapters: ["french-m2"],
+      positions: {},
+    });
+    const store = await import("./reviewStore");
+    expect(store.getSnapshot().reviewChapters).toEqual({ "french-c1-l2": { addedAt: 5 } });
+
+    store.markChapterComplete("french-c1-l1");
+    const saved = JSON.parse(data[STORAGE_KEY]);
+    expect(saved.completedChapters).toEqual(["french-c1-l2", "french-c1-l1"]);
+    expect(Object.keys(saved.reviewChapters)).toEqual(["french-c1-l2"]);
+  });
+
+  it("ajoute tout un chapitre aux révisions en un seul changement", async () => {
+    const store = await import("./reviewStore");
+    store.addReviewChapter("a");
+    store.addReviewChapters(["a", "b", "c"]);
+    expect(Object.keys(store.getSnapshot().reviewChapters).sort()).toEqual(["a", "b", "c"]);
   });
 });

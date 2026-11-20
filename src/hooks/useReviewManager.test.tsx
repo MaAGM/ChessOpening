@@ -5,7 +5,7 @@ import { useState } from "react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import type { PanelMode } from "./useTrainerMode";
 import { useReviewManager } from "./useReviewManager";
-import { openingCourses } from "@/lib/data/openings";
+import { courseEntries, loadCoursesForLessons } from "@/lib/data/openings";
 import {
   createRepertoire,
   deleteRepertoire,
@@ -204,8 +204,9 @@ describe("sources de révision", () => {
     expect(result.current.review.hasRepertoire).toBe(false);
   });
 
-  it("ajoute les fiches d'un répertoire à celles des chapitres déjà ajoutés aux révisions", () => {
-    const blackChapter = openingCourses.find((c) => c.side === "black")!.chapters[0];
+  it("ajoute les fiches d'un répertoire à celles des chapitres déjà ajoutés aux révisions", async () => {
+    const blackChapter = courseEntries.find((c) => c.side === "black")!.chapters[0].lessons[0];
+    await loadCoursesForLessons([blackChapter.id]);
     addReviewChapter(blackChapter.id);
     const { result, rerender } = renderHook(() => useHarness("black"));
     const chaptersOnly = result.current.review.cardSummary.total;

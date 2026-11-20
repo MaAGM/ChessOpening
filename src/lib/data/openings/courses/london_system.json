@@ -1,0 +1,97 @@
+{
+  "id": "london_system",
+  "name": "London System",
+  "description": "Formation complète sur London System",
+  "side": "white",
+  "eco": [
+    "D02"
+  ],
+  "chapters": [
+    {
+      "id": "london_system-c1",
+      "title": "Les fondations",
+      "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+      "stage": "foundations",
+      "lessons": [
+        {
+          "id": "london_system-c1-l1",
+          "legacyIds": [
+            "london_system-m1"
+          ],
+          "title": "Système de Londres (Classique)",
+          "eco": "D02",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 1... d5 {d5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d5]} 2. Bf4 {Bf4 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gc1f4]} 2... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 3. e3 {e3 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e3]} 3... c6 {c6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc7c6]} 4. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 4... Bf5 {Bf5 : Les Noirs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gc8f5]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "london_system-c1-l2",
+          "legacyIds": [
+            "london_system-m2"
+          ],
+          "title": "Queen's Pawn: London",
+          "eco": "D02",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 1... d5 {d5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d5]} 2. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 2... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 3. Bf4 {Bf4 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gc1f4]} 3... e6 {e6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e6]} 4. e3 {e3 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e3]} 4... c5 {c5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc7c5]} 5. c3 {c3 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc2c3]} 5... Nc6 {Nc6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb8c6]} 6. Bd3 {Bd3 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf1d3]} 6... Bd6 {Bd6 : Les Noirs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf8d6]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        }
+      ]
+    },
+    {
+      "id": "london_system-c2",
+      "title": "Lignes théoriques",
+      "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
+      "stage": "theory",
+      "lessons": [
+        {
+          "id": "london_system-c2-l1",
+          "legacyIds": [
+            "london_system-m3"
+          ],
+          "title": "Queen's Pawn: London",
+          "eco": "D02",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 1... d5 {d5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d5]} 2. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 2... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 3. Bf4 {Bf4 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gc1f4]} 3... c5 {c5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc7c5]} 4. e3 {e3 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e3]} 4... e6 {e6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e6]} 5. c3 {c3 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc2c3]} 5... Nc6 {Nc6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb8c6]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "london_system-c2-l2",
+          "legacyIds": [
+            "london_system-m4"
+          ],
+          "title": "London System: Ligne principale",
+          "eco": "D02",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 1... d5 {d5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d5]} 2. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 2... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 3. Bf4 {Bf4 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gc1f4]} 3... e6 {e6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e6]} 4. e3 {e3 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e3]} 4... c5 {c5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc7c5]} 5. c3 {c3 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc2c3]} 5... Nc6 {Nc6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb8c6]} 6. Nbd2 {Nbd2 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb1d2]} 6... Bd6 {Bd6 : Les Noirs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf8d6]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "london_system-c2-l3",
+          "legacyIds": [
+            "london_system-m5"
+          ],
+          "title": "London System: Variante ...Bf5",
+          "eco": "D02",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 1... d5 {d5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d5]} 2. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 2... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 3. Bf4 {Bf4 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gc1f4]} 3... Bf5 {Bf5 : Les Noirs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gc8f5]} 4. e3 {e3 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e3]} 4... e6 {e6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e6]} 5. Bd3 {Bd3 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf1d3]} 5... Bxd3 {Bxd3 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gf5d3]} 6. Qxd3 {Qxd3 : Les Blancs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gd1d3]} 6... c5 {c5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc7c5]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        }
+      ]
+    }
+  ]
+}

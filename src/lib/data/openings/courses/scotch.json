@@ -1,0 +1,98 @@
+{
+  "id": "scotch",
+  "name": "Scotch",
+  "description": "Formation complète sur Scotch",
+  "side": "white",
+  "eco": [
+    "C45",
+    "C44"
+  ],
+  "chapters": [
+    {
+      "id": "scotch-c1",
+      "title": "Les fondations",
+      "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+      "stage": "foundations",
+      "lessons": [
+        {
+          "id": "scotch-c1-l1",
+          "legacyIds": [
+            "scotch-m1"
+          ],
+          "title": "Partie Écossaise",
+          "eco": "C45",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. e4 {e4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e4]} 1... e5 {e5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e5]} 2. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 2... Nc6 {Nc6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb8c6]} 3. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 3... exd4 {exd4 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Ge5d4]} 4. Nxd4 {Nxd4 : Les Blancs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gf3d4]} 4... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 5. Nxc6 {Nxc6 : Les Blancs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gd4c6]} 5... bxc6 {bxc6 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gb7c6]} 6. e5 {e5 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge4e5]} 6... Qe7 {Qe7 : Les Noirs développent le dame avec un gain de coordination et de contrôle des cases clés. [%cal Gd8e7]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "scotch-c1-l2",
+          "legacyIds": [
+            "scotch-m2"
+          ],
+          "title": "Scotch Game: Classical Variation, Blackburne Attack",
+          "eco": "C45",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. e4 {e4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e4]} 1... e5 {e5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e5]} 2. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 2... Nc6 {Nc6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb8c6]} 3. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 3... exd4 {exd4 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Ge5d4]} 4. Nxd4 {Nxd4 : Les Blancs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gf3d4]} 4... Bc5 {Bc5 : Les Noirs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf8c5]} 5. Be3 {Be3 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gc1e3]} 5... Qf6 {Qf6 : Les Noirs développent le dame avec un gain de coordination et de contrôle des cases clés. [%cal Gd8f6]} 6. c3 {c3 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc2c3]} 6... Nge7 {Nge7 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8e7]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        }
+      ]
+    },
+    {
+      "id": "scotch-c2",
+      "title": "Lignes théoriques",
+      "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
+      "stage": "theory",
+      "lessons": [
+        {
+          "id": "scotch-c2-l1",
+          "legacyIds": [
+            "scotch-m3"
+          ],
+          "title": "Scotch: Steinitz, 5.Nb5 Bb4+",
+          "eco": "C45",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. e4 {e4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e4]} 1... e5 {e5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e5]} 2. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 2... Nc6 {Nc6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb8c6]} 3. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 3... exd4 {exd4 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Ge5d4]} 4. Nxd4 {Nxd4 : Les Blancs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gf3d4]} 4... Qh4 {Qh4 : Les Noirs développent le dame avec un gain de coordination et de contrôle des cases clés. [%cal Gd8h4]} 5. Nb5 {Nb5 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gd4b5]} 5... Bb4+ {Bb4+ : Les Noirs imposent un échec intermédiaire qui force une défense précise. [%cal Gf8b4]} 6. Nd2 {Nd2 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb1d2]} 6... Qxe4+ {Qxe4+ : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gh4e4]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "scotch-c2-l2",
+          "legacyIds": [
+            "scotch-m4"
+          ],
+          "title": "Scotch: Goring Gambit, 4...dxc3 5.Nxc3",
+          "eco": "C44",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. e4 {e4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e4]} 1... e5 {e5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e5]} 2. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 2... Nc6 {Nc6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb8c6]} 3. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 3... exd4 {exd4 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Ge5d4]} 4. c3 {c3 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc2c3]} 4... dxc3 {dxc3 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gd4c3]} 5. Nxc3 {Nxc3 : Les Blancs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gb1c3]} 5... d6 {d6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d6]} 6. Bc4 {Bc4 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf1c4]} 6... Bg4 {Bg4 : Les Noirs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gc8g4]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "scotch-c2-l3",
+          "legacyIds": [
+            "scotch-m5"
+          ],
+          "title": "Scotch Game",
+          "eco": "C45",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. e4 {e4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e4]} 1... e5 {e5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e5]} 2. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 2... Nc6 {Nc6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb8c6]} 3. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 3... exd4 {exd4 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Ge5d4]} 4. Nxd4 {Nxd4 : Les Blancs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gf3d4]} 4... Qh4 {Qh4 : Les Noirs développent le dame avec un gain de coordination et de contrôle des cases clés. [%cal Gd8h4]} 5. Nb5 {Nb5 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gd4b5]} 5... Bb4+ {Bb4+ : Les Noirs imposent un échec intermédiaire qui force une défense précise. [%cal Gf8b4]} 6. Bd2 {Bd2 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gc1d2]} 6... Qxe4+ {Qxe4+ : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gh4e4]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        }
+      ]
+    }
+  ]
+}

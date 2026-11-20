@@ -1,0 +1,101 @@
+{
+  "id": "queens_gambit",
+  "name": "Queens Gambit",
+  "description": "Formation complète sur Queens Gambit",
+  "side": "white",
+  "eco": [
+    "D20",
+    "D30",
+    "D68",
+    "D28",
+    "D34"
+  ],
+  "chapters": [
+    {
+      "id": "queens_gambit-c1",
+      "title": "Les fondations",
+      "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+      "stage": "foundations",
+      "lessons": [
+        {
+          "id": "queens_gambit-c1-l1",
+          "legacyIds": [
+            "queens_gambit-m1"
+          ],
+          "title": "Gambit Dame Accepté",
+          "eco": "D20",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 1... d5 {d5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d5]} 2. c4 {c4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc2c4]} 2... dxc4 {dxc4 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gd5c4]} 3. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 3... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 4. e3 {e3 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e3]} 4... e6 {e6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e6]} 5. Bxc4 {Bxc4 : Les Blancs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gf1c4]} 5... c5 {c5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc7c5]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "queens_gambit-c1-l2",
+          "legacyIds": [
+            "queens_gambit-m2"
+          ],
+          "title": "Gambit Dame Refusé",
+          "eco": "D30",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 1... d5 {d5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d5]} 2. c4 {c4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc2c4]} 2... e6 {e6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e6]} 3. Nc3 {Nc3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb1c3]} 3... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 4. Bg5 {Bg5 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gc1g5]} 4... Be7 {Be7 : Les Noirs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf8e7]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        }
+      ]
+    },
+    {
+      "id": "queens_gambit-c2",
+      "title": "Lignes théoriques",
+      "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
+      "stage": "theory",
+      "lessons": [
+        {
+          "id": "queens_gambit-c2-l1",
+          "legacyIds": [
+            "queens_gambit-m3"
+          ],
+          "title": "QGD: Orthodox, Classical, Vidmar, 13...exd4",
+          "eco": "D68",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 1... d5 {d5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d5]} 2. c4 {c4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc2c4]} 2... e6 {e6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e6]} 3. Nc3 {Nc3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb1c3]} 3... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 4. Bg5 {Bg5 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gc1g5]} 4... Be7 {Be7 : Les Noirs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf8e7]} 5. e3 {e3 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e3]} 5... O-O {O-O : Les Noirs sécurisent le roi et activent les tours pour le milieu de jeu. [%cal Ge8g8]} 6. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 6... Nbd7 {Nbd7 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb8d7]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "queens_gambit-c2-l2",
+          "legacyIds": [
+            "queens_gambit-m4"
+          ],
+          "title": "QGA: Classical, 7.Qe2 b5 8.Bb3 Nc6 9.Rd1 c4",
+          "eco": "D28",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 1... d5 {d5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d5]} 2. c4 {c4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc2c4]} 2... dxc4 {dxc4 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gd5c4]} 3. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 3... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 4. e3 {e3 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e3]} 4... e6 {e6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e6]} 5. Bxc4 {Bxc4 : Les Blancs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gf1c4]} 5... c5 {c5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc7c5]} 6. O-O {O-O : Les Blancs sécurisent le roi et activent les tours pour le milieu de jeu. [%cal Ge1g1]} 6... a6 {a6 : Les Noirs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Ga7a6]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "queens_gambit-c2-l3",
+          "legacyIds": [
+            "queens_gambit-m5"
+          ],
+          "title": "QGD Tarrasch: 9.dxc5 Bxc5 10.Bg5 d4 11.Bxf6 Qxf6 12.Nd5",
+          "eco": "D34",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 1... d5 {d5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d5]} 2. c4 {c4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc2c4]} 2... e6 {e6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e6]} 3. Nc3 {Nc3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb1c3]} 3... c5 {c5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc7c5]} 4. cxd5 {cxd5 : Les Blancs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gc4d5]} 4... exd5 {exd5 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Ge6d5]} 5. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 5... Nc6 {Nc6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb8c6]} 6. g3 {g3 : Les Blancs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Gg2g3]} 6... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        }
+      ]
+    }
+  ]
+}

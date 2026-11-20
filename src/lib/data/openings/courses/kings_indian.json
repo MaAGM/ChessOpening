@@ -1,0 +1,101 @@
+{
+  "id": "kings_indian",
+  "name": "Kings Indian",
+  "description": "Formation complète sur Kings Indian",
+  "side": "black",
+  "eco": [
+    "E90",
+    "E66",
+    "E80",
+    "E87",
+    "E84"
+  ],
+  "chapters": [
+    {
+      "id": "kings_indian-c1",
+      "title": "Les fondations",
+      "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+      "stage": "foundations",
+      "lessons": [
+        {
+          "id": "kings_indian-c1-l1",
+          "legacyIds": [
+            "kings_indian-m1"
+          ],
+          "title": "Est-Indienne - Classique",
+          "eco": "E90",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 1... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 2. c4 {c4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc2c4]} 2... g6 {g6 : Les Noirs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Gg7g6]} 3. Nc3 {Nc3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb1c3]} 3... Bg7 {Bg7 : Les Noirs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf8g7]} 4. e4 {e4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e4]} 4... d6 {d6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d6]} 5. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 5... O-O {O-O : Les Noirs sécurisent le roi et activent les tours pour le milieu de jeu. [%cal Ge8g8]} 6. Be2 {Be2 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf1e2]} 6... e5 {e5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e5]} 7. O-O {O-O : Les Blancs sécurisent le roi et activent les tours pour le milieu de jeu. [%cal Ge1g1]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "kings_indian-c1-l2",
+          "legacyIds": [
+            "kings_indian-m2"
+          ],
+          "title": "King's Indian: Fianchetto, Yugoslav Panno, Main Line, 12.Bb2 bxc4",
+          "eco": "E66",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 1... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 2. c4 {c4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc2c4]} 2... g6 {g6 : Les Noirs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Gg7g6]} 3. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 3... Bg7 {Bg7 : Les Noirs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf8g7]} 4. g3 {g3 : Les Blancs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Gg2g3]} 4... O-O {O-O : Les Noirs sécurisent le roi et activent les tours pour le milieu de jeu. [%cal Ge8g8]} 5. Bg2 {Bg2 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf1g2]} 5... d6 {d6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d6]} 6. O-O {O-O : Les Blancs sécurisent le roi et activent les tours pour le milieu de jeu. [%cal Ge1g1]} 6... Nc6 {Nc6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb8c6]} 7. Nc3 {Nc3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb1c3]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        }
+      ]
+    },
+    {
+      "id": "kings_indian-c2",
+      "title": "Lignes théoriques",
+      "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
+      "stage": "theory",
+      "lessons": [
+        {
+          "id": "kings_indian-c2-l1",
+          "legacyIds": [
+            "kings_indian-m3"
+          ],
+          "title": "King's Indian: Saemisch, 5...e5 6.d5",
+          "eco": "E80",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 1... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 2. c4 {c4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc2c4]} 2... g6 {g6 : Les Noirs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Gg7g6]} 3. Nc3 {Nc3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb1c3]} 3... Bg7 {Bg7 : Les Noirs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf8g7]} 4. e4 {e4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e4]} 4... d6 {d6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d6]} 5. f3 {f3 : Les Blancs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Gf2f3]} 5... e5 {e5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e5]} 6. d5 {d5 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd4d5]} 6... Nh5 {Nh5 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gf6h5]} 7. Be3 {Be3 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gc1e3]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "kings_indian-c2-l2",
+          "legacyIds": [
+            "kings_indian-m4"
+          ],
+          "title": "King's Indian: Saemisch, Orthodox, Bronstein, 9.g3",
+          "eco": "E87",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 1... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 2. c4 {c4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc2c4]} 2... g6 {g6 : Les Noirs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Gg7g6]} 3. Nc3 {Nc3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb1c3]} 3... Bg7 {Bg7 : Les Noirs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf8g7]} 4. e4 {e4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e4]} 4... d6 {d6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d6]} 5. f3 {f3 : Les Blancs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Gf2f3]} 5... O-O {O-O : Les Noirs sécurisent le roi et activent les tours pour le milieu de jeu. [%cal Ge8g8]} 6. Be3 {Be3 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gc1e3]} 6... e5 {e5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e5]} 7. d5 {d5 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd4d5]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "kings_indian-c2-l3",
+          "legacyIds": [
+            "kings_indian-m5"
+          ],
+          "title": "King's Indian: Saemisch, Panno Main Line, 9.h4 h5 10.O-O-O",
+          "eco": "E84",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 1... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 2. c4 {c4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc2c4]} 2... g6 {g6 : Les Noirs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Gg7g6]} 3. Nc3 {Nc3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb1c3]} 3... Bg7 {Bg7 : Les Noirs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf8g7]} 4. e4 {e4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e4]} 4... d6 {d6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d6]} 5. f3 {f3 : Les Blancs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Gf2f3]} 5... O-O {O-O : Les Noirs sécurisent le roi et activent les tours pour le milieu de jeu. [%cal Ge8g8]} 6. Be3 {Be3 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gc1e3]} 6... Nc6 {Nc6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb8c6]} 7. Nge2 {Nge2 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1e2]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        }
+      ]
+    }
+  ]
+}

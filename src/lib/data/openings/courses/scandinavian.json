@@ -1,0 +1,97 @@
+{
+  "id": "scandinavian",
+  "name": "Scandinavian",
+  "description": "Formation complète sur Scandinavian",
+  "side": "black",
+  "eco": [
+    "B01"
+  ],
+  "chapters": [
+    {
+      "id": "scandinavian-c1",
+      "title": "Les fondations",
+      "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+      "stage": "foundations",
+      "lessons": [
+        {
+          "id": "scandinavian-c1-l1",
+          "legacyIds": [
+            "scandinavian-m1"
+          ],
+          "title": "Défense Scandinave",
+          "eco": "B01",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. e4 {e4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e4]} 1... d5 {d5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d5]} 2. exd5 {exd5 : Les Blancs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Ge4d5]} 2... Qxd5 {Qxd5 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gd8d5]} 3. Nc3 {Nc3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb1c3]} 3... Qa5 {Qa5 : Les Noirs développent le dame avec un gain de coordination et de contrôle des cases clés. [%cal Gd5a5]} 4. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 4... e5 {e5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e5]} 5. dxe5 {dxe5 : Les Blancs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gd4e5]} 5... Nc6 {Nc6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb8c6]} 6. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 6... Bb4 {Bb4 : Les Noirs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf8b4]} 7. Bd2 {Bd2 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gc1d2]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "scandinavian-c1-l2",
+          "legacyIds": [
+            "scandinavian-m2"
+          ],
+          "title": "Scandinavian Defense: Schiller-Pytel Variation",
+          "eco": "B01",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. e4 {e4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e4]} 1... d5 {d5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d5]} 2. exd5 {exd5 : Les Blancs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Ge4d5]} 2... Qxd5 {Qxd5 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gd8d5]} 3. Nc3 {Nc3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb1c3]} 3... Qd6 {Qd6 : Les Noirs développent le dame avec un gain de coordination et de contrôle des cases clés. [%cal Gd5d6]} 4. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 4... c6 {c6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc7c6]} 5. Bc4 {Bc4 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf1c4]} 5... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 6. Nge2 {Nge2 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1e2]} 6... Bf5 {Bf5 : Les Noirs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gc8f5]} 7. Ng3 {Ng3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Ge2g3]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        }
+      ]
+    },
+    {
+      "id": "scandinavian-c2",
+      "title": "Lignes théoriques",
+      "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
+      "stage": "theory",
+      "lessons": [
+        {
+          "id": "scandinavian-c2-l1",
+          "legacyIds": [
+            "scandinavian-m3"
+          ],
+          "title": "Scandinavian: Schiller, 4.d4 Nf6",
+          "eco": "B01",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. e4 {e4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e4]} 1... d5 {d5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d5]} 2. exd5 {exd5 : Les Blancs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Ge4d5]} 2... Qxd5 {Qxd5 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gd8d5]} 3. Nc3 {Nc3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb1c3]} 3... Qd6 {Qd6 : Les Noirs développent le dame avec un gain de coordination et de contrôle des cases clés. [%cal Gd5d6]} 4. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 4... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 5. Bc4 {Bc4 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf1c4]} 5... c6 {c6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc7c6]} 6. Nge2 {Nge2 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1e2]} 6... Bf5 {Bf5 : Les Noirs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gc8f5]} 7. Ng3 {Ng3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Ge2g3]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "scandinavian-c2-l2",
+          "legacyIds": [
+            "scandinavian-m4"
+          ],
+          "title": "Scandinavian Defense: Classical Variation",
+          "eco": "B01",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. e4 {e4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e4]} 1... d5 {d5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d5]} 2. exd5 {exd5 : Les Blancs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Ge4d5]} 2... Qxd5 {Qxd5 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gd8d5]} 3. Nc3 {Nc3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb1c3]} 3... Qa5 {Qa5 : Les Noirs développent le dame avec un gain de coordination et de contrôle des cases clés. [%cal Gd5a5]} 4. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 4... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 5. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 5... Bf5 {Bf5 : Les Noirs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gc8f5]} 6. Ne5 {Ne5 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gf3e5]} 6... c6 {c6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc7c6]} 7. Bc4 {Bc4 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf1c4]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "scandinavian-c2-l3",
+          "legacyIds": [
+            "scandinavian-m5"
+          ],
+          "title": "Scandinavian Defense: Classical Variation",
+          "eco": "B01",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. e4 {e4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e4]} 1... d5 {d5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d5]} 2. exd5 {exd5 : Les Blancs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Ge4d5]} 2... Qxd5 {Qxd5 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gd8d5]} 3. Nc3 {Nc3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb1c3]} 3... Qa5 {Qa5 : Les Noirs développent le dame avec un gain de coordination et de contrôle des cases clés. [%cal Gd5a5]} 4. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 4... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 5. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 5... Bf5 {Bf5 : Les Noirs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gc8f5]} 6. Ne5 {Ne5 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gf3e5]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        }
+      ]
+    }
+  ]
+}

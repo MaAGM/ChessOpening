@@ -3,6 +3,7 @@
 import { useCallback, useMemo, useSyncExternalStore } from "react";
 import {
   addReviewChapter,
+  addReviewChapters,
   getServerSnapshot,
   getSnapshot,
   markChapterComplete,
@@ -32,6 +33,8 @@ export function useReviewStore() {
     /** Statistiques de répétition espacée, indexées par clé de position. */
     positionStats: state.positions,
     addToReview: addReviewChapter,
+    /** Ajoute plusieurs cours d'un coup (ex. « Ajouter le chapitre aux révisions »). */
+    addManyToReview: addReviewChapters,
     removeFromReview: removeReviewChapter,
     markComplete: markChapterComplete,
     recordResult: recordPositionResult,

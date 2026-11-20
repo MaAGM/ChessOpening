@@ -1,0 +1,1361 @@
+{
+  "version": 1,
+  "courses": [
+    {
+      "id": "english",
+      "name": "English",
+      "description": "Formation complète sur English",
+      "side": "white",
+      "eco": [
+        "A30",
+        "A33",
+        "A39",
+        "A16"
+      ],
+      "chapters": [
+        {
+          "id": "english-c1",
+          "title": "Les fondations",
+          "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+          "stage": "foundations",
+          "lessons": [
+            {
+              "id": "english-c1-l1",
+              "title": "Anglaise - Symétrique",
+              "legacyIds": [
+                "english-m1"
+              ]
+            },
+            {
+              "id": "english-c1-l2",
+              "title": "English: Symmetrical, Two Knights, 5.Nc3 Nc6 6.Ndb5 d5",
+              "legacyIds": [
+                "english-m2"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "english-c2",
+          "title": "Lignes théoriques",
+          "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
+          "stage": "theory",
+          "lessons": [
+            {
+              "id": "english-c2-l1",
+              "title": "English: Symmetrical, Hedgehog, 8.Qxd4 O-O",
+              "legacyIds": [
+                "english-m3"
+              ]
+            },
+            {
+              "id": "english-c2-l2",
+              "title": "English: Symmetrical, Main Line 7.d4, 8...Ng4",
+              "legacyIds": [
+                "english-m4"
+              ]
+            },
+            {
+              "id": "english-c2-l3",
+              "title": "English: Anglo-Indian, 2.Nc3 g6 3.g3",
+              "legacyIds": [
+                "english-m5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "reti",
+      "name": "Reti",
+      "description": "Formation complète sur Reti",
+      "side": "white",
+      "eco": [
+        "A08"
+      ],
+      "chapters": [
+        {
+          "id": "reti-c1",
+          "title": "Les fondations",
+          "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+          "stage": "foundations",
+          "lessons": [
+            {
+              "id": "reti-c1-l1",
+              "title": "Reti: KIA, French Variation",
+              "legacyIds": [
+                "reti-m1"
+              ]
+            },
+            {
+              "id": "reti-c1-l2",
+              "title": "Reti: KIA, French Variation",
+              "legacyIds": [
+                "reti-m2"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "reti-c2",
+          "title": "Lignes théoriques",
+          "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
+          "stage": "theory",
+          "lessons": [
+            {
+              "id": "reti-c2-l1",
+              "title": "Reti: KIA, 2...c5, 3.Bg2 Nc6 4.O-O",
+              "legacyIds": [
+                "reti-m3"
+              ]
+            },
+            {
+              "id": "reti-c2-l2",
+              "title": "Reti: KIA, 2...c5, 3.Bg2 Nc6 4.O-O",
+              "legacyIds": [
+                "reti-m4"
+              ]
+            },
+            {
+              "id": "reti-c2-l3",
+              "title": "Reti: KIA, 2...c5, 3.Bg2 Nc6 4.O-O",
+              "legacyIds": [
+                "reti-m5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "benoni",
+      "name": "Benoni",
+      "description": "Formation complète sur Benoni",
+      "side": "black",
+      "eco": [
+        "A43",
+        "A57",
+        "A60",
+        "A69",
+        "A58"
+      ],
+      "chapters": [
+        {
+          "id": "benoni-c1",
+          "title": "Les fondations",
+          "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+          "stage": "foundations",
+          "lessons": [
+            {
+              "id": "benoni-c1-l1",
+              "title": "Ancienne Benoni (Old Benoni)",
+              "legacyIds": [
+                "benoni-m1"
+              ]
+            },
+            {
+              "id": "benoni-c1-l2",
+              "title": "Gambit Benko (Volga)",
+              "legacyIds": [
+                "benoni-m2"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "benoni-c2",
+          "title": "Lignes théoriques",
+          "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
+          "stage": "theory",
+          "lessons": [
+            {
+              "id": "benoni-c2-l1",
+              "title": "Benoni Moderne",
+              "legacyIds": [
+                "benoni-m3"
+              ]
+            },
+            {
+              "id": "benoni-c2-l2",
+              "title": "Benoni: Four Pawns, Main Line, 10.e5: 12.Bg5 Qb6",
+              "legacyIds": [
+                "benoni-m4"
+              ]
+            },
+            {
+              "id": "benoni-c2-l3",
+              "title": "Benko Gambit: Accepted, 7.Nf3 g6",
+              "legacyIds": [
+                "benoni-m5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "trompowsky",
+      "name": "Trompowsky",
+      "description": "Formation complète sur Trompowsky",
+      "side": "white",
+      "eco": [
+        "A45"
+      ],
+      "chapters": [
+        {
+          "id": "trompowsky-c1",
+          "title": "Les fondations",
+          "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+          "stage": "foundations",
+          "lessons": [
+            {
+              "id": "trompowsky-c1-l1",
+              "title": "Attaque Trompowsky",
+              "legacyIds": [
+                "trompowsky-m1"
+              ]
+            },
+            {
+              "id": "trompowsky-c1-l2",
+              "title": "Trompowsky Attack: Edge Variation",
+              "legacyIds": [
+                "trompowsky-m2"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "trompowsky-c2",
+          "title": "Lignes théoriques",
+          "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
+          "stage": "theory",
+          "lessons": [
+            {
+              "id": "trompowsky-c2-l1",
+              "title": "Trompowsky Attack: Edge Variation",
+              "legacyIds": [
+                "trompowsky-m3"
+              ]
+            },
+            {
+              "id": "trompowsky-c2-l2",
+              "title": "Trompowsky Attack: Edge Variation",
+              "legacyIds": [
+                "trompowsky-m4"
+              ]
+            },
+            {
+              "id": "trompowsky-c2-l3",
+              "title": "Trompowsky: 2...Ne4 3.Bh4 d5",
+              "legacyIds": [
+                "trompowsky-m5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "scandinavian",
+      "name": "Scandinavian",
+      "description": "Formation complète sur Scandinavian",
+      "side": "black",
+      "eco": [
+        "B01"
+      ],
+      "chapters": [
+        {
+          "id": "scandinavian-c1",
+          "title": "Les fondations",
+          "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+          "stage": "foundations",
+          "lessons": [
+            {
+              "id": "scandinavian-c1-l1",
+              "title": "Défense Scandinave",
+              "legacyIds": [
+                "scandinavian-m1"
+              ]
+            },
+            {
+              "id": "scandinavian-c1-l2",
+              "title": "Scandinavian Defense: Schiller-Pytel Variation",
+              "legacyIds": [
+                "scandinavian-m2"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scandinavian-c2",
+          "title": "Lignes théoriques",
+          "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
+          "stage": "theory",
+          "lessons": [
+            {
+              "id": "scandinavian-c2-l1",
+              "title": "Scandinavian: Schiller, 4.d4 Nf6",
+              "legacyIds": [
+                "scandinavian-m3"
+              ]
+            },
+            {
+              "id": "scandinavian-c2-l2",
+              "title": "Scandinavian Defense: Classical Variation",
+              "legacyIds": [
+                "scandinavian-m4"
+              ]
+            },
+            {
+              "id": "scandinavian-c2-l3",
+              "title": "Scandinavian Defense: Classical Variation",
+              "legacyIds": [
+                "scandinavian-m5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "alekhine",
+      "name": "Alekhine",
+      "description": "Formation complète sur Alekhine",
+      "side": "black",
+      "eco": [
+        "B02",
+        "B03"
+      ],
+      "chapters": [
+        {
+          "id": "alekhine-c1",
+          "title": "Les fondations",
+          "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+          "stage": "foundations",
+          "lessons": [
+            {
+              "id": "alekhine-c1-l1",
+              "title": "Défense Alekhine",
+              "legacyIds": [
+                "alekhine-m1"
+              ]
+            },
+            {
+              "id": "alekhine-c1-l2",
+              "title": "Alekhine Defense: Four Pawns Attack, Main Line",
+              "legacyIds": [
+                "alekhine-m2"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "alekhine-c2",
+          "title": "Lignes théoriques",
+          "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
+          "stage": "theory",
+          "lessons": [
+            {
+              "id": "alekhine-c2-l1",
+              "title": "Alekhine: Exchange, 5...cxd6",
+              "legacyIds": [
+                "alekhine-m3"
+              ]
+            },
+            {
+              "id": "alekhine-c2-l2",
+              "title": "Alekhine: Exchange, 5...cxd6 6.Nc3",
+              "legacyIds": [
+                "alekhine-m4"
+              ]
+            },
+            {
+              "id": "alekhine-c2-l3",
+              "title": "Alekhine: Four Pawns Attack, 6...Bf5",
+              "legacyIds": [
+                "alekhine-m5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pirc",
+      "name": "Pirc",
+      "description": "Formation complète sur Pirc",
+      "side": "black",
+      "eco": [
+        "B07",
+        "B08",
+        "B09"
+      ],
+      "chapters": [
+        {
+          "id": "pirc-c1",
+          "title": "Les fondations",
+          "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+          "stage": "foundations",
+          "lessons": [
+            {
+              "id": "pirc-c1-l1",
+              "title": "Défense Pirc",
+              "legacyIds": [
+                "pirc-m1"
+              ]
+            },
+            {
+              "id": "pirc-c1-l2",
+              "title": "Pirc Defense: Classical Variation, Quiet System, Parma Defense",
+              "legacyIds": [
+                "pirc-m2"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "pirc-c2",
+          "title": "Lignes théoriques",
+          "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
+          "stage": "theory",
+          "lessons": [
+            {
+              "id": "pirc-c2-l1",
+              "title": "Lion Defense: Anti-Philidor, Lion's Cave",
+              "legacyIds": [
+                "pirc-m3"
+              ]
+            },
+            {
+              "id": "pirc-c2-l2",
+              "title": "Pirc: Austrian, 5...O-O 6.Bd3 Na6",
+              "legacyIds": [
+                "pirc-m4"
+              ]
+            },
+            {
+              "id": "pirc-c2-l3",
+              "title": "Pirc Defense: Austrian Attack, Unzicker Attack",
+              "legacyIds": [
+                "pirc-m5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "caro_kann",
+      "name": "Caro Kann",
+      "description": "Formation complète sur Caro Kann",
+      "side": "black",
+      "eco": [
+        "B12",
+        "B13",
+        "B19",
+        "B17"
+      ],
+      "chapters": [
+        {
+          "id": "caro_kann-c1",
+          "title": "Les fondations",
+          "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+          "stage": "foundations",
+          "lessons": [
+            {
+              "id": "caro_kann-c1-l1",
+              "title": "Caro-Kann - Avance",
+              "legacyIds": [
+                "caro_kann-m1"
+              ]
+            },
+            {
+              "id": "caro_kann-c1-l2",
+              "title": "Caro-Kann - Échange",
+              "legacyIds": [
+                "caro_kann-m2"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "caro_kann-c2",
+          "title": "Lignes théoriques",
+          "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
+          "stage": "theory",
+          "lessons": [
+            {
+              "id": "caro_kann-c2-l1",
+              "title": "Caro-Kann: Classical, Spassky, Main Line, 13.Ne4 O-O-O",
+              "legacyIds": [
+                "caro_kann-m3"
+              ]
+            },
+            {
+              "id": "caro_kann-c2-l2",
+              "title": "Caro-Kann: Classical, Spassky, 10.Qxd3 Ngf6",
+              "legacyIds": [
+                "caro_kann-m4"
+              ]
+            },
+            {
+              "id": "caro_kann-c2-l3",
+              "title": "Caro-Kann: Steinitz, 5.Ng5 Ngf6 6.Bd3 e6 7.N1f3 Bd6 8.Qe2",
+              "legacyIds": [
+                "caro_kann-m5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sicilian",
+      "name": "Sicilian",
+      "description": "Formation complète sur Sicilian",
+      "side": "black",
+      "eco": [
+        "B22",
+        "B70",
+        "B90",
+        "B97",
+        "B23"
+      ],
+      "chapters": [
+        {
+          "id": "sicilian-c1",
+          "title": "Les fondations",
+          "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+          "stage": "foundations",
+          "lessons": [
+            {
+              "id": "sicilian-c1-l1",
+              "title": "Sicilienne - Alapine",
+              "legacyIds": [
+                "sicilian-m1"
+              ]
+            },
+            {
+              "id": "sicilian-c1-l2",
+              "title": "Sicilienne - Dragon",
+              "legacyIds": [
+                "sicilian-m2"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sicilian-c2",
+          "title": "Lignes théoriques",
+          "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
+          "stage": "theory",
+          "lessons": [
+            {
+              "id": "sicilian-c2-l1",
+              "title": "Sicilienne - Najdorf",
+              "legacyIds": [
+                "sicilian-m3"
+              ]
+            },
+            {
+              "id": "sicilian-c2-l2",
+              "title": "Sicilian: Najdorf, Poisoned Pawn, Main Line, 13.e5 dxe5: 15.Ne4 Be7",
+              "legacyIds": [
+                "sicilian-m4"
+              ]
+            },
+            {
+              "id": "sicilian-c2-l3",
+              "title": "Sicilian: Closed, Grand Prix, 3...d6 4.Nf3 g6",
+              "legacyIds": [
+                "sicilian-m5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "french",
+      "name": "French",
+      "description": "Formation complète sur French",
+      "side": "black",
+      "eco": [
+        "C02",
+        "C15",
+        "C19",
+        "C06",
+        "C09"
+      ],
+      "chapters": [
+        {
+          "id": "french-c1",
+          "title": "Les fondations",
+          "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+          "stage": "foundations",
+          "lessons": [
+            {
+              "id": "french-c1-l1",
+              "title": "Française - Avance",
+              "legacyIds": [
+                "french-m1"
+              ]
+            },
+            {
+              "id": "french-c1-l2",
+              "title": "Française - Winawer",
+              "legacyIds": [
+                "french-m2"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "french-c2",
+          "title": "Lignes théoriques",
+          "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
+          "stage": "theory",
+          "lessons": [
+            {
+              "id": "french-c2-l1",
+              "title": "French Defense: Winawer Variation, Poisoned Pawn Variation, Main Line",
+              "legacyIds": [
+                "french-m3"
+              ]
+            },
+            {
+              "id": "french-c2-l2",
+              "title": "French: Tarrasch, Closed, 8...f6 9.exf6 Nxf6",
+              "legacyIds": [
+                "french-m4"
+              ]
+            },
+            {
+              "id": "french-c2-l3",
+              "title": "French: Tarrasch, Open, Main Line, 9.Nb3 Bd6 10.Re1",
+              "legacyIds": [
+                "french-m5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "vienna",
+      "name": "Vienna",
+      "description": "Formation complète sur Vienna",
+      "side": "white",
+      "eco": [
+        "C25",
+        "C27",
+        "C29"
+      ],
+      "chapters": [
+        {
+          "id": "vienna-c1",
+          "title": "Les fondations",
+          "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+          "stage": "foundations",
+          "lessons": [
+            {
+              "id": "vienna-c1-l1",
+              "title": "Partie Viennoise",
+              "legacyIds": [
+                "vienna-m1"
+              ]
+            },
+            {
+              "id": "vienna-c1-l2",
+              "title": "Vienna: 3.Bc4 Nxe4 4.Qh5 Nd6 5.Bb3 Nc6",
+              "legacyIds": [
+                "vienna-m2"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "vienna-c2",
+          "title": "Lignes théoriques",
+          "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
+          "stage": "theory",
+          "lessons": [
+            {
+              "id": "vienna-c2-l1",
+              "title": "Vienna Gambit, with Max Lange Defense: Pierce Gambit",
+              "legacyIds": [
+                "vienna-m3"
+              ]
+            },
+            {
+              "id": "vienna-c2-l2",
+              "title": "Vienna Gambit, with Max Lange Defense: Hamppe-Muzio Gambit",
+              "legacyIds": [
+                "vienna-m4"
+              ]
+            },
+            {
+              "id": "vienna-c2-l3",
+              "title": "Vienna Game, Würzburger Trap",
+              "legacyIds": [
+                "vienna-m5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "kings_gambit",
+      "name": "Kings Gambit",
+      "description": "Formation complète sur Kings Gambit",
+      "side": "white",
+      "eco": [
+        "C33",
+        "C37",
+        "C38",
+        "C39"
+      ],
+      "chapters": [
+        {
+          "id": "kings_gambit-c1",
+          "title": "Les fondations",
+          "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+          "stage": "foundations",
+          "lessons": [
+            {
+              "id": "kings_gambit-c1-l1",
+              "title": "Gambit Roi Accepté",
+              "legacyIds": [
+                "kings_gambit-m1"
+              ]
+            },
+            {
+              "id": "kings_gambit-c1-l2",
+              "title": "King's Gambit Accepted: Muzio Gambit, Sarratt Defense",
+              "legacyIds": [
+                "kings_gambit-m2"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "kings_gambit-c2",
+          "title": "Lignes théoriques",
+          "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
+          "stage": "theory",
+          "lessons": [
+            {
+              "id": "kings_gambit-c2-l1",
+              "title": "King's Gambit Accepted: Philidor Gambit",
+              "legacyIds": [
+                "kings_gambit-m3"
+              ]
+            },
+            {
+              "id": "kings_gambit-c2-l2",
+              "title": "King's Gambit Accepted: Allgaier Gambit, Thorold Attack",
+              "legacyIds": [
+                "kings_gambit-m4"
+              ]
+            },
+            {
+              "id": "kings_gambit-c2-l3",
+              "title": "King's Gambit Accepted: Kieseritzky Gambit, Anderssen Defense",
+              "legacyIds": [
+                "kings_gambit-m5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "scotch",
+      "name": "Scotch",
+      "description": "Formation complète sur Scotch",
+      "side": "white",
+      "eco": [
+        "C45",
+        "C44"
+      ],
+      "chapters": [
+        {
+          "id": "scotch-c1",
+          "title": "Les fondations",
+          "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+          "stage": "foundations",
+          "lessons": [
+            {
+              "id": "scotch-c1-l1",
+              "title": "Partie Écossaise",
+              "legacyIds": [
+                "scotch-m1"
+              ]
+            },
+            {
+              "id": "scotch-c1-l2",
+              "title": "Scotch Game: Classical Variation, Blackburne Attack",
+              "legacyIds": [
+                "scotch-m2"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scotch-c2",
+          "title": "Lignes théoriques",
+          "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
+          "stage": "theory",
+          "lessons": [
+            {
+              "id": "scotch-c2-l1",
+              "title": "Scotch: Steinitz, 5.Nb5 Bb4+",
+              "legacyIds": [
+                "scotch-m3"
+              ]
+            },
+            {
+              "id": "scotch-c2-l2",
+              "title": "Scotch: Goring Gambit, 4...dxc3 5.Nxc3",
+              "legacyIds": [
+                "scotch-m4"
+              ]
+            },
+            {
+              "id": "scotch-c2-l3",
+              "title": "Scotch Game",
+              "legacyIds": [
+                "scotch-m5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "italian",
+      "name": "Italian",
+      "description": "Formation complète sur Italian",
+      "side": "white",
+      "eco": [
+        "C53",
+        "C55",
+        "C54",
+        "C51"
+      ],
+      "chapters": [
+        {
+          "id": "italian-c1",
+          "title": "Les fondations",
+          "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+          "stage": "foundations",
+          "lessons": [
+            {
+              "id": "italian-c1-l1",
+              "title": "Italienne - Giuoco Piano",
+              "legacyIds": [
+                "italian-m1"
+              ]
+            },
+            {
+              "id": "italian-c1-l2",
+              "title": "Italienne - Deux Cavaliers",
+              "legacyIds": [
+                "italian-m2"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "italian-c2",
+          "title": "Lignes théoriques",
+          "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
+          "stage": "theory",
+          "lessons": [
+            {
+              "id": "italian-c2-l1",
+              "title": "Italian Game: Classical Variation, Greco Gambit, Moeller-Therkatz Attack",
+              "legacyIds": [
+                "italian-m3"
+              ]
+            },
+            {
+              "id": "italian-c2-l2",
+              "title": "Two Knights: Max Lange, 6.e5 d5",
+              "legacyIds": [
+                "italian-m4"
+              ]
+            },
+            {
+              "id": "italian-c2-l3",
+              "title": "Italian Game: Evans Gambit, Fraser Attack",
+              "legacyIds": [
+                "italian-m5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ruy_lopez",
+      "name": "Ruy Lopez",
+      "description": "Formation complète sur Ruy Lopez",
+      "side": "white",
+      "eco": [
+        "C65",
+        "C78",
+        "C95",
+        "C82",
+        "C67"
+      ],
+      "chapters": [
+        {
+          "id": "ruy_lopez-c1",
+          "title": "Les fondations",
+          "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+          "stage": "foundations",
+          "lessons": [
+            {
+              "id": "ruy_lopez-c1-l1",
+              "title": "Espagnole - Défense Berlin",
+              "legacyIds": [
+                "ruy_lopez-m1"
+              ]
+            },
+            {
+              "id": "ruy_lopez-c1-l2",
+              "title": "Espagnole - Défense Morphy",
+              "legacyIds": [
+                "ruy_lopez-m2"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ruy_lopez-c2",
+          "title": "Lignes théoriques",
+          "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
+          "stage": "theory",
+          "lessons": [
+            {
+              "id": "ruy_lopez-c2-l1",
+              "title": "Spanish: Closed, Breyer, Main Line, 15.a4 c5",
+              "legacyIds": [
+                "ruy_lopez-m3"
+              ]
+            },
+            {
+              "id": "ruy_lopez-c2-l2",
+              "title": "Spanish: Open, Dilworth, 14.Kxf2",
+              "legacyIds": [
+                "ruy_lopez-m4"
+              ]
+            },
+            {
+              "id": "ruy_lopez-c2-l3",
+              "title": "Spanish: Open Berlin, Main Line 9.Nc3 (Rio de Janerio)",
+              "legacyIds": [
+                "ruy_lopez-m5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "london_system",
+      "name": "London System",
+      "description": "Formation complète sur London System",
+      "side": "white",
+      "eco": [
+        "D02"
+      ],
+      "chapters": [
+        {
+          "id": "london_system-c1",
+          "title": "Les fondations",
+          "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+          "stage": "foundations",
+          "lessons": [
+            {
+              "id": "london_system-c1-l1",
+              "title": "Système de Londres (Classique)",
+              "legacyIds": [
+                "london_system-m1"
+              ]
+            },
+            {
+              "id": "london_system-c1-l2",
+              "title": "Queen's Pawn: London",
+              "legacyIds": [
+                "london_system-m2"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "london_system-c2",
+          "title": "Lignes théoriques",
+          "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
+          "stage": "theory",
+          "lessons": [
+            {
+              "id": "london_system-c2-l1",
+              "title": "Queen's Pawn: London",
+              "legacyIds": [
+                "london_system-m3"
+              ]
+            },
+            {
+              "id": "london_system-c2-l2",
+              "title": "London System: Ligne principale",
+              "legacyIds": [
+                "london_system-m4"
+              ]
+            },
+            {
+              "id": "london_system-c2-l3",
+              "title": "London System: Variante ...Bf5",
+              "legacyIds": [
+                "london_system-m5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "slav",
+      "name": "Slav",
+      "description": "Formation complète sur Slav",
+      "side": "black",
+      "eco": [
+        "D10",
+        "D17",
+        "D49",
+        "D47",
+        "D19"
+      ],
+      "chapters": [
+        {
+          "id": "slav-c1",
+          "title": "Les fondations",
+          "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+          "stage": "foundations",
+          "lessons": [
+            {
+              "id": "slav-c1-l1",
+              "title": "Défense Slave",
+              "legacyIds": [
+                "slav-m1"
+              ]
+            },
+            {
+              "id": "slav-c1-l2",
+              "title": "Slav: Central, Main Line",
+              "legacyIds": [
+                "slav-m2"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "slav-c2",
+          "title": "Lignes théoriques",
+          "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
+          "stage": "theory",
+          "lessons": [
+            {
+              "id": "slav-c2-l1",
+              "title": "Semi-Slav Defense: Meran Variation, Sozin Variation",
+              "legacyIds": [
+                "slav-m3"
+              ]
+            },
+            {
+              "id": "slav-c2-l2",
+              "title": "Semi-Slav: Meran, Wade, Main Line, 12.O-O",
+              "legacyIds": [
+                "slav-m4"
+              ]
+            },
+            {
+              "id": "slav-c2-l3",
+              "title": "Slav: Dutch, 8...O-O 9.Qe2 Bg6 10.Ne5 Nbd7, 12.Rd1",
+              "legacyIds": [
+                "slav-m5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "queens_gambit",
+      "name": "Queens Gambit",
+      "description": "Formation complète sur Queens Gambit",
+      "side": "white",
+      "eco": [
+        "D20",
+        "D30",
+        "D68",
+        "D28",
+        "D34"
+      ],
+      "chapters": [
+        {
+          "id": "queens_gambit-c1",
+          "title": "Les fondations",
+          "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+          "stage": "foundations",
+          "lessons": [
+            {
+              "id": "queens_gambit-c1-l1",
+              "title": "Gambit Dame Accepté",
+              "legacyIds": [
+                "queens_gambit-m1"
+              ]
+            },
+            {
+              "id": "queens_gambit-c1-l2",
+              "title": "Gambit Dame Refusé",
+              "legacyIds": [
+                "queens_gambit-m2"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "queens_gambit-c2",
+          "title": "Lignes théoriques",
+          "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
+          "stage": "theory",
+          "lessons": [
+            {
+              "id": "queens_gambit-c2-l1",
+              "title": "QGD: Orthodox, Classical, Vidmar, 13...exd4",
+              "legacyIds": [
+                "queens_gambit-m3"
+              ]
+            },
+            {
+              "id": "queens_gambit-c2-l2",
+              "title": "QGA: Classical, 7.Qe2 b5 8.Bb3 Nc6 9.Rd1 c4",
+              "legacyIds": [
+                "queens_gambit-m4"
+              ]
+            },
+            {
+              "id": "queens_gambit-c2-l3",
+              "title": "QGD Tarrasch: 9.dxc5 Bxc5 10.Bg5 d4 11.Bxf6 Qxf6 12.Nd5",
+              "legacyIds": [
+                "queens_gambit-m5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "grunfeld",
+      "name": "Grunfeld",
+      "description": "Formation complète sur Grunfeld",
+      "side": "black",
+      "eco": [
+        "D80",
+        "D89",
+        "D91",
+        "D97",
+        "D79"
+      ],
+      "chapters": [
+        {
+          "id": "grunfeld-c1",
+          "title": "Les fondations",
+          "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+          "stage": "foundations",
+          "lessons": [
+            {
+              "id": "grunfeld-c1-l1",
+              "title": "Défense Grünfeld",
+              "legacyIds": [
+                "grunfeld-m1"
+              ]
+            },
+            {
+              "id": "grunfeld-c1-l2",
+              "title": "Gruenfeld: Classical Exchange, Main Line, 13.Bd3 Be6 14.Rc1",
+              "legacyIds": [
+                "grunfeld-m2"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "grunfeld-c2",
+          "title": "Lignes théoriques",
+          "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
+          "stage": "theory",
+          "lessons": [
+            {
+              "id": "grunfeld-c2-l1",
+              "title": "Gruenfeld: 5.Bg5 Ne4 6.cxd5 Nxg5 7.Nxg5 e6 8.Qd2 exd5",
+              "legacyIds": [
+                "grunfeld-m3"
+              ]
+            },
+            {
+              "id": "grunfeld-c2-l2",
+              "title": "Gruenfeld: Russian, Prins, 8.Be2",
+              "legacyIds": [
+                "grunfeld-m4"
+              ]
+            },
+            {
+              "id": "grunfeld-c2-l3",
+              "title": "Neo-Gruenfeld, Main Line",
+              "legacyIds": [
+                "grunfeld-m5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "catalan",
+      "name": "Catalan",
+      "description": "Formation complète sur Catalan",
+      "side": "white",
+      "eco": [
+        "E04",
+        "E08",
+        "E09",
+        "E05",
+        "E06"
+      ],
+      "chapters": [
+        {
+          "id": "catalan-c1",
+          "title": "Les fondations",
+          "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+          "stage": "foundations",
+          "lessons": [
+            {
+              "id": "catalan-c1-l1",
+              "title": "Catalane - Ouverte",
+              "legacyIds": [
+                "catalan-m1"
+              ]
+            },
+            {
+              "id": "catalan-c1-l2",
+              "title": "Catalan Opening: Closed",
+              "legacyIds": [
+                "catalan-m2"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "catalan-c2",
+          "title": "Lignes théoriques",
+          "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
+          "stage": "theory",
+          "lessons": [
+            {
+              "id": "catalan-c2-l1",
+              "title": "Catalan: Closed, Main Line, 9.e4 Bb7 10.b3",
+              "legacyIds": [
+                "catalan-m3"
+              ]
+            },
+            {
+              "id": "catalan-c2-l2",
+              "title": "Catalan: Open, Classical, 8.a4 Bd7 9.Qxc4",
+              "legacyIds": [
+                "catalan-m4"
+              ]
+            },
+            {
+              "id": "catalan-c2-l3",
+              "title": "Catalan: Closed, 6.O-O c6 7.Qc2 b6",
+              "legacyIds": [
+                "catalan-m5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "kings_indian",
+      "name": "Kings Indian",
+      "description": "Formation complète sur Kings Indian",
+      "side": "black",
+      "eco": [
+        "E90",
+        "E66",
+        "E80",
+        "E87",
+        "E84"
+      ],
+      "chapters": [
+        {
+          "id": "kings_indian-c1",
+          "title": "Les fondations",
+          "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+          "stage": "foundations",
+          "lessons": [
+            {
+              "id": "kings_indian-c1-l1",
+              "title": "Est-Indienne - Classique",
+              "legacyIds": [
+                "kings_indian-m1"
+              ]
+            },
+            {
+              "id": "kings_indian-c1-l2",
+              "title": "King's Indian: Fianchetto, Yugoslav Panno, Main Line, 12.Bb2 bxc4",
+              "legacyIds": [
+                "kings_indian-m2"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "kings_indian-c2",
+          "title": "Lignes théoriques",
+          "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
+          "stage": "theory",
+          "lessons": [
+            {
+              "id": "kings_indian-c2-l1",
+              "title": "King's Indian: Saemisch, 5...e5 6.d5",
+              "legacyIds": [
+                "kings_indian-m3"
+              ]
+            },
+            {
+              "id": "kings_indian-c2-l2",
+              "title": "King's Indian: Saemisch, Orthodox, Bronstein, 9.g3",
+              "legacyIds": [
+                "kings_indian-m4"
+              ]
+            },
+            {
+              "id": "kings_indian-c2-l3",
+              "title": "King's Indian: Saemisch, Panno Main Line, 9.h4 h5 10.O-O-O",
+              "legacyIds": [
+                "kings_indian-m5"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

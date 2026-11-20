@@ -1,3 +1,4 @@
+import { migrateLessonIds } from "./lessonIdMigration";
 import { SRS_CONFIG, clampBox, nextStats, type PositionStats } from "./srs";
 
 // Invité : la clé garde son nom d'origine (la version du format est dans les données).
@@ -134,12 +135,13 @@ export function sanitizeState(raw: unknown): ReviewStoreState | null {
     ? Array.from(new Set(raw.completedChapters.filter((x): x is string => typeof x === "string")))
     : [];
 
-  return {
+  // Anciens identifiants de cours (french-m1) traduits vers les nouveaux (french-c1-l1).
+  return migrateLessonIds({
     version: STORE_VERSION,
     reviewChapters,
     completedChapters,
     positions: sanitizePositions(raw.positions),
-  };
+  });
 }
 
 /** Lit l'état persisté d'un périmètre (invité ou utilisateur), sans toucher au cache. */
@@ -158,7 +160,7 @@ function loadScope(scope: StorageScope): ReviewStoreState {
 
   // Première utilisation : migration de l'ancienne clé (mode invité uniquement).
   return scope.kind === "guest"
-    ? { ...createEmptyState(), completedChapters: readLegacyCompleted() }
+    ? migrateLessonIds({ ...createEmptyState(), completedChapters: readLegacyCompleted() })
     : createEmptyState();
 }
 
@@ -293,6 +295,17 @@ export function addReviewChapter(chapterId: string): void {
     },
     "local",
   );
+}
+
+/** Ajoute plusieurs cours d'un coup (ex. tout un chapitre), en un seul changement. */
+export function addReviewChapters(chapterIds: readonly string[]): void {
+  const state = getSnapshot();
+  const missing = chapterIds.filter((id) => !has(state.reviewChapters, id));
+  if (missing.length === 0) return;
+  const now = Date.now();
+  const reviewChapters = { ...state.reviewChapters };
+  for (const id of missing) reviewChapters[id] = { addedAt: now };
+  commit({ ...state, reviewChapters }, "local");
 }
 
 export function removeReviewChapter(chapterId: string): void {

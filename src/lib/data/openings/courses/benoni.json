@@ -1,0 +1,101 @@
+{
+  "id": "benoni",
+  "name": "Benoni",
+  "description": "Formation complète sur Benoni",
+  "side": "black",
+  "eco": [
+    "A43",
+    "A57",
+    "A60",
+    "A69",
+    "A58"
+  ],
+  "chapters": [
+    {
+      "id": "benoni-c1",
+      "title": "Les fondations",
+      "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+      "stage": "foundations",
+      "lessons": [
+        {
+          "id": "benoni-c1-l1",
+          "legacyIds": [
+            "benoni-m1"
+          ],
+          "title": "Ancienne Benoni (Old Benoni)",
+          "eco": "A43",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 1... c5 {c5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc7c5]} 2. d5 {d5 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd4d5]} 2... e5 {e5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e5]} 3. e4 {e4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e4]} 3... d6 {d6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d6]} 4. Nc3 {Nc3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb1c3]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "benoni-c1-l2",
+          "legacyIds": [
+            "benoni-m2"
+          ],
+          "title": "Gambit Benko (Volga)",
+          "eco": "A57",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 1... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 2. c4 {c4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc2c4]} 2... c5 {c5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc7c5]} 3. d5 {d5 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd4d5]} 3... b5 {b5 : Les Noirs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Gb7b5]} 4. cxb5 {cxb5 : Les Blancs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gc4b5]} 4... a6 {a6 : Les Noirs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Ga7a6]} 5. bxa6 {bxa6 : Les Blancs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gb5a6]} 5... Bxa6 {Bxa6 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gc8a6]} 6. Nc3 {Nc3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb1c3]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        }
+      ]
+    },
+    {
+      "id": "benoni-c2",
+      "title": "Lignes théoriques",
+      "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
+      "stage": "theory",
+      "lessons": [
+        {
+          "id": "benoni-c2-l1",
+          "legacyIds": [
+            "benoni-m3"
+          ],
+          "title": "Benoni Moderne",
+          "eco": "A60",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 1... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 2. c4 {c4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc2c4]} 2... c5 {c5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc7c5]} 3. d5 {d5 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd4d5]} 3... e6 {e6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e6]} 4. Nc3 {Nc3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb1c3]} 4... exd5 {exd5 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Ge6d5]} 5. cxd5 {cxd5 : Les Blancs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gc4d5]} 5... d6 {d6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d6]} 6. e4 {e4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e4]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "benoni-c2-l2",
+          "legacyIds": [
+            "benoni-m4"
+          ],
+          "title": "Benoni: Four Pawns, Main Line, 10.e5: 12.Bg5 Qb6",
+          "eco": "A69",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 1... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 2. c4 {c4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc2c4]} 2... c5 {c5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc7c5]} 3. d5 {d5 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd4d5]} 3... e6 {e6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e6]} 4. Nc3 {Nc3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb1c3]} 4... exd5 {exd5 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Ge6d5]} 5. cxd5 {cxd5 : Les Blancs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gc4d5]} 5... d6 {d6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d6]} 6. e4 {e4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e4]} 6... g6 {g6 : Les Noirs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Gg7g6]} 7. f4 {f4 : Les Blancs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Gf2f4]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "benoni-c2-l3",
+          "legacyIds": [
+            "benoni-m5"
+          ],
+          "title": "Benko Gambit: Accepted, 7.Nf3 g6",
+          "eco": "A58",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 1... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 2. c4 {c4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc2c4]} 2... c5 {c5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc7c5]} 3. d5 {d5 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd4d5]} 3... b5 {b5 : Les Noirs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Gb7b5]} 4. cxb5 {cxb5 : Les Blancs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gc4b5]} 4... a6 {a6 : Les Noirs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Ga7a6]} 5. bxa6 {bxa6 : Les Blancs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gb5a6]} 5... g6 {g6 : Les Noirs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Gg7g6]} 6. Nc3 {Nc3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb1c3]} 6... Bxa6 {Bxa6 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gc8a6]} 7. e4 {e4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e4]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        }
+      ]
+    }
+  ]
+}

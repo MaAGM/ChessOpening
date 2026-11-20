@@ -1,5 +1,5 @@
-import { openingCourses } from "@/lib/data/openings";
-import type { OpeningChapter, TutorialNode } from "@/lib/data/openings";
+import { getLessonLocation, getLoadedLesson } from "@/lib/data/openings";
+import type { Lesson, TutorialNode } from "@/lib/data/openings";
 import { toTutorialRoot } from "@/lib/repertoire/convert";
 import type { Repertoire } from "@/lib/repertoire/types";
 import { buildReviewGraph, type ReviewGraph } from "./reviewGraph";
@@ -7,7 +7,7 @@ import type { Side } from "./types";
 
 export type { Side };
 
-/** Ce qui alimente la révision : un chapitre Masterclass ou un répertoire de l'utilisateur. */
+/** Ce qui alimente la révision : un cours Masterclass ou un répertoire de l'utilisateur. */
 export type ReviewSource = {
   /** Identifiant unique (chapitre : son id ; répertoire : « repertoire:<id> »). */
   id: string;
@@ -25,26 +25,28 @@ export function repertoireSourceId(repertoireId: string): string {
   return `${REPERTOIRE_SOURCE_PREFIX}${repertoireId}`;
 }
 
+/** Ids des cours d'une couleur, d'après l'index léger (aucun chargement nécessaire). */
+function lessonIdsForSide(side: Side, chapterIds: string[]): string[] {
+  return [...new Set(chapterIds)].filter((id) => getLessonLocation(id)?.side === side);
+}
+
 /**
- * Chapitres sauvegardés pour une couleur donnée.
- * Les IDs obsolètes (chapitre retiré d'eco-blueprints.json) sont ignorés
- * naturellement : on part des chapitres qui existent, pas des IDs.
+ * Cours sauvegardés pour une couleur donnée, parmi les ouvertures DÉJÀ CHARGÉES
+ * (`loadCoursesForLessons`). Les IDs obsolètes (cours retiré du catalogue) et les cours
+ * marqués non révisables sont ignorés.
  */
-export function getReviewChapters(side: Side, chapterIds: string[]): OpeningChapter[] {
-  const wanted = new Set(chapterIds);
-  return openingCourses.flatMap((course) =>
-    course.chapters.filter(
-      (chapter) => wanted.has(chapter.id) && (chapter.side ?? course.side) === side,
-    ),
-  );
+export function getReviewLessons(side: Side, chapterIds: string[]): Lesson[] {
+  return lessonIdsForSide(side, chapterIds)
+    .map(getLoadedLesson)
+    .filter((lesson): lesson is Lesson => lesson !== null && lesson.reviewable);
 }
 
 function getChapterSources(side: Side, chapterIds: string[]): ReviewSource[] {
-  return getReviewChapters(side, chapterIds).map((chapter) => ({
-    id: chapter.id,
-    name: chapter.name,
+  return getReviewLessons(side, chapterIds).map((lesson) => ({
+    id: lesson.id,
+    name: lesson.title,
     side,
-    root: chapter.root,
+    root: lesson.root,
   }));
 }
 
@@ -82,11 +84,11 @@ export function buildReviewGraphForSide(
   return sources.length > 0 ? buildReviewGraph(sources) : null;
 }
 
-/** Nombre de chapitres sauvegardés par couleur (pour activer/désactiver Blancs / Noirs). */
+/** Nombre de cours sauvegardés par couleur (pour activer/désactiver Blancs / Noirs). */
 export function countReviewChaptersBySide(chapterIds: string[]): Record<Side, number> {
   return {
-    white: getReviewChapters("white", chapterIds).length,
-    black: getReviewChapters("black", chapterIds).length,
+    white: lessonIdsForSide("white", chapterIds).length,
+    black: lessonIdsForSide("black", chapterIds).length,
   };
 }
 
@@ -96,7 +98,7 @@ export function countReviewSourcesBySide(
   repertoires: Repertoire[] = [],
 ): Record<Side, SourceCount> {
   const count = (side: Side): SourceCount => ({
-    chapters: getReviewChapters(side, chapterIds).length,
+    chapters: lessonIdsForSide(side, chapterIds).length,
     repertoires: getRepertoireSources(side, repertoires).length,
   });
   return { white: count("white"), black: count("black") };

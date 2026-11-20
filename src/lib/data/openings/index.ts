@@ -1,32 +1,20 @@
 export * from "./types";
+export * from "./catalog";
+export {
+  areLessonsLoaded,
+  buildCourse,
+  courseLoaders,
+  getLoadedCourse,
+  getLoadedLesson,
+  loadAllCourses,
+  loadCourse,
+  loadCoursesForLessons,
+} from "./loader";
+export { buildLessonTree, DEFAULT_LESSON_END } from "./lessonTree";
 
-import { frenchCourse } from "./french";
-import { englishCourse } from "./english";
-import { retiCourse } from "./reti";
-import { benoniCourse } from "./benoni";
-import { trompowskyCourse } from "./trompowsky";
-import { alekhineCourse } from "./alekhine";
-import { pircCourse } from "./pirc";
-import { carokannCourse } from "./carokann";
-import { sicilianCourse } from "./sicilian";
-import { viennaCourse } from "./vienna";
-import { kings_gambitCourse } from "./kings_gambit";
-import { scotchCourse } from "./scotch";
-import { italianCourse } from "./italian";
-import { ruyLopezCourse } from "./ruy_lopez";
-import { londonSystemCourse } from "./london_system";
-import { slavCourse } from "./slav";
-import { scandinavianCourse } from "./scandinavian";
-import { queens_gambitCourse } from "./queens_gambit";
-import { grunfeldCourse } from "./grunfeld";
-import { catalanCourse } from "./catalan";
-import { kings_indianCourse } from "./kings_indian";
-
-export const openingCourses = [frenchCourse, englishCourse, retiCourse, benoniCourse, trompowskyCourse, alekhineCourse, pircCourse, carokannCourse, sicilianCourse, viennaCourse, kings_gambitCourse, scotchCourse, italianCourse, ruyLopezCourse, londonSystemCourse, slavCourse, scandinavianCourse, queens_gambitCourse, grunfeldCourse, catalanCourse, kings_indianCourse];
-
-// --- Helpers (same logic we already have) ---------------------------------
+// --- Helpers sur les arbres de cours ------------------------------------------
 import { Chess } from "chess.js";
-import type { TutorialNode, OpeningCourse, OpeningChapter } from "./types";
+import type { TutorialNode } from "./types";
 
 /** Recursively walks the tree following `moveSequence` and returns the node reached. */
 export function findNodeByMoveSequence(
@@ -68,9 +56,3 @@ export function walkPath(
   }
   return results;
 }
-
-/** Flatten all chapters from every course. */
-export function getAllChapters(): OpeningChapter[] {
-  return openingCourses.flatMap((c) => c.chapters);
-}
-

@@ -8,7 +8,8 @@
     "start": "next start",
     "test": "vitest run",
     "lint": "eslint",
-    "postinstall": "node scripts/copy-stockfish.mjs"
+    "postinstall": "node scripts/copy-stockfish.mjs",
+    "courses:index": "node scripts/build-course-index.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.10.0",

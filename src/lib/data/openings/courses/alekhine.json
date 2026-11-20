@@ -1,0 +1,98 @@
+{
+  "id": "alekhine",
+  "name": "Alekhine",
+  "description": "Formation complète sur Alekhine",
+  "side": "black",
+  "eco": [
+    "B02",
+    "B03"
+  ],
+  "chapters": [
+    {
+      "id": "alekhine-c1",
+      "title": "Les fondations",
+      "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+      "stage": "foundations",
+      "lessons": [
+        {
+          "id": "alekhine-c1-l1",
+          "legacyIds": [
+            "alekhine-m1"
+          ],
+          "title": "Défense Alekhine",
+          "eco": "B02",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. e4 {e4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e4]} 1... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 2. e5 {e5 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge4e5]} 2... Nd5 {Nd5 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gf6d5]} 3. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 3... d6 {d6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d6]} 4. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "alekhine-c1-l2",
+          "legacyIds": [
+            "alekhine-m2"
+          ],
+          "title": "Alekhine Defense: Four Pawns Attack, Main Line",
+          "eco": "B03",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. e4 {e4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e4]} 1... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 2. e5 {e5 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge4e5]} 2... Nd5 {Nd5 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gf6d5]} 3. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 3... d6 {d6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d6]} 4. c4 {c4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc2c4]} 4... Nb6 {Nb6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gd5b6]} 5. f4 {f4 : Les Blancs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Gf2f4]} 5... dxe5 {dxe5 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gd6e5]} 6. fxe5 {fxe5 : Les Blancs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gf4e5]} 6... Nc6 {Nc6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb8c6]} 7. Be3 {Be3 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gc1e3]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        }
+      ]
+    },
+    {
+      "id": "alekhine-c2",
+      "title": "Lignes théoriques",
+      "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
+      "stage": "theory",
+      "lessons": [
+        {
+          "id": "alekhine-c2-l1",
+          "legacyIds": [
+            "alekhine-m3"
+          ],
+          "title": "Alekhine: Exchange, 5...cxd6",
+          "eco": "B03",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. e4 {e4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e4]} 1... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 2. e5 {e5 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge4e5]} 2... Nd5 {Nd5 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gf6d5]} 3. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 3... d6 {d6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d6]} 4. c4 {c4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc2c4]} 4... Nb6 {Nb6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gd5b6]} 5. exd6 {exd6 : Les Blancs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Ge5d6]} 5... cxd6 {cxd6 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gc7d6]} 6. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 6... g6 {g6 : Les Noirs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Gg7g6]} 7. Be2 {Be2 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf1e2]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "alekhine-c2-l2",
+          "legacyIds": [
+            "alekhine-m4"
+          ],
+          "title": "Alekhine: Exchange, 5...cxd6 6.Nc3",
+          "eco": "B03",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. e4 {e4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e4]} 1... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 2. e5 {e5 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge4e5]} 2... Nd5 {Nd5 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gf6d5]} 3. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 3... d6 {d6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d6]} 4. c4 {c4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc2c4]} 4... Nb6 {Nb6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gd5b6]} 5. exd6 {exd6 : Les Blancs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Ge5d6]} 5... cxd6 {cxd6 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gc7d6]} 6. Nc3 {Nc3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb1c3]} 6... g6 {g6 : Les Noirs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Gg7g6]} 7. Be3 {Be3 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gc1e3]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "alekhine-c2-l3",
+          "legacyIds": [
+            "alekhine-m5"
+          ],
+          "title": "Alekhine: Four Pawns Attack, 6...Bf5",
+          "eco": "B03",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. e4 {e4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e4]} 1... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 2. e5 {e5 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge4e5]} 2... Nd5 {Nd5 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gf6d5]} 3. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 3... d6 {d6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d6]} 4. c4 {c4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc2c4]} 4... Nb6 {Nb6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gd5b6]} 5. f4 {f4 : Les Blancs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Gf2f4]} 5... dxe5 {dxe5 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gd6e5]} 6. fxe5 {fxe5 : Les Blancs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gf4e5]} 6... Bf5 {Bf5 : Les Noirs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gc8f5]} 7. Nc3 {Nc3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb1c3]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        }
+      ]
+    }
+  ]
+}

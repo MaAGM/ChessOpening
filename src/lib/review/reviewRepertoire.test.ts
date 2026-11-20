@@ -1,13 +1,13 @@
-import { describe, expect, it } from "vitest";
+import { beforeAll, describe, expect, it } from "vitest";
 import { Chess } from "chess.js";
-import { openingCourses } from "@/lib/data/openings";
+import { courseEntries, getLoadedLesson, loadAllCourses } from "@/lib/data/openings";
 import type { Repertoire, RepertoireNode } from "@/lib/repertoire/types";
 import {
   buildReviewGraphForSide,
   countReviewChaptersBySide,
   countReviewSourcesBySide,
   getRepertoireSources,
-  getReviewChapters,
+  getReviewLessons,
   getReviewSources,
   repertoireSourceId,
 } from "./reviewRepertoire";
@@ -16,7 +16,14 @@ import { toPositionKey } from "./positionKey";
 
 // Les IDs sont lus dans les données réelles : les tests ne dépendent d'aucun ID précis.
 const chapterIdsOf = (side: "white" | "black") =>
-  openingCourses.filter((course) => course.side === side).flatMap((c) => c.chapters.map((ch) => ch.id));
+  courseEntries
+    .filter((course) => course.side === side)
+    .flatMap((c) => c.chapters.flatMap((ch) => ch.lessons.map((lesson) => lesson.id)));
+
+// Les arbres des cours sont chargés à la demande : la révision ne lit que les ouvertures chargées.
+beforeAll(async () => {
+  await loadAllCourses();
+});
 
 const oneWhite = chapterIdsOf("white")[0];
 const oneBlack = chapterIdsOf("black")[0];
@@ -43,8 +50,8 @@ describe("reviewRepertoire (données réelles)", () => {
 
   it("filtre par couleur : un chapitre Blancs n'entre pas dans le répertoire des Noirs", () => {
     const ids = [oneWhite, oneBlack];
-    expect(getReviewChapters("black", ids).map((c) => c.id)).toEqual([oneBlack]);
-    expect(getReviewChapters("white", ids).map((c) => c.id)).toEqual([oneWhite]);
+    expect(getReviewLessons("black", ids).map((c) => c.id)).toEqual([oneBlack]);
+    expect(getReviewLessons("white", ids).map((c) => c.id)).toEqual([oneWhite]);
   });
 
   it("ignore les IDs obsolètes et renvoie null si rien ne reste", () => {
@@ -160,8 +167,7 @@ describe("buildReviewGraphForSide avec des répertoires", () => {
   });
 
   it("fusionne un répertoire avec un chapitre Masterclass de la même couleur", () => {
-    const course = openingCourses.find((c) => c.side === "white")!;
-    const chapter = course.chapters[0];
+    const chapter = getLoadedLesson(chapterIdsOf("white")[0])!;
     const firstMove = Object.keys(chapter.root.children ?? {})[0];
     const rep = repertoire({ side: "white", children: line(firstMove) });
 

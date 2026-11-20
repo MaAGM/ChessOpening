@@ -7,6 +7,7 @@ import { Chess, type Square } from "chess.js";
 import { useRepertoireStore } from "@/hooks/useRepertoireStore";
 import { useReviewStore } from "@/hooks/useReviewStore";
 import type { PanelMode } from "@/hooks/useTrainerMode";
+import { areLessonsLoaded, loadCoursesForLessons } from "@/lib/data/openings";
 import type { Arrow } from "@/lib/data/openings/types";
 import { fenTurn } from "@/lib/review/positionKey";
 import {
@@ -121,11 +122,32 @@ export function useReviewManager(params: ReviewManagerParams) {
   // ----------------------------------------------------------------------
   const isReviewMode = panelMode === "review_active" && reviewSide !== null;
 
-  // Sources de la révision : chapitres ajoutés + répertoires dont l'interrupteur est activé.
+  // Les arbres des cours Masterclass sont chargés à la demande (une ouverture par import()) :
+  // on charge celles des cours ajoutés aux révisions avant de construire le graphe.
+  const lessonsReady = areLessonsLoaded(reviewChapterIds);
+  const [loadedVersion, setLoadedVersion] = useState(0);
+  useEffect(() => {
+    if (!isReviewMode || lessonsReady) return;
+    let cancelled = false;
+    loadCoursesForLessons(reviewChapterIds)
+      .catch((error: unknown) => console.warn("[review] Chargement des cours impossible :", error))
+      .finally(() => {
+        if (!cancelled) setLoadedVersion((v) => v + 1);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [isReviewMode, lessonsReady, reviewChapterIds]);
+
+  // Sources de la révision : cours ajoutés + répertoires dont l'interrupteur est activé.
   const sources = useMemo(
-    () => (isReviewMode && reviewSide ? getReviewSources(reviewSide, reviewChapterIds, repertoires) : []),
-    [isReviewMode, reviewSide, reviewChapterIds, repertoires],
+    () =>
+      isReviewMode && reviewSide && loadedVersion >= 0
+        ? getReviewSources(reviewSide, reviewChapterIds, repertoires)
+        : [],
+    [isReviewMode, reviewSide, reviewChapterIds, repertoires, loadedVersion],
   );
+  const isLoadingLessons = isReviewMode && !lessonsReady;
 
   const graph = useMemo(() => (sources.length > 0 ? buildReviewGraph(sources) : null), [sources]);
 
@@ -356,6 +378,8 @@ export function useReviewManager(params: ReviewManagerParams) {
   return {
     // État
     hasRepertoire: graph !== null,
+    /** Les cours ajoutés aux révisions sont en cours de chargement. */
+    isLoadingLessons,
     isPlayerTurn,
     isComputerTurn,
     isLineFinished,

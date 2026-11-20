@@ -1,0 +1,97 @@
+{
+  "id": "reti",
+  "name": "Reti",
+  "description": "Formation complète sur Reti",
+  "side": "white",
+  "eco": [
+    "A08"
+  ],
+  "chapters": [
+    {
+      "id": "reti-c1",
+      "title": "Les fondations",
+      "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+      "stage": "foundations",
+      "lessons": [
+        {
+          "id": "reti-c1-l1",
+          "legacyIds": [
+            "reti-m1"
+          ],
+          "title": "Reti: KIA, French Variation",
+          "eco": "A08",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 1... d5 {d5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d5]} 2. g3 {g3 : Les Blancs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Gg2g3]} 2... c5 {c5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc7c5]} 3. Bg2 {Bg2 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf1g2]} 3... Nc6 {Nc6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb8c6]} 4. O-O {O-O : Les Blancs sécurisent le roi et activent les tours pour le milieu de jeu. [%cal Ge1g1]} 4... e6 {e6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e6]} 5. d3 {d3 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d3]} 5... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 6. Nbd2 {Nbd2 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb1d2]} 6... Be7 {Be7 : Les Noirs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf8e7]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "reti-c1-l2",
+          "legacyIds": [
+            "reti-m2"
+          ],
+          "title": "Reti: KIA, French Variation",
+          "eco": "A08",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 1... d5 {d5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d5]} 2. g3 {g3 : Les Blancs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Gg2g3]} 2... c5 {c5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc7c5]} 3. Bg2 {Bg2 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf1g2]} 3... Nc6 {Nc6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb8c6]} 4. O-O {O-O : Les Blancs sécurisent le roi et activent les tours pour le milieu de jeu. [%cal Ge1g1]} 4... e6 {e6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e6]} 5. d3 {d3 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d3]} 5... Bd6 {Bd6 : Les Noirs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf8d6]} 6. Nbd2 {Nbd2 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb1d2]} 6... Nge7 {Nge7 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8e7]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        }
+      ]
+    },
+    {
+      "id": "reti-c2",
+      "title": "Lignes théoriques",
+      "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
+      "stage": "theory",
+      "lessons": [
+        {
+          "id": "reti-c2-l1",
+          "legacyIds": [
+            "reti-m3"
+          ],
+          "title": "Reti: KIA, 2...c5, 3.Bg2 Nc6 4.O-O",
+          "eco": "A08",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 1... d5 {d5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d5]} 2. g3 {g3 : Les Blancs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Gg2g3]} 2... c5 {c5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc7c5]} 3. Bg2 {Bg2 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf1g2]} 3... Nc6 {Nc6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb8c6]} 4. O-O {O-O : Les Blancs sécurisent le roi et activent les tours pour le milieu de jeu. [%cal Ge1g1]} 4... e6 {e6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e6]} 5. d3 {d3 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d3]} 5... Nge7 {Nge7 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8e7]} 6. Nbd2 {Nbd2 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb1d2]} 6... g6 {g6 : Les Noirs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Gg7g6]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "reti-c2-l2",
+          "legacyIds": [
+            "reti-m4"
+          ],
+          "title": "Reti: KIA, 2...c5, 3.Bg2 Nc6 4.O-O",
+          "eco": "A08",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 1... d5 {d5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d5]} 2. g3 {g3 : Les Blancs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Gg2g3]} 2... c5 {c5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc7c5]} 3. Bg2 {Bg2 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf1g2]} 3... Nc6 {Nc6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb8c6]} 4. O-O {O-O : Les Blancs sécurisent le roi et activent les tours pour le milieu de jeu. [%cal Ge1g1]} 4... e6 {e6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e6]} 5. d3 {d3 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d3]} 5... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 6. Nbd2 {Nbd2 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb1d2]} 6... g6 {g6 : Les Noirs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Gg7g6]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "reti-c2-l3",
+          "legacyIds": [
+            "reti-m5"
+          ],
+          "title": "Reti: KIA, 2...c5, 3.Bg2 Nc6 4.O-O",
+          "eco": "A08",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 1... d5 {d5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d5]} 2. g3 {g3 : Les Blancs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Gg2g3]} 2... c5 {c5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc7c5]} 3. Bg2 {Bg2 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf1g2]} 3... Nc6 {Nc6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb8c6]} 4. O-O {O-O : Les Blancs sécurisent le roi et activent les tours pour le milieu de jeu. [%cal Ge1g1]} 4... e6 {e6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e6]} 5. d3 {d3 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d3]} 5... Nge7 {Nge7 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8e7]} 6. Nbd2 {Nbd2 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb1d2]} 6... b6 {b6 : Les Noirs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Gb7b6]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        }
+      ]
+    }
+  ]
+}

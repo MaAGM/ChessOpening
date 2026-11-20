@@ -1,0 +1,101 @@
+{
+  "id": "slav",
+  "name": "Slav",
+  "description": "Formation complète sur Slav",
+  "side": "black",
+  "eco": [
+    "D10",
+    "D17",
+    "D49",
+    "D47",
+    "D19"
+  ],
+  "chapters": [
+    {
+      "id": "slav-c1",
+      "title": "Les fondations",
+      "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+      "stage": "foundations",
+      "lessons": [
+        {
+          "id": "slav-c1-l1",
+          "legacyIds": [
+            "slav-m1"
+          ],
+          "title": "Défense Slave",
+          "eco": "D10",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 1... d5 {d5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d5]} 2. c4 {c4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc2c4]} 2... c6 {c6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc7c6]} 3. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 3... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 4. Nc3 {Nc3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb1c3]} 4... dxc4 {dxc4 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gd5c4]} 5. a4 {a4 : Les Blancs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Ga2a4]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "slav-c1-l2",
+          "legacyIds": [
+            "slav-m2"
+          ],
+          "title": "Slav: Central, Main Line",
+          "eco": "D17",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 1... d5 {d5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d5]} 2. c4 {c4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc2c4]} 2... c6 {c6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc7c6]} 3. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 3... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 4. Nc3 {Nc3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb1c3]} 4... dxc4 {dxc4 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gd5c4]} 5. a4 {a4 : Les Blancs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Ga2a4]} 5... Bf5 {Bf5 : Les Noirs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gc8f5]} 6. Ne5 {Ne5 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gf3e5]} 6... e6 {e6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e6]} 7. f3 {f3 : Les Blancs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Gf2f3]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        }
+      ]
+    },
+    {
+      "id": "slav-c2",
+      "title": "Lignes théoriques",
+      "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
+      "stage": "theory",
+      "lessons": [
+        {
+          "id": "slav-c2-l1",
+          "legacyIds": [
+            "slav-m3"
+          ],
+          "title": "Semi-Slav Defense: Meran Variation, Sozin Variation",
+          "eco": "D49",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 1... d5 {d5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d5]} 2. c4 {c4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc2c4]} 2... c6 {c6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc7c6]} 3. Nc3 {Nc3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb1c3]} 3... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 4. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 4... e6 {e6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e6]} 5. e3 {e3 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e3]} 5... Nbd7 {Nbd7 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb8d7]} 6. Bd3 {Bd3 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf1d3]} 6... dxc4 {dxc4 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gd5c4]} 7. Bxc4 {Bxc4 : Les Blancs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gd3c4]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "slav-c2-l2",
+          "legacyIds": [
+            "slav-m4"
+          ],
+          "title": "Semi-Slav: Meran, Wade, Main Line, 12.O-O",
+          "eco": "D47",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 1... d5 {d5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d5]} 2. c4 {c4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc2c4]} 2... c6 {c6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc7c6]} 3. Nc3 {Nc3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb1c3]} 3... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 4. e3 {e3 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e3]} 4... e6 {e6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e6]} 5. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 5... Nbd7 {Nbd7 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb8d7]} 6. Bd3 {Bd3 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf1d3]} 6... dxc4 {dxc4 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gd5c4]} 7. Bxc4 {Bxc4 : Les Blancs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gd3c4]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "slav-c2-l3",
+          "legacyIds": [
+            "slav-m5"
+          ],
+          "title": "Slav: Dutch, 8...O-O 9.Qe2 Bg6 10.Ne5 Nbd7, 12.Rd1",
+          "eco": "D19",
+          "kind": "line",
+          "objectives": [],
+          "pgn": "1. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 1... d5 {d5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d5]} 2. c4 {c4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc2c4]} 2... c6 {c6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc7c6]} 3. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 3... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 4. Nc3 {Nc3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb1c3]} 4... dxc4 {dxc4 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gd5c4]} 5. a4 {a4 : Les Blancs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Ga2a4]} 5... Bf5 {Bf5 : Les Noirs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gc8f5]} 6. e3 {e3 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e3]} 6... e6 {e6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e6]} 7. Bxc4 {Bxc4 : Les Blancs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gf1c4]}",
+          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        }
+      ]
+    }
+  ]
+}

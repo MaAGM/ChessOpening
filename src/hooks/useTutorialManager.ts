@@ -1,17 +1,23 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Chess } from "chess.js";
 
 import { useReviewStore } from "@/hooks/useReviewStore";
 import type { PanelMode } from "@/hooks/useTrainerMode";
-import type { TutorialNode, OpeningCourse } from "@/lib/data/openings";
+import type { CourseChapter, Lesson, OpeningCourse, Side, TutorialNode } from "@/lib/data/openings";
 import {
-  findNodeByMoveSequence,
   computeFenForPath,
-  getAllChapters,
-  openingCourses,
+  findNodeByMoveSequence,
+  getCourseEntry,
+  getLessonLocation,
+  getLoadedCourse,
+  loadCourse,
 } from "@/lib/data/openings";
+import { computeCoverage, findRewindPath, hasUnexploredBelow, pathKey } from "@/lib/learning/coverage";
+import { nextLessonId } from "@/lib/learning/progress";
+
+const COMPUTER_MOVE_DELAY_MS = 400;
 
 export type TutorialManagerParams = {
   /** Current board position in FEN */
@@ -32,43 +38,27 @@ export type TutorialManagerParams = {
   setPanelMode: (mode: PanelMode) => void;
 };
 
-/**
- * Returns the most recent path where the tutorial branch diverged
- * (i.e. a node with > 1 child) so the UI can offer a “rewind” button.
- */
-function getPreviousBranchPath(
-  rootNode: TutorialNode,
-  currentPath: string[],
-): string[] | null {
-  let node: TutorialNode | undefined = rootNode;
-  let firstBranchPath: string[] | null =
-    Object.keys(rootNode.children ?? {}).length > 1 ? [] : null;
+const isLeaf = (node: TutorialNode | null | undefined) =>
+  Boolean(node) && Object.keys(node!.children ?? {}).length === 0;
 
-  for (let i = 0; i < currentPath.length; i += 1) {
-    if (!node?.children) break;
-    node = node.children[currentPath[i]];
-    if (!node) break;
-
-    if (Object.keys(node.children ?? {}).length > 1) {
-      // On capture UNIQUEMENT la première intersection (la séparation principale)
-      if (firstBranchPath === null) {
-        firstBranchPath = currentPath.slice(0, i + 1);
-      }
-    }
+function findLesson(course: OpeningCourse | null, lessonId: string | null) {
+  if (!course || !lessonId) return null;
+  for (const chapter of course.chapters) {
+    const index = chapter.lessons.findIndex((lesson) => lesson.id === lessonId);
+    if (index >= 0) return { chapter, lesson: chapter.lessons[index], lessonIndex: index };
   }
-
-  // Si on est déjà sur la séparation principale, on ne propose pas le bouton
-  if (firstBranchPath !== null && firstBranchPath.length === currentPath.length) {
-    return null;
-  }
-
-  return firstBranchPath;
+  return null;
 }
 
 /**
- * All tutorial‑related state and behaviour lives inside this hook.
- * The component that consumes it (the page + the sidebar) stays
- * focused on layout and presentation.
+ * Mode Apprentissage (Masterclass) : navigation Ouverture → Chapitres → Cours et
+ * déroulé d'un cours sur l'échiquier.
+ *
+ * - Une ouverture est chargée à la demande (`loadCourse`) quand on l'ouvre.
+ * - Dans un cours, l'ordinateur joue seul quand il n'a qu'un coup ; s'il en a plusieurs,
+ *   le joueur choisit la variante à étudier.
+ * - Les fins de variante atteintes sont mémorisées pendant la session : le cours est marqué
+ *   « parcouru » quand toutes ses fins de variante obligatoires (`mustCover`) l'ont été.
  */
 export function useTutorialManager(params: TutorialManagerParams) {
   const {
@@ -82,315 +72,372 @@ export function useTutorialManager(params: TutorialManagerParams) {
     setPanelMode,
   } = params;
 
-  const { markComplete } = useReviewStore();
+  const { markComplete, completedChapters } = useReviewStore();
 
   // ----------------------------------------------------------------------
-  // UI state that belongs to the tutorial subsystem
+  // Ouverture sélectionnée (vue « chapitres ») et son chargement
   // ----------------------------------------------------------------------
-  const [activeTutorialId, setActiveTutorialId] = useState<string | null>(null);
+  const [selectedCourseId, setSelectedCourseId] = useState<string | null>(null);
+  const [loadTick, setLoadTick] = useState(0);
+  const [loadError, setLoadError] = useState<string | null>(null);
+
+  // Lu dans le cache du chargeur : `loadTick` force le nouveau rendu une fois chargé.
+  const course = useMemo(
+    () => (selectedCourseId && loadTick >= 0 ? getLoadedCourse(selectedCourseId) : null),
+    [selectedCourseId, loadTick],
+  );
+  const courseEntry = useMemo(
+    () => (selectedCourseId ? getCourseEntry(selectedCourseId) : null),
+    [selectedCourseId],
+  );
+
+  useEffect(() => {
+    if (!selectedCourseId || course) return;
+    let cancelled = false;
+    loadCourse(selectedCourseId)
+      .then(() => {
+        if (!cancelled) setLoadTick((t) => t + 1);
+      })
+      .catch((error: unknown) => {
+        console.warn("[Masterclass] Chargement impossible :", error);
+        if (!cancelled) setLoadError("Impossible de charger cette ouverture. Réessayez plus tard.");
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [selectedCourseId, course]);
+
+  // ----------------------------------------------------------------------
+  // Cours en cours
+  // ----------------------------------------------------------------------
+  const [activeLessonId, setActiveLessonId] = useState<string | null>(null);
   const [currentPath, setCurrentPath] = useState<string[]>([]);
   const [moveFrom, setMoveFrom] = useState<string | null>(null);
+  /** Fins de variante atteintes pendant la session du cours (clés `pathKey`). */
+  const [exploredLeaves, setExploredLeaves] = useState<ReadonlySet<string>>(() => new Set());
 
-  // ----------------------------------------------------------------------
-  // Derived data
-  // ----------------------------------------------------------------------
-  const activeCourse = useMemo(
-    () =>
-      openingCourses.find((c: OpeningCourse) =>
-        c.chapters.some((ch) => ch.id === activeTutorialId),
-      ) ?? null,
-    [activeTutorialId],
-  );
+  const found = useMemo(() => findLesson(course, activeLessonId), [course, activeLessonId]);
+  const activeLesson: Lesson | null = found?.lesson ?? null;
+  const activeChapter: CourseChapter | null = found?.chapter ?? null;
+  const activeChapterIndex = activeChapter && course ? course.chapters.indexOf(activeChapter) : -1;
+  const activeLessonIndex = found?.lessonIndex ?? -1;
 
-  // Utilisation directe du side provenant du JSON !
-  const userColor = activeCourse?.side ?? "white";
-
-  const activeTutorial = getAllChapters().find(
-    (c) => c.id === activeTutorialId,
-  );
+  const userColor: Side = activeLesson?.side ?? course?.side ?? "white";
 
   const activeNode: TutorialNode | null = useMemo(() => {
-    if (!activeTutorial) return null;
-    return currentPath.length === 0
-      ? activeTutorial.root
-      : findNodeByMoveSequence(activeTutorial.root, currentPath) ?? null;
-  }, [activeTutorial, currentPath]);
+    if (!activeLesson) return null;
+    return findNodeByMoveSequence(activeLesson.root, currentPath);
+  }, [activeLesson, currentPath]);
 
-  const previousBranchPath = useMemo(() => {
-    if (!activeTutorial) return null;
-    return getPreviousBranchPath(activeTutorial.root, currentPath);
-  }, [activeTutorial, currentPath]);
+  const isLessonFinished = isLeaf(activeNode);
 
-  const isChapterFinished =
-  activeNode ? Object.keys(activeNode.children ?? {}).length === 0 : false;
-
-  const currentChapterIndex = activeCourse?.chapters.findIndex(
-    (c) => c.id === activeTutorialId,
+  const coverage = useMemo(
+    () => (activeLesson ? computeCoverage(activeLesson.root, activeLesson.mustCover, exploredLeaves) : null),
+    [activeLesson, exploredLeaves],
   );
-  const nextChapter =
-    activeCourse &&
-    typeof currentChapterIndex === "number" &&
-    currentChapterIndex !== -1 &&
-    currentChapterIndex < activeCourse.chapters.length - 1
-      ? activeCourse.chapters[currentChapterIndex + 1]
+
+  /** Où revenir pour explorer une variante pas encore vue (null : tout est exploré). */
+  const rewindPath = useMemo(
+    () =>
+      activeLesson && isLessonFinished
+        ? findRewindPath(activeLesson.root, activeLesson.mustCover, exploredLeaves, currentPath)
+        : null,
+    [activeLesson, isLessonFinished, exploredLeaves, currentPath],
+  );
+
+  const nextLesson = useMemo(() => {
+    if (!courseEntry || !activeLessonId) return null;
+    const id = nextLessonId(courseEntry, activeLessonId);
+    if (!id) return null;
+    const location = getLessonLocation(id);
+    const chapter = courseEntry.chapters.find((c) => c.id === location?.chapterId);
+    const entry = chapter?.lessons.find((l) => l.id === id);
+    return entry && chapter
+      ? { id, title: entry.title, chapterTitle: chapter.title, isNewChapter: chapter.id !== activeChapter?.id }
       : null;
+  }, [courseEntry, activeLessonId, activeChapter]);
+
+  const isLessonCompleted = activeLessonId ? completedChapters.includes(activeLessonId) : false;
 
   // ----------------------------------------------------------------------
-  // Chapter completion – marked as soon as the end of the line is reached.
-  // markComplete is idempotent (no-op if already completed).
+  // Cours parcouru : toutes les fins de variante obligatoires ont été atteintes.
+  // markComplete est idempotent.
   // ----------------------------------------------------------------------
   useEffect(() => {
-    if (panelMode === "learning_active" && activeTutorialId && isChapterFinished) {
-      markComplete(activeTutorialId);
+    if (panelMode === "learning_active" && activeLessonId && coverage?.complete) {
+      markComplete(activeLessonId);
     }
-  }, [panelMode, activeTutorialId, isChapterFinished, markComplete]);
+  }, [panelMode, activeLessonId, coverage, markComplete]);
 
   // ----------------------------------------------------------------------
-  // Interaction handlers (piece drop, click, navigation)
+  // Avancer d'un coup dans l'arbre (joueur, ordinateur ou choix de variante)
+  // ----------------------------------------------------------------------
+  const advance = useCallback(
+    (path: string[], san: string) => {
+      const nextPath = [...path, san];
+      setCurrentPath(nextPath);
+      if (activeLesson && isLeaf(findNodeByMoveSequence(activeLesson.root, nextPath))) {
+        setExploredLeaves((prev) => {
+          const key = pathKey(nextPath);
+          return prev.has(key) ? prev : new Set([...prev, key]);
+        });
+      }
+    },
+    [activeLesson],
+  );
+
+  const sideToMove: Side = currentPath.length % 2 === 0 ? "white" : "black";
+  const isLearning = panelMode === "learning_active" && activeNode !== null;
+
+  const previewSan = (from: string, to: string): string | null => {
+    try {
+      return new Chess(currentFen).move({ from, to, promotion: "q" }).san;
+    } catch {
+      return null;
+    }
+  };
+
+  // ----------------------------------------------------------------------
+  // Interaction handlers (piece drop, click)
   // ----------------------------------------------------------------------
   const handlePieceDrop = (sourceSquare: string, targetSquare: string | null) => {
     // Le passage au mode Exploration après un coup joué depuis le menu est géré par la
     // page (`shouldEnterExplorer`), pour le glisser-déposer comme pour le clic.
-
-    // If we are currently in tutorial mode, enforce the tutorial tree
-    if (panelMode === "learning_active" && activeNode) {
+    if (isLearning && activeNode) {
       // Coup refusé : on efface aussi la sélection et les points d'aide.
       const reject = () => {
         clearSelection();
         return false;
       };
 
-      if (!targetSquare) return reject();
-
-      const sideToMove = currentPath.length % 2 === 0 ? "white" : "black";
-      if (sideToMove !== userColor) return reject();
-
-      const previewGame = new Chess(currentFen);
-      let previewMove;
-      try {
-        previewMove = previewGame.move({
-          from: sourceSquare,
-          to: targetSquare,
-          promotion: "q",
-        });
-      } catch {
-        return reject();
-      }
-      if (!previewMove) return reject();
-
-      const allowedMoves = Object.keys(activeNode.children ?? {});
-      if (!allowedMoves.includes(previewMove.san)) return reject();
+      if (!targetSquare || sideToMove !== userColor) return reject();
+      const san = previewSan(sourceSquare, targetSquare);
+      if (!san || !Object.keys(activeNode.children ?? {}).includes(san)) return reject();
 
       const moved = onPieceDrop(sourceSquare, targetSquare);
       if (moved) {
-        setCurrentPath((p) => [...p, previewMove!.san]);
+        advance(currentPath, san);
         setMoveFrom(null);
       }
       return moved;
     }
 
-    // Normal (non‑tutorial) handling
     const moved = onPieceDrop(sourceSquare, targetSquare);
     if (moved) setMoveFrom(null);
     return moved;
   };
 
   const handleSquareClick = (square: string) => {
-    if (panelMode === "learning_active" && activeNode) {
-      const sideToMove = currentPath.length % 2 === 0 ? "white" : "black";
-      if (sideToMove !== userColor) return;
-
-      // 1️⃣ First click – just highlight possible moves
-      if (!moveFrom) {
-        setMoveFrom(square);
-        onSquareClick(square);
-        return;
-      }
-
-      // 2️⃣ Click same square – cancel selection
-      if (moveFrom === square) {
-        setMoveFrom(null);
-        onSquareClick(square);
-        return;
-      }
-
-      // 3️⃣ Attempt the move
-      const previewGame = new Chess(currentFen);
-      let previewMove;
-      try {
-        previewMove = previewGame.move({
-          from: moveFrom,
-          to: square,
-          promotion: "q",
-        });
-      } catch {
-        // Invalid chess move – reset selection to the new square
-        setMoveFrom(square);
-        onSquareClick(square);
-        return;
-      }
-
-      const allowedMoves = Object.keys(activeNode.children ?? {});
-      if (previewMove && allowedMoves.includes(previewMove.san)) {
-        // Correct move – let the board apply it
-        onSquareClick(square);
-        setCurrentPath((p) => [...p, previewMove!.san]);
-        setMoveFrom(null);
-      } else {
-        // Wrong move – refuse and clear the highlights
-        onSquareClick(moveFrom);
-        setMoveFrom(null);
-      }
-    } else {
-      // Outside tutorial – pure board interaction
+    if (!isLearning || !activeNode) {
       onSquareClick(square);
+      return;
     }
+    if (sideToMove !== userColor) return;
+
+    // 1) Premier clic : on montre les coups possibles
+    if (!moveFrom) {
+      setMoveFrom(square);
+      onSquareClick(square);
+      return;
+    }
+
+    // 2) Même case : annulation
+    if (moveFrom === square) {
+      setMoveFrom(null);
+      onSquareClick(square);
+      return;
+    }
+
+    // 3) Tentative de coup
+    const san = previewSan(moveFrom, square);
+    if (!san) {
+      // Coup illégal : la sélection passe à la nouvelle case
+      setMoveFrom(square);
+      onSquareClick(square);
+      return;
+    }
+
+    if (Object.keys(activeNode.children ?? {}).includes(san)) {
+      onSquareClick(square); // useChessGame applique le coup
+      advance(currentPath, san);
+    } else {
+      onSquareClick(moveFrom); // mauvais coup : on désélectionne
+    }
+    setMoveFrom(null);
   };
 
-  const handleStartTutorial = (id: string) => {
-    const tutorial = getAllChapters().find((c) => c.id === id);
-    if (!tutorial) return;
-
-    setActiveTutorialId(id);
+  // ----------------------------------------------------------------------
+  // Navigation
+  // ----------------------------------------------------------------------
+  const resetLessonState = () => {
     setCurrentPath([]);
     setMoveFrom(null);
-    setPanelMode("learning_active");
+    setExploredLeaves(new Set());
+  };
 
-    try {
-      const fen = computeFenForPath([]);
-      loadPosition(fen);
-    } catch {
-      loadPosition(new Chess().fen());
+  /** Ouvre la vue des chapitres d'une ouverture (le contenu se charge en arrière-plan). */
+  const handleOpenCourse = (courseId: string) => {
+    setLoadError(null);
+    setSelectedCourseId(courseId);
+    setPanelMode("opening_selector");
+  };
+
+  /** Revient à la liste des ouvertures. */
+  const handleCloseCourse = () => {
+    setSelectedCourseId(null);
+    setLoadError(null);
+  };
+
+  const handleStartLesson = (lessonId: string) => {
+    const location = getLessonLocation(lessonId);
+    if (!location) return;
+
+    setSelectedCourseId(location.courseId);
+    setActiveLessonId(lessonId);
+    resetLessonState();
+    setPanelMode("learning_active");
+    loadPosition(computeFenForPath([]));
+
+    // Normalement déjà chargée (vue des chapitres) ; sinon le cours s'affiche une fois prêt.
+    if (!getLoadedCourse(location.courseId)) {
+      loadCourse(location.courseId)
+        .then(() => setLoadTick((t) => t + 1))
+        .catch(() => setLoadError("Impossible de charger ce cours. Réessayez plus tard."));
     }
   };
 
-  const handleNextChapter = () => {
-    if (nextChapter) {
-      handleStartTutorial(nextChapter.id);
-    }
+  const handleNextLesson = () => {
+    if (nextLesson) handleStartLesson(nextLesson.id);
+  };
+
+  /** Recommence le cours depuis le début (les variantes déjà vues restent comptées). */
+  const handleRestartLesson = () => {
+    setCurrentPath([]);
+    setMoveFrom(null);
+    loadPosition(computeFenForPath([]));
+  };
+
+  /** Quitte le cours et revient à la vue des chapitres de son ouverture. */
+  const handleBackToCourse = () => {
+    setActiveLessonId(null);
+    resetLessonState();
+    resetGame();
+    setPanelMode("opening_selector");
   };
 
   const handleBackToMenu = () => {
     setPanelMode("menu");
-    setActiveTutorialId(null);
-    setCurrentPath([]);
-    setMoveFrom(null);
+    setSelectedCourseId(null);
+    setActiveLessonId(null);
+    setLoadError(null);
+    resetLessonState();
     resetGame();
   };
 
   const handleRewindToBranch = () => {
-    if (!activeTutorial) return;
-    const branchPath = getPreviousBranchPath(activeTutorial.root, currentPath);
-    if (!branchPath) return;
-
-    setCurrentPath(branchPath);
+    if (!rewindPath) return;
+    setCurrentPath(rewindPath);
     setMoveFrom(null);
     try {
-      const fen = computeFenForPath(branchPath);
-      loadPosition(fen);
+      loadPosition(computeFenForPath(rewindPath));
     } catch {
       loadPosition(new Chess().fen());
     }
   };
 
   // ----------------------------------------------------------------------
-  // Computer‑side automatic move (when it’s the opponent’s turn)
+  // Coup automatique de l'ordinateur (quand il n'a qu'un seul coup possible)
   // ----------------------------------------------------------------------
+  const computerColor: Side = userColor === "white" ? "black" : "white";
+  const branchChoices = useMemo(() => Object.keys(activeNode?.children ?? {}), [activeNode]);
+  const isComputerTurn = isLearning && sideToMove === computerColor;
+
   useEffect(() => {
-    if (panelMode !== "learning_active" || !activeNode) return;
-
-    const sideToMove = currentPath.length % 2 === 0 ? "white" : "black";
-    const computerColor = userColor === "white" ? "black" : "white";
-    if (sideToMove !== computerColor) return;
-
-    const nextMoves = Object.keys(activeNode.children ?? {});
-    
-    // NOUVEAU : Si l'ordinateur a plusieurs choix, on bloque l'auto-play
-    if (nextMoves.length > 1) {
-      return; 
-    }
-
-    const mainLineMove = nextMoves[0];
-    if (!mainLineMove) return;
+    if (!isComputerTurn || branchChoices.length !== 1) return;
+    const [mainLineMove] = branchChoices;
 
     const timer = setTimeout(() => {
-      const previewGame = new Chess(currentFen);
-      let previewMove;
+      let move;
       try {
-        previewMove = previewGame.move(mainLineMove);
+        move = new Chess(currentFen).move(mainLineMove);
       } catch {
         return;
       }
-      if (!previewMove) return;
-
-      const moved = onPieceDrop(previewMove.from, previewMove.to);
-      if (moved) {
-        setCurrentPath((p) => [...p, mainLineMove]);
-      }
-    }, 400);
+      if (onPieceDrop(move.from, move.to)) advance(currentPath, mainLineMove);
+    }, COMPUTER_MOVE_DELAY_MS);
 
     return () => clearTimeout(timer);
-  }, [
-    panelMode,
-    activeNode,
-    currentPath,
-    userColor,
-    currentFen,
-    onPieceDrop,
-  ]);
+  }, [isComputerTurn, branchChoices, currentPath, currentFen, onPieceDrop, advance]);
 
-  // ======================================================================
-  // NOUVEAU : Logique de sélection de la branche (Branch Selector Logic)
-  // ======================================================================
-  const sideToMove = currentPath.length % 2 === 0 ? "white" : "black";
-  const isComputerTurn = sideToMove !== userColor;
-  const branchChoices = Object.keys(activeNode?.children ?? {});
-  const isWaitingForBranchChoice = panelMode === "learning_active" && isComputerTurn && branchChoices.length > 1;
+  // ----------------------------------------------------------------------
+  // Choix d'une variante quand l'ordinateur a plusieurs coups
+  // ----------------------------------------------------------------------
+  const isWaitingForBranchChoice = isComputerTurn && branchChoices.length > 1;
+
+  /** Variantes déjà entièrement explorées depuis la position courante. */
+  const exploredChoices = useMemo(
+    () =>
+      activeLesson && isWaitingForBranchChoice
+        ? branchChoices.filter(
+            (san) =>
+              !hasUnexploredBelow(activeLesson.root, "allBranches", exploredLeaves, [...currentPath, san]),
+          )
+        : [],
+    [activeLesson, isWaitingForBranchChoice, branchChoices, exploredLeaves, currentPath],
+  );
 
   const handleBranchChoice = (moveSan: string) => {
-    const previewGame = new Chess(currentFen);
-    let previewMove;
+    let move;
     try {
-      previewMove = previewGame.move(moveSan);
+      move = new Chess(currentFen).move(moveSan);
     } catch {
       return;
     }
-    
-    if (previewMove) {
-      const moved = onPieceDrop(previewMove.from, previewMove.to);
-      if (moved) {
-        setCurrentPath((p) => [...p, moveSan]);
-      }
-    }
+    if (onPieceDrop(move.from, move.to)) advance(currentPath, moveSan);
   };
 
-  // ----------------------------------------------------------------------
-  // Return everything the UI components need
-  // ----------------------------------------------------------------------
   return {
-    // Tutorial state
-    activeTutorialId,
-    activeCourse,
+    // Vue des chapitres
+    selectedCourseId,
+    course,
+    courseEntry,
+    isCourseLoading: selectedCourseId !== null && course === null && loadError === null,
+    loadError,
+
+    // Cours en cours
+    activeLessonId,
+    activeLesson,
+    activeChapter,
+    activeChapterIndex,
+    activeLessonIndex,
     activeNode,
-    isChapterFinished,
-    nextChapter,
-    previousBranchPath,
+    isLessonFinished,
+    isLessonCompleted,
+    coverage,
+    canExploreOtherBranch: rewindPath !== null,
+    nextLesson,
     userColor,
-    
-    // Variables pour le panneau de choix
+    computerColor,
+
+    // Choix de variante
     isWaitingForBranchChoice,
     branchChoices,
+    exploredChoices,
     handleBranchChoice,
 
     // Interaction handlers
     handlePieceClick: handleSquareClick,
     handlePieceDrop,
-    handleStartTutorial,
-    handleNextChapter,
-    handleBackToMenu,
+
+    // Navigation
+    handleOpenCourse,
+    handleCloseCourse,
+    handleStartLesson,
+    handleNextLesson,
+    handleRestartLesson,
     handleRewindToBranch,
-    // Misc helpers (exported for potential external use)
-    getPreviousBranchPath,
+    handleBackToCourse,
+    handleBackToMenu,
   };
 }
 

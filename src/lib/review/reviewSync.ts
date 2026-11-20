@@ -1,3 +1,4 @@
+import { migrateLessonIds } from "./lessonIdMigration";
 import type { ReviewStoreState } from "./reviewStore";
 import type { PositionStats } from "./srs";
 import {
@@ -152,9 +153,18 @@ function emptyState(): ReviewStoreState {
   return { version: 2, reviewChapters: {}, completedChapters: [], positions: {} };
 }
 
+/**
+ * Fusion utilisée par la synchronisation : les anciens identifiants de cours venus du cloud
+ * sont migrés dans l'état fusionné. Le cloud (`lastSynced`) garde ses anciens identifiants,
+ * donc le prochain envoi supprime les anciennes lignes et crée les nouvelles.
+ */
+export function mergeAndMigrate(a: ReviewStoreState, b: ReviewStoreState): ReviewStoreState {
+  return migrateLessonIds(mergeStates(a, b));
+}
+
 export const reviewSyncStrategy: SyncStrategy<ReviewStoreState, ChangeSet> = {
   emptyState,
-  merge: mergeStates,
+  merge: mergeAndMigrate,
   diff: diffStates,
   isEmpty: isEmptyChangeSet,
 };

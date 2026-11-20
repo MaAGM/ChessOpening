@@ -1,4 +1,4 @@
-import type { OpeningChapter, TutorialNode } from "@/lib/data/openings/types";
+import type { Lesson, TutorialNode } from "@/lib/data/openings/types";
 import type { Side } from "@/lib/review/types";
 import { createNodeId } from "./repertoireTree";
 import type { RepertoireDraft, RepertoireNode, TreeRoot } from "./types";
@@ -43,17 +43,17 @@ export function fromTutorialRoot(
   return { children: convertAll(root.children) };
 }
 
-/** Brouillon de répertoire à partir d'un chapitre Masterclass (copie dans « mes répertoires »). */
-export function repertoireFromChapter(
-  chapter: OpeningChapter,
+/** Brouillon de répertoire à partir d'un cours Masterclass (copie dans « mes répertoires »). */
+export function repertoireFromLesson(
+  lesson: Pick<Lesson, "title" | "side" | "root">,
   course: { name: string; side: Side },
 ): RepertoireDraft {
   return {
-    name: chapter.name,
-    side: chapter.side ?? course.side,
+    name: lesson.title,
+    side: lesson.side ?? course.side,
     category: course.name,
     reviewEnabled: true,
-    children: fromTutorialRoot(chapter.root).children,
+    children: fromTutorialRoot(lesson.root).children,
     origin: { kind: "custom" },
   };
 }
