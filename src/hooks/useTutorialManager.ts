@@ -149,10 +149,8 @@ export function useTutorialManager(params: TutorialManagerParams) {
   // Interaction handlers (piece drop, click, navigation)
   // ----------------------------------------------------------------------
   const handlePieceDrop = (sourceSquare: string, targetSquare: string | null) => {
-    // Switch from the menu to the explorer automatically
-    if (panelMode === "menu") {
-      setPanelMode("explorer");
-    }
+    // Le passage au mode Exploration après un coup joué depuis le menu est géré par la
+    // page (`shouldEnterExplorer`), pour le glisser-déposer comme pour le clic.
 
     // If we are currently in tutorial mode, enforce the tutorial tree
     if (panelMode === "learning_active" && activeNode) {

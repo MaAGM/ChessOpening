@@ -74,6 +74,21 @@ export function boardModeKind(panelMode: PanelMode): BoardModeKind {
 }
 
 /**
+ * Écrans de navigation (menu et les trois options choisies mais pas encore lancées) :
+ * l'échiquier y est libre, et jouer un coup ouvre le mode Exploration.
+ */
+const BROWSING_MODES: readonly PanelMode[] = ["menu", "opening_selector", "review_setup", "repertoire_list"];
+
+export function isBrowsingScreen(panelMode: PanelMode): boolean {
+  return BROWSING_MODES.includes(panelMode);
+}
+
+/** Un coup vient d'être ajouté à la partie depuis un écran de navigation. */
+export function shouldEnterExplorer(panelMode: PanelMode, previousPlies: number, plies: number): boolean {
+  return isBrowsingScreen(panelMode) && plies > previousPlies;
+}
+
+/**
  * L'analyse Stockfish est masquée pendant les exercices (révision, apprentissage
  * d'une ligne) : elle donnerait la réponse. Elle reste disponible ailleurs.
  */

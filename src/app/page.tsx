@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { useAuth, useAuthSyncBootstrap } from "@/hooks/useAuth";
 import { useChessGame } from "@/hooks/useChessGame";
@@ -18,7 +18,12 @@ import { uciToSquares } from "@/lib/engine";
 import { buildPositionSnapshot, suggestedQuestions } from "@/lib/coach/chatSnapshot";
 import { getConvexClient } from "@/lib/convex/client";
 import { createCoachChatBackend } from "@/lib/convex/coachRemote";
-import { ENGINE_ARROW_COLOR, engineAllowed, resolveBoardController } from "@/lib/trainer/boardController";
+import {
+  ENGINE_ARROW_COLOR,
+  engineAllowed,
+  resolveBoardController,
+  shouldEnterExplorer,
+} from "@/lib/trainer/boardController";
 
 import { OpeningName } from "@/components/chess/OpeningName";
 import { ChessBoard } from "@/components/chess/ChessBoard";
@@ -116,6 +121,16 @@ export default function HomePage() {
   // ----------------------------------------------------------------------
   // Analyse Stockfish locale (coupée pendant la révision et l'apprentissage)
   // ----------------------------------------------------------------------
+  // ----------------------------------------------------------------------
+  // Un coup joué depuis le menu (ou une option pas encore lancée) ouvre l'Exploration
+  // ----------------------------------------------------------------------
+  const previousPliesRef = useRef(sanHistory.length);
+  useEffect(() => {
+    const previous = previousPliesRef.current;
+    previousPliesRef.current = sanHistory.length;
+    if (shouldEnterExplorer(panelMode, previous, sanHistory.length)) setPanelMode("explorer");
+  }, [sanHistory.length, panelMode, setPanelMode]);
+
   const engine = useEngineAnalysis(currentFen, engineAllowed(panelMode));
   const engineBestMove = engine.analysis?.bestMove ? uciToSquares(engine.analysis.bestMove) : null;
 

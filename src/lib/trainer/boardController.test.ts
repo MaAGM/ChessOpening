@@ -7,9 +7,42 @@ import {
   REVIEW_HINT_ARROW_COLOR,
   boardModeKind,
   engineAllowed,
+  isBrowsingScreen,
   resolveBoardController,
+  shouldEnterExplorer,
   type BoardControllerInput,
 } from "./boardController";
+
+describe("shouldEnterExplorer", () => {
+  const ALL: PanelMode[] = [
+    "menu",
+    "explorer",
+    "opening_selector",
+    "learning_active",
+    "review_setup",
+    "review_active",
+    "repertoire_list",
+    "repertoire_editor",
+  ];
+
+  it("le menu et les trois options pas encore lancées sont des écrans de navigation", () => {
+    expect(ALL.filter(isBrowsingScreen)).toEqual(["menu", "opening_selector", "review_setup", "repertoire_list"]);
+  });
+
+  it("ouvre l'Exploration quand un coup est joué depuis un écran de navigation", () => {
+    for (const mode of ["menu", "opening_selector", "review_setup", "repertoire_list"] as PanelMode[]) {
+      expect(shouldEnterExplorer(mode, 0, 1)).toBe(true);
+    }
+  });
+
+  it("ne bouge pas sans nouveau coup (remise à zéro, navigation) ni ailleurs", () => {
+    expect(shouldEnterExplorer("opening_selector", 0, 0)).toBe(false);
+    expect(shouldEnterExplorer("menu", 3, 0)).toBe(false);
+    for (const mode of ["explorer", "learning_active", "review_active", "repertoire_editor"] as PanelMode[]) {
+      expect(shouldEnterExplorer(mode, 0, 1)).toBe(false);
+    }
+  });
+});
 
 function makeInput(panelMode: PanelMode, overrides: Partial<BoardControllerInput> = {}) {
   const input: BoardControllerInput = {
