@@ -1,46 +1,91 @@
 {
   "id": "italian",
-  "name": "Italian",
-  "description": "Formation complète sur Italian",
+  "name": "Partie italienne",
+  "description": "Le fou c4 vise f7 dès le 3e coup. Répertoire complet côté Blancs : le Giuoco Pianissimo (c3, d3, Re1, h3) et ses plans de manœuvre, le Giuoco Piano c3-d4, l'attaque Møller, le gambit Evans, l'attaque Max Lange et les Deux Cavaliers 4.Ng5.",
   "side": "white",
   "eco": [
+    "C50",
+    "C51",
+    "C52",
     "C53",
-    "C55",
     "C54",
-    "C51"
+    "C55",
+    "C57",
+    "C58",
+    "C59"
   ],
   "chapters": [
     {
       "id": "italian-c1",
       "title": "Les fondations",
-      "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+      "summary": "Le fou c4 contre f7, le centre c3-d4, la mise en place du Pianissimo et l'attaque 4.Ng5 contre les Deux Cavaliers.",
       "stage": "foundations",
       "lessons": [
         {
           "id": "italian-c1-l1",
-          "legacyIds": [
-            "italian-m1"
+          "legacyIds": [],
+          "title": "3.Bc4 : le fou contre f7",
+          "eco": "C50",
+          "kind": "concept",
+          "objectives": [
+            "Comprendre pourquoi f7 est la cible de l'Italienne",
+            "Reconnaître les trois grandes réponses noires au 3e coup",
+            "Préparer d4 par c3 contre 3…Bc5"
           ],
-          "title": "Italienne - Giuoco Piano",
-          "eco": "C53",
-          "kind": "line",
-          "objectives": [],
-          "pgn": "1. e4 {e4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e4]} 1... e5 {e5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e5]} 2. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 2... Nc6 {Nc6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb8c6]} 3. Bc4 {Bc4 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf1c4]} 3... Bc5 {Bc5 : Les Noirs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf8c5]} 4. c3 {c3 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc2c3]} 4... d6 {d6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d6]} 5. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 5... exd4 {exd4 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Ge5d4]} 6. cxd4 {cxd4 : Les Blancs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gc3d4]} 6... Bb6 {Bb6 : Les Noirs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gc5b6]}",
-          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "pgn": "{La Partie italienne est l'une des plus anciennes ouvertures : le fou se place en c4, sur la diagonale qui mène à f7, la case que seul le roi noir défend au départ. Tout le reste découle d'une question : quand et comment ouvrir le centre ?} 1. e4 {[%cal Ge2e4]} 1... e5 2. Nf3 {Le cavalier attaque e5 et se développe vers le centre. [%cal Gg1f3,Gf3e5]} 2... Nc6 3. Bc4 {Le fou vise f7 et contrôle d5, la case de la rupture …d5. [%cal Gf1c4,Gc4f7,Gc4d5]} 3... Bc5 {Les Noirs répondent symétriquement : leur fou vise f2.} (3... Nf6 {Les Deux Cavaliers : les Noirs contre-attaquent e4 au lieu de développer le fou.} 4. d3 {Le pion protège e4 calmement ; le jeu reste dans les eaux du Pianissimo. [%cal Gd2d3,Gd3e4]}) (3... Be7 {La Défense hongroise : un fou passif qui ne vise rien.} 4. d4 {Contre un développement aussi modeste, prenez le centre tout de suite. [%cal Gd2d4,Gd4e5]}) 4. c3 {Le pion prépare d4 : deux pions côte à côte au centre chasseront le fou c5. [%cal Gc2c3,Gc3d4,Gd4c5]} 4... Nf6 {Les Noirs attaquent e4 pour gêner d4.} 5. d3 {Le Pianissimo : e4 est défendu, d4 viendra plus tard, une fois le roque et Re1 joués. [%cal Gd2d3,Gd3d4]} 5... d6 6. O-O {[%cal Ge1g1]} 6... O-O 7. Bb3 {Le fou recule de lui-même : …Na5 ou …d5 ne le chasseront pas avec gain de temps. [%cal Gc4b3,Gb3f7]} 7... a6 8. Nbd2 {[%cal Gb1d2]} 8... Ba7 9. h3 {Le pion empêche …Bg4 et …Ng4 : la structure de base est en place. [%cal Gh2h3,Gh3g4]}",
+          "conclusion": "Vous connaissez le rôle du fou c4 et les trois grandes réponses noires. Avec c3, la poussée d4 est toujours dans l'air : la jouer tout de suite donne le Giuoco Piano, la préparer donne le Pianissimo.",
           "mustCover": "allBranches",
           "reviewable": true
         },
         {
           "id": "italian-c1-l2",
           "legacyIds": [
+            "italian-m1"
+          ],
+          "title": "Giuoco Piano : le centre c3-d4",
+          "eco": "C54",
+          "kind": "line",
+          "objectives": [
+            "Jouer d4 avec le soutien du pion c3",
+            "Répondre à l'échec …Bb4+ par Bd2",
+            "Connaître le plan …d5 et la réponse Qb3"
+          ],
+          "pgn": "{Avec 4.c3 puis 5.d4, les Blancs construisent le centre idéal. Les Noirs doivent réagir vite : prendre en d4 puis donner l'échec en b4, avant de frapper le centre par …d5.} 1. e4 {[%cal Ge2e4]} 1... e5 2. Nf3 {[%cal Gg1f3]} 2... Nc6 3. Bc4 {[%cal Gf1c4]} 3... Bc5 4. c3 {[%cal Gc2c3]} 4... Nf6 5. d4 {La poussée centrale : e5 et le fou c5 sont attaqués en même temps. [%cal Gd2d4,Gd4e5,Gd4c5]} 5... exd4 6. cxd4 {Le centre e4-d4 est en place ; le fou c5 doit se décider. [%cal Gc3d4]} 6... Bb4+ {Le seul échec utile : il retarde le développement blanc.} 7. Bd2 {L'interposition la plus solide : elle propose l'échange du fou noir. [%cal Gc1d2]} 7... Bxd2+ 8. Nbxd2 {Le cavalier reprend et soutient e4 ; le fou c4 reste votre meilleure pièce. [%cal Gb1d2]} 8... d5 {La rupture libératrice : les Noirs dissolvent votre centre.} 9. exd5 {[%cal Ge4d5]} 9... Nxd5 10. Qb3 {La dame attaque le cavalier d5 et vise b7 et f7. [%cal Gd1b3,Gb3d5,Gb3b7]} 10... Nce7 {Le cavalier soutient d5 et prépare le roque.} (10... Na5 {Les Noirs chassent la dame.} 11. Qa4+ {Avec échec : la dame garde un œil sur a5 et d5. [%cal Gb3a4,Ga4a5]} 11... Nc6 12. Qb3 {Si les Noirs répètent par …Na5, la partie est nulle ; c'est la ligne la plus fréquente au haut niveau. [%cal Ga4b3]}) 11. O-O {[%cal Ge1g1]} 11... O-O 12. Rfe1 {La tour occupe la colonne e : la case e5 et le cavalier e7 sont sous pression. [%cal Gf1e1,Ge1e7]} 12... c6 {Le cavalier d5 est solidement soutenu.} 13. a4 {Le pion gagne de l'espace à l'aile dame et prépare a5 ; votre pion isolé d4 vous donne en échange du jeu actif. [%cal Ga2a4,Ga4a5]}",
+          "conclusion": "Le Giuoco Piano donne aux Blancs un pion d4 isolé mais actif. Retenez l'enchaînement Bd2, Nbxd2, Qb3 puis Rfe1 : vos pièces visent d5, b7 et la colonne e.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "italian-c1-l3",
+          "legacyIds": [],
+          "title": "Le Pianissimo : roquer, Re1, h3",
+          "eco": "C54",
+          "kind": "concept",
+          "objectives": [
+            "Mettre en place le schéma c3-d3, O-O, Re1, h3",
+            "Comprendre le rôle du pion a4 contre …b5",
+            "Préparer la manœuvre Nbd2-f1"
+          ],
+          "pgn": "{Le Pianissimo est le système préféré des grands maîtres modernes : au lieu d'ouvrir le centre, les Blancs construisent patiemment. Chaque coup a un rôle précis, et l'ordre compte.} 1. e4 {[%cal Ge2e4]} 1... e5 2. Nf3 {[%cal Gg1f3]} 2... Nc6 3. Bc4 {[%cal Gf1c4]} 3... Bc5 4. c3 {[%cal Gc2c3]} 4... Nf6 5. d3 {[%cal Gd2d3]} 5... d6 6. O-O {Le roi à l'abri d'abord : la tour pourra rejoindre e1. [%cal Ge1g1]} 6... O-O (6... a6 {Les Noirs préparent …Ba7 pour garder leur fou à l'abri de d4 et b4.} 7. a4 {Le pion empêche …b5, qui chasserait votre fou c4. [%cal Ga2a4,Ga4b5]}) 7. Re1 {La tour soutient e4 : d4 pourra être joué sans craindre …Nxe4. [%cal Gf1e1,Ge1e4]} 7... a6 {Le fou c5 aura une retraite en a7.} (7... a5 {Les Noirs gagnent de l'espace et préparent …a4.} 8. h3 {Le pion interdit …Bg4 et …Ng4, deux pièces noires qui gêneraient votre cavalier f3. [%cal Gh2h3,Gh3g4]}) 8. a4 {Le même réflexe : …b5 ne doit pas chasser votre fou. [%cal Ga2a4,Ga4b5]} 8... Ba7 9. h3 {La case g4 est interdite : votre cavalier f3 ne sera jamais cloué. [%cal Gh2h3,Gh3g4]} 9... h6 {Les Noirs prennent la même précaution contre Bg5 et Ng5.} 10. Nbd2 {Le cavalier passe par d2 car c3 est occupé par le pion : sa route est d2-f1-g3. [%cal Gb1d2,Gd2f1,Gf1g3]}",
+          "conclusion": "Le schéma du Pianissimo : c3, d3, O-O, Re1, a4, h3 puis Nbd2-f1. Rien n'est forcé, mais chaque coup prive les Noirs d'une ressource avant de préparer d4 ou b4.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "italian-c1-l4",
+          "legacyIds": [
             "italian-m2"
           ],
-          "title": "Italienne - Deux Cavaliers",
-          "eco": "C55",
+          "title": "Deux Cavaliers : l'attaque 4.Ng5",
+          "eco": "C58",
           "kind": "line",
-          "objectives": [],
-          "pgn": "1. e4 {e4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e4]} 1... e5 {e5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e5]} 2. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 2... Nc6 {Nc6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb8c6]} 3. Bc4 {Bc4 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf1c4]} 3... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 4. Ng5 {Ng5 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gf3g5]} 4... d5 {d5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d5]}",
-          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "objectives": [
+            "Attaquer f7 avec le cavalier et le fou",
+            "Garder le pion de plus après 5…Na5",
+            "Répondre à 5…Nxd5 par 6.d4"
+          ],
+          "pgn": "{Contre 3…Nf6, le coup 4.Ng5 attaque directement f7 avec deux pièces. Les Noirs doivent jouer …d5 et sacrifier un pion : votre tâche est de le garder sans laisser vos pièces se faire chasser.} 1. e4 {[%cal Ge2e4]} 1... e5 2. Nf3 {[%cal Gg1f3]} 2... Nc6 3. Bc4 {[%cal Gf1c4]} 3... Nf6 4. Ng5 {Le cavalier et le fou frappent f7 : la menace est Nxf7. [%cal Gf3g5,Gg5f7,Gc4f7]} 4... d5 {La seule défense sérieuse : les Noirs coupent la diagonale du fou.} 5. exd5 {Le pion prend et maintient la diagonale fermée. [%cal Ge4d5]} 5... Na5 {Les Noirs chassent le fou au prix d'un pion.} (5... Nxd5 {Les Noirs reprennent, mais leur cavalier d5 est fragile.} 6. d4 {Plus fort que le sacrifice en f7 : le centre s'ouvre pendant que le roi noir est encore en e8. [%cal Gd2d4,Gd4e5]}) 6. Bb5+ {Avec échec : le fou garde la diagonale a4-e8 et la case c6. [%cal Gc4b5,Gb5e8]} 6... c6 7. dxc6 {[%cal Gd5c6]} 7... bxc6 8. Bd3 {Le fou se place en d3, où il soutient e4 et ne peut pas être chassé par …e4 avec tempo sur le cavalier. [%cal Gb5d3]} 8... Nd5 {Le cavalier centralisé prépare …Nf4 contre votre fou. [%cal Gd5f4]} 9. Nf3 {Le cavalier rentre, attaque e5 et protège h2. [%cal Gg5f3,Gf3e5]} 9... Bd6 10. O-O {Le roque : votre pion de plus est sain, les Noirs ont de l'activité. [%cal Ge1g1]} 10... Nf4 11. Re1 {La tour vise e5 et laisse f1 libre au fou. [%cal Gf1e1]} 11... Nxd3 12. cxd3 {La structure d3 protège e4 et c4 ; vous gardez votre pion de plus. [%cal Gc2d3]} 12... O-O 13. Nc3 {Développement : le cavalier contrôle e4 et d5. [%cal Gb1c3,Gc3e4,Gc3d5]}",
+          "conclusion": "Contre les Deux Cavaliers, 4.Ng5 gagne un pion : après …Na5, Bb5+ puis Bd3 et Nf3 le consolident. Vos adversaires ont de l'activité, mais vous avez un avantage matériel durable.",
           "mustCover": "allBranches",
           "reviewable": true
         }
@@ -48,49 +93,293 @@
     },
     {
       "id": "italian-c2",
-      "title": "Lignes théoriques",
-      "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
-      "stage": "theory",
+      "title": "Plans typiques",
+      "summary": "Les manœuvres du Pianissimo : la route Nbd2-f1-g3, la poussée d4 au bon moment, l'expansion b4 et la structure après Bxe6.",
+      "stage": "plans",
       "lessons": [
         {
           "id": "italian-c2-l1",
-          "legacyIds": [
-            "italian-m3"
-          ],
-          "title": "Italian Game: Classical Variation, Greco Gambit, Moeller-Therkatz Attack",
+          "legacyIds": [],
+          "title": "La route Nbd2-f1-g3",
           "eco": "C54",
           "kind": "line",
-          "objectives": [],
-          "pgn": "1. e4 {e4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e4]} 1... e5 {e5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e5]} 2. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 2... Nc6 {Nc6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb8c6]} 3. Bc4 {Bc4 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf1c4]} 3... Bc5 {Bc5 : Les Noirs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf8c5]} 4. c3 {c3 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc2c3]} 4... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 5. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 5... exd4 {exd4 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Ge5d4]} 6. cxd4 {cxd4 : Les Blancs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gc3d4]} 6... Bb4+ {Bb4+ : Les Noirs imposent un échec intermédiaire qui force une défense précise. [%cal Gc5b4]}",
-          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "objectives": [
+            "Conduire le cavalier b1 vers g3",
+            "Savoir quand jouer Bb3 pour garder le fou",
+            "Préparer Nf5 contre le roque noir"
+          ],
+          "pgn": "{Dans le Pianissimo, le cavalier b1 n'a pas de case naturelle en c3. Sa route est longue mais précieuse : d2, f1 puis g3, d'où il visera f5 et h5, deux cases proches du roi noir.} 1. e4 {[%cal Ge2e4]} 1... e5 2. Nf3 {[%cal Gg1f3]} 2... Nc6 3. Bc4 {[%cal Gf1c4]} 3... Bc5 4. c3 {[%cal Gc2c3]} 4... Nf6 5. d3 {[%cal Gd2d3]} 5... d6 6. O-O {[%cal Ge1g1]} 6... O-O 7. Re1 {[%cal Gf1e1]} 7... a6 8. a4 {[%cal Ga2a4]} 8... Ba7 9. h3 {[%cal Gh2h3]} 9... h6 10. Nbd2 {Première étape de la manœuvre. [%cal Gb1d2,Gd2f1]} 10... Ne7 {Les Noirs font le même voyage avec leur cavalier c6 : il ira en g6.} 11. Nf1 {Deuxième étape : le cavalier libère la diagonale du fou c1 et vise g3. [%cal Gd2f1,Gf1g3]} 11... Ng6 12. Ng3 {Le cavalier est arrivé : il vise f5, d'où il frapperait h6 et g7. [%cal Gf1g3,Gg3f5]} 12... c6 {Les Noirs préparent …d5 et …b5.} 13. Bb3 {Le fou se met à l'abri de …d5 et de …b5 et garde la diagonale vers f7. [%cal Gc4b3,Gb3f7]}",
+          "conclusion": "La manœuvre Nbd2-f1-g3 met une pièce de plus près du roi noir sans rien affaiblir. Avec Bb3, le fou c4 reste en vie face à …d5 et …b5.",
           "mustCover": "allBranches",
           "reviewable": true
         },
         {
           "id": "italian-c2-l2",
-          "legacyIds": [
-            "italian-m4"
-          ],
-          "title": "Two Knights: Max Lange, 6.e5 d5",
-          "eco": "C55",
+          "legacyIds": [],
+          "title": "La poussée d4 au bon moment",
+          "eco": "C54",
           "kind": "line",
-          "objectives": [],
-          "pgn": "1. e4 {e4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e4]} 1... e5 {e5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e5]} 2. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 2... Nc6 {Nc6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb8c6]} 3. Bc4 {Bc4 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf1c4]} 3... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 4. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 4... exd4 {exd4 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Ge5d4]} 5. O-O {O-O : Les Blancs sécurisent le roi et activent les tours pour le milieu de jeu. [%cal Ge1g1]} 5... Bc5 {Bc5 : Les Noirs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf8c5]} 6. e5 {e5 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge4e5]} 6... d5 {d5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d5]}",
-          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "objectives": [
+            "Jouer d4 quand le cavalier c6 a quitté la défense de e5",
+            "Maintenir la tension centrale avec Nbd2",
+            "Rediriger le fou vers c2"
+          ],
+          "pgn": "{Le Pianissimo prépare d4 ; encore faut-il choisir le moment. Le bon signal : quand le cavalier noir quitte c6, la case e5 perd un défenseur et d4 devient fort.} 1. e4 {[%cal Ge2e4]} 1... e5 2. Nf3 {[%cal Gg1f3]} 2... Nc6 3. Bc4 {[%cal Gf1c4]} 3... Bc5 4. c3 {[%cal Gc2c3]} 4... Nf6 5. d3 {[%cal Gd2d3]} 5... d6 6. O-O {[%cal Ge1g1]} 6... O-O 7. Re1 {[%cal Gf1e1]} 7... a6 8. a4 {[%cal Ga2a4]} 8... Ba7 9. h3 {[%cal Gh2h3]} 9... Ne7 {Le cavalier part vers g6 : e5 n'a plus que le pion d6 pour défenseur.} 10. d4 {C'est le moment : le centre s'élargit et e5 est attaqué. [%cal Gd3d4,Gd4e5]} 10... Ng6 11. Nbd2 {Le cavalier soutient e4 et laisse la tension se maintenir. [%cal Gb1d2,Gd2e4]} 11... h6 {Les Noirs interdisent Bg5.} (11... c6 {Les Noirs préparent …d5.} 12. Bf1 {Le fou se replie et soutient e4 indirectement ; la tension centrale reste en votre faveur. [%cal Gc4f1,Gf1d3]}) 12. Bb3 {[%cal Gc4b3]} 12... Re8 13. Bc2 {Le fou rejoint la diagonale b1-h7 : derrière e4, il vise le roque noir. [%cal Gb3c2,Gc2g6]}",
+          "conclusion": "Le bon moment pour d4 est celui où les Noirs relâchent leur contrôle de e5. Ensuite, Nbd2 et Bc2 soutiennent e4 et préparent une attaque sur l'aile roi.",
           "mustCover": "allBranches",
           "reviewable": true
         },
         {
           "id": "italian-c2-l3",
+          "legacyIds": [],
+          "title": "L'aile dame : a4 et b4",
+          "eco": "C54",
+          "kind": "line",
+          "objectives": [
+            "Gagner de l'espace avec b4 face au fou a7",
+            "Reprendre en e6 au bon moment",
+            "Préparer la réponse à la rupture …d5"
+          ],
+          "pgn": "{Quand le centre reste fermé, les Blancs peuvent aussi jouer à l'aile dame : avec a4 et b4, ils gagnent de l'espace et enferment le fou a7 derrière ses propres pions.} 1. e4 {[%cal Ge2e4]} 1... e5 2. Nf3 {[%cal Gg1f3]} 2... Nc6 3. Bc4 {[%cal Gf1c4]} 3... Bc5 4. c3 {[%cal Gc2c3]} 4... Nf6 5. d3 {[%cal Gd2d3]} 5... d6 6. O-O {[%cal Ge1g1]} 6... O-O 7. Re1 {[%cal Gf1e1]} 7... a6 8. a4 {[%cal Ga2a4]} 8... Ba7 9. h3 {[%cal Gh2h3]} 9... h6 10. Nbd2 {[%cal Gb1d2]} 10... Re8 11. b4 {L'aile dame avance : le pion prépare b5 contre le cavalier c6. [%cal Gb2b4,Gb4b5]} 11... Be6 {Les Noirs proposent l'échange des fous de cases blanches.} 12. Bxe6 {Prenez : le fou c4 n'a pas de bonne retraite et l'échange vous donne la colonne e semi-ouverte après …Rxe6. [%cal Gc4e6]} 12... Rxe6 13. Qc2 {La dame soutient e4 et prépare Nf1-e3. [%cal Gd1c2,Gc2e4]} 13... Qd7 14. Nf1 {Le cavalier vise e3 et g3, et contrôle d5. [%cal Gd2f1,Gf1e3]} 14... d5 {La rupture noire : le centre s'ouvre.} 15. Ng3 {Le cavalier soutient e4 et vise f5 : la tension se maintient sans rien céder. [%cal Gf1g3,Gg3f5]}",
+          "conclusion": "Avec a4 et b4, les Blancs gagnent de l'espace à l'aile dame et rendent le fou a7 inactif. Quand les Noirs rompent par …d5, vos pièces sont prêtes à soutenir e4.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "italian-c2-l4",
+          "legacyIds": [],
+          "title": "Après Bxe6 : jouer contre les pions doublés",
+          "eco": "C54",
+          "kind": "line",
+          "objectives": [
+            "Comprendre la structure …fxe6",
+            "Viser le pion e6 et la case d5",
+            "Neutraliser la colonne f ouverte"
+          ],
+          "pgn": "{Quand les Noirs jouent …Be6 et que vous échangez en e6, la reprise …fxe6 leur ouvre la colonne f mais affaiblit leur centre. Votre jeu : attaquer l'aile dame et contrôler d5.} 1. e4 {[%cal Ge2e4]} 1... e5 2. Nf3 {[%cal Gg1f3]} 2... Nc6 3. Bc4 {[%cal Gf1c4]} 3... Bc5 4. c3 {[%cal Gc2c3]} 4... Nf6 5. d3 {[%cal Gd2d3]} 5... d6 6. O-O {[%cal Ge1g1]} 6... O-O 7. Re1 {[%cal Gf1e1]} 7... a6 8. a4 {[%cal Ga2a4]} 8... Ba7 9. h3 {[%cal Gh2h3]} 9... h6 10. Nbd2 {[%cal Gb1d2]} 10... Be6 {Le fou propose l'échange.} 11. Bxe6 {Prenez : la reprise par le pion f doublera les pions noirs. [%cal Gc4e6]} 11... fxe6 12. b4 {Le pion prend de l'espace et prépare b5 contre le cavalier c6. [%cal Gb2b4,Gb4b5]} 12... Qe8 {La dame rejoint l'aile roi par g6 ou h5.} (12... Nh5 {Le cavalier vise f4.} 13. Nf1 {[%cal Gd2f1]} 13... Qf6 {Les Noirs alignent dame et tour sur la colonne f.} 14. Ra2 {La tour couvre f2 par la deuxième rangée : une défense élégante. [%cal Ga1a2,Ga2f2]}) (12... Ne7 13. Nf1 {[%cal Gd2f1]} 13... Ng6 14. Ra2 {La tour protège la deuxième rangée avant l'arrivée des pièces noires. [%cal Ga1a2,Ga2f2]}) 13. Nf1 {[%cal Gd2f1]} 13... Nh5 14. Ra2 {La tour défend f2 ; votre cavalier f1 pourra aller en e3, face à la case d5. [%cal Ga1a2,Ga2f2,Gf1e3]} 14... Nf4 15. Kh2 {Le roi protège h3 et g3 : le sacrifice …Nxh3 ne marche plus, et Ng3 chassera bientôt le cavalier f4. [%cal Gg1h2,Gf1g3]}",
+          "conclusion": "Après Bxe6 fxe6, les Noirs ont la colonne f mais un centre figé. Défendez f2 par Ra2, centralisez le cavalier en e3, puis jouez sur l'aile dame avec b4-b5.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        }
+      ]
+    },
+    {
+      "id": "italian-c3",
+      "title": "Réponses adverses",
+      "summary": "Ce que les Noirs jouent pour éviter le Giuoco : les Deux Cavaliers par 4.d3, la Défense hongroise, les coups rares et les déviations du 4e coup.",
+      "stage": "responses",
+      "lessons": [
+        {
+          "id": "italian-c3-l1",
+          "legacyIds": [],
+          "title": "3…Nf6 4.d3 : les Deux Cavaliers tranquilles",
+          "eco": "C55",
+          "kind": "line",
+          "objectives": [
+            "Répondre à 3…Nf6 sans entrer dans la théorie forcée",
+            "Garder le fou c4 face à …Na5 grâce à a4 et Ba2",
+            "Connaître les systèmes …h6 et …g6 des Noirs"
+          ],
+          "pgn": "{Contre 3…Nf6, le coup 4.d3 protège e4 et garde la structure du Pianissimo. Les Noirs choisissent souvent un fou en e7, plus modeste qu'en c5 : votre plan reste le même, avec une attention particulière au fou c4.} 1. e4 {[%cal Ge2e4]} 1... e5 2. Nf3 {[%cal Gg1f3]} 2... Nc6 3. Bc4 {[%cal Gf1c4]} 3... Nf6 4. d3 {Le pion soutient e4 : …Nxe4 n'est plus possible. [%cal Gd2d3,Gd3e4]} 4... Be7 {Le fou reste à l'abri de d4 et de b4.} (4... Bc5 {Les Noirs reviennent au Giuoco.} 5. c3 {Par interversion, vous retrouvez le Pianissimo des chapitres précédents. [%cal Gc2c3,Gc3d4]}) (4... h6 {Les Noirs interdisent Ng5 et Bg5 avant de décider de la place de leur fou.} 5. O-O {[%cal Ge1g1]} 5... d6 6. c3 {[%cal Gc2c3]} 6... g6 {Le fou ira en g7, derrière le pion e5.} (6... g5 {Une expansion agressive : le pion veut chasser le cavalier f3 par …g4.} 7. Nbd2 {[%cal Gb1d2]} 7... Bg7 {Le roi noir restera au centre ; ouvrez le jeu avec d4 dès que possible. [%cal Gd3d4]}) 7. Re1 {[%cal Gf1e1]} 7... Bg7 8. Nbd2 {Le cavalier rejoint f1 : la route Nbd2-f1-g3 est la même que dans le Pianissimo. [%cal Gb1d2,Gd2f1]}) 5. O-O {[%cal Ge1g1]} 5... O-O 6. Re1 {[%cal Gf1e1]} 6... d6 7. a4 {Le pion prépare la retraite a2 pour le fou si …Na5 le chasse. [%cal Ga2a4,Gc4a2]} 7... Na5 {Le cavalier chasse le fou c4.} (7... Be6 {Les Noirs proposent l'échange des fous.} 8. Nbd2 {Si …Bxc4, le cavalier reprendra et visera e3 et d5. [%cal Gb1d2,Gd2c4]} 8... Qd7 {La dame relie les tours ; le fou e6 attend.}) 8. Ba2 {Le fou garde la diagonale a2-g8 : il vise toujours f7. [%cal Gc4a2,Ga2f7]} 8... c5 {Les Noirs gagnent de l'espace et préparent …Nc6.} 9. c3 {Le pion prépare b4 contre le cavalier a5 et d4 au centre. [%cal Gc2c3,Gc3d4]}",
+          "conclusion": "Face à 3…Nf6, 4.d3 mène à un Pianissimo où le fou e7 noir est moins actif qu'en c5. Avec a4 puis Ba2, votre fou de cases blanches échappe à …Na5 sans quitter la diagonale de f7.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "italian-c3-l2",
+          "legacyIds": [],
+          "title": "La Défense hongroise 3…Be7",
+          "eco": "C50",
+          "kind": "line",
+          "objectives": [
+            "Prendre le centre par d4 contre un fou passif",
+            "Exploiter la dame en h5 pour gagner e5",
+            "Empêcher le roque noir par Bh6"
+          ],
+          "pgn": "{La Défense hongroise évite toute la théorie du Giuoco : le fou e7 se contente de défendre. Contre une réponse aussi passive, les Blancs ouvrent le centre et cherchent l'initiative.} 1. e4 {[%cal Ge2e4]} 1... e5 2. Nf3 {[%cal Gg1f3]} 2... Nc6 3. Bc4 {[%cal Gf1c4]} 3... Be7 4. d4 {La poussée centrale, sans préparation : le fou e7 ne gêne pas d4. [%cal Gd2d4,Gd4e5]} 4... d6 {Les Noirs soutiennent e5.} (4... exd4 5. Nxd4 {Reprenez avec le cavalier : il est centralisé et vise f5 et b5. [%cal Gf3d4,Gd4f5]} 5... d6 6. O-O {[%cal Ge1g1]} 6... Nf6 7. Nc3 {[%cal Gb1c3]} 7... O-O 8. Re1 {Toutes vos pièces sont développées et la colonne e appuie e4 : les Noirs sont à l'étroit. [%cal Gf1e1,Ge1e4]}) 5. dxe5 {Ouvrez la colonne d et provoquez les échanges. [%cal Gd4e5]} 5... Nxe5 (5... dxe5 6. Qxd8+ {L'échange des dames empêche les Noirs de roquer. [%cal Gd1d8]} 6... Bxd8 7. Nc3 {[%cal Gb1c3]} 7... Nf6 8. Be3 {Une finale sans dames où votre développement supérieur vous donne l'initiative. [%cal Gc1e3,Ge3c5]}) 6. Nxe5 {[%cal Gf3e5]} 6... dxe5 7. Qh5 {La dame attaque e5 et f7 en même temps. [%cal Gd1h5,Gh5e5,Gh5f7]} 7... g6 {Les Noirs défendent f7 mais abandonnent e5.} 8. Qxe5 {[%cal Gh5e5]} 8... Nf6 9. Bh6 {Le fou empêche le roque : le roi noir est cloué au centre, avec un pion de moins. [%cal Gc1h6,Gh6f8]}",
+          "conclusion": "Contre la Hongroise, ouvrez le centre : 4.d4 puis dxe5 provoque des échanges qui laissent le roi noir au centre. La dame en h5, qui frappe e5 et f7, est la clé de la ligne principale.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "italian-c3-l3",
+          "legacyIds": [],
+          "title": "Les coups rares : 3…d6 et 3…g6",
+          "eco": "C50",
+          "kind": "line",
+          "objectives": [
+            "Prendre le centre contre les défenses passives",
+            "Reprendre en d4 avec le cavalier",
+            "Supprimer le clouage …Bg4 par h3"
+          ],
+          "pgn": "{Contre 3…d6 ou 3…g6, les Noirs renoncent à contester le centre tout de suite. La réponse la plus nette est 4.d4 : vous obtenez plus d'espace et un développement plus rapide.} 1. e4 {[%cal Ge2e4]} 1... e5 2. Nf3 {[%cal Gg1f3]} 2... Nc6 3. Bc4 {[%cal Gf1c4]} 3... d6 {La Défense Semi-italienne : solide, mais elle enferme le fou f8.} (3... g6 {Le fou ira en g7, mais f7 reste fragile.} 4. d4 {[%cal Gd2d4]} 4... exd4 5. Nxd4 {[%cal Gf3d4]} 5... Bg7 6. Be3 {Le fou protège d4 : vous avez un centre libre et une avance de développement. [%cal Gc1e3,Ge3d4]}) 4. d4 {Le centre s'ouvre pendant que le fou f8 est encore enfermé. [%cal Gd2d4,Gd4e5]} 4... exd4 (4... Bg4 {Les Noirs clouent le cavalier qui défend d4.} 5. h3 {Posez la question au fou tout de suite. [%cal Gh2h3,Gh3g4]} 5... Bxf3 6. Qxf3 {Vous avez la paire de fous et une dame active qui vise f7 et b7. [%cal Gd1f3,Gf3f7]}) 5. Nxd4 {Le cavalier centralisé contrôle e6, f5 et b5. [%cal Gf3d4,Gd4f5,Gd4b5]} 5... Nf6 6. Nc3 {[%cal Gb1c3]} 6... Be7 7. O-O {Le roque : vous avez un avantage d'espace classique, les Noirs une position solide mais passive. [%cal Ge1g1]} 7... O-O 8. Re1 {La tour soutient e4 avant toute rupture noire. [%cal Gf1e1,Ge1e4]} 8... Nxd4 9. Qxd4 {La dame centralisée domine : les Noirs chercheront …Ng4 ou …c6 pour se libérer. [%cal Gd1d4]}",
+          "conclusion": "Contre les défenses qui retardent le jeu central, 4.d4 suffit : reprenez en d4 avec le cavalier, développez-vous et roquez. L'espace gagné est un avantage durable.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "italian-c3-l4",
+          "legacyIds": [],
+          "title": "Les déviations du 4e coup : 4…Qe7 et 4…d6",
+          "eco": "C53",
+          "kind": "line",
+          "objectives": [
+            "Jouer d4 contre la défense …Qe7",
+            "Soutenir le centre avec h3 et Re1",
+            "Reconnaître l'interversion 4…Bb6"
+          ],
+          "pgn": "{Après 4.c3, les Noirs ne jouent pas toujours 4…Nf6. Les coups 4…Qe7 et 4…d6 défendent e5 à l'avance : la poussée d4 reste possible, mais elle ne gagne plus rien de force. Les Blancs prennent alors l'espace.} 1. e4 {[%cal Ge2e4]} 1... e5 2. Nf3 {[%cal Gg1f3]} 2... Nc6 3. Bc4 {[%cal Gf1c4]} 3... Bc5 4. c3 {[%cal Gc2c3]} 4... Qe7 {La dame soutient e5 : après d4, les Noirs garderont un pion en e5.} (4... Bb6 {Le fou recule par anticipation.} 5. d4 {[%cal Gd2d4]} 5... Qe7 6. O-O {Par interversion, on rejoint la ligne de 4…Qe7. [%cal Ge1g1,Gd4e5]}) (4... d6 {Une défense solide de e5.} 5. d4 {[%cal Gd2d4]} 5... exd4 6. cxd4 {[%cal Gc3d4]} 6... Bb6 {Le fou garde la diagonale contre f2.} 7. h3 {Le pion interdit …Bg4, qui clouerait le défenseur de d4. [%cal Gh2h3,Gh3g4]} 7... Nf6 8. Nc3 {[%cal Gb1c3]} 8... O-O 9. O-O {Le centre e4-d4 est soutenu par toutes vos pièces : c'est l'idéal du Giuoco Piano. [%cal Ge1g1]}) 5. d4 {[%cal Gd2d4]} 5... Bb6 6. O-O {[%cal Ge1g1]} 6... d6 7. h3 {Le cavalier f3 ne sera jamais cloué. [%cal Gh2h3,Gh3g4]} 7... Nf6 8. Re1 {La tour soutient e4 : vous maintenez la tension centrale, et Na3-c2 ou a4 suivront. [%cal Gf1e1,Ge1e4]}",
+          "conclusion": "Contre 4…Qe7 ou 4…d6, ne cherchez pas un gain immédiat : d4, h3 et Re1 donnent aux Blancs un centre solide et plus d'espace, sans jamais laisser le cavalier f3 se faire clouer.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        }
+      ]
+    },
+    {
+      "id": "italian-c4",
+      "title": "Pièges",
+      "summary": "Les pièges classiques de l'Italienne : ceux qu'il faut éviter et ceux qui punissent un développement imprécis.",
+      "stage": "traps",
+      "lessons": [
+        {
+          "id": "italian-c4-l1",
+          "legacyIds": [],
+          "title": "Le piège Blackburne-Shilling : 3…Nd4",
+          "eco": "C50",
+          "kind": "trap",
+          "objectives": [
+            "Ne pas prendre le pion e5 après 3…Nd4",
+            "Échanger le cavalier d4 puis attaquer le pion d4",
+            "Punir 5…Bc5? par Bxf7+ et Qh5+"
+          ],
+          "pgn": "{Le coup 3…Nd4 est un piège célèbre : si 4.Nxe5?, alors 4…Qg5! attaque e5 et g2, et la ligne 5.Nxf7?? Qxg2 6.Rf1 Qxe4+ 7.Be2 Nf3# se termine par un mat. La réponse saine est simple.} 1. e4 {[%cal Ge2e4]} 1... e5 2. Nf3 {[%cal Gg1f3]} 2... Nc6 3. Bc4 {[%cal Gf1c4]} 3... Nd4 {Le cavalier attaque f3 et laisse e5 en apparence sans défense.} 4. Nxd4 {Échangez : le pion e5 était un appât, le cavalier d4 était la vraie cible. [%cal Gf3d4]} 4... exd4 5. c3 {Attaquez le pion d4 : il est isolé loin de son camp. [%cal Gc2c3,Gc3d4]} 5... Bc5 {Le fou défend d4, mais le roi noir est exposé.} (5... dxc3 6. Nxc3 {Vous avez une avance de développement nette : le fou c4 et la dame visent f7. [%cal Gb1c3,Gc4f7]} 6... d6 7. Qb3 {La dame attaque f7 et b7 : les Noirs ne peuvent pas tout défendre. [%cal Gd1b3,Gb3f7,Gb3b7]}) 6. Bxf7+ {Le sacrifice : le roi doit prendre et l'échec suivant fourchette le roi et le fou c5. [%cal Gc4f7]} 6... Kxf7 7. Qh5+ {La fourchette : la dame donne l'échec et attaque le fou c5. [%cal Gd1h5,Gh5c5]} 7... g6 8. Qxc5 {Vous récupérez la pièce avec un pion de plus, et le roi noir a perdu le droit de roquer. [%cal Gh5c5]} 8... Nf6 9. Qxd4 {Un deuxième pion tombe : la dame centralisée surveille aussi f6 et h8. [%cal Gc5d4,Gd4f6]} 9... d5 10. e5 {Le pion chasse le cavalier : l'avantage blanc est décisif. [%cal Ge4e5,Ge5f6]}",
+          "conclusion": "Contre 3…Nd4, ne mordez jamais à l'appât e5 : 4.Nxd4 exd4 5.c3 donne un bon jeu. Et si le fou noir vient défendre d4 en c5, la fourchette Bxf7+ puis Qh5+ gagne un pion.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "italian-c4-l2",
+          "legacyIds": [],
+          "title": "4.Ng5 : quand les Noirs oublient f7",
+          "eco": "C57",
+          "kind": "trap",
+          "objectives": [
+            "Identifier les coups qui ne défendent pas f7",
+            "Gagner la qualité par Nxf7",
+            "Sacrifier en f7 pour chasser le roi"
+          ],
+          "pgn": "{Après 4.Ng5, seule la riposte …d5 défend correctement f7. Les autres coups, même naturels, laissent le pion f7 sous le feu du cavalier et du fou : il faut savoir en profiter immédiatement.} 1. e4 {[%cal Ge2e4]} 1... e5 2. Nf3 {[%cal Gg1f3]} 2... Nc6 3. Bc4 {[%cal Gf1c4]} 3... Nf6 4. Ng5 {Deux pièces contre f7, défendu par le seul roi. [%cal Gf3g5,Gg5f7,Gc4f7]} 4... h6 {Les Noirs chassent le cavalier, mais trop tard.} (4... Na5 {Le cavalier attaque le fou, mais f7 tombe d'abord.} 5. Bxf7+ {Avec échec : le fou n'est plus en prise. [%cal Gc4f7]} 5... Ke7 6. d4 {Le centre s'ouvre devant un roi noir qui ne pourra plus roquer. [%cal Gd2d4,Gd4e5]}) (4... Nxe4 {Les Noirs prennent un pion central au lieu de défendre.} 5. Bxf7+ {Le roi est chassé de sa case. [%cal Gc4f7]} 5... Ke7 6. d4 {Le pion d4 ouvre la diagonale du fou c1 vers g5 et attaque e5. [%cal Gd2d4]}) (4... b5 {Un contre-gambit qui ne résout rien.} 5. Bxf7+ {[%cal Gc4f7]} 5... Ke7 6. Bb3 {Le fou se replie avec un pion de plus, et le roi noir est en plein centre. [%cal Gf7b3,Gb3f7]}) 5. Nxf7 {Le cavalier attaque la dame d8 et la tour h8 en même temps. [%cal Gg5f7,Gf7d8,Gf7h8]} 5... Qe7 6. Nxh8 {La tour est gagnée : la qualité et un pion de plus. [%cal Gf7h8]} 6... d5 7. exd5 {Le pion reprend en d5 : le cavalier h8 est piégé, mais il a déjà coûté une tour aux Noirs. [%cal Ge4d5]} 7... Nd4 8. c3 {Le cavalier d4 est chassé : vous gardez un avantage matériel décisif. [%cal Gc2c3,Gc3d4]} 8... Bg4 9. f3 {Le pion repousse le fou et ferme la diagonale vers la dame d1. [%cal Gf2f3,Gf3g4]} 9... Nxf3+ 10. gxf3 {Le sacrifice noir ne donne rien : vous avez une tour de plus pour un cavalier. [%cal Gg2f3]}",
+          "conclusion": "Après 4.Ng5, seul …d5 défend f7. Contre toute autre réponse, cherchez Nxf7 ou Bxf7+ : la case f7 est le talon d'Achille du camp noir.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "italian-c4-l3",
+          "legacyIds": [],
+          "title": "Le piège de Légal",
+          "eco": "C50",
+          "kind": "trap",
+          "objectives": [
+            "Exploiter un clouage qui n'en est pas un",
+            "Sacrifier la dame contre un mat",
+            "Gagner un pion quand les Noirs évitent le mat"
+          ],
+          "pgn": "{Le piège de Légal date du XVIIIe siècle et reste efficace : le fou noir cloue le cavalier f3 contre la dame, mais ce clouage n'est pas absolu. Le cavalier peut bouger, et la dame peut être sacrifiée.} 1. e4 {[%cal Ge2e4]} 1... e5 2. Nf3 {[%cal Gg1f3]} 2... Nc6 3. Bc4 {[%cal Gf1c4]} 3... d6 4. Nc3 {Le cavalier contrôle d5, une case essentielle du mat à venir. [%cal Gb1c3,Gc3d5]} 4... Bg4 {Le fou cloue le cavalier f3.} 5. h3 {Posez la question au fou. [%cal Gh2h3]} 5... Bh5 {Le fou garde le clouage… qui n'en est pas un.} 6. Nxe5 {Le cavalier abandonne la dame : prendre en d1 coûtera le mat aux Noirs. [%cal Gf3e5]} 6... Nxe5 {La meilleure défense noire : le cavalier élimine le vôtre.} (6... Bxd1 7. Bxf7+ {Le roi est chassé de e8. [%cal Gc4f7]} 7... Ke7 8. Nd5# {Mat : le cavalier e5, le fou f7 et le cavalier d5 couvrent toutes les cases du roi. [%cal Gc3d5]}) (6... dxe5 7. Qxh5 {La dame reprend le fou : vous avez un pion de plus et la dame vise f7. [%cal Gd1h5,Gh5f7]}) 7. Qxh5 {La dame reprend le fou et attaque le cavalier e5 et f7. [%cal Gd1h5,Gh5e5,Gh5f7]} 7... Nxc4 8. Qb5+ {La fourchette : échec et attaque du cavalier c4. [%cal Gh5b5,Gb5c4]} 8... c6 9. Qxc4 {La pièce est récupérée : vous avez un pion de plus et une meilleure structure. [%cal Gb5c4]}",
+          "conclusion": "Un clouage contre la dame n'est pas un clouage contre le roi : si la pièce clouée peut bouger avec une menace plus forte, faites-le. Le piège de Légal se termine par un mat ou par un pion gagné.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "italian-c4-l4",
+          "legacyIds": [],
+          "title": "Giuoco Piano : 7…Nxe4 et le coup Bxf7+",
+          "eco": "C54",
+          "kind": "trap",
+          "objectives": [
+            "Répondre à 7…Nxe4 par l'échange en b4",
+            "Récupérer la pièce par Bxf7+ et Qb3+",
+            "Punir 8…d5? par le clouage Bb5"
+          ],
+          "pgn": "{Après 6…Bb4+ 7.Bd2, les Noirs peuvent prendre e4 avec le cavalier. Ce gain de pion déclenche une petite combinaison : un sacrifice en f7 puis un échec en b3 rétablissent l'équilibre, et la moindre imprécision noire coûte une pièce.} 1. e4 {[%cal Ge2e4]} 1... e5 2. Nf3 {[%cal Gg1f3]} 2... Nc6 3. Bc4 {[%cal Gf1c4]} 3... Bc5 4. c3 {[%cal Gc2c3]} 4... Nf6 5. d4 {[%cal Gd2d4]} 5... exd4 6. cxd4 {[%cal Gc3d4]} 6... Bb4+ 7. Bd2 {[%cal Gc1d2]} 7... Nxe4 {Les Noirs prennent le pion central.} 8. Bxb4 {Éliminez le fou : le cavalier c6 devra reprendre et quitter la défense de e5 et d4. [%cal Gd2b4]} 8... d5 {Les Noirs attaquent le fou c4 au lieu de reprendre.} (8... Nxb4 {La reprise naturelle.} 9. Bxf7+ {Le sacrifice déplace le roi et ouvre la diagonale b3-f7. [%cal Gc4f7]} 9... Kxf7 10. Qb3+ {La dame donne l'échec et attaque le cavalier b4 : la pièce est récupérée. [%cal Gd1b3,Gb3b4]} 10... d5 11. Ne5+ {Le cavalier chasse le roi avant que la dame ne reprenne en b4. [%cal Gf3e5]} 11... Ke6 12. Qxb4 {Le matériel est égal, et le roi noir en e6 reste une cible pour vos pièces. [%cal Gb3b4,Gb4e7]}) 9. Bb5 {Le fou échappe à l'attaque et cloue le cavalier c6 : les Noirs ont deux pièces en l'air. [%cal Gc4b5,Gb5c6,Gb5e8]} 9... Qf6 10. O-O {Le roi se met à l'abri ; le fou b4 et le clouage en c6 vous laissent une pièce de plus. [%cal Ge1g1]}",
+          "conclusion": "Après 7…Nxe4, échangez en b4 puis cherchez Bxf7+ suivi de Qb3+ : la dame récupère le cavalier b4. Si les Noirs jouent …d5 au lieu de reprendre, Bb5 cloue le cavalier c6 et gagne une pièce.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        }
+      ]
+    },
+    {
+      "id": "italian-c5",
+      "title": "Grande théorie",
+      "summary": "Les lignes profondes : l'attaque Møller, le gambit Evans, l'attaque Max Lange et la ligne principale du Pianissimo.",
+      "stage": "theory",
+      "lessons": [
+        {
+          "id": "italian-c5-l1",
+          "legacyIds": [
+            "italian-m3"
+          ],
+          "title": "L'attaque Møller : 7.Nc3 Nxe4 8.O-O",
+          "eco": "C54",
+          "kind": "line",
+          "objectives": [
+            "Sacrifier le pion e4 pour l'initiative",
+            "Jouer 9.d5 pour gagner du temps contre les pièces noires",
+            "Connaître la ligne forcée jusqu'au double clouage en e7"
+          ],
+          "pgn": "{L'attaque Møller est la réponse la plus ambitieuse à 6…Bb4+ : les Blancs donnent un pion, puis le cavalier c3, pour ouvrir la colonne e et chasser les pièces noires avec le pion d.} 1. e4 {[%cal Ge2e4]} 1... e5 2. Nf3 {[%cal Gg1f3]} 2... Nc6 3. Bc4 {[%cal Gf1c4]} 3... Bc5 4. c3 {[%cal Gc2c3]} 4... Nf6 5. d4 {[%cal Gd2d4]} 5... exd4 6. cxd4 {[%cal Gc3d4]} 6... Bb4+ 7. Nc3 {Le cavalier s'interpose et laisse e4 sans défense. [%cal Gb1c3]} 7... Nxe4 8. O-O {Le gambit : le roi se met à l'abri, la tour rejoint la colonne e. [%cal Ge1g1]} 8... Bxc3 9. d5 {Le cœur de l'attaque : le pion chasse le cavalier c6 au lieu de reprendre en c3. [%cal Gd4d5]} 9... Bf6 {Le fou se replie vers la défense de l'aile roi.} (9... Ne5 {Le cavalier va au centre.} 10. bxc3 {[%cal Gb2c3]} 10... Nxc4 11. Qd4 {La dame attaque les deux cavaliers et g7 : les Noirs doivent rendre du matériel. [%cal Gd1d4,Gd4c4,Gd4e4,Gd4g7]} 11... O-O 12. Qxe4 {Vous récupérez une pièce, et les Noirs doivent encore développer leur aile dame. [%cal Gd4e4]}) 10. Re1 {[%cal Gf1e1]} 10... Ne7 11. Rxe4 {[%cal Ge1e4]} 11... d6 12. Bg5 {Échangez le défenseur noir de l'aile roi. [%cal Gc1g5,Gg5f6]} 12... Bxg5 13. Nxg5 {[%cal Gf3g5]} 13... h6 {Les Noirs chassent le cavalier.} (13... O-O 14. Nxh7 {Le sacrifice classique : la diagonale vers h7 et la colonne h s'ouvrent. [%cal Gg5h7]} 14... Kxh7 15. Qh5+ {La dame entre avec échec ; la tour suivra par h4. [%cal Gd1h5,Ge4h4]}) 14. Qe2 {Le clouage sur la colonne e : le cavalier e7 ne peut pas bouger. [%cal Gd1e2,Ge2e7]} 14... hxg5 15. Re1 {La deuxième tour s'ajoute au clouage : les Noirs doivent rendre du matériel pour débloquer le cavalier e7. [%cal Ga1e1,Ge1e7]}",
+          "conclusion": "L'attaque Møller échange du matériel contre du temps : 9.d5, Re1, Bg5 puis le clouage Qe2 forcent les Noirs à rendre ce qu'ils ont pris. La suite habituelle 15…Be6 16.dxe6 f6 17.Re3 mène à une position dynamiquement équilibrée.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "italian-c5-l2",
           "legacyIds": [
             "italian-m5"
           ],
-          "title": "Italian Game: Evans Gambit, Fraser Attack",
+          "title": "Le gambit Evans 4.b4",
           "eco": "C51",
           "kind": "line",
-          "objectives": [],
-          "pgn": "1. e4 {e4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e4]} 1... e5 {e5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e5]} 2. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 2... Nc6 {Nc6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb8c6]} 3. Bc4 {Bc4 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf1c4]} 3... Bc5 {Bc5 : Les Noirs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf8c5]} 4. b4 {b4 : Les Blancs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Gb2b4]} 4... Bxb4 {Bxb4 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gc5b4]} 5. c3 {c3 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc2c3]} 5... Bc5 {Bc5 : Les Noirs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gb4c5]} 6. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 6... exd4 {exd4 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Ge5d4]}",
-          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "objectives": [
+            "Sacrifier le pion b4 pour gagner du temps",
+            "Construire le centre c3-d4 avec tempo",
+            "Viser f7 et b7 avec Qb3"
+          ],
+          "pgn": "{Le gambit Evans sacrifie un pion pour une idée simple : chasser le fou c5 avec gain de temps, puis jouer c3 et d4. Les Blancs obtiennent un centre et une avance de développement.} 1. e4 {[%cal Ge2e4]} 1... e5 2. Nf3 {[%cal Gg1f3]} 2... Nc6 3. Bc4 {[%cal Gf1c4]} 3... Bc5 4. b4 {Le pion est offert pour dévier le fou de la diagonale g1-a7. [%cal Gb2b4,Gb4c5]} 4... Bxb4 (4... Bb6 {Les Noirs déclinent le gambit.} 5. a4 {Le pion menace a5, qui piégerait le fou. [%cal Ga2a4,Ga4a5]} 5... a6 6. Nc3 {[%cal Gb1c3]} 6... Nf6 7. Nd5 {Le cavalier centralisé échange le fou b6 ou le cavalier f6 : votre jeu est actif. [%cal Gc3d5,Gd5b6]}) 5. c3 {Le pion chasse le fou avec gain de temps et prépare d4. [%cal Gc2c3,Gc3b4]} 5... Ba5 (5... Be7 {Une retraite plus défensive.} 6. d4 {[%cal Gd2d4]} 6... Na5 7. Be2 {Le fou évite l'échange contre le cavalier a5. [%cal Gc4e2]} 7... exd4 8. Qxd4 {La dame centralisée vise g7. [%cal Gd1d4,Gd4g7]} 8... d6 9. Qxg7 {[%cal Gd4g7]} 9... Bf6 10. Qg3 {Le pion g7 est gagné et vous retrouvez l'équilibre matériel. [%cal Gg7g3]}) 6. d4 {Le centre idéal, construit avec gain de temps. [%cal Gd2d4,Gd4e5]} 6... d6 (6... exd4 7. O-O {Le gambit continue : le développement prime sur le matériel. [%cal Ge1g1]} 7... Nge7 8. Ng5 {Deux pièces contre f7. [%cal Gf3g5,Gg5f7]} 8... d5 9. exd5 {[%cal Ge4d5]} 9... Ne5 10. Qxd4 {La dame reprend avec une attaque double sur e5 et g7. [%cal Gd1d4]} 10... f6 11. Re1 {[%cal Gf1e1]} 11... Bb6 12. Qh4 {La dame se replace sur l'aile roi et cloue presque le jeu noir. [%cal Gd4h4,Gh4e7]}) 7. Qb3 {La dame attaque f7 et b7. [%cal Gd1b3,Gb3f7,Gb3b7]} 7... Qd7 8. O-O {Le roque d'abord : la tension en e5 reste en votre faveur. [%cal Ge1g1]} 8... Bb6 9. Nbd2 {[%cal Gb1d2]} 9... Na5 {Le cavalier attaque la dame et le fou.} 10. Qc2 {La dame garde un œil sur e4 et le fou c4 reste en place. [%cal Gb3c2,Gc2e4]} 10... Ne7 11. dxe5 {[%cal Gd4e5]} 11... Ng6 12. exd6 {[%cal Ge5d6]} 12... Qxd6 {Le centre est ouvert : votre avance de développement compense le pion. [%cal Gc4f7]}",
+          "conclusion": "Le gambit Evans échange un pion contre deux temps : c3 et d4 viennent avec menace. Avec Qb3, le roque et Nbd2, vos pièces sont prêtes avant que les Noirs ne coordonnent les leurs.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "italian-c5-l3",
+          "legacyIds": [
+            "italian-m4"
+          ],
+          "title": "L'attaque Max Lange",
+          "eco": "C55",
+          "kind": "line",
+          "objectives": [
+            "Ouvrir le jeu par 4.d4 et 5.O-O contre les Deux Cavaliers",
+            "Connaître la ligne 6.e5 d5 7.exf6",
+            "Répondre à 5…Nxe4 par 6.Re1"
+          ],
+          "pgn": "{Contre 3…Nf6, une autre voie que 4.d3 : ouvrir immédiatement le centre par 4.d4 et sacrifier un pion par le roque. L'attaque Max Lange conduit à des positions très tactiques où chaque coup est forcé.} 1. e4 {[%cal Ge2e4]} 1... e5 2. Nf3 {[%cal Gg1f3]} 2... Nc6 3. Bc4 {[%cal Gf1c4]} 3... Nf6 4. d4 {Le centre s'ouvre alors que le roi noir est encore en e8. [%cal Gd2d4,Gd4e5]} 4... exd4 5. O-O {Le roque : la tour vise la colonne e. [%cal Ge1g1]} 5... Bc5 (5... Nxe4 {Les Noirs prennent le pion central.} 6. Re1 {La tour cloue le cavalier e4 contre le roi. [%cal Gf1e1,Ge1e4]} 6... d5 7. Bxd5 {[%cal Gc4d5]} 7... Qxd5 8. Nc3 {Le cavalier attaque la dame et le cavalier e4 en même temps. [%cal Gb1c3,Gc3d5,Gc3e4]} 8... Qa5 9. Nxe4 {[%cal Gc3e4]} 9... Be6 10. Neg5 {[%cal Ge4g5]} 10... O-O-O 11. Nxe6 {[%cal Gg5e6]} 11... fxe6 12. Rxe6 {Le pion e6 est récupéré : le matériel est égal et les Noirs ont le pion d4 à défendre. [%cal Ge1e6]}) 6. e5 {Le pion chasse le cavalier f6. [%cal Ge4e5,Ge5f6]} 6... d5 7. exf6 {[%cal Ge5f6]} 7... dxc4 8. Re1+ {L'échec force le fou à s'interposer en e6. [%cal Gf1e1]} 8... Be6 9. Ng5 {Le cavalier attaque le fou e6, cloué sur la colonne e. [%cal Gf3g5,Gg5e6]} 9... Qd5 10. Nc3 {Le cavalier attaque la dame avec gain de temps. [%cal Gb1c3,Gc3d5]} 10... Qf5 11. Nce4 {Le cavalier rejoint le centre et soutient la pression sur e6. [%cal Gc3e4,Ge4c5]} 11... O-O-O 12. g4 {Le pion chasse la dame de la diagonale h3-c8. [%cal Gg2g4]} 12... Qe5 13. Nxe6 {Les Blancs éliminent le fou ; la position reste explosive, avec le pion f6 contre le pion de plus noir. [%cal Gg5e6]} 13... fxe6",
+          "conclusion": "L'attaque Max Lange est une course : 6.e5, 8.Re1+ et 9.Ng5 maintiennent l'initiative, mais les Noirs ont des ressources. Contre 5…Nxe4, 6.Re1 et 8.Nc3 récupèrent le pion avec un jeu confortable.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "italian-c5-l4",
+          "legacyIds": [],
+          "title": "Pianissimo : la ligne …a5 et …Qa7",
+          "eco": "C54",
+          "kind": "line",
+          "objectives": [
+            "Répondre à …a5 par h3 et Nbd2",
+            "Utiliser Bb5 et Be3 contre la diagonale noire",
+            "Mener une partie de manœuvres à 28 demi-coups"
+          ],
+          "pgn": "{La grande ligne moderne du Pianissimo, jouée des centaines de fois au plus haut niveau : les Noirs gagnent de l'espace par …a5 et placent leur dame en a7, en batterie avec le fou c5 contre f2.} 1. e4 {[%cal Ge2e4]} 1... e5 2. Nf3 {[%cal Gg1f3]} 2... Nc6 3. Bc4 {[%cal Gf1c4]} 3... Bc5 4. c3 {[%cal Gc2c3]} 4... Nf6 5. d3 {[%cal Gd2d3]} 5... d6 6. O-O {[%cal Ge1g1]} 6... O-O 7. Re1 {[%cal Gf1e1]} 7... a5 {Les Noirs prennent l'espace à l'aile dame et préparent …a4.} 8. h3 {[%cal Gh2h3]} 8... h6 9. Nbd2 {[%cal Gb1d2]} 9... Be6 {Le fou défie le vôtre.} 10. Bb5 {Le fou évite l'échange et cloue le cavalier c6 contre rien : il menace de le prendre pour affaiblir e5. [%cal Gc4b5,Gb5c6]} 10... Qb8 (10... Nd7 {Le cavalier prépare …f5 ou …d5.} 11. Nf1 {La manœuvre habituelle : le cavalier vise g3 ou e3. [%cal Gd2f1,Gf1e3]} 11... d5 12. Ne3 {Le cavalier e3 frappe d5 et f5, les deux cases de rupture noires. [%cal Gf1e3,Ge3d5,Ge3f5]}) 11. Nf1 {[%cal Gd2f1]} 11... Qa7 {La batterie : dame et fou visent f2. [%cal Ga7f2]} 12. Be3 {Le fou s'oppose à la batterie : l'échange en e3 rapproche votre cavalier du centre. [%cal Gc1e3,Ge3c5]} 12... Bxe3 13. Nxe3 {[%cal Gf1e3]} 13... Ne7 {Le cavalier rejoint g6, où il surveillera f4.} 14. a4 {Le pion bloque l'aile dame et fixe le pion a5. [%cal Ga2a4,Ga4a5]} 14... Ng6 {Position équilibrée et riche : vos prochains coups sont d4 ou Bc4 selon le placement noir.}",
+          "conclusion": "Dans la grande ligne du Pianissimo, les Blancs neutralisent la batterie …Qa7/…Bc5 par Be3, puis bloquent l'aile dame par a4. Le jeu se décidera par la poussée d4 au bon moment.",
           "mustCover": "allBranches",
           "reviewable": true
         }

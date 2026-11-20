@@ -578,65 +578,173 @@
     },
     {
       "id": "french",
-      "name": "French",
-      "description": "Formation complète sur French",
+      "name": "Défense française",
+      "description": "Une défense solide et combative : …e6 et …d5 contestent e4, puis …c5 et …f6 attaquent la chaîne de pions blanche. Répertoire complet : Winawer, Tarrasch 3…c5, Avance, Échange et attaque est-indienne.",
       "side": "black",
       "eco": [
+        "C00",
+        "C01",
         "C02",
-        "C15",
-        "C19",
+        "C03",
+        "C05",
         "C06",
-        "C09"
+        "C07",
+        "C08",
+        "C09",
+        "C15",
+        "C16",
+        "C17",
+        "C18",
+        "C19"
       ],
       "chapters": [
         {
           "id": "french-c1",
           "title": "Les fondations",
-          "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+          "summary": "La structure e6-d5, les quatre grandes réponses blanches, la chaîne de pions, le « mauvais fou » et la rupture …f6.",
           "stage": "foundations",
           "lessons": [
             {
               "id": "french-c1-l1",
-              "title": "Française - Avance",
+              "title": "Défier e4 : la structure française",
+              "legacyIds": []
+            },
+            {
+              "id": "french-c1-l2",
+              "title": "L'Avance : attaquer la base de la chaîne",
               "legacyIds": [
                 "french-m1"
               ]
             },
             {
-              "id": "french-c1-l2",
-              "title": "Française - Winawer",
+              "id": "french-c1-l3",
+              "title": "Le « mauvais fou » : l'échanger par b5",
+              "legacyIds": []
+            },
+            {
+              "id": "french-c1-l4",
+              "title": "La rupture …f6 : frapper la tête de la chaîne",
               "legacyIds": [
-                "french-m2"
+                "french-m4"
               ]
             }
           ]
         },
         {
           "id": "french-c2",
-          "title": "Lignes théoriques",
-          "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
-          "stage": "theory",
+          "title": "Plans typiques",
+          "summary": "Les manœuvres qui reviennent partout : le cavalier f5 contre d4, le verrou …c4, les cases noires de la Winawer et le jeu actif de la Tarrasch 3…c5.",
+          "stage": "plans",
           "lessons": [
             {
               "id": "french-c2-l1",
-              "title": "French Defense: Winawer Variation, Poisoned Pawn Variation, Main Line",
+              "title": "Le cavalier en f5 : pression maximale sur d4",
+              "legacyIds": []
+            },
+            {
+              "id": "french-c2-l2",
+              "title": "Le verrou …c4 et la case b3",
+              "legacyIds": []
+            },
+            {
+              "id": "french-c2-l3",
+              "title": "La Winawer : pions doublés et cases noires",
+              "legacyIds": [
+                "french-m2"
+              ]
+            },
+            {
+              "id": "french-c2-l4",
+              "title": "Tarrasch 3…c5 : le jeu actif contre 3.Nd2",
+              "legacyIds": [
+                "french-m5"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "french-c3",
+          "title": "Réponses adverses",
+          "summary": "Ce que les Blancs jouent pour éviter vos lignes : l'Échange, l'attaque est-indienne, les déviations de la Winawer et de l'Avance.",
+          "stage": "responses",
+          "lessons": [
+            {
+              "id": "french-c3-l1",
+              "title": "La variante d'échange 3.exd5",
+              "legacyIds": []
+            },
+            {
+              "id": "french-c3-l2",
+              "title": "L'attaque est-indienne et les coups secondaires",
+              "legacyIds": []
+            },
+            {
+              "id": "french-c3-l3",
+              "title": "Winawer : les déviations au 4e et 5e coup",
+              "legacyIds": []
+            },
+            {
+              "id": "french-c3-l4",
+              "title": "L'Avance : 4.Nf3 et 4.dxc5",
+              "legacyIds": []
+            }
+          ]
+        },
+        {
+          "id": "french-c4",
+          "title": "Pièges",
+          "summary": "Les pièges à éviter et ceux à tendre : quand une erreur de développement coûte une pièce ou la partie.",
+          "stage": "traps",
+          "lessons": [
+            {
+              "id": "french-c4-l1",
+              "title": "Tarrasch fermée : le fou f4 tombe",
+              "legacyIds": []
+            },
+            {
+              "id": "french-c4-l2",
+              "title": "L'Avance : 11.a3? et la chute de d4",
+              "legacyIds": []
+            },
+            {
+              "id": "french-c4-l3",
+              "title": "4.Qg4 : le pion e5 et la dame exposée",
+              "legacyIds": []
+            },
+            {
+              "id": "french-c4-l4",
+              "title": "Winawer : 5.Qg4 et le clouage …Qa5",
+              "legacyIds": []
+            }
+          ]
+        },
+        {
+          "id": "french-c5",
+          "title": "Grande théorie",
+          "summary": "Les lignes profondes qu'un joueur de Française doit connaître : le pion empoisonné, l'attaque 7.h4, la Tarrasch 3…c5 et le gambit Milner-Barry.",
+          "stage": "theory",
+          "lessons": [
+            {
+              "id": "french-c5-l1",
+              "title": "Winawer : le pion empoisonné 7.Qg4 Qc7",
               "legacyIds": [
                 "french-m3"
               ]
             },
             {
-              "id": "french-c2-l2",
-              "title": "French: Tarrasch, Closed, 8...f6 9.exf6 Nxf6",
-              "legacyIds": [
-                "french-m4"
-              ]
+              "id": "french-c5-l2",
+              "title": "Winawer : l'attaque 7.h4",
+              "legacyIds": []
             },
             {
-              "id": "french-c2-l3",
-              "title": "French: Tarrasch, Open, Main Line, 9.Nb3 Bd6 10.Re1",
-              "legacyIds": [
-                "french-m5"
-              ]
+              "id": "french-c5-l3",
+              "title": "Tarrasch 3…c5 : la grande ligne 4.exd5 Qxd5",
+              "legacyIds": []
+            },
+            {
+              "id": "french-c5-l4",
+              "title": "L'Avance : le gambit Milner-Barry",
+              "legacyIds": []
             }
           ]
         }
@@ -836,32 +944,47 @@
     },
     {
       "id": "italian",
-      "name": "Italian",
-      "description": "Formation complète sur Italian",
+      "name": "Partie italienne",
+      "description": "Le fou c4 vise f7 dès le 3e coup. Répertoire complet côté Blancs : le Giuoco Pianissimo (c3, d3, Re1, h3) et ses plans de manœuvre, le Giuoco Piano c3-d4, l'attaque Møller, le gambit Evans, l'attaque Max Lange et les Deux Cavaliers 4.Ng5.",
       "side": "white",
       "eco": [
+        "C50",
+        "C51",
+        "C52",
         "C53",
-        "C55",
         "C54",
-        "C51"
+        "C55",
+        "C57",
+        "C58",
+        "C59"
       ],
       "chapters": [
         {
           "id": "italian-c1",
           "title": "Les fondations",
-          "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+          "summary": "Le fou c4 contre f7, le centre c3-d4, la mise en place du Pianissimo et l'attaque 4.Ng5 contre les Deux Cavaliers.",
           "stage": "foundations",
           "lessons": [
             {
               "id": "italian-c1-l1",
-              "title": "Italienne - Giuoco Piano",
+              "title": "3.Bc4 : le fou contre f7",
+              "legacyIds": []
+            },
+            {
+              "id": "italian-c1-l2",
+              "title": "Giuoco Piano : le centre c3-d4",
               "legacyIds": [
                 "italian-m1"
               ]
             },
             {
-              "id": "italian-c1-l2",
-              "title": "Italienne - Deux Cavaliers",
+              "id": "italian-c1-l3",
+              "title": "Le Pianissimo : roquer, Re1, h3",
+              "legacyIds": []
+            },
+            {
+              "id": "italian-c1-l4",
+              "title": "Deux Cavaliers : l'attaque 4.Ng5",
               "legacyIds": [
                 "italian-m2"
               ]
@@ -870,30 +993,119 @@
         },
         {
           "id": "italian-c2",
-          "title": "Lignes théoriques",
-          "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
-          "stage": "theory",
+          "title": "Plans typiques",
+          "summary": "Les manœuvres du Pianissimo : la route Nbd2-f1-g3, la poussée d4 au bon moment, l'expansion b4 et la structure après Bxe6.",
+          "stage": "plans",
           "lessons": [
             {
               "id": "italian-c2-l1",
-              "title": "Italian Game: Classical Variation, Greco Gambit, Moeller-Therkatz Attack",
+              "title": "La route Nbd2-f1-g3",
+              "legacyIds": []
+            },
+            {
+              "id": "italian-c2-l2",
+              "title": "La poussée d4 au bon moment",
+              "legacyIds": []
+            },
+            {
+              "id": "italian-c2-l3",
+              "title": "L'aile dame : a4 et b4",
+              "legacyIds": []
+            },
+            {
+              "id": "italian-c2-l4",
+              "title": "Après Bxe6 : jouer contre les pions doublés",
+              "legacyIds": []
+            }
+          ]
+        },
+        {
+          "id": "italian-c3",
+          "title": "Réponses adverses",
+          "summary": "Ce que les Noirs jouent pour éviter le Giuoco : les Deux Cavaliers par 4.d3, la Défense hongroise, les coups rares et les déviations du 4e coup.",
+          "stage": "responses",
+          "lessons": [
+            {
+              "id": "italian-c3-l1",
+              "title": "3…Nf6 4.d3 : les Deux Cavaliers tranquilles",
+              "legacyIds": []
+            },
+            {
+              "id": "italian-c3-l2",
+              "title": "La Défense hongroise 3…Be7",
+              "legacyIds": []
+            },
+            {
+              "id": "italian-c3-l3",
+              "title": "Les coups rares : 3…d6 et 3…g6",
+              "legacyIds": []
+            },
+            {
+              "id": "italian-c3-l4",
+              "title": "Les déviations du 4e coup : 4…Qe7 et 4…d6",
+              "legacyIds": []
+            }
+          ]
+        },
+        {
+          "id": "italian-c4",
+          "title": "Pièges",
+          "summary": "Les pièges classiques de l'Italienne : ceux qu'il faut éviter et ceux qui punissent un développement imprécis.",
+          "stage": "traps",
+          "lessons": [
+            {
+              "id": "italian-c4-l1",
+              "title": "Le piège Blackburne-Shilling : 3…Nd4",
+              "legacyIds": []
+            },
+            {
+              "id": "italian-c4-l2",
+              "title": "4.Ng5 : quand les Noirs oublient f7",
+              "legacyIds": []
+            },
+            {
+              "id": "italian-c4-l3",
+              "title": "Le piège de Légal",
+              "legacyIds": []
+            },
+            {
+              "id": "italian-c4-l4",
+              "title": "Giuoco Piano : 7…Nxe4 et le coup Bxf7+",
+              "legacyIds": []
+            }
+          ]
+        },
+        {
+          "id": "italian-c5",
+          "title": "Grande théorie",
+          "summary": "Les lignes profondes : l'attaque Møller, le gambit Evans, l'attaque Max Lange et la ligne principale du Pianissimo.",
+          "stage": "theory",
+          "lessons": [
+            {
+              "id": "italian-c5-l1",
+              "title": "L'attaque Møller : 7.Nc3 Nxe4 8.O-O",
               "legacyIds": [
                 "italian-m3"
               ]
             },
             {
-              "id": "italian-c2-l2",
-              "title": "Two Knights: Max Lange, 6.e5 d5",
+              "id": "italian-c5-l2",
+              "title": "Le gambit Evans 4.b4",
+              "legacyIds": [
+                "italian-m5"
+              ]
+            },
+            {
+              "id": "italian-c5-l3",
+              "title": "L'attaque Max Lange",
               "legacyIds": [
                 "italian-m4"
               ]
             },
             {
-              "id": "italian-c2-l3",
-              "title": "Italian Game: Evans Gambit, Fraser Attack",
-              "legacyIds": [
-                "italian-m5"
-              ]
+              "id": "italian-c5-l4",
+              "title": "Pianissimo : la ligne …a5 et …Qa7",
+              "legacyIds": []
             }
           ]
         }

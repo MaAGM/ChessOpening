@@ -26,8 +26,8 @@ describe("sanitizeState", () => {
     });
     expect(state).toEqual({
       version: 2,
-      reviewChapters: { "french-c1-l1": { addedAt: 50 } },
-      completedChapters: ["french-c1-l1", "french-c2-l1"],
+      reviewChapters: { "french-c1-l1": { addedAt: 50 }, "french-c1-l2": { addedAt: 123 } },
+      completedChapters: ["french-c1-l2", "french-c5-l1"],
       positions: {},
     });
   });
@@ -143,12 +143,12 @@ describe("reviewStore (avec localStorage factice)", () => {
       positions: {},
     });
     const store = await import("./reviewStore");
-    expect(store.getSnapshot().reviewChapters).toEqual({ "french-c1-l2": { addedAt: 5 } });
+    expect(store.getSnapshot().reviewChapters).toEqual({ "french-c2-l3": { addedAt: 5 } });
 
     store.markChapterComplete("french-c1-l1");
     const saved = JSON.parse(data[STORAGE_KEY]);
-    expect(saved.completedChapters).toEqual(["french-c1-l2", "french-c1-l1"]);
-    expect(Object.keys(saved.reviewChapters)).toEqual(["french-c1-l2"]);
+    expect(saved.completedChapters).toEqual(["french-c2-l3", "french-c1-l1"]);
+    expect(Object.keys(saved.reviewChapters)).toEqual(["french-c2-l3"]);
   });
 
   it("ajoute tout un chapitre aux révisions en un seul changement", async () => {

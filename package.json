@@ -9,7 +9,8 @@
     "test": "vitest run",
     "lint": "eslint",
     "postinstall": "node scripts/copy-stockfish.mjs",
-    "courses:index": "node scripts/build-course-index.mjs"
+    "courses:index": "node scripts/build-course-index.mjs",
+    "courses:lab": "node --import ./scripts/lib/register-src.mjs scripts/opening-lab.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.10.0",
@@ -25,6 +26,7 @@
     "stockfish": "19.0.1"
   },
   "devDependencies": {
+    "@chess-openings/eco.json": "^2.2.2",
     "@edge-runtime/vm": "^5.0.0",
     "@tailwindcss/postcss": "^4",
     "@testing-library/react": "^16.3.3",

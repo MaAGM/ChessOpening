@@ -139,10 +139,11 @@ describe("useTutorialManager : Ouverture → Chapitres → Cours", () => {
     expect(h.result.current.panelMode).toBe("learning_active");
     expect(h.result.current.tutorial.userColor).toBe("black");
     expect(h.result.current.tutorial.activeChapterIndex).toBe(0);
+    // L'introduction du cours s'affiche dès le départ, avant les coups de mise en place.
+    expect(h.result.current.tutorial.activeNode?.explanation).toBeTruthy();
 
     await computerPlays(); // les Blancs jouent seuls 1.e4
     expect(new Chess(h.result.current.fen).turn()).toBe("b");
-    expect(h.result.current.tutorial.activeNode?.explanation).toBeTruthy();
   });
 
   it("refuse un coup qui n'est pas dans le cours", async () => {
@@ -190,15 +191,17 @@ describe("useTutorialManager : Ouverture → Chapitres → Cours", () => {
 
   it("« Cours suivant » passe au chapitre suivant après le dernier cours d'un chapitre", () => {
     const h = renderHook(() => useHarness());
-    act(() => h.result.current.tutorial.handleStartLesson("french-c1-l2"));
+    act(() => h.result.current.tutorial.handleStartLesson("french-c1-l3"));
+    expect(h.result.current.tutorial.nextLesson).toMatchObject({ id: "french-c1-l4", isNewChapter: false });
 
+    act(() => h.result.current.tutorial.handleStartLesson("french-c1-l4"));
     expect(h.result.current.tutorial.nextLesson).toMatchObject({ id: "french-c2-l1", isNewChapter: true });
     act(() => h.result.current.tutorial.handleNextLesson());
     expect(h.result.current.tutorial.activeLessonId).toBe("french-c2-l1");
     expect(h.result.current.tutorial.activeChapterIndex).toBe(1);
     expect(h.result.current.fen).toBe(INITIAL_FEN);
 
-    act(() => h.result.current.tutorial.handleStartLesson("french-c2-l3"));
+    act(() => h.result.current.tutorial.handleStartLesson("french-c5-l4"));
     expect(h.result.current.tutorial.nextLesson).toBeNull();
   });
 

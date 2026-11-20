@@ -68,24 +68,36 @@ describe("catalogue Masterclass : index et fichiers d'ouverture", () => {
     }
   });
 
-  it("le catalogue converti garde ses 105 cours, chacun lié à son ancien identifiant", () => {
+  it("garde les 105 anciens identifiants (m1..m5 par ouverture), chacun lié à un cours", () => {
     const lessons = courseEntries.flatMap((c) => c.chapters.flatMap((ch) => ch.lessons));
-    expect(lessons).toHaveLength(105);
+    expect(lessons).toHaveLength(135);
     for (const lesson of lessons) {
-      expect(lesson.legacyIds).toHaveLength(1);
-      expect(resolveLessonId(lesson.legacyIds[0])).toBe(lesson.id);
+      for (const legacyId of lesson.legacyIds) expect(resolveLessonId(legacyId)).toBe(lesson.id);
+    }
+    for (const course of courseEntries) {
+      const legacy = course.chapters.flatMap((ch) => ch.lessons.flatMap((l) => l.legacyIds)).sort();
+      expect(legacy, course.id).toEqual([1, 2, 3, 4, 5].map((n) => `${course.id}-m${n}`));
+    }
+  });
+
+  it("les ouvertures pilotes sont des Masterclasses de 5 chapitres de 4 cours", () => {
+    for (const id of ["french", "italian"]) {
+      const course = courseEntries.find((c) => c.id === id)!;
+      expect(course.chapters.map((ch) => ch.stage)).toEqual([...COURSE_STAGES]);
+      expect(course.chapters.map((ch) => ch.lessons.length)).toEqual([4, 4, 4, 4, 4]);
     }
   });
 
   it("localise un cours sans rien charger", () => {
+    const first = getLessonLocation("french-c1-l1")!;
     expect(getLessonLocation("french-c2-l1")).toEqual({
       courseId: "french",
       chapterId: "french-c2",
       side: "black",
-      order: 2,
+      order: first.order + 4,
     });
     expect(getLessonLocation("inconnu")).toBeNull();
-    expect(getCourseLessonIds("french")).toHaveLength(5);
+    expect(getCourseLessonIds("french")).toHaveLength(20);
   });
 });
 

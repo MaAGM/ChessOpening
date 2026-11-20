@@ -46,3 +46,6 @@ next-env.d.ts
 .vscode
 .claude
 AGENTS.md
+# atelier d'auteur des Masterclass (scripts/opening-lab.mjs)
+/scripts/.cache/
+/scripts/out/

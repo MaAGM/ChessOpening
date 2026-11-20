@@ -37,13 +37,14 @@ describe("migrateLessonIds", () => {
   it("migre les cours terminés et en révision, sans doublon", () => {
     const migrated = migrateLessonIds(
       state({
-        reviewChapters: { "italian-m2": { addedAt: 900 }, "italian-c1-l2": { addedAt: 400 }, "inconnu": { addedAt: 7 } },
-        completedChapters: ["italian-m1", "italian-c1-l1", "inconnu"],
+        // italian-m2 → italian-c1-l4 et italian-m1 → italian-c1-l2 : les entrées déjà migrées l'emportent.
+        reviewChapters: { "italian-m2": { addedAt: 900 }, "italian-c1-l4": { addedAt: 400 }, "inconnu": { addedAt: 7 } },
+        completedChapters: ["italian-m1", "italian-c1-l2", "inconnu"],
         positions: { k: { box: 1, due: 0, attempts: 1, failures: 0, lastSeen: 0, recent: [1] } },
       }),
     );
-    expect(migrated.reviewChapters).toEqual({ "italian-c1-l2": { addedAt: 400 }, inconnu: { addedAt: 7 } });
-    expect(migrated.completedChapters).toEqual(["italian-c1-l1", "inconnu"]);
+    expect(migrated.reviewChapters).toEqual({ "italian-c1-l4": { addedAt: 400 }, inconnu: { addedAt: 7 } });
+    expect(migrated.completedChapters).toEqual(["italian-c1-l2", "inconnu"]);
     expect(Object.keys(migrated.positions)).toEqual(["k"]);
   });
 });
@@ -53,13 +54,13 @@ describe("synchronisation d'un cloud aux anciens identifiants", () => {
     const remote = state({ reviewChapters: { "french-m2": { addedAt: 10 } }, completedChapters: ["french-m1"] });
     const merged = mergeAndMigrate(state(), remote);
 
-    expect(merged.reviewChapters).toEqual({ "french-c1-l2": { addedAt: 10 } });
-    expect(merged.completedChapters).toEqual(["french-c1-l1"]);
+    expect(merged.reviewChapters).toEqual({ "french-c2-l3": { addedAt: 10 } });
+    expect(merged.completedChapters).toEqual(["french-c1-l2"]);
 
     const changes = diffStates(remote, merged);
     expect(changes.chaptersDelete.sort()).toEqual(["french-m1", "french-m2"]);
-    expect(changes.chaptersReviewSet).toEqual({ "french-c1-l2": 10 });
-    expect(changes.chaptersCompletedSet).toEqual(["french-c1-l1"]);
+    expect(changes.chaptersReviewSet).toEqual({ "french-c2-l3": 10 });
+    expect(changes.chaptersCompletedSet).toEqual(["french-c1-l2"]);
 
     // Une fois le cloud à jour, plus rien à envoyer.
     expect(diffStates(merged, mergeAndMigrate(merged, merged)).chaptersDelete).toEqual([]);
