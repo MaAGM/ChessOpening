@@ -9,6 +9,8 @@ const app = defineApp({
     ANTHROPIC_API_KEY: v.optional(v.string()),
     /** Modèle du Coach (facultatif) ; défaut : claude-haiku-5-5. */
     COACH_MODEL: v.optional(v.string()),
+    /** Coupe-circuit du chat du Coach : `false` (ou `0`, `off`) le désactive sans redéploiement. */
+    COACH_CHAT_ENABLED: v.optional(v.string()),
   },
 });
 app.use(betterAuth);

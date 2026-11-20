@@ -8,10 +8,10 @@ import Anthropic from "@anthropic-ai/sdk";
 export const DEFAULT_COACH_MODEL = "claude-haiku-5-5";
 
 /**
- * Plafond de sortie (réflexion comprise). La réponse attendue fait 150 mots au plus :
- * ce plafond borne le coût d'un appel sans tronquer une réponse normale.
+ * Plafond de sortie. Le Coach répond en 2 à 4 phrases courtes : ce plafond borne le
+ * coût d'un appel sans tronquer une réponse normale.
  */
-const MAX_OUTPUT_TOKENS = 4096;
+export const COACH_MAX_OUTPUT_TOKENS = 600;
 
 export type CoachCompletion = {
   text: string;
@@ -20,6 +20,8 @@ export type CoachCompletion = {
   outputTokens: number;
 };
 
+export type CoachTurn = { role: "user" | "assistant"; content: string };
+
 /** Erreur « métier » du LLM (refus, réponse vide) : message affichable, sans détail interne. */
 export class CoachModelError extends Error {}
 
@@ -27,17 +29,20 @@ export async function callCoachModel(args: {
   apiKey: string;
   model: string;
   system: string;
-  user: string;
+  messages: CoachTurn[];
 }): Promise<CoachCompletion> {
-  const client = new Anthropic({ apiKey: args.apiKey, maxRetries: 1, timeout: 60_000 });
+  const client = new Anthropic({ apiKey: args.apiKey, maxRetries: 1, timeout: 30_000 });
 
   const response = await client.messages.create({
     model: args.model,
-    max_tokens: MAX_OUTPUT_TOKENS,
-    // Explication courte à partir d'un contexte déjà analysé : peu de réflexion nécessaire.
+    max_tokens: COACH_MAX_OUTPUT_TOKENS,
+    // Discussion courte à partir d'un contexte déjà analysé : effort minimal. Sur Haiku,
+    // la réflexion est coupée pour que tout le plafond serve à la réponse visible.
     output_config: { effort: "low" },
-    system: args.system,
-    messages: [{ role: "user", content: args.user }],
+    ...(args.model.startsWith("claude-haiku") ? { thinking: { type: "disabled" as const } } : {}),
+    // Consignes figées en tête : préfixe stable, mis en cache d'un message à l'autre.
+    system: [{ type: "text", text: args.system, cache_control: { type: "ephemeral" } }],
+    messages: args.messages,
   });
 
   if (response.stop_reason === "refusal") {
@@ -48,12 +53,14 @@ export async function callCoachModel(args: {
     .flatMap((block) => (block.type === "text" ? [block.text] : []))
     .join("")
     .trim();
-  if (!text) throw new CoachModelError("Le Coach n'a renvoyé aucune explication.");
+  if (!text) throw new CoachModelError("Le Coach n'a renvoyé aucune réponse.");
 
+  const usage = response.usage;
   return {
     text,
     model: response.model,
-    inputTokens: response.usage.input_tokens,
-    outputTokens: response.usage.output_tokens,
+    inputTokens:
+      usage.input_tokens + (usage.cache_creation_input_tokens ?? 0) + (usage.cache_read_input_tokens ?? 0),
+    outputTokens: usage.output_tokens,
   };
 }

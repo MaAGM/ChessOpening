@@ -1,32 +1,44 @@
 "use client";
 
-import { useMemo } from "react";
+import { useCallback, useMemo, useState } from "react";
 
 import { useAuth, useAuthSyncBootstrap } from "@/hooks/useAuth";
 import { useChessGame } from "@/hooks/useChessGame";
-import { useCoach } from "@/hooks/useCoach";
-import { getCoachEngine, useEngineAnalysis } from "@/hooks/useEngineAnalysis";
+import { useCoachChat } from "@/hooks/useCoachChat";
+import { useEngineAnalysis } from "@/hooks/useEngineAnalysis";
+import { useMasterExplorer } from "@/hooks/useMasterExplorer";
 import { useRepertoireEditor } from "@/hooks/useRepertoireEditor";
 import { useRepertoireStore } from "@/hooks/useRepertoireStore";
 import { useReviewManager } from "@/hooks/useReviewManager";
 import { useTrainerMode } from "@/hooks/useTrainerMode";
 import { useTutorialManager } from "@/hooks/useTutorialManager";
 import type { Side } from "@/lib/review/reviewRepertoire";
+import { sanToSquares } from "@/lib/review/reviewGraph";
 import { uciToSquares } from "@/lib/engine";
+import { buildPositionSnapshot, suggestedQuestions } from "@/lib/coach/chatSnapshot";
 import { getConvexClient } from "@/lib/convex/client";
-import { createCoachExplainer } from "@/lib/convex/coachRemote";
+import { createCoachChatBackend } from "@/lib/convex/coachRemote";
 import { ENGINE_ARROW_COLOR, engineAllowed, resolveBoardController } from "@/lib/trainer/boardController";
 
 import { OpeningName } from "@/components/chess/OpeningName";
 import { ChessBoard } from "@/components/chess/ChessBoard";
-import { CoachPanel, type CoachAccess } from "@/components/chess/CoachPanel";
+import { CoachChat, type CoachAccess } from "@/components/chess/CoachChat";
+import { EngineLine } from "@/components/chess/EngineLine";
 import { EvalBar } from "@/components/chess/EvalBar";
+import { MasterExplorer } from "@/components/chess/MasterExplorer";
+import { MoveList } from "@/components/chess/MoveList";
 import { TrainerSidebar, type TrainerNavigation } from "@/components/chess/TrainerSidebar";
+import { Button } from "@/components/ui/Button";
+import { ExplorerWorkspace } from "@/components/layout/ExplorerWorkspace";
 import { TrainerLayout } from "@/components/layout/TrainerLayout";
+
+/** Flèche d'aperçu d'un coup survolé dans la base des maîtres. */
+const PREVIEW_ARROW_COLOR = "#D4AF37";
 
 export default function HomePage() {
   // Authentification Better Auth (Convex) + synchronisation cloud (sans effet en mode invité)
   useAuthSyncBootstrap();
+  const { status: authStatus, configured: authConfigured, signInWithGoogle } = useAuth();
 
   // ----------------------------------------------------------------------
   // Navigation state (which screen the sidebar shows, review side)
@@ -40,6 +52,7 @@ export default function HomePage() {
     setEditingRepertoireId,
   } = useTrainerMode();
   const { getRepertoire } = useRepertoireStore();
+  const isExplorer = panelMode === "explorer";
 
   // ----------------------------------------------------------------------
   // Core board state (from the generic chess hook).
@@ -49,6 +62,9 @@ export default function HomePage() {
   const {
     currentFen,
     currentGame,
+    sanHistory,
+    historyIndex,
+    goToMove,
     openingName,
     squareStyles,
     onPieceDrop,
@@ -87,28 +103,6 @@ export default function HomePage() {
     reviewSide,
   });
 
-  // ----------------------------------------------------------------------
-  // Coach IA : verdict local à chaque erreur de révision, explication du LLM (connecté)
-  // ----------------------------------------------------------------------
-  const { status: authStatus, configured: authConfigured, signInWithGoogle } = useAuth();
-  const coachAccess: CoachAccess = !authConfigured
-    ? "unconfigured"
-    : authStatus === "authenticated"
-      ? "authenticated"
-      : authStatus === "guest"
-        ? "guest"
-        : "loading";
-  const coachExplainer = useMemo(() => {
-    const client = coachAccess === "authenticated" ? getConvexClient() : null;
-    return client ? createCoachExplainer(client) : null;
-  }, [coachAccess]);
-  const coach = useCoach({
-    mistake: review.lastMistake,
-    openingName,
-    getEngine: getCoachEngine,
-    explainer: coachExplainer,
-  });
-
   const editor = useRepertoireEditor({
     repertoireId: editingRepertoireId,
     panelMode,
@@ -120,12 +114,64 @@ export default function HomePage() {
   });
 
   // ----------------------------------------------------------------------
+  // Analyse Stockfish locale (coupée pendant la révision et l'apprentissage)
+  // ----------------------------------------------------------------------
+  const engine = useEngineAnalysis(currentFen, engineAllowed(panelMode));
+  const engineBestMove = engine.analysis?.bestMove ? uciToSquares(engine.analysis.bestMove) : null;
+
+  // ----------------------------------------------------------------------
+  // Mode Exploration : base des maîtres et Coach IA (chat, comptes connectés)
+  // ----------------------------------------------------------------------
+  const explorer = useMasterExplorer(currentFen, isExplorer);
+  const explorerSummary = explorer.status === "ready" ? explorer.summary : null;
+  const playedMoves = useMemo(() => sanHistory.slice(0, historyIndex), [sanHistory, historyIndex]);
+  const displayedOpening = explorerSummary?.openingName ?? openingName;
+
+  /** Orientation choisie avec « Retourner l'échiquier » (null : celle du tutoriel). */
+  const [explorerFlip, setExplorerFlip] = useState<Side | null>(null);
+  const explorerOrientation: Side = explorerFlip ?? tutorial.userColor;
+  const flipExplorerBoard = () => setExplorerFlip(explorerOrientation === "white" ? "black" : "white");
+
+  const coachAccess: CoachAccess = !authConfigured
+    ? "unconfigured"
+    : authStatus === "authenticated"
+      ? "authenticated"
+      : authStatus === "guest"
+        ? "guest"
+        : "loading";
+  const coachBackend = useMemo(() => {
+    const client = coachAccess === "authenticated" ? getConvexClient() : null;
+    return client ? createCoachChatBackend(client) : null;
+  }, [coachAccess]);
+  const snapshot = useMemo(
+    () =>
+      buildPositionSnapshot({
+        fen: currentFen,
+        moves: playedMoves,
+        openingName: displayedOpening,
+        analysis: engine.analysis,
+        explorer: explorerSummary,
+        boardOrientation: explorerOrientation,
+      }),
+    [currentFen, playedMoves, displayedOpening, engine.analysis, explorerSummary, explorerOrientation],
+  );
+  const getSnapshot = useCallback(() => snapshot, [snapshot]);
+  const coachChat = useCoachChat({ backend: coachBackend, getSnapshot });
+
+  /** Coup de la base des maîtres survolé : aperçu en flèche sur l'échiquier. */
+  const [previewSan, setPreviewSan] = useState<string | null>(null);
+  const previewSquares = isExplorer && previewSan ? sanToSquares(currentFen, previewSan) : null;
+
+  // ----------------------------------------------------------------------
   // Mode transitions shared by the sidebar
   // ----------------------------------------------------------------------
   const handleBackToMenu = () => {
     tutorial.handleBackToMenu(); // repasse en "menu" et remet l'échiquier à zéro
     review.resetSession();
     editor.resetSession();
+    coachChat.reset();
+    setPreviewSan(null);
+    setExplorerFlip(null);
     setReviewSide(null);
     setEditingRepertoireId(null);
   };
@@ -164,10 +210,6 @@ export default function HomePage() {
   // ----------------------------------------------------------------------
   // Board wiring: l'écran actif décide qui reçoit les coups, les flèches, l'orientation
   // ----------------------------------------------------------------------
-  // Analyse Stockfish locale (coupée pendant la révision et l'apprentissage)
-  const engine = useEngineAnalysis(currentFen, engineAllowed(panelMode));
-  const engineBestMove = engine.analysis?.bestMove ? uciToSquares(engine.analysis.bestMove) : null;
-
   const editingRepertoire =
     panelMode === "repertoire_editor" && editingRepertoireId
       ? getRepertoire(editingRepertoireId)
@@ -199,45 +241,80 @@ export default function HomePage() {
     engineBestMove,
   });
 
+  const boardOrientation: Side = isExplorer ? explorerOrientation : board.orientation;
+
+  const boardElement = (
+    <ChessBoard
+      position={currentFen}
+      boardOrientation={boardOrientation}
+      currentGame={currentGame}
+      squareStyles={board.squareStyles}
+      onPieceDrop={board.onPieceDrop}
+      onPieceDragBegin={onPieceDragBegin}
+      onPieceDragEnd={onPieceDragEnd}
+      onSquareClick={board.onSquareClick}
+      onSquareRightClick={onSquareRightClick}
+      customArrows={previewSquares ? [[previewSquares.from, previewSquares.to]] : board.arrows}
+      arrowColor={previewSquares ? PREVIEW_ARROW_COLOR : board.arrowColor}
+      engineArrow={previewSquares ? null : board.engineArrow}
+      engineArrowColor={ENGINE_ARROW_COLOR}
+    />
+  );
+
+  const evalBar = board.showEngine ? (
+    <EvalBar analysis={engine.analysis} status={engine.status} orientation={boardOrientation} />
+  ) : undefined;
+
+  if (isExplorer) {
+    const playExplorerMove = (san: string) => {
+      const squares = sanToSquares(currentFen, san);
+      setPreviewSan(null);
+      if (squares) board.onPieceDrop(squares.from, squares.to);
+    };
+
+    return (
+      <ExplorerWorkspace
+        back={
+          <Button variant="secondary" onClick={handleBackToMenu} className="flex w-fit items-center gap-2">
+            ← Menu
+          </Button>
+        }
+        title={
+          <div className="flex min-w-0 items-baseline gap-2">
+            {explorerSummary?.eco && (
+              <span className="rounded bg-[#D4AF37]/15 px-1.5 py-0.5 text-xs font-semibold text-[#D4AF37]">
+                {explorerSummary.eco}
+              </span>
+            )}
+            <h1 className="truncate text-lg font-semibold text-slate-100">
+              {displayedOpening ?? "Exploration libre"}
+            </h1>
+          </div>
+        }
+        board={boardElement}
+        evalBar={evalBar}
+        onFlipBoard={flipExplorerBoard}
+        moves={<MoveList sanHistory={sanHistory} historyIndex={historyIndex} onSelectMove={goToMove} />}
+        engine={<EngineLine {...engine} fen={currentFen} ply={historyIndex} />}
+        explorer={<MasterExplorer state={explorer} onPreviewMove={setPreviewSan} onPlayMove={playExplorerMove} />}
+        coach={
+          <CoachChat
+            chat={coachChat}
+            access={coachAccess}
+            onSignIn={() => void signInWithGoogle()}
+            suggestions={suggestedQuestions(snapshot)}
+          />
+        }
+      />
+    );
+  }
+
   return (
     <TrainerLayout
       boardHeader={<OpeningName name={openingName} />}
-      board={
-        <ChessBoard
-          position={currentFen}
-          boardOrientation={board.orientation}
-          currentGame={currentGame}
-          squareStyles={board.squareStyles}
-          onPieceDrop={board.onPieceDrop}
-          onPieceDragBegin={onPieceDragBegin}
-          onPieceDragEnd={onPieceDragEnd}
-          onSquareClick={board.onSquareClick}
-          onSquareRightClick={onSquareRightClick}
-          customArrows={board.arrows}
-          arrowColor={board.arrowColor}
-          engineArrow={board.engineArrow}
-          engineArrowColor={ENGINE_ARROW_COLOR}
-        />
-      }
-      boardAside={
-        board.showEngine ? (
-          <EvalBar analysis={engine.analysis} status={engine.status} orientation={board.orientation} />
-        ) : undefined
-      }
-      panel={
-        <TrainerSidebar
-          navigation={navigation}
-          tutorial={tutorial}
-          review={review}
-          editor={editor}
-          currentFen={currentFen}
-        />
-      }
-      coach={
-        panelMode === "review_active" ? (
-          <CoachPanel coach={coach} access={coachAccess} onSignIn={() => void signInWithGoogle()} />
-        ) : undefined
-      }
+      board={boardElement}
+      boardAside={evalBar}
+      panel={<TrainerSidebar navigation={navigation} tutorial={tutorial} review={review} editor={editor} />}
     />
   );
 }

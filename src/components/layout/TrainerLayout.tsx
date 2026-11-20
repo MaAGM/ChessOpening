@@ -6,23 +6,23 @@ type TrainerLayoutProps = {
   /** L'échiquier lui-même (rendu dans le cadre doré). */
   board: ReactNode;
   /**
-   * Emplacement réservé à gauche de l'échiquier (future barre d'évaluation).
-   * Non fourni : le DOM et le rendu sont strictement ceux d'aujourd'hui.
+   * Emplacement à gauche de l'échiquier (barre d'évaluation).
+   * Non fourni : l'échiquier est rendu seul dans son cadre.
    */
   boardAside?: ReactNode;
   /** Panneau principal (TrainerSidebar). */
   panel: ReactNode;
-  /** Emplacement réservé au futur panneau Coach, à droite du panneau principal. */
-  coach?: ReactNode;
 };
 
 /**
- * Mise en page de l'écran d'entraînement, découpée en emplacements :
+ * Mise en page des écrans d'entraînement (menu, apprentissage, révision, répertoire) :
  *
  *   [boardHeader]
- *   [boardAside] [board]      [panel]      [coach]
+ *   [boardAside] [board]      [panel]
+ *
+ * Le mode Exploration a sa propre mise en page (ExplorerWorkspace).
  */
-export function TrainerLayout({ boardHeader, board, boardAside, panel, coach }: TrainerLayoutProps) {
+export function TrainerLayout({ boardHeader, board, boardAside, panel }: TrainerLayoutProps) {
   const boardFrame = (
     <section className="w-full max-w-137.5 border-2 border-[#D4AF37] bg-[#D4AF37]/10 p-2 shadow-2xl shadow-black/40">
       {board}
@@ -46,9 +46,6 @@ export function TrainerLayout({ boardHeader, board, boardAside, panel, coach }: 
 
       {/* Zone panneau principal */}
       {panel}
-
-      {/* Zone Coach (réservée) */}
-      {coach ? <div data-slot="coach">{coach}</div> : null}
     </main>
   );
 }

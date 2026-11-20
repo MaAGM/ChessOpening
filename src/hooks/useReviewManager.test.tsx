@@ -143,33 +143,15 @@ describe("useReviewManager avec un répertoire", () => {
     expect(getReviewSnapshot().positions[keyAfter("e4")]).toMatchObject({ box: 1, failures: 1 });
   });
 
-  it("transmet chaque coup hors répertoire au Coach, et l'oublie à la ligne suivante", async () => {
+  it("n'expose plus aucune donnée destinée au Coach : la révision reste un entraînement pur", async () => {
     newRepertoire("black", ["e4", "e6", "d4", "d5"]);
     const { result } = renderHook(() => useHarness("black"));
     await computerPlays();
-    expect(result.current.review.lastMistake).toBeNull();
-
-    const fenBefore = result.current.fen;
     act(() => {
       result.current.review.handlePieceDrop("a7", "a6");
     });
-    const first = result.current.review.lastMistake;
-    expect(first).toMatchObject({ fenBefore, playedSan: "a6" });
-    // Le répertoire est repris avec son arbre d'origine (symboles compris)
-    expect(first?.sources).toEqual([
-      expect.objectContaining({ kind: "repertoire", name: "Ma Française" }),
-    ]);
-
-    act(() => {
-      result.current.review.handlePieceDrop("c7", "c5");
-    });
-    expect(result.current.review.lastMistake).toMatchObject({ playedSan: "c5" });
-    expect(result.current.review.lastMistake?.id).not.toBe(first?.id);
-
-    act(() => {
-      result.current.review.restartLine();
-    });
-    expect(result.current.review.lastMistake).toBeNull();
+    expect(result.current.review.stats.mistakes).toBe(1);
+    expect(result.current.review).not.toHaveProperty("lastMistake");
   });
 
   it("déroule toute une ligne du répertoire jusqu'à la fin", async () => {

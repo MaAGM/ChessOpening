@@ -31,6 +31,7 @@ type Env = {
   readonly CONVEX_CLOUD_URL: string;
   readonly CONVEX_SITE_URL: string;
   readonly ANTHROPIC_API_KEY: string | undefined;
+  readonly COACH_CHAT_ENABLED: string | undefined;
   readonly COACH_MODEL: string | undefined;
 };
 

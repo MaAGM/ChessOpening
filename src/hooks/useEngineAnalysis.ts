@@ -2,8 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 
-import type { CoachEngine } from "@/lib/coach";
-
 import {
   EngineClient,
   analysisKey,
@@ -37,15 +35,6 @@ function getSharedClient(): EngineClient | null {
 }
 
 /**
- * Moteur du Coach : le même Stockfish que l'affichage (coupé pendant la révision),
- * pour ne pas charger un second worker. `null` si le navigateur ne le permet pas.
- */
-export function getCoachEngine(): CoachEngine | null {
-  const client = getSharedClient();
-  return client ? { analyze: (fen, options) => client.analyze(fen, options) } : null;
-}
-
-/**
  * Analyse Stockfish locale de `fen`. Changer de position annule la recherche en
  * cours ; les positions déjà analysées sont servies par le cache du moteur.
  * `enabled = false` arrête la recherche (aucun calcul en arrière-plan).
@@ -58,8 +47,7 @@ export function useEngineAnalysis(fen: string, enabled: boolean): EngineAnalysis
 
   useEffect(() => {
     if (!enabled) {
-      // Pas d'arrêt à chaque changement de position une fois coupé : le moteur partagé
-      // peut alors servir à une autre analyse (Coach pendant la révision).
+      // Pas d'arrêt à chaque changement de position une fois coupé : rien ne tourne.
       if (wasEnabledRef.current) sharedClient?.stop();
       wasEnabledRef.current = false;
       return;

@@ -65,7 +65,8 @@ export default defineSchema({
   /**
    * Suivi d'utilisation du Coach IA : une ligne par utilisateur et par jour (UTC, « AAAA-MM-JJ »).
    * Les quotas eux-mêmes sont appliqués par le composant `rateLimiter` ; cette table sert au suivi
-   * (appels facturés, réponses servies par le cache, tokens consommés).
+   * (messages facturés, tokens consommés) et au budget journalier de tokens par utilisateur.
+   * `cachedHits` ne sert plus (ancien cache du Coach de révision).
    */
   coachUsage: defineTable({
     userId: v.string(),
@@ -78,8 +79,9 @@ export default defineSchema({
   }).index("by_userId_and_day", ["userId", "day"]),
 
   /**
-   * Explications déjà produites, indexées par l'empreinte SHA-256 de (modèle, consignes, prompt).
-   * La réponse ne dépend que du prompt : la même erreur ne coûte qu'un appel au LLM.
+   * OBSOLÈTE : cache de l'ancien Coach de révision (explications indexées par empreinte SHA-256).
+   * Plus lue ni écrite depuis le passage au chat du mode Exploration ; conservée dans le schéma
+   * pour ne pas bloquer le déploiement tant qu'elle contient des documents.
    */
   coachExplanations: defineTable({
     hash: v.string(),

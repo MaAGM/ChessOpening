@@ -2,7 +2,6 @@
 
 import { FC, useMemo } from "react";
 
-import { MasterExplorer } from "@/components/chess/MasterExplorer";
 import { OpeningSelector } from "@/components/chess/OpeningSelector";
 import { LearningPanel } from "@/components/chess/LearningPanel";
 import { AccountPanel } from "@/components/chess/AccountPanel";
@@ -45,7 +44,6 @@ type Props = {
   review: ReviewManager;
   /** État et actions de l'éditeur de répertoire (useRepertoireEditor) */
   editor: RepertoireEditor;
-  currentFen: string;
 };
 
 /** Largeur du panneau selon l'écran affiché (classes complètes pour Tailwind). */
@@ -63,13 +61,13 @@ function sidebarWidthClass(mode: PanelMode): string {
 }
 
 /**
- * The sidebar contains the **menu**, the **explorer**, the **opening selector**,
+ * The sidebar contains the **menu**, the **opening selector**,
  * the **learning panel** (tutorial) and the **review screens**.
  *
  * All visual logic lives here; the page component only renders this
  * component and passes the hook‑generated props.
  */
-export const TrainerSidebar: FC<Props> = ({ navigation, tutorial, review, editor, currentFen }) => {
+export const TrainerSidebar: FC<Props> = ({ navigation, tutorial, review, editor }) => {
   const {
     panelMode,
     setPanelMode,
@@ -171,11 +169,6 @@ export const TrainerSidebar: FC<Props> = ({ navigation, tutorial, review, editor
             </svg>
             {panelMode === "repertoire_editor" ? "Mes répertoires" : "Retour"}
           </Button>
-
-          {/* ---------------------------------------------------------------- */}
-          {/* Explorer – shown when panelMode === "explorer" */}
-          {/* ---------------------------------------------------------------- */}
-          {panelMode === "explorer" && <MasterExplorer currentFen={currentFen}/>}
 
           {/* ---------------------------------------------------------------- */}
           {/* Opening selector – shown when panelMode === "opening_selector" */}
