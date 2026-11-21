@@ -132,7 +132,7 @@ describe("reviewStore (avec localStorage factice)", () => {
   it("migre les anciens identifiants de l'ancienne clé des chapitres complétés", async () => {
     data["chess-opening:completed-chapters-v2"] = JSON.stringify(["sicilian-m3"]);
     const store = await import("./reviewStore");
-    expect(store.getSnapshot().completedChapters).toEqual(["sicilian-c2-l1"]);
+    expect(store.getSnapshot().completedChapters).toEqual(["sicilian-c1-l2"]);
   });
 
   it("migre un état persisté avec les anciens identifiants et le réécrit au prochain changement", async () => {

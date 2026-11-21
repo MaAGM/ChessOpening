@@ -1,33 +1,38 @@
 {
   "id": "ruy_lopez",
-  "name": "Ruy Lopez",
-  "description": "Formation complète sur Ruy Lopez",
+  "name": "Partie Espagnole",
+  "description": "1.e4 e5 2.Nf3 Nc6 3.Bb5 : la pression lente sur le défenseur de e5. Un répertoire complet côté Blancs avec l'Espagnole fermée (c3, h3, d4 et la manœuvre Nbd2-f1-g3), 4.O-O contre la Berlinoise, les réponses à l'Ouverte, à la Schliemann, à 3…Bc5 et à l'Arkhangelsk, pièges et grandes lignes Breyer, Dilworth et Rio.",
   "side": "white",
   "eco": [
+    "C60",
     "C65",
+    "C67",
     "C78",
-    "C95",
     "C82",
-    "C67"
+    "C84",
+    "C92",
+    "C95"
   ],
   "chapters": [
     {
       "id": "ruy_lopez-c1",
       "title": "Les fondations",
-      "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+      "summary": "Pourquoi le fou va en b5 puis en a4, la mise en place Re1, Bb3, c3 et h3 avant d4, la finale berlinoise et la Steinitz moderne.",
       "stage": "foundations",
       "lessons": [
         {
           "id": "ruy_lopez-c1-l1",
-          "legacyIds": [
-            "ruy_lopez-m1"
+          "legacyIds": [],
+          "title": "3.Bb5 : viser le défenseur de e5",
+          "eco": "C60",
+          "kind": "concept",
+          "objectives": [
+            "Comprendre que le fou b5 attaque le cavalier qui défend e5",
+            "Reculer en a4 plutôt qu'échanger contre 3…a6",
+            "Roquer avant de protéger e4, puis jouer Re1"
           ],
-          "title": "Espagnole - Défense Berlin",
-          "eco": "C65",
-          "kind": "line",
-          "objectives": [],
-          "pgn": "1. e4 {e4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e4]} 1... e5 {e5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e5]} 2. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 2... Nc6 {Nc6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb8c6]} 3. Bb5 {Bb5 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf1b5]} 3... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 4. O-O {O-O : Les Blancs sécurisent le roi et activent les tours pour le milieu de jeu. [%cal Ge1g1]} 4... Nxe4 {Nxe4 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gf6e4]} 5. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 5... Nd6 {Nd6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Ge4d6]}",
-          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "pgn": "{L'Espagnole ne menace rien tout de suite : le fou b5 attaque le cavalier c6, qui est le seul défenseur du pion e5. Tant que votre pion e4 n'est pas protégé, Bxc6 suivi de Nxe5 ne gagne rien. Vous roquez, vous jouez Re1, et la menace devient réelle.} 1. e4 {[%cal Ge2e4]} 1... e5 2. Nf3 {Le cavalier attaque e5 dès le deuxième coup. [%cal Gg1f3,Gf3e5]} 2... Nc6 3. Bb5 {Le fou attaque le défenseur du pion e5. [%cal Gf1b5,Gb5c6,Gc6e5]} 3... a6 {Le coup de Morphy : les Noirs demandent tout de suite au fou de se décider.} (3... Nf6 4. O-O {Le roque d'abord : le pion e4 paraît en prise, mais d4 et Re1 le récupéreront. [%cal Ge1g1,Gg1h1]}) 4. Ba4 {Le fou garde le contact avec c6. Après 4.Bxc6 dxc6 5.Nxe5?, …Qd4 récupérerait le pion aussitôt. [%cal Gb5a4,Ga4c6]} 4... Nf6 (4... d6 5. c3 {Le pion prépare d4 et une retraite en c2 pour le fou. [%cal Gc2c3,Gc3d4]}) 5. O-O {Le roi se met à l'abri ; le pion e4 est protégé indirectement par la colonne e qui va s'ouvrir. [%cal Ge1g1]} 5... Be7 (5... Nxe4 6. d4 {Le centre s'ouvre alors que le roi noir n'a pas roqué. [%cal Gd2d4,Gd4e5]}) 6. Re1 {La tour protège e4 : maintenant Bxc6 puis Nxe5 menace vraiment de gagner un pion. [%cal Gf1e1,Ge1e4,Ga4c6]}",
+          "conclusion": "Le fou b5 ne gagne pas e5 tout de suite : il prépare. Après Ba4, O-O et Re1, la menace Bxc6 et Nxe5 oblige les Noirs à jouer …b5, et c'est là que la vraie Espagnole commence.",
           "mustCover": "allBranches",
           "reviewable": true
         },
@@ -36,12 +41,50 @@
           "legacyIds": [
             "ruy_lopez-m2"
           ],
-          "title": "Espagnole - Défense Morphy",
-          "eco": "C78",
+          "title": "6…b5 7.Bb3 : c3 et h3 avant d4",
+          "eco": "C84",
           "kind": "line",
-          "objectives": [],
-          "pgn": "1. e4 {e4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e4]} 1... e5 {e5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e5]} 2. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 2... Nc6 {Nc6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb8c6]} 3. Bb5 {Bb5 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf1b5]} 3... a6 {a6 : Les Noirs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Ga7a6]} 4. Ba4 {Ba4 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gb5a4]} 4... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 5. O-O {O-O : Les Blancs sécurisent le roi et activent les tours pour le milieu de jeu. [%cal Ge1g1]} 5... Be7 {Be7 : Les Noirs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf8e7]}",
-          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "objectives": [
+            "Placer le fou en b3 face au pion f7",
+            "Préparer d4 par c3, qui offre aussi la case c2 au fou",
+            "Jouer h3 pour interdire …Bg4 avant de pousser d4"
+          ],
+          "pgn": "{Après 6…b5 7.Bb3, vous ne poussez pas d4 tout de suite. Le pion c3 le prépare et libère la case c2 pour le fou ; le petit coup h3 empêche …Bg4, qui clouerait le cavalier f3 au moment où il doit soutenir d4.} 1. e4 {[%cal Ge2e4]} 1... e5 2. Nf3 {[%cal Gg1f3]} 2... Nc6 3. Bb5 {[%cal Gf1b5]} 3... a6 4. Ba4 {[%cal Gb5a4]} 4... Nf6 5. O-O {[%cal Ge1g1]} 5... Be7 6. Re1 {[%cal Gf1e1]} 6... b5 7. Bb3 {Le fou se place sur la diagonale a2-g8, face au pion f7. [%cal Ga4b3,Gb3f7]} 7... d6 {Le pion soutient e5 et libère le fou c8.} (7... O-O 8. h3 {Le coup anti-Marshall : sans c3, le gambit …d5 n'a plus de sens. [%cal Gh2h3,Gh3g4]} 8... Bb7 9. d3 {Le pion protège e4 calmement : vous gardez a4 en réserve. [%cal Gd2d3]}) 8. c3 {Le pion prépare d4 et réserve c2 pour le fou b3. [%cal Gc2c3,Gc3d4,Gb3c2]} 8... O-O 9. h3 {Sans ce coup, …Bg4 clouerait le cavalier f3, défenseur de d4. [%cal Gh2h3,Gh3g4]} 9... Na5 (9... Nb8 10. d4 {Le pion prend le centre : e4 et d4 côte à côte, l'idéal de l'Espagnole. [%cal Gd2d4,Gd4e5]}) 10. Bc2 {Le fou évite l'échange et reste dirigé vers l'aile roi noire. [%cal Gb3c2,Gc2h7]} 10... c5 11. d4 {Le centre est en place : vos deux pions centraux contre le seul pion e5. [%cal Gd2d4]}",
+          "conclusion": "La Fermée se construit toujours dans le même ordre : Bb3, c3, h3, puis d4. Ce petit coup h3 n'est pas une perte de temps : il protège le futur pion d4 contre le clouage …Bg4.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "ruy_lopez-c1-l3",
+          "legacyIds": [
+            "ruy_lopez-m1"
+          ],
+          "title": "4.O-O contre la Berlinoise : la finale",
+          "eco": "C67",
+          "kind": "line",
+          "objectives": [
+            "Laisser prendre e4 et répondre par 5.d4",
+            "Échanger en c6 puis chasser le cavalier par dxe5",
+            "Jouer la finale avec Nc3, h3 et Bf4 contre le roi noir au centre"
+          ],
+          "pgn": "{Contre 3…Nf6, vous roquez et laissez prendre e4. Après 5.d4 Nd6 6.Bxc6 dxc6 7.dxe5, les dames s'échangent : les Noirs ont la paire de fous, mais leur roi ne roquera plus et votre majorité à l'aile roi est mobile.} 1. e4 {[%cal Ge2e4]} 1... e5 2. Nf3 {[%cal Gg1f3]} 2... Nc6 3. Bb5 {[%cal Gf1b5]} 3... Nf6 4. O-O {Le roque : la colonne e va s'ouvrir contre le roi noir. [%cal Ge1g1,Gf1e1]} 4... Nxe4 (4... Bc5 5. c3 {Le pion prépare d4 avec gain de temps sur le fou c5. [%cal Gc2c3,Gc3d4]}) 5. d4 {Le pion attaque e5 et ouvre le jeu tant que le roi noir est au centre. [%cal Gd2d4,Gd4e5]} 5... Nd6 6. Bxc6 {[%cal Gb5c6]} 6... dxc6 7. dxe5 {Le pion chasse le cavalier d6 : il n'a plus de case centrale. [%cal Gd4e5]} 7... Nf5 8. Qxd8+ {[%cal Gd1d8]} 8... Kxd8 {Le roi noir a perdu le droit de roquer.} 9. Nc3 {Le cavalier se développe et surveille e4 et d5. [%cal Gb1c3,Gc3e4]} 9... Ke8 10. h3 {Le pion contrôle g4 et prépare g4 pour chasser le cavalier f5. [%cal Gh2h3,Gh3g4]} 10... h5 11. Bf4 {Le fou soutient le pion e5, cœur de votre plan : votre majorité e5-f4-g4 avancera. [%cal Gc1f4,Gf4e5]}",
+          "conclusion": "Dans la finale berlinoise, vos atouts sont le pion e5 et la majorité de pions à l'aile roi. Nc3, h3 et Bf4 les soutiennent avant de pousser g4 et f4.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "ruy_lopez-c1-l4",
+          "legacyIds": [],
+          "title": "4…d6 : la Steinitz moderne",
+          "eco": "C76",
+          "kind": "line",
+          "objectives": [
+            "Préparer d4 par c3 contre 4…d6",
+            "Reprendre en f5 et roquer contre la Siesta 5…f5",
+            "Garder la tension par Re1 contre …Bd7 et …Be7"
+          ],
+          "pgn": "{Avec 4…d6, les Noirs défendent e5 par un pion et gardent leur fou c8 libre. Vous répondez par c3 et d4 : votre centre est plus large, et le fou a4 reste prêt à revenir en c2.} 1. e4 {[%cal Ge2e4]} 1... e5 2. Nf3 {[%cal Gg1f3]} 2... Nc6 3. Bb5 {[%cal Gf1b5]} 3... a6 4. Ba4 {[%cal Gb5a4]} 4... d6 5. c3 {Le pion prépare d4 et la retraite c2 du fou. [%cal Gc2c3,Gc3d4]} 5... Bd7 (5... f5 6. exf5 {[%cal Ge4f5]} 6... Bxf5 {La Siesta : les Noirs ouvrent la colonne f.} 7. O-O {Le roi se met à l'abri avant d4 : la colonne e s'ouvrira pour la tour. [%cal Ge1g1]}) 6. d4 {[%cal Gd2d4]} 6... Nf6 7. O-O {Le roque d'abord : le pion e4 est défendu indirectement par la menace dxe5. [%cal Ge1g1]} 7... Be7 8. Re1 {La tour protège e4 et prépare Nbd2-f1 : vous gardez la tension au centre. [%cal Gf1e1,Ge1e4]} 8... O-O 9. Nbd2 {Le cavalier rejoint la manœuvre Nf1-g3, comme dans la Fermée. [%cal Gb1d2,Gd2f1,Gf1g3]}",
+          "conclusion": "Contre la Steinitz moderne, c3 et d4 vous donnent le centre. Gardez la tension avec Re1 et Nbd2 : c'est aux Noirs de décider quand échanger en d4.",
           "mustCover": "allBranches",
           "reviewable": true
         }
@@ -49,49 +92,293 @@
     },
     {
       "id": "ruy_lopez-c2",
-      "title": "Lignes théoriques",
-      "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
-      "stage": "theory",
+      "title": "Plans typiques",
+      "summary": "Les plans blancs dans la Fermée après 9.h3 : la colonne c contre la Tchigorine, la manœuvre Nbd2-f1-g3, la poussée a4 contre la Zaïtsev et le levier a4 contre la Karpov.",
+      "stage": "plans",
       "lessons": [
         {
           "id": "ruy_lopez-c2-l1",
-          "legacyIds": [
-            "ruy_lopez-m3"
-          ],
-          "title": "Spanish: Closed, Breyer, Main Line, 15.a4 c5",
-          "eco": "C95",
+          "legacyIds": [],
+          "title": "9…Na5 : la Tchigorine et la colonne c",
+          "eco": "C99",
           "kind": "line",
-          "objectives": [],
-          "pgn": "1. e4 {e4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e4]} 1... e5 {e5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e5]} 2. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 2... Nc6 {Nc6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb8c6]} 3. Bb5 {Bb5 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf1b5]} 3... a6 {a6 : Les Noirs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Ga7a6]} 4. Ba4 {Ba4 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gb5a4]} 4... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 5. O-O {O-O : Les Blancs sécurisent le roi et activent les tours pour le milieu de jeu. [%cal Ge1g1]} 5... Be7 {Be7 : Les Noirs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf8e7]} 6. Re1 {Re1 : Les Blancs développent le tour avec un gain de coordination et de contrôle des cases clés. [%cal Gf1e1]} 6... b5 {b5 : Les Noirs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Gb7b5]}",
-          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "objectives": [
+            "Construire Bc2, d4 et Nbd2 contre …Na5 et …c5",
+            "Reprendre en d4 par le pion c pour ouvrir la colonne c",
+            "Replacer le cavalier par Nb3-d2 et la tour en c1"
+          ],
+          "pgn": "{Contre la Tchigorine, les Noirs ouvrent souvent la colonne c par …cxd4. Vous reprenez par le pion c, et la colonne ouverte devient votre terrain : le cavalier passe par b3 pour gêner …a5-a4, puis la tour vient en c1.} 1. e4 {[%cal Ge2e4]} 1... e5 2. Nf3 {[%cal Gg1f3]} 2... Nc6 3. Bb5 {[%cal Gf1b5]} 3... a6 4. Ba4 {[%cal Gb5a4]} 4... Nf6 5. O-O {[%cal Ge1g1]} 5... Be7 6. Re1 {[%cal Gf1e1]} 6... b5 7. Bb3 {[%cal Ga4b3]} 7... d6 8. c3 {[%cal Gc2c3]} 8... O-O 9. h3 {[%cal Gh2h3]} 9... Na5 10. Bc2 {[%cal Gb3c2]} 10... c5 11. d4 {[%cal Gd2d4]} 11... Qc7 {La dame protège e5 et vise c2. [%cal Gc7c2]} 12. Nbd2 {Le cavalier soutient e4 et prépare Nf1 ou Nb3. [%cal Gb1d2,Gd2b3]} 12... cxd4 (12... Nc6 13. d5 {Le pion gagne de l'espace et chasse le cavalier : le centre est fermé. [%cal Gd4d5,Gd5c6]} 13... Nd8 14. a4 {Le pion ouvre un front à l'aile dame, où les Noirs sont étirés. [%cal Ga2a4,Ga4b5]}) 13. cxd4 {[%cal Gc3d4]} 13... Nc6 14. Nb3 {Le cavalier attaque c5 et retient …a5-a4 un temps. [%cal Gd2b3,Gb3c5]} 14... a5 15. Be3 {Le fou protège d4 et b6. [%cal Gc1e3,Ge3d4]} 15... a4 16. Nbd2 {[%cal Gb3d2]} 16... Bd7 17. Rc1 {La tour s'installe en face de la dame noire, sur la colonne ouverte. [%cal Ga1c1,Gc1c7]}",
+          "conclusion": "Quand les Noirs ouvrent la colonne c, reprenez par le pion et occupez-la. Nb3, Be3 et Rc1 mettent vos pièces en face de la dame c7.",
           "mustCover": "allBranches",
           "reviewable": true
         },
         {
           "id": "ruy_lopez-c2-l2",
-          "legacyIds": [
-            "ruy_lopez-m4"
-          ],
-          "title": "Spanish: Open, Dilworth, 14.Kxf2",
-          "eco": "C82",
+          "legacyIds": [],
+          "title": "9…h6 : la manœuvre Nbd2-f1-g3",
+          "eco": "C93",
           "kind": "line",
-          "objectives": [],
-          "pgn": "1. e4 {e4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e4]} 1... e5 {e5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e5]} 2. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 2... Nc6 {Nc6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb8c6]} 3. Bb5 {Bb5 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf1b5]} 3... a6 {a6 : Les Noirs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Ga7a6]} 4. Ba4 {Ba4 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gb5a4]} 4... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 5. O-O {O-O : Les Blancs sécurisent le roi et activent les tours pour le milieu de jeu. [%cal Ge1g1]} 5... Nxe4 {Nxe4 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gf6e4]} 6. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 6... b5 {b5 : Les Noirs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Gb7b5]}",
-          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "objectives": [
+            "Développer le cavalier b1 par d2, f1 puis g3",
+            "Libérer la colonne d et le fou c1 grâce à cette manœuvre",
+            "Fermer le centre par d5 quand le cavalier noir va en c6"
+          ],
+          "pgn": "{Dans la Fermée, le cavalier b1 n'a pas de bonne case directe : c3 est occupé par un pion. Il passe donc par d2, f1 et g3, où il vise f5 et h5. Contre la Smyslov 9…h6, cette manœuvre est la colonne vertébrale de votre jeu.} 1. e4 {[%cal Ge2e4]} 1... e5 2. Nf3 {[%cal Gg1f3]} 2... Nc6 3. Bb5 {[%cal Gf1b5]} 3... a6 4. Ba4 {[%cal Gb5a4]} 4... Nf6 5. O-O {[%cal Ge1g1]} 5... Be7 6. Re1 {[%cal Gf1e1]} 6... b5 7. Bb3 {[%cal Ga4b3]} 7... d6 8. c3 {[%cal Gc2c3]} 8... O-O 9. h3 {[%cal Gh2h3]} 9... h6 {Les Noirs préparent …Re8 et …Bf8 sans craindre Ng5.} 10. d4 {[%cal Gd2d4]} 10... Re8 11. Nbd2 {[%cal Gb1d2]} 11... Bf8 12. Nf1 {Le cavalier libère d2 pour le fou c1 et file vers g3. [%cal Gd2f1,Gf1g3]} 12... Bd7 13. Ng3 {Le cavalier vise f5, une case magnifique devant le roi noir. [%cal Gf1g3,Gg3f5]} 13... Na5 14. Bc2 {[%cal Gb3c2]} 14... c5 15. b3 {Le pion enlève la case c4 au cavalier a5. [%cal Gb2b3,Gb3c4]} 15... Nc6 16. d5 {Le pion chasse le cavalier et ferme le centre : vous jouerez à l'aile roi. [%cal Gd4d5,Gd5c6]}",
+          "conclusion": "Nbd2-f1-g3 est la manœuvre à connaître par cœur. Le cavalier g3 soutient la future attaque Nf5 ou Nh5, et le fou c1 respire enfin.",
           "mustCover": "allBranches",
           "reviewable": true
         },
         {
           "id": "ruy_lopez-c2-l3",
+          "legacyIds": [],
+          "title": "9…Bb7 : la Zaïtsev et la poussée a4",
+          "eco": "C92",
+          "kind": "line",
+          "objectives": [
+            "Attaquer le pion b5 par a4 contre la Zaïtsev",
+            "Reculer le fou en b1 quand le cavalier noir vient en b4",
+            "Activer la tour a1 par Ra3 après d5"
+          ],
+          "pgn": "{La Zaïtsev met le fou en b7 et la tour en e8 contre votre pion e4. Votre réponse est la poussée a4 : elle frappe le pion b5, que les Noirs doivent défendre, et la tour a1 pourra entrer en jeu par a3.} 1. e4 {[%cal Ge2e4]} 1... e5 2. Nf3 {[%cal Gg1f3]} 2... Nc6 3. Bb5 {[%cal Gf1b5]} 3... a6 4. Ba4 {[%cal Gb5a4]} 4... Nf6 5. O-O {[%cal Ge1g1]} 5... Be7 6. Re1 {[%cal Gf1e1]} 6... b5 7. Bb3 {[%cal Ga4b3]} 7... d6 8. c3 {[%cal Gc2c3]} 8... O-O 9. h3 {[%cal Gh2h3]} 9... Bb7 10. d4 {[%cal Gd2d4]} 10... Re8 11. Nbd2 {[%cal Gb1d2]} 11... Bf8 12. a4 {Le pion attaque b5 : votre deuxième front est ouvert. [%cal Ga2a4,Ga4b5]} 12... h6 13. Bc2 {Le fou protège e4 avant l'échange en d4. [%cal Gb3c2,Gc2e4]} 13... exd4 14. cxd4 {[%cal Gc3d4]} 14... Nb4 15. Bb1 {Le fou recule mais garde e4 en vue. [%cal Gc2b1]} 15... c5 16. d5 {Le pion ferme la diagonale du fou b7. [%cal Gd4d5,Gd5b7]} 16... Nd7 17. Ra3 {La tour se lève : par a3, elle peut basculer vers l'aile roi. [%cal Ga1a3,Ga3g3]}",
+          "conclusion": "Contre la Zaïtsev, a4 donne une cible : le pion b5. Après d5, le fou b7 est enfermé, et Ra3 ajoute une tour à l'attaque.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "ruy_lopez-c2-l4",
+          "legacyIds": [],
+          "title": "9…Nd7 : la Karpov et le levier a4",
+          "eco": "C96",
+          "kind": "line",
+          "objectives": [
+            "Jouer d4 contre la manœuvre …Nd7-…Bf6",
+            "Pousser a4 pour ouvrir l'aile dame",
+            "Sortir le cavalier par a3 pour soutenir b5"
+          ],
+          "pgn": "{Avec 9…Nd7, les Noirs placent leur fou en f6 pour peser sur d4. Vous jouez d4 quand même, puis a4 et Na3 : le cavalier rejoint l'aile dame, où le pion b5 devient une cible.} 1. e4 {[%cal Ge2e4]} 1... e5 2. Nf3 {[%cal Gg1f3]} 2... Nc6 3. Bb5 {[%cal Gf1b5]} 3... a6 4. Ba4 {[%cal Gb5a4]} 4... Nf6 5. O-O {[%cal Ge1g1]} 5... Be7 6. Re1 {[%cal Gf1e1]} 6... b5 7. Bb3 {[%cal Ga4b3]} 7... d6 8. c3 {[%cal Gc2c3]} 8... O-O 9. h3 {[%cal Gh2h3]} 9... Nd7 10. d4 {[%cal Gd2d4]} 10... Bf6 {Le fou presse le pion d4. [%cal Gf6d4]} 11. a4 {Le levier attaque b5 et oblige les Noirs à se déterminer. [%cal Ga2a4,Ga4b5]} 11... Bb7 12. Na3 {Le cavalier vise b5 par l'extérieur : la case d2 reste libre pour le fou. [%cal Gb1a3,Ga3b5]} 12... exd4 (12... Nb6 13. axb5 {L'échange ouvre la colonne a pour votre tour. [%cal Ga4b5,Ga1a6]}) 13. cxd4 {[%cal Gc3d4]} 13... Re8 14. axb5 {L'échange d'abord : la colonne a s'ouvre et le pion b5 devient faible. [%cal Ga4b5,Ga1a8]} 14... axb5 15. Bf4 {Le fou sort et vise d6, pendant que le cavalier a3 garde un œil sur b5. [%cal Gc1f4,Gf4d6,Ga3b5]}",
+          "conclusion": "Contre la Karpov, d4, a4 et Na3 mettent la pression sur b5. Après l'échange en d4, axb5 ouvre la colonne a avant que le fou c1 ne sorte en f4.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        }
+      ]
+    },
+    {
+      "id": "ruy_lopez-c3",
+      "title": "Réponses adverses",
+      "summary": "L'Espagnole ouverte avec 9.Nbd2, la Schliemann avec 4.d3, la Défense classique 3…Bc5 et les deux lignes rapides 5…b5 et 5…Bc5.",
+      "stage": "responses",
+      "lessons": [
+        {
+          "id": "ruy_lopez-c3-l1",
+          "legacyIds": [],
+          "title": "5…Nxe4 : l'Ouverte et 9.Nbd2",
+          "eco": "C80",
+          "kind": "line",
+          "objectives": [
+            "Récupérer le pion par d4 et dxe5 contre l'Ouverte",
+            "Défier le cavalier e4 par Nbd2",
+            "Viser les cases d4 et c5 après l'échange en e6"
+          ],
+          "pgn": "{Dans l'Ouverte, les Noirs prennent e4 et gardent leur cavalier au centre. Vous récupérez le pion e5, puis 9.Nbd2 défie ce cavalier : il doit s'échanger ou reculer en c5.} 1. e4 {[%cal Ge2e4]} 1... e5 2. Nf3 {[%cal Gg1f3]} 2... Nc6 3. Bb5 {[%cal Gf1b5]} 3... a6 4. Ba4 {[%cal Gb5a4]} 4... Nf6 5. O-O {[%cal Ge1g1]} 5... Nxe4 6. d4 {[%cal Gd2d4]} 6... b5 7. Bb3 {[%cal Ga4b3]} 7... d5 8. dxe5 {[%cal Gd4e5]} 8... Be6 {Les Noirs ont un cavalier actif en e4 et un pion d5 solide.} 9. Nbd2 {Le cavalier défie celui de e4. [%cal Gb1d2,Gd2e4]} 9... Nc5 (9... Be7 10. c3 {Le pion protège d4 et offre c2 au fou. [%cal Gc2c3,Gc3d4]}) 10. c3 {[%cal Gc2c3]} 10... d4 {Le pion noir avance pour gagner de l'espace.} 11. Bxe6 {[%cal Gb3e6]} 11... Nxe6 12. cxd4 {[%cal Gc3d4]} 12... Ncxd4 13. a4 {Le pion attaque b5 : l'aile dame noire est fragile. [%cal Ga2a4,Ga4b5]}",
+          "conclusion": "Contre l'Ouverte, rendez le pion e4, reprenez e5 et défiez le cavalier par Nbd2. Après l'échange en e6, a4 attaque le pion b5.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "ruy_lopez-c3-l2",
+          "legacyIds": [],
+          "title": "3…f5 : la Schliemann et 4.d3",
+          "eco": "C63",
+          "kind": "line",
+          "objectives": [
+            "Répondre au gambit par le calme 4.d3",
+            "Reprendre en e4 avec le pion pour garder le centre",
+            "Échanger en c6 pour fragiliser e5"
+          ],
+          "pgn": "{La Schliemann est un gambit agressif : 3…f5 attaque e4. Avec 4.d3, vous refusez les complications : le pion protège e4, et après …fxe4 dxe4, votre centre est solide alors que le roi noir a perdu un pion protecteur.} 1. e4 {[%cal Ge2e4]} 1... e5 2. Nf3 {[%cal Gg1f3]} 2... Nc6 3. Bb5 {[%cal Gf1b5]} 3... f5 4. d3 {Le pion protège e4 sans rien concéder. [%cal Gd2d3,Gd3e4]} 4... fxe4 5. dxe4 {[%cal Gd3e4]} 5... Nf6 6. O-O {Le roi se met à l'abri : la colonne f ouverte ne vous gêne pas. [%cal Ge1g1]} 6... Bc5 (6... d6 7. Nc3 {Le cavalier protège e4 et vise d5. [%cal Gb1c3,Gc3d5]}) 7. Bxc6 {L'échange enlève le défenseur de e5. [%cal Gb5c6]} 7... bxc6 8. Nxe5 {Le cavalier prend e5 : les Noirs ont des pions doublés pour leur pion de retard. [%cal Gf3e5]} 8... O-O 9. Nc3 {Le cavalier protège e4 et vise a4, d'où il chassera le fou c5. [%cal Gb1c3,Gc3a4]}",
+          "conclusion": "Contre la Schliemann, 4.d3 évite toute théorie. Après …fxe4 dxe4, l'échange en c6 enlève le défenseur de e5 : Nxe5 prend le pion, et Nc3 tient le centre.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "ruy_lopez-c3-l3",
+          "legacyIds": [],
+          "title": "3…Bc5 et 3…Nd4 : c3 et d4",
+          "eco": "C64",
+          "kind": "line",
+          "objectives": [
+            "Préparer d4 par c3 contre la Défense classique",
+            "Clouer le cavalier f6 par Bg5 après …Bb6",
+            "Répondre à 3…Nd4 par l'échange Nxd4"
+          ],
+          "pgn": "{Contre 3…Bc5, le fou noir vise f2. Vous préparez d4 par c3 : le fou c5 sera chassé avec gain de temps, et votre centre e4-d4 s'installera.} 1. e4 {[%cal Ge2e4]} 1... e5 2. Nf3 {[%cal Gg1f3]} 2... Nc6 3. Bb5 {[%cal Gf1b5]} 3... Bc5 {Le fou noir vise f2. [%cal Gc5f2]} (3... Nd4 4. Nxd4 {[%cal Gf3d4]} 4... exd4 5. O-O {Le roque : le pion d4 noir est avancé et sera vite une cible. [%cal Ge1g1,Gf1e1]}) 4. c3 {Le pion prépare d4, qui chassera le fou c5. [%cal Gc2c3,Gc3d4]} 4... Nf6 5. O-O {[%cal Ge1g1]} 5... O-O 6. d4 {[%cal Gd2d4]} 6... Bb6 7. Bg5 {Le fou cloue le cavalier f6, défenseur de e5 et du roi. [%cal Gc1g5,Gg5f6,Gg5d8]} 7... h6 8. Bh4 {[%cal Gg5h4]} 8... d6 9. a4 {Le pion menace a5 contre le fou b6. [%cal Ga2a4,Ga4a5]}",
+          "conclusion": "Contre 3…Bc5, c3 et d4 chassent le fou noir. Bg5 cloue le cavalier f6, et a4 menace d'enfermer le fou b6.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "ruy_lopez-c3-l4",
+          "legacyIds": [],
+          "title": "5…b5 et …Bc5 : l'Arkhangelsk et la Möller",
+          "eco": "C78",
+          "kind": "line",
+          "objectives": [
+            "Reculer le fou en b3 contre 5…b5",
+            "Pousser a4 contre …Bc5 pour gêner l'aile dame",
+            "Gagner de l'espace avec a5 et h3 avant d4"
+          ],
+          "pgn": "{Avec 5…b5 et …Bc5, les Noirs mettent leur fou sur la diagonale a7-g1, face à votre roi. Vous répondez par a4, qui attaque b5, puis c3 et d4 : le fou noir devient une cible.} 1. e4 {[%cal Ge2e4]} 1... e5 2. Nf3 {[%cal Gg1f3]} 2... Nc6 3. Bb5 {[%cal Gf1b5]} 3... a6 4. Ba4 {[%cal Gb5a4]} 4... Nf6 5. O-O {[%cal Ge1g1]} 5... b5 6. Bb3 {[%cal Ga4b3]} 6... Bc5 {Le fou vise f2. [%cal Gc5f2]} (6... Bb7 7. Re1 {[%cal Gf1e1]} 7... Bc5 8. c3 {[%cal Gc2c3]} 8... d6 9. d4 {[%cal Gd2d4]} 9... Bb6 10. Be3 {Le fou défie celui de b6. [%cal Gc1e3,Ge3b6]}) 7. a4 {Le pion attaque b5 tout de suite. [%cal Ga2a4,Ga4b5]} 7... Rb8 8. c3 {[%cal Gc2c3]} 8... d6 9. d4 {[%cal Gd2d4]} 9... Bb6 10. a5 {Le pion chasse le fou b6. [%cal Ga4a5,Ga5b6]} 10... Ba7 11. h3 {Le pion contrôle g4 avant que …Bg4 ne cloue le cavalier f3. [%cal Gh2h3]}",
+          "conclusion": "Contre l'Arkhangelsk et la Möller, a4 frappe b5 et a5 chasse le fou. Avec c3, d4 et h3, vous retrouvez un centre fort.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        }
+      ]
+    },
+    {
+      "id": "ruy_lopez-c4",
+      "title": "Pièges",
+      "summary": "Les erreurs noires typiques contre l'Espagnole : le piège de Tarrasch dans la Steinitz, …d5? contre le cavalier cloué, la variante de Riga dans l'Ouverte et la mauvaise reprise dans la Schliemann.",
+      "stage": "traps",
+      "lessons": [
+        {
+          "id": "ruy_lopez-c4-l1",
+          "legacyIds": [],
+          "title": "Le piège de Tarrasch : 7…O-O? dans la Steinitz",
+          "eco": "C66",
+          "kind": "trap",
+          "objectives": [
+            "Échanger en c6 puis ouvrir le centre par dxe5 quand les Noirs roquent trop tôt",
+            "Gagner le pion e5 après l'échange des dames",
+            "Finir par la fourchette Be7 contre les deux tours"
+          ],
+          "pgn": "{Dans la vieille Défense Steinitz, le pion e5 n'est défendu que par le pion d6 et le cavalier c6. Si les Noirs roquent avant de régler la tension, Bxc6 et dxe5 leur font perdre un pion, puis une qualité.} 1. e4 {[%cal Ge2e4]} 1... e5 2. Nf3 {[%cal Gg1f3]} 2... Nc6 3. Bb5 {[%cal Gf1b5]} 3... d6 4. d4 {[%cal Gd2d4]} 4... Bd7 5. Nc3 {[%cal Gb1c3]} 5... Nf6 6. O-O {[%cal Ge1g1]} 6... Be7 7. Re1 {[%cal Gf1e1]} 7... O-O {Les Noirs roquent sans voir que e5 va tomber.} 8. Bxc6 {Le fou élimine le défenseur de e5. [%cal Gb5c6]} 8... Bxc6 9. dxe5 {[%cal Gd4e5]} 9... dxe5 10. Qxd8 {[%cal Gd1d8]} 10... Raxd8 11. Nxe5 {Le cavalier gagne le pion. [%cal Gf3e5]} 11... Bxe4 12. Nxe4 {[%cal Gc3e4]} 12... Nxe4 13. Nd3 {Le cavalier recule : la tour e1 cloue le cavalier e4 contre le fou e7. [%cal Ge5d3,Ge1e4]} 13... f5 14. f3 {[%cal Gf2f3]} 14... Bc5+ 15. Nxc5 {[%cal Gd3c5]} 15... Nxc5 16. Bg5 {Le fou attaque la tour d8 avec gain de temps. [%cal Gc1g5,Gg5d8]} 16... Rd5 17. Be7 {Le fou attaque les deux tours et le cavalier c5 à la fois. [%cal Gg5e7,Ge7f8,Ge7c5]} 17... Re8 18. c4 {Le pion chasse la tour d5 : la qualité tombe. [%cal Gc2c4]}",
+          "conclusion": "Quand le pion e5 n'est défendu que par d6 et le cavalier c6, Bxc6 et dxe5 le gagnent. Le piège de Tarrasch se termine par Bg5 puis Be7, qui frappe deux tours.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "ruy_lopez-c4-l2",
+          "legacyIds": [],
+          "title": "6…d5? : le cavalier c6 cloué",
+          "eco": "C84",
+          "kind": "trap",
+          "objectives": [
+            "Reconnaître le clouage du fou a4 sur le cavalier c6",
+            "Prendre en d5 puis gagner le pion e5",
+            "Punir …Bd7 par le sacrifice Nxf7 et Qh5+"
+          ],
+          "pgn": "{Après 6.Re1, les Noirs aiment frapper le centre par …d5. Mais tant que …b5 n'a pas été joué, votre fou a4 cloue le cavalier c6 sur le roi e8 : le pion e5 n'a donc plus de vrai défenseur.} 1. e4 {[%cal Ge2e4]} 1... e5 2. Nf3 {[%cal Gg1f3]} 2... Nc6 3. Bb5 {[%cal Gf1b5]} 3... a6 4. Ba4 {[%cal Gb5a4]} 4... Nf6 5. O-O {[%cal Ge1g1]} 5... Be7 6. Re1 {[%cal Gf1e1]} 6... d5 {Le pion attaque e4, mais le cavalier c6 est cloué.} 7. exd5 {[%cal Ge4d5]} 7... Nxd5 (7... Qxd5 8. Nxe5 {Le cavalier prend : …Nxe5 est impossible à cause du clouage. [%cal Gf3e5,Ga4e8]}) 8. Nxe5 {Le cavalier prend e5 : le cavalier c6 ne peut pas le reprendre. [%cal Gf3e5,Ga4c6]} 8... Bd7 9. Nxf7 {Le sacrifice ouvre le roi noir. [%cal Ge5f7]} 9... Kxf7 10. Qh5+ {[%cal Gd1h5]} 10... g6 11. Qxd5+ {La dame reprend le cavalier avec échec : vous avez deux pions de plus et le roi noir est à découvert. [%cal Gh5d5]}",
+          "conclusion": "Tant que le fou a4 est en place et que …b5 n'a pas été joué, le cavalier c6 est cloué. Un pion e5 défendu par une pièce clouée est un pion en prise.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "ruy_lopez-c4-l3",
+          "legacyIds": [],
+          "title": "6…exd4? : la variante de Riga",
+          "eco": "C80",
+          "kind": "trap",
+          "objectives": [
+            "Clouer le cavalier e4 par Re1 quand les Noirs prennent en d4",
+            "Reprendre d4 avec le cavalier et prendre en c6",
+            "Rendre la qualité en e4 pour échanger les dames avec avantage"
+          ],
+          "pgn": "{Dans l'Ouverte, 6…exd4 ouvre la colonne e alors que le roi noir n'a pas roqué. Après Re1, le cavalier e4 est cloué ; les Noirs tentent un sacrifice en h2, mais la suite forcée vous laisse deux pièces mineures contre une tour.} 1. e4 {[%cal Ge2e4]} 1... e5 2. Nf3 {[%cal Gg1f3]} 2... Nc6 3. Bb5 {[%cal Gf1b5]} 3... a6 4. Ba4 {[%cal Gb5a4]} 4... Nf6 5. O-O {[%cal Ge1g1]} 5... Nxe4 6. d4 {[%cal Gd2d4]} 6... exd4 {Les Noirs ouvrent la colonne e devant leur propre roi.} 7. Re1 {La tour cloue le cavalier e4. [%cal Gf1e1,Ge1e4,Ge4e8]} 7... d5 8. Nxd4 {Le cavalier reprend et attaque c6. [%cal Gf3d4,Gd4c6]} 8... Bd6 9. Nxc6 {[%cal Gd4c6]} 9... Bxh2+ (9... Qh4 10. g3 {Le pion chasse la dame et protège h2 : les Noirs ont perdu une pièce. [%cal Gg2g3]}) 10. Kh1 {[%cal Gg1h1]} 10... Qh4 11. Rxe4+ {La tour rend la qualité pour casser l'attaque. [%cal Ge1e4]} 11... dxe4 12. Qd8+ {[%cal Gd1d8]} 12... Qxd8 13. Nxd8+ {[%cal Gc6d8]} 13... Kxd8 14. Kxh2 {Le roi prend le fou : deux pièces mineures contre une tour, l'avantage est blanc. [%cal Gh1h2]}",
+          "conclusion": "Contre 6…exd4?, Re1 cloue le cavalier e4. Après le sacrifice en h2, Kh1, Rxe4+ et Qd8+ simplifient : vos pièces mineures dominent la finale.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "ruy_lopez-c4-l4",
+          "legacyIds": [],
+          "title": "Schliemann : 7…dxc6? et l'échange des dames",
+          "eco": "C63",
+          "kind": "trap",
+          "objectives": [
+            "Échanger en c6 contre …Bc5 dans la Schliemann",
+            "Échanger les dames quand les Noirs reprennent avec le pion d",
+            "Gagner le pion e5 après Qxd8+"
+          ],
+          "pgn": "{Dans la Schliemann avec 4.d3, l'échange Bxc6 laisse un choix aux Noirs. La bonne reprise est …bxc6 ; avec …dxc6?, la colonne d s'ouvre entre les dames, et après leur échange le pion e5 n'a plus de défenseur.} 1. e4 {[%cal Ge2e4]} 1... e5 2. Nf3 {[%cal Gg1f3]} 2... Nc6 3. Bb5 {[%cal Gf1b5]} 3... f5 4. d3 {[%cal Gd2d3]} 4... fxe4 5. dxe4 {[%cal Gd3e4]} 5... Nf6 6. O-O {[%cal Ge1g1]} 6... Bc5 7. Bxc6 {Le fou enlève le défenseur de e5. [%cal Gb5c6]} 7... dxc6 {La mauvaise reprise : la colonne d s'ouvre.} 8. Qxd8+ {L'échange des dames enlève à la dame noire la défense de e5. [%cal Gd1d8]} 8... Kxd8 9. Nxe5 {Le cavalier gagne le pion, et le roi noir ne peut plus roquer. [%cal Gf3e5]} 9... Bd6 10. Nf7+ {Le cavalier fourchette le roi et la tour h8. [%cal Ge5f7,Gf7h8]}",
+          "conclusion": "Contre la Schliemann, Bxc6 pose une question : après …dxc6?, Qxd8+ et Nxe5 gagnent un pion. Retenez que l'échange des dames supprime le dernier défenseur de e5.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        }
+      ]
+    },
+    {
+      "id": "ruy_lopez-c5",
+      "title": "Grande théorie",
+      "summary": "Les lignes profondes : la Breyer avec a4 et d5, la Dilworth dans l'Ouverte, la Rio de Janeiro contre la Berlinoise et l'anti-Marshall 8.h3.",
+      "stage": "theory",
+      "lessons": [
+        {
+          "id": "ruy_lopez-c5-l1",
+          "legacyIds": [
+            "ruy_lopez-m3"
+          ],
+          "title": "La Breyer : Nf1-g3, a4 puis d5",
+          "eco": "C95",
+          "kind": "line",
+          "objectives": [
+            "Jouer d4 et Nbd2 contre le repli 9…Nb8",
+            "Achever la manœuvre Nf1-g3 contre …Bf8 et …g6",
+            "Fermer le centre par d5 puis jouer Bg5 et Be3"
+          ],
+          "pgn": "{La Breyer replace le cavalier c6 en d7 par b8. La position est lente : vous terminez la manœuvre Nf1-g3, puis a4 provoque …c5, et d5 ferme le centre. Le jeu se déplace alors à l'aile roi.} 1. e4 {[%cal Ge2e4]} 1... e5 2. Nf3 {[%cal Gg1f3]} 2... Nc6 3. Bb5 {[%cal Gf1b5]} 3... a6 4. Ba4 {[%cal Gb5a4]} 4... Nf6 5. O-O {[%cal Ge1g1]} 5... Be7 6. Re1 {[%cal Gf1e1]} 6... b5 7. Bb3 {[%cal Ga4b3]} 7... d6 8. c3 {[%cal Gc2c3]} 8... O-O 9. h3 {[%cal Gh2h3]} 9... Nb8 10. d4 {[%cal Gd2d4]} 10... Nbd7 11. Nbd2 {[%cal Gb1d2]} 11... Bb7 12. Bc2 {[%cal Gb3c2]} 12... Re8 13. Nf1 {[%cal Gd2f1]} 13... Bf8 14. Ng3 {[%cal Gf1g3]} 14... g6 {Le fou noir ira en g7.} 15. a4 {Le pion demande à …c5 de venir. [%cal Ga2a4,Ga4b5]} 15... c5 16. d5 {Le centre est fermé : le fou b7 est enfermé derrière ses pions. [%cal Gd4d5,Gd5b7]} 16... c4 17. Bg5 {Le fou se place avant …h6 pour provoquer un affaiblissement. [%cal Gc1g5,Gg5f6]} 17... h6 18. Be3 {[%cal Gg5e3]} 18... Nc5 19. Qd2 {La dame vise h6 : le pion g6 est fragile. [%cal Gd1d2,Gd2h6]} 19... h5 {Les Noirs empêchent g4.}",
+          "conclusion": "Dans la Breyer, l'ordre est Nf1-g3, a4, d5, puis Bg5 et Qd2. Le centre fermé et le fou b7 enfermé vous laissent l'initiative à l'aile roi.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "ruy_lopez-c5-l2",
+          "legacyIds": [
+            "ruy_lopez-m4"
+          ],
+          "title": "La Dilworth : 9.c3 Bc5 et le sacrifice en f2",
+          "eco": "C82",
+          "kind": "line",
+          "objectives": [
+            "Répondre à 9…Bc5 par Nbd2",
+            "Accepter le sacrifice …Nxf2 en reprenant avec la tour",
+            "Ramener le roi et le cavalier par Nf1 et Be3"
+          ],
+          "pgn": "{La Dilworth sacrifie deux pièces contre une tour et deux pions en f2. Il faut connaître la ligne : votre roi s'expose un temps, mais vos pièces mineures finissent par dominer.} 1. e4 {[%cal Ge2e4]} 1... e5 2. Nf3 {[%cal Gg1f3]} 2... Nc6 3. Bb5 {[%cal Gf1b5]} 3... a6 4. Ba4 {[%cal Gb5a4]} 4... Nf6 5. O-O {[%cal Ge1g1]} 5... Nxe4 6. d4 {[%cal Gd2d4]} 6... b5 7. Bb3 {[%cal Ga4b3]} 7... d5 8. dxe5 {[%cal Gd4e5]} 8... Be6 9. c3 {[%cal Gc2c3]} 9... Bc5 10. Nbd2 {[%cal Gb1d2]} 10... O-O 11. Bc2 {Le fou vise h7 et quitte la diagonale de f7. [%cal Gb3c2,Gc2h7]} 11... Nxf2 12. Rxf2 {[%cal Gf1f2]} 12... f6 13. exf6 {[%cal Ge5f6]} 13... Bxf2+ 14. Kxf2 {[%cal Gg1f2]} 14... Qxf6 {Les Noirs ont une tour et deux pions pour deux pièces.} 15. Nf1 {Le cavalier protège le roi et vise e3. [%cal Gd2f1,Gf1e3]} 15... Ne5 16. Be3 {Le fou bloque la colonne e et défend le roi. [%cal Gc1e3,Ge3c5]} 16... Rae8 17. Bc5 {Le fou attaque la tour f8 et quitte e3, où le cavalier f1 viendra. [%cal Ge3c5,Gc5f8]}",
+          "conclusion": "Contre la Dilworth, prenez les pièces et regroupez-vous : Nf1, Be3 et Bc5 couvrent le roi et attaquent. Deux pièces mineures valent plus qu'une tour dans ce milieu de partie.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "ruy_lopez-c5-l3",
           "legacyIds": [
             "ruy_lopez-m5"
           ],
-          "title": "Spanish: Open Berlin, Main Line 9.Nc3 (Rio de Janerio)",
+          "title": "La Rio de Janeiro : 5…Be7 6.Qe2",
           "eco": "C67",
           "kind": "line",
-          "objectives": [],
-          "pgn": "1. e4 {e4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e4]} 1... e5 {e5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e5]} 2. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 2... Nc6 {Nc6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb8c6]} 3. Bb5 {Bb5 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf1b5]} 3... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 4. O-O {O-O : Les Blancs sécurisent le roi et activent les tours pour le milieu de jeu. [%cal Ge1g1]} 4... Nxe4 {Nxe4 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gf6e4]} 5. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 5... Be7 {Be7 : Les Noirs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf8e7]} 6. Qe2 {Qe2 : Les Blancs développent le dame avec un gain de coordination et de contrôle des cases clés. [%cal Gd1e2]} 6... Nd6 {Nd6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Ge4d6]}",
-          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "objectives": [
+            "Attaquer le cavalier e4 par Qe2 contre 5…Be7",
+            "Échanger en c6 pour doubler les pions noirs",
+            "Recentrer le cavalier par Nd4 et le fou par Be3"
+          ],
+          "pgn": "{Avec 5…Be7, les Noirs évitent la finale berlinoise. La dame e2 attaque le cavalier e4 sur la colonne ; après l'échange en c6, les pions noirs de l'aile dame sont doublés, et vos pièces occupent le centre.} 1. e4 {[%cal Ge2e4]} 1... e5 2. Nf3 {[%cal Gg1f3]} 2... Nc6 3. Bb5 {[%cal Gf1b5]} 3... Nf6 4. O-O {[%cal Ge1g1]} 4... Nxe4 5. d4 {[%cal Gd2d4]} 5... Be7 6. Qe2 {La dame attaque le cavalier e4. [%cal Gd1e2,Ge2e4]} 6... Nd6 7. Bxc6 {[%cal Gb5c6]} 7... bxc6 8. dxe5 {[%cal Gd4e5]} 8... Nb7 {Le cavalier recule sur le bord : il reviendra par c5.} 9. Nc3 {[%cal Gb1c3]} 9... O-O 10. Re1 {[%cal Gf1e1]} 10... Nc5 11. Nd4 {Le cavalier se centralise et vise f5 et c6. [%cal Gf3d4,Gd4c6]} 11... Ne6 12. Be3 {Le fou soutient d4 : vous gardez la case centrale. [%cal Gc1e3,Ge3d4]} 12... Nxd4 13. Bxd4 {[%cal Ge3d4]} 13... c5 {Les Noirs chassent le fou : il recule et vise g7.}",
+          "conclusion": "Contre la Rio de Janeiro, Qe2 puis Bxc6 et dxe5 vous donnent un pion e5 fort et une meilleure structure. Nd4 et Be3 occupent les cases centrales.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "ruy_lopez-c5-l4",
+          "legacyIds": [],
+          "title": "L'anti-Marshall : 8.h3 Bb7 9.d3 d5",
+          "eco": "C88",
+          "kind": "line",
+          "objectives": [
+            "Éviter le gambit Marshall par 8.h3",
+            "Protéger e4 par d3 avant c3",
+            "Prendre en d5 et activer le cavalier par Nbd2"
+          ],
+          "pgn": "{Contre 7…O-O, 8.c3 d5 permettrait le gambit Marshall. Avec 8.h3 puis d3, vous jouez une position solide : si les Noirs poussent quand même …d5, l'échange laisse un centre ouvert sans compensation pour eux.} 1. e4 {[%cal Ge2e4]} 1... e5 2. Nf3 {[%cal Gg1f3]} 2... Nc6 3. Bb5 {[%cal Gf1b5]} 3... a6 4. Ba4 {[%cal Gb5a4]} 4... Nf6 5. O-O {[%cal Ge1g1]} 5... Be7 6. Re1 {[%cal Gf1e1]} 6... b5 7. Bb3 {[%cal Ga4b3]} 7... O-O 8. h3 {Le pion empêche …Bg4 sans donner aux Noirs le temps de …d5 contre c3. [%cal Gh2h3,Gh3g4]} 8... Bb7 9. d3 {Le pion protège e4. [%cal Gd2d3,Gd3e4]} 9... d5 (9... d6 10. a3 {Le pion garde une case de retraite en a2 pour le fou. [%cal Ga2a3,Gb3a2]}) 10. exd5 {[%cal Ge4d5]} 10... Nxd5 11. Nbd2 {Le cavalier va en e4 ou en f1. [%cal Gb1d2,Gd2e4]} 11... Qd7 12. Ne4 {Le cavalier se centralise et vise c5 et g5. [%cal Gd2e4,Ge4c5]}",
+          "conclusion": "Avec 8.h3 et d3, vous jouez l'Espagnole sans la théorie de la Marshall. Si …d5, l'échange et Nbd2-e4 donnent à vos pièces les cases centrales.",
           "mustCover": "allBranches",
           "reviewable": true
         }

@@ -47,6 +47,20 @@ const PRESETS = {
   trompowsky: { side: "white", root: "d4 Nf6 Bg5" },
   scandinavian: { side: "black", root: "e4 d5 exd5 Qxd5" },
   alekhine: { side: "black", root: "e4 Nf6 e5 Nd5" },
+  ruy_lopez: { side: "white", root: "e4 e5 Nf3 Nc6 Bb5" },
+  queens_gambit: { side: "white", root: "d4 d5 c4" },
+  sicilian: { side: "black", root: "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6" },
+  caro_kann: { side: "black", root: "e4 c6" },
+  kings_indian: { side: "black", root: "d4 Nf6 c4 g6" },
+  english: { side: "white", root: "c4" },
+  benoni: { side: "black", root: "d4 Nf6 c4 c5 d5" },
+  pirc: { side: "black", root: "e4 d6 d4 Nf6 Nc3 g6" },
+  vienna: { side: "white", root: "e4 e5 Nc3" },
+  kings_gambit: { side: "white", root: "e4 e5 f4" },
+  scotch: { side: "white", root: "e4 e5 Nf3 Nc6 d4" },
+  catalan: { side: "white", root: "d4 Nf6 c4 e6 g3" },
+  slav: { side: "black", root: "d4 d5 c4 c6" },
+  grunfeld: { side: "black", root: "d4 Nf6 c4 g6 Nc3 d5" },
 };
 
 // ---------------------------------------------------------------------------

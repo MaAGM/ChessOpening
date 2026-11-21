@@ -1,0 +1,336 @@
+// Brouillon de la Masterclass « Défense Benoni » (côté Noirs) : 1.d4 Nf6 2.c4 c5 3.d5.
+// Répertoire : la Benoni moderne 3…e6 (classique, h3, fianchetto, Bf4, Taimanov, Quatre pions),
+// le gambit Benko 3…b5 (accepté et refusé) et l'ancienne Benoni 1.d4 c5 2.d5 e5.
+// Les deux grandes réponses à 3.d5 (…e6 et …b5) sont présentées comme alternatives.
+// Les flèches du coup à jouer sont ajoutées par scripts/course-builder.mjs ; celles écrites ici
+// illustrent une idée (cible, manœuvre, menace).
+import { TRAPS } from "./benoni-traps.mjs";
+
+const MB = "1. d4 Nf6 2. c4 c5 3. d5 e6 4. Nc3 exd5 5. cxd5 d6";
+const BK = "1. d4 Nf6 2. c4 c5 3. d5 b5 4. cxb5 a6";
+
+export default {
+  id: "benoni",
+  name: "Défense Benoni",
+  description:
+    "1.d4 Nf6 2.c4 c5 : une défense de combat qui déséquilibre la structure dès le troisième coup. Un répertoire complet côté Noirs avec la Benoni moderne contre tous les systèmes blancs, le gambit Benko accepté et refusé, l'ancienne Benoni, pièges et grandes lignes.",
+  side: "black",
+  eco: ["A44", "A57", "A58", "A59", "A61", "A62", "A64", "A67", "A69", "A70", "A77"],
+  chapters: [
+    // =====================================================================================
+    {
+      title: "Les fondations",
+      summary:
+        "La structure de la Benoni moderne, la variante classique avec 10.Nd2, le gambit Benko accepté et l'ancienne Benoni.",
+      stage: "foundations",
+      lessons: [
+        {
+          title: "3…e6 : la structure de la Benoni moderne",
+          eco: "A60",
+          kind: "concept",
+          objectives: [
+            "Provoquer d5 par …c5 puis ouvrir la colonne e par …e6",
+            "Fianchetter le fou f8 sur la grande diagonale",
+            "Comprendre la majorité noire à l'aile dame",
+          ],
+          pgn: `{La Benoni moderne crée une structure déséquilibrée : les Blancs ont un pion d5 et une majorité au centre, vous avez une majorité à l'aile dame et le fou g7 sur la grande diagonale. Le jeu sera dynamique pour les deux camps.}
+1. d4 Nf6 2. c4 c5 {Le pion attaque d4 : les Blancs avancent en général en d5. [%cal Gc5d4]}
+3. d5 e6 {Le pion attaque d5 pour ouvrir la colonne e. [%cal Ge6d5]}
+4. Nc3
+(4. Nf3 exd5 5. cxd5 d6 {La même structure, avec le cavalier déjà en f3.})
+4... exd5 5. cxd5 d6 {Le pion d6 bloque la case e5 et libère le fou c8.}
+6. e4
+(6. Nf3 g6 {Contre les systèmes sans e4, le fou rejoint g7 de la même façon. [%cal Gf8g7]})
+6... g6 7. Nf3 Bg7 {Le fou g7 vise c3 et b2 sur la diagonale ouverte. [%cal Gg7b2]}`,
+          conclusion:
+            "La Benoni moderne échange le pion e contre le pion c. Votre fou g7, la colonne e et la majorité …a6-b5 compensent l'espace blanc au centre.",
+        },
+        {
+          legacyIds: ["benoni-m3"],
+          title: "La classique : 9.O-O Re8 10.Nd2",
+          eco: "A77",
+          kind: "line",
+          objectives: [
+            "Placer la tour en e8 contre le pion e4",
+            "Amener le cavalier b8 en c7 par a6",
+            "Préparer …b5 malgré a4",
+          ],
+          pgn: `{Dans la classique, les Blancs jouent Be2, O-O et Nd2 pour rejoindre c4 et viser d6. Votre réponse : la tour e8 presse e4, le cavalier passe par a6 et c7, et …b5 reste la rupture à préparer.}
+${MB} 6. e4 g6 7. Nf3 Bg7 8. Be2 O-O 9. O-O Re8 {La tour presse le pion e4. [%cal Ge8e4]}
+10. Nd2 Na6 {Le cavalier rejoint c7 pour soutenir …b5. [%cal Ga6c7]}
+11. f3 Nc7 12. a4 b6 {Le pion b6 couvre c5 et prépare …a6 et …Rb8 ; …b5 viendra plus tard. [%cal Gb6c5]}`,
+          conclusion:
+            "Dans la classique, …Re8, …Na6-c7 et …b6 préparent patiemment …b5. Vos pièces restent actives malgré l'espace blanc.",
+        },
+        {
+          legacyIds: ["benoni-m2"],
+          title: "Le gambit Benko : 3…b5 4.cxb5 a6",
+          eco: "A59",
+          kind: "line",
+          objectives: [
+            "Sacrifier le pion b pour ouvrir les colonnes a et b",
+            "Échanger les fous de cases blanches par …Bxf1",
+            "Fianchetter le fou f8 vers la grande diagonale",
+          ],
+          pgn: `{Le gambit Benko offre un pion pour ouvrir les colonnes a et b. Vos tours y prendront place, et le fou g7 complétera la pression sur l'aile dame : la compensation dure longtemps.}
+${BK} {Le pion a6 propose d'ouvrir la colonne a. [%cal Ga6b5]}
+5. bxa6 Bxa6 {Le fou reprend et vise f1. [%cal Ga6f1]}
+6. Nc3 d6 7. e4
+(7. Nf3 g6 {Contre le fianchetto, le fou rejoint aussi g7.})
+7... Bxf1 {L'échange empêche les Blancs de roquer. [%cal Ga6f1]}
+8. Kxf1 g6 9. g3 Bg7 {Le fou g7 rejoint l'aile dame par la grande diagonale. [%cal Gg7a1]}`,
+          conclusion:
+            "Dans le Benko accepté, vous avez un pion de moins mais deux colonnes ouvertes et un fou g7 puissant. Le roi blanc a perdu le droit de roquer.",
+        },
+        {
+          legacyIds: ["benoni-m1"],
+          title: "L'ancienne Benoni : 1.d4 c5 2.d5 e5",
+          eco: "A44",
+          kind: "line",
+          objectives: [
+            "Bloquer le centre par …e5 et …d6",
+            "Échanger le fou c8 contre le cavalier f3",
+            "Échanger les fous de cases noires par …Bg5",
+          ],
+          pgn: `{L'ancienne Benoni ferme le centre tout de suite. Vos pions c5, d6 et e5 sont sur des cases noires : votre fou e7 est le mauvais fou, alors vous cherchez à l'échanger par …Bg5.}
+1. d4 c5 2. d5 e5 {Le centre est bloqué : le jeu se déplacera sur les ailes. [%cal Ge5d4]}
+3. e4 d6 4. Nc3 Be7 5. Nf3 Bg4 {Le fou s'échange contre le cavalier qui surveille g5. [%cal Gg4f3]}
+6. Be2 Bxf3 7. Bxf3 Bg5 {Le fou propose l'échange de votre mauvais fou. [%cal Gg5c1]}`,
+          conclusion:
+            "Dans l'ancienne Benoni, échangez les pièces mineures qui gênent votre structure : …Bg4xf3 puis …Bg5 laissent un cavalier contre un fou sur des cases fermées.",
+        },
+      ],
+    },
+    // =====================================================================================
+    {
+      title: "Plans typiques",
+      summary:
+        "La rupture …b5 contre h3 et Bd3, le fianchetto blanc avec …a6 et …Rb8, la pression du Benko et la défense de d6 contre Bf4.",
+      stage: "plans",
+      lessons: [
+        {
+          title: "La rupture …b5 contre 7.h3",
+          eco: "A70",
+          kind: "line",
+          objectives: [
+            "Jouer …b5 même s'il semble perdre un pion",
+            "Exploiter l'échec …Qa5+ pour récupérer la pièce",
+            "Reprendre le pion b5 et garder des pièces actives",
+          ],
+          pgn: `{Contre 7.h3 et 9.Bd3, la rupture …b5 est thématique. Si les Blancs prennent en b5 avec le fou, …Nxe4 et l'échec …Qa5+ récupèrent la pièce : vos pièces deviennent très actives.}
+${MB} 6. e4 g6 7. h3 Bg7 8. Nf3 O-O 9. Bd3 b5 {Le pion attaque c4 et défie le fou d3. [%cal Gb5c4]}
+10. Bxb5
+(10. Nxb5 Re8 {La tour presse e4 : le pion n'a plus de défenseur sûr. [%cal Ge8e4]})
+10... Nxe4 {Le cavalier prend : le fou b5 n'est plus protégé. [%cal Gf6e4]}
+11. Nxe4 Qa5+ {L'échec attaque le roi et le fou b5 en même temps. [%cal Ga5e1,Ga5b5]}
+12. Nfd2 Qxb5 13. Nxd6 Qa6 {La dame vise le roi blanc resté au centre. [%cal Ga6e2]}
+14. N2c4 {Les Blancs ont un pion de plus, mais leur roi est exposé.}`,
+          conclusion:
+            "Contre h3 et Bd3, …b5 ouvre le jeu. Après …Nxe4 et …Qa5+, votre activité compense largement le pion.",
+        },
+        {
+          title: "Contre le fianchetto : …a6, …Rb8 et …b5",
+          eco: "A64",
+          kind: "line",
+          objectives: [
+            "Préparer …b5 par …a6 et …Rb8",
+            "Installer le cavalier en e5 face au cavalier c4",
+            "Garder le fou g7 libre sur la grande diagonale",
+          ],
+          pgn: `{Contre le fianchetto blanc, le jeu est plus lent. Votre plan est classique : …a6, …Nbd7, …Re8 et …Rb8 préparent …b5, et le cavalier e5 contrôle c4.}
+${MB} 6. Nf3 g6 7. g3 Bg7 8. Bg2 O-O 9. O-O a6 {Le pion prépare …b5. [%cal Gb7b5]}
+10. a4 Nbd7 11. Nd2 Re8 12. h3 Rb8 {La tour soutient …b5. [%cal Gb8b5]}
+13. Nc4 Ne5 {Le cavalier défie celui de c4 et attaque d3. [%cal Ge5c4,Ge5d3]}`,
+          conclusion:
+            "Contre le fianchetto, …a6, …Rb8 et …Ne5 préparent …b5. Le cavalier e5 conteste la case c4, clé du jeu blanc.",
+        },
+        {
+          title: "Benko : la pression sur les colonnes a et b",
+          eco: "A58",
+          kind: "line",
+          objectives: [
+            "Placer les tours en a8 et b8 face aux pions blancs",
+            "Jouer …Qa5 pour presser c3 et a2",
+            "Maintenir la compensation sans se presser",
+          ],
+          pgn: `{Dans le Benko avec fianchetto blanc, vous n'avez pas de récupération immédiate du pion. Votre compensation est positionnelle : …Qa5, …Rfb8 et le fou g7 pressent sans relâche l'aile dame blanche.}
+${BK} 5. bxa6 Bxa6 6. Nc3 d6 7. Nf3 g6 8. g3 Bg7 9. Bg2 Nbd7 10. O-O O-O {Le roque terminé, toutes vos pièces se tournent vers l'aile dame.}
+11. Rb1 Qa5 {La dame vise c3 et a2. [%cal Ga5c3,Ga5a2]}`,
+          conclusion:
+            "Dans le Benko, chaque pièce noire vise l'aile dame. …Qa5, …Rfb8 et le fou g7 compensent durablement le pion sacrifié.",
+        },
+        {
+          title: "Contre 7.Bf4 : …Qa4+ et la défense de d6",
+          eco: "A61",
+          kind: "line",
+          objectives: [
+            "Protéger d6 contre le fou f4",
+            "Répondre à Qa4+ par …Bd7 avec gain de temps",
+            "Défendre d6 par …Qc7 puis roquer",
+          ],
+          pgn: `{Avec 7.Bf4, les Blancs attaquent d6 tout de suite. Le pion d6 est votre point faible : …Bg7, puis …Bd7 et …Qc7 le protègent avant le roque.}
+${MB} 6. Nf3 g6 7. Bf4 Bg7 {Le fou protège la diagonale et prépare le roque.}
+8. Qa4+ Bd7 {Le fou couvre l'échec et vise la dame. [%cal Gd7a4]}
+9. Qb3 Qc7 {La dame défend d6 et b7. [%cal Gc7d6,Gc7b7]}
+10. e3 O-O 11. Be2 a6 {Le pion prépare …b5 et chasse les pièces de b5. [%cal Ga6b5]}`,
+          conclusion:
+            "Contre Bf4, protégez d6 avant tout : …Bd7, …Qc7 et le roque. Ensuite, …a6 et …b5 relancent votre jeu.",
+        },
+      ],
+    },
+    // =====================================================================================
+    {
+      title: "Réponses adverses",
+      summary:
+        "L'attaque Taimanov 8.Bb5+, le Benko refusé par 5.b6, 5.e3 ou 4.Nf3, et les plans de chaque côté.",
+      stage: "responses",
+      lessons: [
+        {
+          title: "L'attaque Taimanov : 7.f4 Bg7 8.Bb5+",
+          eco: "A67",
+          kind: "line",
+          objectives: [
+            "Répondre à Bb5+ par …Nfd7 pour garder le contrôle de e5",
+            "Roquer puis amener le cavalier en c7",
+            "Freiner la poussée e5 en contrôlant la case",
+          ],
+          pgn: `{L'attaque Taimanov est la ligne la plus dangereuse : Bb5+ gêne votre développement et e5 menace. Le cavalier va en d7 pour surveiller e5, puis …Na6-c7 chasse le fou b5.}
+${MB} 6. e4 g6 7. f4 Bg7 8. Bb5+ Nfd7 {Le cavalier défend e5 contre la poussée. [%cal Gd7e5]}
+9. a4 O-O 10. Nf3 Na6 {Le cavalier vise c7 pour chasser le fou b5. [%cal Ga6c7]}
+11. O-O Nc7 12. Bd3 a6 {Le pion prépare …b5 et …Rb8. [%cal Ga6b5]}`,
+          conclusion:
+            "Contre la Taimanov, …Nfd7 surveille e5 et …Na6-c7 chasse le fou. …a6 et …b5 reprennent l'initiative à l'aile dame.",
+        },
+        {
+          title: "Benko refusé : 5.b6",
+          eco: "A57",
+          kind: "line",
+          objectives: [
+            "Récupérer le pion b6 au bon moment",
+            "Développer le cavalier en d7 pour viser b6",
+            "Répondre à a4 par …a5",
+          ],
+          pgn: `{Avec 5.b6, les Blancs rendent le pion pour garder la colonne a fermée. Vous récupérez b6 tranquillement : …d6, …Nbd7 et la dame ou le cavalier prendront le pion.}
+${BK} 5. b6 d6 6. Nc3 Nbd7 {Le cavalier attaque le pion b6. [%cal Gd7b6]}
+7. a4
+(7. Nf3 g6 {Le fianchetto d'abord : le pion b6 ne s'enfuira pas.})
+7... a5 {Le pion bloque a4 ; …Qxb6 suivra. [%cal Ga5a4]}
+8. e4 {Le pion b6 reste faible : …Nxb6 ou …Qxb6 le reprendra.}`,
+          conclusion:
+            "Contre 5.b6, ne vous pressez pas : …d6, …Nbd7 et …a5 préparent la reprise du pion b6 avec une structure saine.",
+        },
+        {
+          title: "Benko refusé : 5.e3",
+          eco: "A57",
+          kind: "line",
+          objectives: [
+            "Fianchetter le fou f8 sans reprendre le pion",
+            "Répondre à a4 en développant le fou en b7",
+            "Ouvrir la colonne a au moment choisi",
+          ],
+          pgn: `{Avec 5.e3, les Blancs gardent le pion b5 en soutenant c4. Vous développez simplement : …g6, …Bg7, le roque et …Bb7 mettent la pression sur d5.}
+${BK} 5. e3 g6 6. Nc3 Bg7 7. a4 {Le pion soutient b5 : la colonne a reste fermée pour l'instant.}
+7... O-O 8. Nf3 Bb7 {Le fou vise d5 et la grande diagonale. [%cal Gb7d5]}`,
+          conclusion:
+            "Contre 5.e3, …g6, …Bg7 et …Bb7 développent vos pièces vers d5. Vous reprendrez le pion b5 au moment opportun.",
+        },
+        {
+          title: "Benko refusé : 4.Nf3 g6",
+          eco: "A57",
+          kind: "line",
+          objectives: [
+            "Répondre à 4.Nf3 par le fianchetto",
+            "Proposer …a6 après cxb5",
+            "Récupérer le pion b6 avec …Nbd7",
+          ],
+          pgn: `{Avec 4.Nf3, les Blancs développent d'abord. Vous jouez …g6 ; si les Blancs prennent ensuite en b5, …a6 relance le gambit dans de bonnes conditions.}
+1. d4 Nf6 2. c4 c5 3. d5 b5 4. Nf3 g6 {Le fianchetto avant tout : le pion b5 attendra. [%cal Gf8g7]}
+5. cxb5 a6 6. b6 d6 7. Nc3 Nbd7 {Le cavalier vise le pion b6. [%cal Gd7b6]}
+8. a4 Qxb6 {La dame reprend le pion : la position est équilibrée.}`,
+          conclusion:
+            "Contre 4.Nf3, le fianchetto puis …a6 gardent l'esprit du Benko. Le pion b6 avancé se récupère facilement.",
+        },
+      ],
+    },
+    // =====================================================================================
+    {
+      title: "Pièges",
+      summary: "Quatre pièges noirs : …Nxe4 contre Nd2 ou Bb5, la case d3 dans la Benko, le pion d5 lâché après Nbd2.",
+      stage: "traps",
+      lessons: TRAPS,
+    },
+    // =====================================================================================
+    {
+      title: "Grande théorie",
+      summary:
+        "Les Quatre pions avec 10.e5, le Benko 5…g6 avec …Bxf1, la classique jusqu'à …b6 et le fianchetto jusqu'à …Nh5.",
+      stage: "theory",
+      lessons: [
+        {
+          legacyIds: ["benoni-m4"],
+          title: "Les Quatre pions : 9.Be2 Re8 10.e5",
+          eco: "A69",
+          kind: "line",
+          objectives: [
+            "Accepter la poussée e5 et contre-attaquer par …Ng4",
+            "Clouer le pion par …Qb6 contre la diagonale b6-g1",
+            "Prendre le pion e5 en échangeant les pièces",
+          ],
+          pgn: `{Dans les Quatre pions, la poussée 10.e5 vise à ouvrir le jeu vers votre roi. Le cavalier saute en g4 et la dame en b6 : la diagonale b6-g1 rend la position blanche délicate.}
+${MB} 6. e4 g6 7. f4 Bg7 8. Nf3 O-O 9. Be2 Re8 {La tour vise e4 et la future case e5. [%cal Ge8e4]}
+10. e5 dxe5 11. fxe5 Ng4 {Le cavalier attaque e5. [%cal Gg4e5]}
+12. Bg5 Qb6 {La dame vise b2 et la diagonale du roi blanc. [%cal Gb6g1]}
+13. O-O Nxe5 14. Nxe5 Bxe5 {Vous avez gagné le pion e5 et le fou g7 rejoint le centre. [%cal Ge5h2]}`,
+          conclusion:
+            "Contre 10.e5, …Ng4 et …Qb6 frappent le centre et le roi blanc. Le pion e5 tombe, et vos pièces sont très actives.",
+        },
+        {
+          legacyIds: ["benoni-m5"],
+          title: "Benko : 5…g6 6.Nc3 Bxa6 7.e4",
+          eco: "A59",
+          kind: "line",
+          objectives: [
+            "Choisir l'ordre …g6 avant …Bxa6",
+            "Échanger les fous en f1 pour priver les Blancs du roque",
+            "Placer le cavalier en d7 et les tours sur les colonnes ouvertes",
+          ],
+          pgn: `{L'ordre 5…g6 retarde la reprise en a6 pour limiter les options blanches. Après 7.e4 Bxf1, le roi blanc reste en f1 ou rejoint g2 à la main : vous gagnez le temps de mettre vos tours en place.}
+${BK} 5. bxa6 g6 {Le fianchetto d'abord : le pion a6 ne s'enfuira pas. [%cal Gf8g7]}
+6. Nc3 Bxa6 7. e4 Bxf1 8. Kxf1 d6 9. Nf3 Bg7 10. g3 O-O 11. Kg2 Nbd7 {Le cavalier rejoint b6 ou e5. [%cal Gd7b6]}`,
+          conclusion:
+            "Avec 5…g6, vous gardez la même compensation : les colonnes a et b, le fou g7 et un roi blanc privé de roque.",
+        },
+        {
+          title: "Classique : 12.a4 b6 et la manœuvre …Rb8",
+          eco: "A77",
+          kind: "line",
+          objectives: [
+            "Garder la tour e8 face au pion e4",
+            "Préparer …b5 par …a6 et …Rb8",
+            "Échanger le cavalier c4 par …Ba6",
+          ],
+          pgn: `{Dans la classique avec 10.Nd2, le cavalier blanc vise c4. Votre réponse : …Na6-c7, …b6, puis …Ba6 pour échanger ce cavalier et ouvrir la voie à …b5.}
+${MB} 6. e4 g6 7. Nf3 Bg7 8. Be2 O-O 9. O-O Re8 10. Nd2 Na6 11. f3 Nc7 12. a4 b6 13. Nc4 Ba6 {Le fou défie le cavalier c4. [%cal Ga6c4]}
+14. Bg5 h6 {Le pion chasse le fou avant qu'il ne cloue le cavalier. [%cal Gh6g5]}`,
+          conclusion:
+            "Dans la classique, …b6 et …Ba6 neutralisent le cavalier c4. Votre structure est solide et …b5 reste en réserve.",
+        },
+        {
+          title: "Fianchetto : …Nh5 et le jeu à l'aile roi",
+          eco: "A64",
+          kind: "line",
+          objectives: [
+            "Jouer …Nh5 pour libérer le pion f",
+            "Préparer …f5 contre le centre blanc",
+            "Garder …b5 comme seconde rupture",
+          ],
+          pgn: `{Après 14.Na3 Nh5, vous changez de flanc : le pion f peut avancer en f5, et le fou g7 retrouve sa diagonale. Les Blancs doivent surveiller les deux ailes.}
+${MB} 6. Nf3 g6 7. g3 Bg7 8. Bg2 O-O 9. O-O a6 10. a4 Nbd7 11. Nd2 Re8 12. h3 Rb8 13. Nc4 Ne5 14. Na3 Nh5 {Le cavalier dégage le pion f. [%cal Gf7f5]}
+15. e4 f5 {Le pion attaque e4 et ouvre la colonne f. [%cal Gf5e4]}`,
+          conclusion:
+            "Contre le fianchetto, …Nh5 et …f5 ouvrent un second front. Les Blancs ne peuvent plus se concentrer sur l'aile dame.",
+        },
+      ],
+    },
+  ],
+};

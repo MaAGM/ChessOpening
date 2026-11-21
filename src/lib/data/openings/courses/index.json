@@ -3,64 +3,170 @@
   "courses": [
     {
       "id": "english",
-      "name": "English",
-      "description": "Formation complète sur English",
+      "name": "Partie anglaise",
+      "description": "1.c4 : une ouverture de flanc qui contrôle d5 et garde le centre en réserve. Un répertoire complet côté Blancs avec le schéma g3-Bg2, la Sicilienne inversée, la fermée et le système Botvinnik, la symétrique et le Hérisson, la Mikenas contre 1…Nf6, pièges et grandes lignes.",
       "side": "white",
       "eco": [
+        "A16",
+        "A17",
+        "A18",
+        "A21",
+        "A22",
+        "A26",
+        "A29",
         "A30",
         "A33",
-        "A39",
-        "A16"
+        "A38",
+        "A39"
       ],
       "chapters": [
         {
           "id": "english-c1",
           "title": "Les fondations",
-          "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+          "summary": "L'idée de 1.c4 et du fianchetto g3-Bg2, la symétrique 1…c5, les Quatre cavaliers inversés et le système Botvinnik contre l'Est-Indienne.",
           "stage": "foundations",
           "lessons": [
             {
               "id": "english-c1-l1",
-              "title": "Anglaise - Symétrique",
+              "title": "1.c4 : contrôler d5 et fianchetter le fou",
+              "legacyIds": []
+            },
+            {
+              "id": "english-c1-l2",
+              "title": "La symétrique 1…c5 : le schéma g3-Bg2",
               "legacyIds": [
                 "english-m1"
               ]
             },
             {
-              "id": "english-c1-l2",
-              "title": "English: Symmetrical, Two Knights, 5.Nc3 Nc6 6.Ndb5 d5",
+              "id": "english-c1-l3",
+              "title": "Les Quatre cavaliers inversés : 4.g3",
+              "legacyIds": []
+            },
+            {
+              "id": "english-c1-l4",
+              "title": "Contre …g6 : le système Botvinnik",
               "legacyIds": [
-                "english-m2"
+                "english-m5"
               ]
             }
           ]
         },
         {
           "id": "english-c2",
-          "title": "Lignes théoriques",
-          "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
-          "stage": "theory",
+          "title": "Plans typiques",
+          "summary": "Le système Botvinnik contre la fermée, l'attaque à l'aile dame des Quatre cavaliers, la finale des Deux cavaliers et l'étau du Hérisson.",
+          "stage": "plans",
           "lessons": [
             {
               "id": "english-c2-l1",
-              "title": "English: Symmetrical, Hedgehog, 8.Qxd4 O-O",
-              "legacyIds": [
-                "english-m3"
-              ]
+              "title": "La fermée : Botvinnik et la case d5",
+              "legacyIds": []
             },
             {
               "id": "english-c2-l2",
-              "title": "English: Symmetrical, Main Line 7.d4, 8...Ng4",
+              "title": "Dragon inversé : l'attaque a3-b4-b5",
+              "legacyIds": []
+            },
+            {
+              "id": "english-c2-l3",
+              "title": "Les Deux cavaliers : 6.Ndb5 d5 et la finale",
+              "legacyIds": [
+                "english-m2"
+              ]
+            },
+            {
+              "id": "english-c2-l4",
+              "title": "Le Hérisson : espace et poussée e4",
+              "legacyIds": [
+                "english-m3"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "english-c3",
+          "title": "Réponses adverses",
+          "summary": "1…e6 avec le schéma Réti, la Mikenas 3.e4 contre 1…Nf6 2.Nc3 e6, la Kramnik-Shirov 2…Bb4 et l'Anglaise-Grünfeld 2…d5.",
+          "stage": "responses",
+          "lessons": [
+            {
+              "id": "english-c3-l1",
+              "title": "1…e6 : g3, b3 et Bb2",
+              "legacyIds": []
+            },
+            {
+              "id": "english-c3-l2",
+              "title": "La Mikenas : 1…Nf6 2.Nc3 e6 3.e4",
+              "legacyIds": []
+            },
+            {
+              "id": "english-c3-l3",
+              "title": "La Kramnik-Shirov : 2…Bb4 3.Nd5",
+              "legacyIds": []
+            },
+            {
+              "id": "english-c3-l4",
+              "title": "L'Anglaise-Grünfeld : 2…d5 3.cxd5",
+              "legacyIds": []
+            }
+          ]
+        },
+        {
+          "id": "english-c4",
+          "title": "Pièges",
+          "summary": "Quatre pièges blancs : Nxe5 contre …d5 prématuré, Ng5 et Nb5 contre le Hérisson, Nxe5 dans la symétrique.",
+          "stage": "traps",
+          "lessons": [
+            {
+              "id": "english-c4-l1",
+              "title": "Quatre Cavaliers : 6…d5? et Nxe5",
+              "legacyIds": []
+            },
+            {
+              "id": "english-c4-l2",
+              "title": "Hérisson : Ng5 et le fou b7",
+              "legacyIds": []
+            },
+            {
+              "id": "english-c4-l3",
+              "title": "Hérisson : 8…Nbd7? Nb5!",
+              "legacyIds": []
+            },
+            {
+              "id": "english-c4-l4",
+              "title": "Symétrique : 6…e5? et Nxe5",
+              "legacyIds": []
+            }
+          ]
+        },
+        {
+          "id": "english-c5",
+          "title": "Grande théorie",
+          "summary": "La symétrique avec 8…Ng4, la Sicilienne inversée avec 4…Bb4 et 7.Ng5, le Hérisson avec la percée e5 et le Botvinnik contre l'Est-Indienne.",
+          "stage": "theory",
+          "lessons": [
+            {
+              "id": "english-c5-l1",
+              "title": "Symétrique : 7.d4 cxd4 8.Nxd4 Ng4",
               "legacyIds": [
                 "english-m4"
               ]
             },
             {
-              "id": "english-c2-l3",
-              "title": "English: Anglo-Indian, 2.Nc3 g6 3.g3",
-              "legacyIds": [
-                "english-m5"
-              ]
+              "id": "english-c5-l2",
+              "title": "Sicilienne inversée : 4…Bb4 et 7.Ng5",
+              "legacyIds": []
+            },
+            {
+              "id": "english-c5-l3",
+              "title": "Le Hérisson : 12.Ba3 Nc5 13.e5",
+              "legacyIds": []
+            },
+            {
+              "id": "english-c5-l4",
+              "title": "Botvinnik contre l'Est-Indienne : 6…c5",
+              "legacyIds": []
             }
           ]
         }
@@ -233,65 +339,170 @@
     },
     {
       "id": "benoni",
-      "name": "Benoni",
-      "description": "Formation complète sur Benoni",
+      "name": "Défense Benoni",
+      "description": "1.d4 Nf6 2.c4 c5 : une défense de combat qui déséquilibre la structure dès le troisième coup. Un répertoire complet côté Noirs avec la Benoni moderne contre tous les systèmes blancs, le gambit Benko accepté et refusé, l'ancienne Benoni, pièges et grandes lignes.",
       "side": "black",
       "eco": [
-        "A43",
+        "A44",
         "A57",
-        "A60",
+        "A58",
+        "A59",
+        "A61",
+        "A62",
+        "A64",
+        "A67",
         "A69",
-        "A58"
+        "A70",
+        "A77"
       ],
       "chapters": [
         {
           "id": "benoni-c1",
           "title": "Les fondations",
-          "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+          "summary": "La structure de la Benoni moderne, la variante classique avec 10.Nd2, le gambit Benko accepté et l'ancienne Benoni.",
           "stage": "foundations",
           "lessons": [
             {
               "id": "benoni-c1-l1",
-              "title": "Ancienne Benoni (Old Benoni)",
-              "legacyIds": [
-                "benoni-m1"
-              ]
+              "title": "3…e6 : la structure de la Benoni moderne",
+              "legacyIds": []
             },
             {
               "id": "benoni-c1-l2",
-              "title": "Gambit Benko (Volga)",
+              "title": "La classique : 9.O-O Re8 10.Nd2",
+              "legacyIds": [
+                "benoni-m3"
+              ]
+            },
+            {
+              "id": "benoni-c1-l3",
+              "title": "Le gambit Benko : 3…b5 4.cxb5 a6",
               "legacyIds": [
                 "benoni-m2"
+              ]
+            },
+            {
+              "id": "benoni-c1-l4",
+              "title": "L'ancienne Benoni : 1.d4 c5 2.d5 e5",
+              "legacyIds": [
+                "benoni-m1"
               ]
             }
           ]
         },
         {
           "id": "benoni-c2",
-          "title": "Lignes théoriques",
-          "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
-          "stage": "theory",
+          "title": "Plans typiques",
+          "summary": "La rupture …b5 contre h3 et Bd3, le fianchetto blanc avec …a6 et …Rb8, la pression du Benko et la défense de d6 contre Bf4.",
+          "stage": "plans",
           "lessons": [
             {
               "id": "benoni-c2-l1",
-              "title": "Benoni Moderne",
-              "legacyIds": [
-                "benoni-m3"
-              ]
+              "title": "La rupture …b5 contre 7.h3",
+              "legacyIds": []
             },
             {
               "id": "benoni-c2-l2",
-              "title": "Benoni: Four Pawns, Main Line, 10.e5: 12.Bg5 Qb6",
+              "title": "Contre le fianchetto : …a6, …Rb8 et …b5",
+              "legacyIds": []
+            },
+            {
+              "id": "benoni-c2-l3",
+              "title": "Benko : la pression sur les colonnes a et b",
+              "legacyIds": []
+            },
+            {
+              "id": "benoni-c2-l4",
+              "title": "Contre 7.Bf4 : …Qa4+ et la défense de d6",
+              "legacyIds": []
+            }
+          ]
+        },
+        {
+          "id": "benoni-c3",
+          "title": "Réponses adverses",
+          "summary": "L'attaque Taimanov 8.Bb5+, le Benko refusé par 5.b6, 5.e3 ou 4.Nf3, et les plans de chaque côté.",
+          "stage": "responses",
+          "lessons": [
+            {
+              "id": "benoni-c3-l1",
+              "title": "L'attaque Taimanov : 7.f4 Bg7 8.Bb5+",
+              "legacyIds": []
+            },
+            {
+              "id": "benoni-c3-l2",
+              "title": "Benko refusé : 5.b6",
+              "legacyIds": []
+            },
+            {
+              "id": "benoni-c3-l3",
+              "title": "Benko refusé : 5.e3",
+              "legacyIds": []
+            },
+            {
+              "id": "benoni-c3-l4",
+              "title": "Benko refusé : 4.Nf3 g6",
+              "legacyIds": []
+            }
+          ]
+        },
+        {
+          "id": "benoni-c4",
+          "title": "Pièges",
+          "summary": "Quatre pièges noirs : …Nxe4 contre Nd2 ou Bb5, la case d3 dans la Benko, le pion d5 lâché après Nbd2.",
+          "stage": "traps",
+          "lessons": [
+            {
+              "id": "benoni-c4-l1",
+              "title": "9.Bg5 Re8 10.Nd2?? Nxe4!",
+              "legacyIds": []
+            },
+            {
+              "id": "benoni-c4-l2",
+              "title": "9.Bb5? Nxe4! et l'échec en a5",
+              "legacyIds": []
+            },
+            {
+              "id": "benoni-c4-l3",
+              "title": "Benko : 9.e4? et la case d3",
+              "legacyIds": []
+            },
+            {
+              "id": "benoni-c4-l4",
+              "title": "4.Nf3 g6 5.a4 bxc4 6.Nbd2? Nxd5",
+              "legacyIds": []
+            }
+          ]
+        },
+        {
+          "id": "benoni-c5",
+          "title": "Grande théorie",
+          "summary": "Les Quatre pions avec 10.e5, le Benko 5…g6 avec …Bxf1, la classique jusqu'à …b6 et le fianchetto jusqu'à …Nh5.",
+          "stage": "theory",
+          "lessons": [
+            {
+              "id": "benoni-c5-l1",
+              "title": "Les Quatre pions : 9.Be2 Re8 10.e5",
               "legacyIds": [
                 "benoni-m4"
               ]
             },
             {
-              "id": "benoni-c2-l3",
-              "title": "Benko Gambit: Accepted, 7.Nf3 g6",
+              "id": "benoni-c5-l2",
+              "title": "Benko : 5…g6 6.Nc3 Bxa6 7.e4",
               "legacyIds": [
                 "benoni-m5"
               ]
+            },
+            {
+              "id": "benoni-c5-l3",
+              "title": "Classique : 12.a4 b6 et la manœuvre …Rb8",
+              "legacyIds": []
+            },
+            {
+              "id": "benoni-c5-l4",
+              "title": "Fianchetto : …Nh5 et le jeu à l'aile roi",
+              "legacyIds": []
             }
           ]
         }
@@ -786,8 +997,8 @@
     },
     {
       "id": "pirc",
-      "name": "Pirc",
-      "description": "Formation complète sur Pirc",
+      "name": "Défense Pirc",
+      "description": "1.e4 d6 2.d4 Nf6 3.Nc3 g6 : une défense hypermoderne qui laisse le centre aux Blancs pour mieux le contester. Un répertoire complet côté Noirs contre la Classique, l'Autrichienne, l'attaque 150 et les systèmes secondaires, avec la défense Lion, pièges et grandes lignes.",
       "side": "black",
       "eco": [
         "B07",
@@ -798,51 +1009,150 @@
         {
           "id": "pirc-c1",
           "title": "Les fondations",
-          "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+          "summary": "Le schéma …d6, …Nf6, …g6, la Classique avec …Bg4, l'Autrichienne avec …Na6 et l'attaque 150 avec …c6 et …b5.",
           "stage": "foundations",
           "lessons": [
             {
               "id": "pirc-c1-l1",
-              "title": "Défense Pirc",
-              "legacyIds": [
-                "pirc-m1"
-              ]
+              "title": "Le schéma Pirc : …d6, …Nf6 et …g6",
+              "legacyIds": []
             },
             {
               "id": "pirc-c1-l2",
-              "title": "Pirc Defense: Classical Variation, Quiet System, Parma Defense",
+              "title": "La Classique : 6…Bg4 et 7…Nc6",
               "legacyIds": [
                 "pirc-m2"
+              ]
+            },
+            {
+              "id": "pirc-c1-l3",
+              "title": "L'Autrichienne : 6.Bd3 Na6 et …c5",
+              "legacyIds": [
+                "pirc-m4"
+              ]
+            },
+            {
+              "id": "pirc-c1-l4",
+              "title": "L'attaque 150 : 4.Be3 Bg7 5.Qd2 c6",
+              "legacyIds": [
+                "pirc-m1"
               ]
             }
           ]
         },
         {
           "id": "pirc-c2",
-          "title": "Lignes théoriques",
-          "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
-          "stage": "theory",
+          "title": "Plans typiques",
+          "summary": "La Classique avec …c6 et …e5, l'attaque 150 avec …b5 et …e5, l'Autrichienne avec …c5 et la poussée 6.e5.",
+          "stage": "plans",
           "lessons": [
             {
               "id": "pirc-c2-l1",
-              "title": "Lion Defense: Anti-Philidor, Lion's Cave",
-              "legacyIds": [
-                "pirc-m3"
-              ]
+              "title": "Classique : …c6, …Nbd7 et …e5",
+              "legacyIds": []
             },
             {
               "id": "pirc-c2-l2",
-              "title": "Pirc: Austrian, 5...O-O 6.Bd3 Na6",
-              "legacyIds": [
-                "pirc-m4"
-              ]
+              "title": "Attaque 150 : 4…c6 5.Qd2 b5 6.Bd3",
+              "legacyIds": []
             },
             {
               "id": "pirc-c2-l3",
-              "title": "Pirc Defense: Austrian Attack, Unzicker Attack",
+              "title": "Autrichienne : 5…c5 6.dxc5 Qa5",
+              "legacyIds": []
+            },
+            {
+              "id": "pirc-c2-l4",
+              "title": "Autrichienne : 6.e5 Nfd7 7.h4",
               "legacyIds": [
                 "pirc-m5"
               ]
+            }
+          ]
+        },
+        {
+          "id": "pirc-c3",
+          "title": "Réponses adverses",
+          "summary": "Les systèmes 4.Bg5, 4.g3 et 4.Be2 avec h4, et la défense Lion 3…Nbd7 contre l'Autrichienne.",
+          "stage": "responses",
+          "lessons": [
+            {
+              "id": "pirc-c3-l1",
+              "title": "4.Bg5 : …h6, …g5 et …Nh5",
+              "legacyIds": []
+            },
+            {
+              "id": "pirc-c3-l2",
+              "title": "4.g3 : …e5 contre le fianchetto",
+              "legacyIds": []
+            },
+            {
+              "id": "pirc-c3-l3",
+              "title": "4.Be2 Bg7 5.h4 : …h5 et …c6",
+              "legacyIds": []
+            },
+            {
+              "id": "pirc-c3-l4",
+              "title": "Défense Lion : 3…Nbd7 4.f4 e5",
+              "legacyIds": [
+                "pirc-m3"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "pirc-c4",
+          "title": "Pièges",
+          "summary": "Quatre pièges noirs : …b4 contre le cavalier c3, …Nc5 dans l’Autrichienne, …Nxe4 contre le fianchetto, …Bxf3 et …Qxd4+ contre Bg5-f4.",
+          "stage": "traps",
+          "lessons": [
+            {
+              "id": "pirc-c4-l1",
+              "title": "4.Be3 c6 : 7.Nf3? b4 et …Nxe4",
+              "legacyIds": []
+            },
+            {
+              "id": "pirc-c4-l2",
+              "title": "Autrichienne : 8.Ne2? cxd4 et …Nc5",
+              "legacyIds": []
+            },
+            {
+              "id": "pirc-c4-l3",
+              "title": "4.g3 : 10.Qe2? Nxe4!",
+              "legacyIds": []
+            },
+            {
+              "id": "pirc-c4-l4",
+              "title": "4.Bg5 et f4 : 10.Qf2? Bxf3 et …Qxd4+",
+              "legacyIds": []
+            }
+          ]
+        },
+        {
+          "id": "pirc-c5",
+          "title": "Grande théorie",
+          "summary": "L'échec perpétuel de 6.Bb5+ dans l'Autrichienne, la Classique avec d5 ou Qd2-Rad1, et l'attaque 150 avec g4-h4-g5.",
+          "stage": "theory",
+          "lessons": [
+            {
+              "id": "pirc-c5-l1",
+              "title": "Autrichienne 6.Bb5+ : la nulle forcée",
+              "legacyIds": []
+            },
+            {
+              "id": "pirc-c5-l2",
+              "title": "Classique 8.d5 : …Bxf3 et …Ne5",
+              "legacyIds": []
+            },
+            {
+              "id": "pirc-c5-l3",
+              "title": "Classique Qd2 : 10.Rad1 Bd7 11.Ne1 b5",
+              "legacyIds": []
+            },
+            {
+              "id": "pirc-c5-l4",
+              "title": "Attaque 150 : g4, h4 et g5",
+              "legacyIds": []
             }
           ]
         }
@@ -850,32 +1160,49 @@
     },
     {
       "id": "caro_kann",
-      "name": "Caro Kann",
-      "description": "Formation complète sur Caro Kann",
+      "name": "Défense Caro-Kann",
+      "description": "1.e4 c6 : une défense solide qui conteste le centre sans enfermer le fou c8. Un répertoire complet côté Noirs avec la variante classique 4…Bf5, l'avance 3.e5, l'échange et la Panov, les Deux Cavaliers, la Fantaisie et 2.c4, la Steinitz en alternative, pièges et grandes lignes.",
       "side": "black",
       "eco": [
+        "B10",
+        "B11",
         "B12",
         "B13",
-        "B19",
-        "B17"
+        "B14",
+        "B15",
+        "B17",
+        "B18",
+        "B19"
       ],
       "chapters": [
         {
           "id": "caro_kann-c1",
           "title": "Les fondations",
-          "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+          "summary": "L'idée de 1…c6 et 2…d5, la variante classique avec 4…Bf5, le système Short contre l'avance et la variante d'échange.",
           "stage": "foundations",
           "lessons": [
             {
               "id": "caro_kann-c1-l1",
-              "title": "Caro-Kann - Avance",
+              "title": "1…c6 et 2…d5 : contester e4 sans enfermer le fou",
+              "legacyIds": []
+            },
+            {
+              "id": "caro_kann-c1-l2",
+              "title": "4…Bf5 : la variante classique",
+              "legacyIds": [
+                "caro_kann-m4"
+              ]
+            },
+            {
+              "id": "caro_kann-c1-l3",
+              "title": "3.e5 Bf5 : le système Short",
               "legacyIds": [
                 "caro_kann-m1"
               ]
             },
             {
-              "id": "caro_kann-c1-l2",
-              "title": "Caro-Kann - Échange",
+              "id": "caro_kann-c1-l4",
+              "title": "3.exd5 cxd5 4.Bd3 : la variante d'échange",
               "legacyIds": [
                 "caro_kann-m2"
               ]
@@ -884,30 +1211,117 @@
         },
         {
           "id": "caro_kann-c2",
-          "title": "Lignes théoriques",
-          "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
-          "stage": "theory",
+          "title": "Plans typiques",
+          "summary": "La simplification …Nxe4 et …Qd5 dans la classique, le jeu contre e5 dans le système Short, l'attaque de minorité dans l'échange et le blocus du pion isolé de la Panov.",
+          "stage": "plans",
           "lessons": [
             {
               "id": "caro_kann-c2-l1",
-              "title": "Caro-Kann: Classical, Spassky, Main Line, 13.Ne4 O-O-O",
+              "title": "Classique : …Nxe4 et la dame en d5",
+              "legacyIds": []
+            },
+            {
+              "id": "caro_kann-c2-l2",
+              "title": "Système Short : …Nbc6 et …Be4",
+              "legacyIds": []
+            },
+            {
+              "id": "caro_kann-c2-l3",
+              "title": "Échange : l'attaque de minorité …b5-b4",
+              "legacyIds": []
+            },
+            {
+              "id": "caro_kann-c2-l4",
+              "title": "Panov : bloquer le pion isolé",
+              "legacyIds": []
+            }
+          ]
+        },
+        {
+          "id": "caro_kann-c3",
+          "title": "Réponses adverses",
+          "summary": "Les Deux Cavaliers 2.Nc3 et 3.Nf3, l'avance agressive 4.Nc3 et 5.g4, la Fantaisie 3.f3 et l'attaque 2.c4.",
+          "stage": "responses",
+          "lessons": [
+            {
+              "id": "caro_kann-c3-l1",
+              "title": "2.Nc3 d5 3.Nf3 : les Deux Cavaliers",
+              "legacyIds": []
+            },
+            {
+              "id": "caro_kann-c3-l2",
+              "title": "3.e5 Bf5 4.Nc3 e6 5.g4 : l'attaque agressive",
+              "legacyIds": []
+            },
+            {
+              "id": "caro_kann-c3-l3",
+              "title": "3.f3 e6 : la Fantaisie",
+              "legacyIds": []
+            },
+            {
+              "id": "caro_kann-c3-l4",
+              "title": "2.c4 d5 : l'attaque Panov accélérée",
+              "legacyIds": []
+            }
+          ]
+        },
+        {
+          "id": "caro_kann-c4",
+          "title": "Pièges",
+          "summary": "Les erreurs blanches typiques : le cavalier e4 oublié après 4…Bf5, le cavalier c3 sans soutien dans la Panov, le pion e5 abandonné dans le système Short et le saut Nb5? dans l'attaque g4.",
+          "stage": "traps",
+          "lessons": [
+            {
+              "id": "caro_kann-c4-l1",
+              "title": "5.Nf3?? : le cavalier e4 en prise",
+              "legacyIds": []
+            },
+            {
+              "id": "caro_kann-c4-l2",
+              "title": "Panov : 8.Bd3? Nxc3 et la tour a1",
+              "legacyIds": []
+            },
+            {
+              "id": "caro_kann-c4-l3",
+              "title": "Système Short : 9.Na3? et le pion e5",
+              "legacyIds": []
+            },
+            {
+              "id": "caro_kann-c4-l4",
+              "title": "Attaque 5.g4 : 8.Nb5? a6",
+              "legacyIds": []
+            }
+          ]
+        },
+        {
+          "id": "caro_kann-c5",
+          "title": "Grande théorie",
+          "summary": "Les lignes profondes : la classique avec 11.Bf4 Qa5+, la Steinitz 4…Nd7, le système Short avec …Ng6 et la Panov avec 8.Qc2.",
+          "stage": "theory",
+          "lessons": [
+            {
+              "id": "caro_kann-c5-l1",
+              "title": "Classique : 11.Bf4 Qa5+ et le grand roque",
               "legacyIds": [
                 "caro_kann-m3"
               ]
             },
             {
-              "id": "caro_kann-c2-l2",
-              "title": "Caro-Kann: Classical, Spassky, 10.Qxd3 Ngf6",
-              "legacyIds": [
-                "caro_kann-m4"
-              ]
-            },
-            {
-              "id": "caro_kann-c2-l3",
-              "title": "Caro-Kann: Steinitz, 5.Ng5 Ngf6 6.Bd3 e6 7.N1f3 Bd6 8.Qe2",
+              "id": "caro_kann-c5-l2",
+              "title": "4…Nd7 : la Steinitz moderne",
               "legacyIds": [
                 "caro_kann-m5"
               ]
+            },
+            {
+              "id": "caro_kann-c5-l3",
+              "title": "Système Short : 10.O-O Ng6 et la paire de fous",
+              "legacyIds": []
+            },
+            {
+              "id": "caro_kann-c5-l4",
+              "title": "Panov : 8.Qc2 Nc6 et la prise en d4",
+              "legacyIds": []
             }
           ]
         }
@@ -915,65 +1329,170 @@
     },
     {
       "id": "sicilian",
-      "name": "Sicilian",
-      "description": "Formation complète sur Sicilian",
+      "name": "Défense Sicilienne",
+      "description": "1.e4 c5 : le combat déséquilibré par excellence. Un répertoire Najdorf complet côté Noirs avec …e5 contre l'attaque anglaise, 6.Be2 et 6.f4, le Pion empoisonné contre 6.Bg5, …e6 et …b5 contre 6.Bc4, les anti-Siciliennes 2.c3, 2.Nc3 et 3.Bb5+, la Dragon en alternative, pièges et grandes lignes.",
       "side": "black",
       "eco": [
         "B22",
-        "B70",
+        "B23",
+        "B52",
+        "B54",
+        "B76",
+        "B78",
+        "B87",
         "B90",
-        "B97",
-        "B23"
+        "B92",
+        "B93",
+        "B97"
       ],
       "chapters": [
         {
           "id": "sicilian-c1",
           "title": "Les fondations",
-          "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+          "summary": "Pourquoi 1…c5 et 5…a6, la réponse …e5 contre 6.Be3 et 6.Be2, et la variante Alapine 2.c3.",
           "stage": "foundations",
           "lessons": [
             {
               "id": "sicilian-c1-l1",
-              "title": "Sicilienne - Alapine",
-              "legacyIds": [
-                "sicilian-m1"
-              ]
+              "title": "1…c5 et 5…a6 : l'idée Najdorf",
+              "legacyIds": []
             },
             {
               "id": "sicilian-c1-l2",
-              "title": "Sicilienne - Dragon",
+              "title": "6.Be3 e5 7.Nb3 : l'attaque anglaise",
               "legacyIds": [
-                "sicilian-m2"
+                "sicilian-m3"
+              ]
+            },
+            {
+              "id": "sicilian-c1-l3",
+              "title": "6.Be2 e5 : la case d5 avant tout",
+              "legacyIds": []
+            },
+            {
+              "id": "sicilian-c1-l4",
+              "title": "2.c3 Nf6 : l'Alapine",
+              "legacyIds": [
+                "sicilian-m1"
               ]
             }
           ]
         },
         {
           "id": "sicilian-c2",
-          "title": "Lignes théoriques",
-          "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
-          "stage": "theory",
+          "title": "Plans typiques",
+          "summary": "La course …b5-b4 contre l'attaque anglaise, la case d5 contre 6.Be2, …b5 et …Qc7 contre le fou c4, et …e5 contre 6.f4.",
+          "stage": "plans",
           "lessons": [
             {
               "id": "sicilian-c2-l1",
-              "title": "Sicilienne - Najdorf",
-              "legacyIds": [
-                "sicilian-m3"
-              ]
+              "title": "La course : …b5, …b4 et …a5",
+              "legacyIds": []
             },
             {
               "id": "sicilian-c2-l2",
-              "title": "Sicilian: Najdorf, Poisoned Pawn, Main Line, 13.e5 dxe5: 15.Ne4 Be7",
+              "title": "6.Be2 : la lutte pour d5",
+              "legacyIds": []
+            },
+            {
+              "id": "sicilian-c2-l3",
+              "title": "6.Bc4 e6 : …b5 et la dame c7",
+              "legacyIds": []
+            },
+            {
+              "id": "sicilian-c2-l4",
+              "title": "6.f4 e5 : frapper la base du pion f4",
+              "legacyIds": []
+            }
+          ]
+        },
+        {
+          "id": "sicilian-c3",
+          "title": "Réponses adverses",
+          "summary": "Le Pion empoisonné contre 6.Bg5, la variante Adams 6.h3, l'échec 3.Bb5+ et le Grand Prix 2.Nc3 avec f4.",
+          "stage": "responses",
+          "lessons": [
+            {
+              "id": "sicilian-c3-l1",
+              "title": "6.Bg5 e6 7.f4 Qb6 : le Pion empoisonné",
+              "legacyIds": []
+            },
+            {
+              "id": "sicilian-c3-l2",
+              "title": "6.h3 e5 : la variante Adams",
+              "legacyIds": []
+            },
+            {
+              "id": "sicilian-c3-l3",
+              "title": "3.Bb5+ Bd7 : l'échange des fous",
+              "legacyIds": []
+            },
+            {
+              "id": "sicilian-c3-l4",
+              "title": "2.Nc3 d6 3.f4 : le Grand Prix",
+              "legacyIds": [
+                "sicilian-m5"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sicilian-c4",
+          "title": "Pièges",
+          "summary": "Les erreurs blanches typiques : 5.Bg5? qui oublie e4, le pion empoisonné sans Rb1, le fou f4 laissé seul dans l'Alapine et le petit roque prématuré après 3.Bb5+.",
+          "stage": "traps",
+          "lessons": [
+            {
+              "id": "sicilian-c4-l1",
+              "title": "5.Bg5? : le pion e4 oublié",
+              "legacyIds": []
+            },
+            {
+              "id": "sicilian-c4-l2",
+              "title": "Pion empoisonné : 9.f5? Qxa1+",
+              "legacyIds": []
+            },
+            {
+              "id": "sicilian-c4-l3",
+              "title": "Alapine : 7.Bf4? et le fou sans défense",
+              "legacyIds": []
+            },
+            {
+              "id": "sicilian-c4-l4",
+              "title": "3.Bb5+ Bd7 4.O-O? Bxb5",
+              "legacyIds": []
+            }
+          ]
+        },
+        {
+          "id": "sicilian-c5",
+          "title": "Grande théorie",
+          "summary": "Les lignes profondes : le Pion empoisonné avec 10.f5, la Dragon yougoslave, la course de l'attaque anglaise et l'attaque Sozine.",
+          "stage": "theory",
+          "lessons": [
+            {
+              "id": "sicilian-c5-l1",
+              "title": "Pion empoisonné : 10.f5 et 13.e5",
               "legacyIds": [
                 "sicilian-m4"
               ]
             },
             {
-              "id": "sicilian-c2-l3",
-              "title": "Sicilian: Closed, Grand Prix, 3...d6 4.Nf3 g6",
+              "id": "sicilian-c5-l2",
+              "title": "La Dragon yougoslave : 5…g6 et la colonne c",
               "legacyIds": [
-                "sicilian-m5"
+                "sicilian-m2"
               ]
+            },
+            {
+              "id": "sicilian-c5-l3",
+              "title": "Attaque anglaise : 15.f5 a4 et la percée …b3",
+              "legacyIds": []
+            },
+            {
+              "id": "sicilian-c5-l4",
+              "title": "L'attaque Sozine : 12.Rad1 et f4-f5",
+              "legacyIds": []
             }
           ]
         }
@@ -1155,63 +1674,164 @@
     },
     {
       "id": "vienna",
-      "name": "Vienna",
-      "description": "Formation complète sur Vienna",
+      "name": "Partie viennoise",
+      "description": "1.e4 e5 2.Nc3 : une ouverture souple qui prépare f4 tout en gardant le choix entre jeu positionnel et attaque. Un répertoire complet côté Blancs avec 3.Bc4, le fianchetto 3.g3, le gambit viennois 3.f4 d5, les réponses 2…Bc5, 2…Nc6 et 2…d6, pièges et grandes lignes.",
       "side": "white",
       "eco": [
         "C25",
+        "C26",
         "C27",
+        "C28",
         "C29"
       ],
       "chapters": [
         {
           "id": "vienna-c1",
           "title": "Les fondations",
-          "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+          "summary": "Les idées de 2.Nc3, le système 3.Bc4 contre …Nc6, …Bc5 et la Frankenstein-Dracula, et la manœuvre …Na5 contre le fou c4.",
           "stage": "foundations",
           "lessons": [
             {
               "id": "vienna-c1-l1",
-              "title": "Partie Viennoise",
+              "title": "2.Nc3 : préparer f4 et contrôler d5",
+              "legacyIds": []
+            },
+            {
+              "id": "vienna-c1-l2",
+              "title": "3…Bc5 4.d3 d6 5.f4 : la chasse au fou",
               "legacyIds": [
                 "vienna-m1"
               ]
             },
             {
-              "id": "vienna-c1-l2",
-              "title": "Vienna: 3.Bc4 Nxe4 4.Qh5 Nd6 5.Bb3 Nc6",
+              "id": "vienna-c1-l3",
+              "title": "Frankenstein-Dracula : 3…Nxe4 4.Qh5",
               "legacyIds": [
                 "vienna-m2"
+              ]
+            },
+            {
+              "id": "vienna-c1-l4",
+              "title": "3…Nc6 4.d3 Na5 : céder le fou c4",
+              "legacyIds": [
+                "vienna-m3"
               ]
             }
           ]
         },
         {
           "id": "vienna-c2",
-          "title": "Lignes théoriques",
-          "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
-          "stage": "theory",
+          "title": "Plans typiques",
+          "summary": "La poussée f5 contre …Bc5, le fianchetto 3.g3 avec Rb1, le gambit viennois 3.f4 d5 et le fianchetto contre …Bc5.",
+          "stage": "plans",
           "lessons": [
             {
               "id": "vienna-c2-l1",
-              "title": "Vienna Gambit, with Max Lange Defense: Pierce Gambit",
-              "legacyIds": [
-                "vienna-m3"
-              ]
+              "title": "3.Bc4 Nc6 4.d3 Bc5 5.f4 : la poussée f5",
+              "legacyIds": []
             },
             {
               "id": "vienna-c2-l2",
-              "title": "Vienna Gambit, with Max Lange Defense: Hamppe-Muzio Gambit",
+              "title": "3.g3 d5 : le fianchetto et la colonne b",
+              "legacyIds": []
+            },
+            {
+              "id": "vienna-c2-l3",
+              "title": "Gambit viennois : 3.f4 d5 4.fxe5",
+              "legacyIds": []
+            },
+            {
+              "id": "vienna-c2-l4",
+              "title": "3.g3 Bc5 : Nge2 et la poussée d4",
+              "legacyIds": []
+            }
+          ]
+        },
+        {
+          "id": "vienna-c3",
+          "title": "Réponses adverses",
+          "summary": "Les réponses 2…Bc5, 2…Nc6 avec 3…Bc5 et 2…d6, et les déviations 5…Bg4 dans le gambit viennois.",
+          "stage": "responses",
+          "lessons": [
+            {
+              "id": "vienna-c3-l1",
+              "title": "2…Bc5 3.Nf3 d6 4.d4",
+              "legacyIds": []
+            },
+            {
+              "id": "vienna-c3-l2",
+              "title": "2…Nc6 3.Bc4 Bc5 4.Qg4",
               "legacyIds": [
                 "vienna-m4"
               ]
             },
             {
-              "id": "vienna-c2-l3",
-              "title": "Vienna Game, Würzburger Trap",
+              "id": "vienna-c3-l3",
+              "title": "2…d6 3.f4 exf4 4.Nf3",
+              "legacyIds": []
+            },
+            {
+              "id": "vienna-c3-l4",
+              "title": "Gambit viennois : 5…Bg4 6.Qe2",
               "legacyIds": [
                 "vienna-m5"
               ]
+            }
+          ]
+        },
+        {
+          "id": "vienna-c4",
+          "title": "Pièges",
+          "summary": "Quatre pièges blancs : Bxd5 contre …Nc6 dans le fianchetto, Nxe5 contre …Bc5 et …Nc6, Bxf7+ contre …Ng4, et fxe5 contre 3…Bb4.",
+          "stage": "traps",
+          "lessons": [
+            {
+              "id": "vienna-c4-l1",
+              "title": "3.g3 d5 : 5…Nc6?? et le cavalier d5",
+              "legacyIds": []
+            },
+            {
+              "id": "vienna-c4-l2",
+              "title": "2…Bc5 3.Nf3 Nc6? 4.Nxe5!",
+              "legacyIds": []
+            },
+            {
+              "id": "vienna-c4-l3",
+              "title": "7.f5 : 7…Ng4? et Bxf7+",
+              "legacyIds": []
+            },
+            {
+              "id": "vienna-c4-l4",
+              "title": "3.f4 Bb4? 4.fxe5 et le cavalier f6",
+              "legacyIds": []
+            }
+          ]
+        },
+        {
+          "id": "vienna-c5",
+          "title": "Grande théorie",
+          "summary": "La Frankenstein-Dracula jusqu'à …Nd4, la variante 5…Be7 6.Nf3, le gambit 5…Bc5 6.d4 Bb4 et le fianchetto avec Rb1.",
+          "stage": "theory",
+          "lessons": [
+            {
+              "id": "vienna-c5-l1",
+              "title": "Frankenstein-Dracula : 11.d3 Bb7 12.h4",
+              "legacyIds": []
+            },
+            {
+              "id": "vienna-c5-l2",
+              "title": "Frankenstein-Dracula : 5…Be7 6.Nf3",
+              "legacyIds": []
+            },
+            {
+              "id": "vienna-c5-l3",
+              "title": "Gambit viennois : 5…Bc5 6.d4 Bb4",
+              "legacyIds": []
+            },
+            {
+              "id": "vienna-c5-l4",
+              "title": "3.g3 d5 : la tour b1 et le pion b7",
+              "legacyIds": []
             }
           ]
         }
@@ -1219,11 +1839,16 @@
     },
     {
       "id": "kings_gambit",
-      "name": "Kings Gambit",
-      "description": "Formation complète sur Kings Gambit",
+      "name": "Gambit du roi",
+      "description": "1.e4 e5 2.f4 : le gambit romantique par excellence. Les Blancs offrent un pion pour ouvrir la colonne f et bâtir un grand centre. Un répertoire complet côté Blancs avec le Kieseritzky, les gambits Philidor, Muzio et Allgaier, les défenses Fischer et moderne, les contre-gambits Falkbeer et 2…Bc5, pièges et grandes lignes.",
       "side": "white",
       "eco": [
+        "C30",
+        "C31",
         "C33",
+        "C34",
+        "C35",
+        "C36",
         "C37",
         "C38",
         "C39"
@@ -1232,19 +1857,33 @@
         {
           "id": "kings_gambit-c1",
           "title": "Les fondations",
-          "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+          "summary": "Pourquoi 2.f4, la réponse 3.Nf3 contre l'acceptation, le Kieseritzky 4.h4 g4 5.Ne5 et les gambits Philidor et Muzio avec 4.Bc4.",
           "stage": "foundations",
           "lessons": [
             {
               "id": "kings_gambit-c1-l1",
-              "title": "Gambit Roi Accepté",
+              "title": "2.f4 exf4 3.Nf3 : le gambit accepté",
               "legacyIds": [
                 "kings_gambit-m1"
               ]
             },
             {
               "id": "kings_gambit-c1-l2",
-              "title": "King's Gambit Accepted: Muzio Gambit, Sarratt Defense",
+              "title": "Kieseritzky : la défense Anderssen 5…Nf6 6.Bc4 d5",
+              "legacyIds": [
+                "kings_gambit-m5"
+              ]
+            },
+            {
+              "id": "kings_gambit-c1-l3",
+              "title": "Gambit Philidor : 4.Bc4 Bg7 5.h4",
+              "legacyIds": [
+                "kings_gambit-m3"
+              ]
+            },
+            {
+              "id": "kings_gambit-c1-l4",
+              "title": "Gambit Muzio : 4.Bc4 g4 5.O-O",
               "legacyIds": [
                 "kings_gambit-m2"
               ]
@@ -1253,30 +1892,115 @@
         },
         {
           "id": "kings_gambit-c2",
-          "title": "Lignes théoriques",
-          "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
-          "stage": "theory",
+          "title": "Les plans typiques",
+          "summary": "L'Allgaier et le sacrifice en f7, le Kieseritzky 5…d6, la défense Fischer 3…d6 avec 6.Ng1 et la défense moderne 3…d5.",
+          "stage": "plans",
           "lessons": [
             {
               "id": "kings_gambit-c2-l1",
-              "title": "King's Gambit Accepted: Philidor Gambit",
-              "legacyIds": [
-                "kings_gambit-m3"
-              ]
-            },
-            {
-              "id": "kings_gambit-c2-l2",
-              "title": "King's Gambit Accepted: Allgaier Gambit, Thorold Attack",
+              "title": "Allgaier : 5.Ng5 h6 6.Nxf7, attaque Thorold",
               "legacyIds": [
                 "kings_gambit-m4"
               ]
             },
             {
+              "id": "kings_gambit-c2-l2",
+              "title": "Kieseritzky : 5…d6 6.Nxg4",
+              "legacyIds": []
+            },
+            {
               "id": "kings_gambit-c2-l3",
-              "title": "King's Gambit Accepted: Kieseritzky Gambit, Anderssen Defense",
-              "legacyIds": [
-                "kings_gambit-m5"
-              ]
+              "title": "Défense Fischer : 3…d6 4.d4 g5 5.h4 g4 6.Ng1",
+              "legacyIds": []
+            },
+            {
+              "id": "kings_gambit-c2-l4",
+              "title": "Défense moderne : 3…d5 4.exd5 Nf6 5.Bc4",
+              "legacyIds": []
+            }
+          ]
+        },
+        {
+          "id": "kings_gambit-c3",
+          "title": "Les réponses adverses",
+          "summary": "Le contre-gambit Falkbeer 2…d5 3.exd5 e4, la variante 3…c6, le refus classique 2…Bc5 et les défenses 3…Nf6 et 3…Be7.",
+          "stage": "responses",
+          "lessons": [
+            {
+              "id": "kings_gambit-c3-l1",
+              "title": "Contre-gambit Falkbeer : 3…e4 4.d3",
+              "legacyIds": []
+            },
+            {
+              "id": "kings_gambit-c3-l2",
+              "title": "Falkbeer : 3…c6 4.Nc3",
+              "legacyIds": []
+            },
+            {
+              "id": "kings_gambit-c3-l3",
+              "title": "Refus classique : 2…Bc5 3.Nf3",
+              "legacyIds": []
+            },
+            {
+              "id": "kings_gambit-c3-l4",
+              "title": "3…Nf6 et 3…Be7 : les défenses modestes",
+              "legacyIds": []
+            }
+          ]
+        },
+        {
+          "id": "kings_gambit-c4",
+          "title": "Les pièges à connaître",
+          "summary": "Quatre pièges blancs : Nxf7 et Bxf4 dans le Kieseritzky, Nxf4 contre la défense Fischer, Kd1 contre …Bf2+ dans le Falkbeer.",
+          "stage": "traps",
+          "lessons": [
+            {
+              "id": "kings_gambit-c4-l1",
+              "title": "Kieseritzky : 6…d6? 7.Nxf7!",
+              "legacyIds": []
+            },
+            {
+              "id": "kings_gambit-c4-l2",
+              "title": "Kieseritzky : 8…c6? 9.Bxf4!",
+              "legacyIds": []
+            },
+            {
+              "id": "kings_gambit-c4-l3",
+              "title": "Défense Fischer : 8…Bd7? 9.Nxf4!",
+              "legacyIds": []
+            },
+            {
+              "id": "kings_gambit-c4-l4",
+              "title": "Falkbeer : 7…Bf2+? 8.Kd1!",
+              "legacyIds": []
+            }
+          ]
+        },
+        {
+          "id": "kings_gambit-c5",
+          "title": "La théorie approfondie",
+          "summary": "Le Kieseritzky avec 9…Qxh4, la défense Fischer avec 6…f5 et 6…Qf6, la défense moderne 6…Be6, et la défense 3…Ne7.",
+          "stage": "theory",
+          "lessons": [
+            {
+              "id": "kings_gambit-c5-l1",
+              "title": "Kieseritzky : 9…Qxh4 10.Qe1",
+              "legacyIds": []
+            },
+            {
+              "id": "kings_gambit-c5-l2",
+              "title": "Défense Fischer : 6…f5 et 6…Qf6",
+              "legacyIds": []
+            },
+            {
+              "id": "kings_gambit-c5-l3",
+              "title": "Défense moderne : 5…Bd6 et 6…Be6",
+              "legacyIds": []
+            },
+            {
+              "id": "kings_gambit-c5-l4",
+              "title": "3…Ne7 : d4, Nc3 et Nxe4",
+              "legacyIds": []
             }
           ]
         }
@@ -1284,30 +2008,40 @@
     },
     {
       "id": "scotch",
-      "name": "Scotch",
-      "description": "Formation complète sur Scotch",
+      "name": "Partie écossaise",
+      "description": "1.e4 e5 2.Nf3 Nc6 3.d4 : les Blancs ouvrent le centre dès le troisième coup et obtiennent un jeu clair et actif. Un répertoire complet côté Blancs avec la variante Mieses, la classique 4…Bc5, la Steinitz 4…Qh4, le gambit Göring, les réponses secondaires, pièges et grandes lignes.",
       "side": "white",
       "eco": [
-        "C45",
-        "C44"
+        "C44",
+        "C45"
       ],
       "chapters": [
         {
           "id": "scotch-c1",
           "title": "Les fondations",
-          "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+          "summary": "Pourquoi 3.d4, la variante Mieses 5.Nxc6 bxc6 6.e5 avec ses deux réponses 8…Ba6 et 8…Nb6, et la classique 4…Bc5 5.Be3.",
           "stage": "foundations",
           "lessons": [
             {
               "id": "scotch-c1-l1",
-              "title": "Partie Écossaise",
+              "title": "3.d4 exd4 4.Nxd4 : ouvrir le centre",
               "legacyIds": [
                 "scotch-m1"
               ]
             },
             {
               "id": "scotch-c1-l2",
-              "title": "Scotch Game: Classical Variation, Blackburne Attack",
+              "title": "Mieses : 8…Ba6 9.b3 et le fianchetto",
+              "legacyIds": []
+            },
+            {
+              "id": "scotch-c1-l3",
+              "title": "Mieses : 8…Nb6 9.Nc3 Qe6 10.Qe4",
+              "legacyIds": []
+            },
+            {
+              "id": "scotch-c1-l4",
+              "title": "Classique : 4…Bc5 5.Be3 Qf6 6.c3",
               "legacyIds": [
                 "scotch-m2"
               ]
@@ -1316,30 +2050,119 @@
         },
         {
           "id": "scotch-c2",
-          "title": "Lignes théoriques",
-          "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
-          "stage": "theory",
+          "title": "Les plans typiques",
+          "summary": "Les autres idées noires dans la Mieses, la classique avec 7…O-O et 7…b6, et le gambit Göring 4.c3.",
+          "stage": "plans",
           "lessons": [
             {
               "id": "scotch-c2-l1",
-              "title": "Scotch: Steinitz, 5.Nb5 Bb4+",
+              "title": "Mieses : 9…O-O-O, 9…Qh4 et 9…g5",
+              "legacyIds": []
+            },
+            {
+              "id": "scotch-c2-l2",
+              "title": "Classique : 7…O-O 8.O-O Bb6 9.Na3",
+              "legacyIds": []
+            },
+            {
+              "id": "scotch-c2-l3",
+              "title": "Classique : 7…b6 et 7…d6",
+              "legacyIds": []
+            },
+            {
+              "id": "scotch-c2-l4",
+              "title": "Gambit Göring : 4.c3 dxc3 5.Nxc3",
+              "legacyIds": [
+                "scotch-m4"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "scotch-c3",
+          "title": "Les réponses adverses",
+          "summary": "La Steinitz 4…Qh4, l'échec 4…Bb4+, les échanges 4…Nxd4 et 4…Qf6, et les fianchettos 4…g6 et 4…d6.",
+          "stage": "responses",
+          "lessons": [
+            {
+              "id": "scotch-c3-l1",
+              "title": "Steinitz : 4…Qh4 5.Nb5",
               "legacyIds": [
                 "scotch-m3"
               ]
             },
             {
-              "id": "scotch-c2-l2",
-              "title": "Scotch: Goring Gambit, 4...dxc3 5.Nxc3",
-              "legacyIds": [
-                "scotch-m4"
-              ]
+              "id": "scotch-c3-l2",
+              "title": "4…Bb4+ 5.c3",
+              "legacyIds": []
             },
             {
-              "id": "scotch-c2-l3",
-              "title": "Scotch Game",
+              "id": "scotch-c3-l3",
+              "title": "4…Nxd4 et 4…Qf6",
+              "legacyIds": []
+            },
+            {
+              "id": "scotch-c3-l4",
+              "title": "4…g6 et 4…d6 : les réponses lentes",
+              "legacyIds": []
+            }
+          ]
+        },
+        {
+          "id": "scotch-c4",
+          "title": "Les pièges à connaître",
+          "summary": "Quatre pièges blancs : cxd5 contre 7…Qe7? dans la Mieses, Bxc5 et Qd4 contre 10…Qb6?, f4 contre 7…Qe5? dans la Steinitz, Bxf7+ dans le Göring.",
+          "stage": "traps",
+          "lessons": [
+            {
+              "id": "scotch-c4-l1",
+              "title": "Mieses : 7…Qe7? 8.cxd5!",
+              "legacyIds": []
+            },
+            {
+              "id": "scotch-c4-l2",
+              "title": "Classique : 10…Qb6? 11.Bxc5!",
+              "legacyIds": []
+            },
+            {
+              "id": "scotch-c4-l3",
+              "title": "Steinitz : 7…Qe5? 8.f4!",
+              "legacyIds": []
+            },
+            {
+              "id": "scotch-c4-l4",
+              "title": "Göring : 7…Bd7? 8.Bxf7+!",
+              "legacyIds": []
+            }
+          ]
+        },
+        {
+          "id": "scotch-c5",
+          "title": "La théorie approfondie",
+          "summary": "La Steinitz avec 7…Qxg2, les déviations 6…Nd5 et 6…Ne4 de la Mieses, la classique après 12.Kh1 et la Mieses 8…Nb6 avec 10…d5 et 10…Bb4.",
+          "stage": "theory",
+          "lessons": [
+            {
+              "id": "scotch-c5-l1",
+              "title": "Steinitz : 7…Qxg2 8.Bf3",
               "legacyIds": [
                 "scotch-m5"
               ]
+            },
+            {
+              "id": "scotch-c5-l2",
+              "title": "Mieses : 6…Nd5 et 6…Ne4",
+              "legacyIds": []
+            },
+            {
+              "id": "scotch-c5-l3",
+              "title": "Classique : 12.Kh1 dxe4 13.fxe4",
+              "legacyIds": []
+            },
+            {
+              "id": "scotch-c5-l4",
+              "title": "Mieses 8…Nb6 : 10…d5, 10…Bb4 et 10…Ba6",
+              "legacyIds": []
             }
           ]
         }
@@ -1516,65 +2339,167 @@
     },
     {
       "id": "ruy_lopez",
-      "name": "Ruy Lopez",
-      "description": "Formation complète sur Ruy Lopez",
+      "name": "Partie Espagnole",
+      "description": "1.e4 e5 2.Nf3 Nc6 3.Bb5 : la pression lente sur le défenseur de e5. Un répertoire complet côté Blancs avec l'Espagnole fermée (c3, h3, d4 et la manœuvre Nbd2-f1-g3), 4.O-O contre la Berlinoise, les réponses à l'Ouverte, à la Schliemann, à 3…Bc5 et à l'Arkhangelsk, pièges et grandes lignes Breyer, Dilworth et Rio.",
       "side": "white",
       "eco": [
+        "C60",
         "C65",
+        "C67",
         "C78",
-        "C95",
         "C82",
-        "C67"
+        "C84",
+        "C92",
+        "C95"
       ],
       "chapters": [
         {
           "id": "ruy_lopez-c1",
           "title": "Les fondations",
-          "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+          "summary": "Pourquoi le fou va en b5 puis en a4, la mise en place Re1, Bb3, c3 et h3 avant d4, la finale berlinoise et la Steinitz moderne.",
           "stage": "foundations",
           "lessons": [
             {
               "id": "ruy_lopez-c1-l1",
-              "title": "Espagnole - Défense Berlin",
+              "title": "3.Bb5 : viser le défenseur de e5",
+              "legacyIds": []
+            },
+            {
+              "id": "ruy_lopez-c1-l2",
+              "title": "6…b5 7.Bb3 : c3 et h3 avant d4",
+              "legacyIds": [
+                "ruy_lopez-m2"
+              ]
+            },
+            {
+              "id": "ruy_lopez-c1-l3",
+              "title": "4.O-O contre la Berlinoise : la finale",
               "legacyIds": [
                 "ruy_lopez-m1"
               ]
             },
             {
-              "id": "ruy_lopez-c1-l2",
-              "title": "Espagnole - Défense Morphy",
-              "legacyIds": [
-                "ruy_lopez-m2"
-              ]
+              "id": "ruy_lopez-c1-l4",
+              "title": "4…d6 : la Steinitz moderne",
+              "legacyIds": []
             }
           ]
         },
         {
           "id": "ruy_lopez-c2",
-          "title": "Lignes théoriques",
-          "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
-          "stage": "theory",
+          "title": "Plans typiques",
+          "summary": "Les plans blancs dans la Fermée après 9.h3 : la colonne c contre la Tchigorine, la manœuvre Nbd2-f1-g3, la poussée a4 contre la Zaïtsev et le levier a4 contre la Karpov.",
+          "stage": "plans",
           "lessons": [
             {
               "id": "ruy_lopez-c2-l1",
-              "title": "Spanish: Closed, Breyer, Main Line, 15.a4 c5",
+              "title": "9…Na5 : la Tchigorine et la colonne c",
+              "legacyIds": []
+            },
+            {
+              "id": "ruy_lopez-c2-l2",
+              "title": "9…h6 : la manœuvre Nbd2-f1-g3",
+              "legacyIds": []
+            },
+            {
+              "id": "ruy_lopez-c2-l3",
+              "title": "9…Bb7 : la Zaïtsev et la poussée a4",
+              "legacyIds": []
+            },
+            {
+              "id": "ruy_lopez-c2-l4",
+              "title": "9…Nd7 : la Karpov et le levier a4",
+              "legacyIds": []
+            }
+          ]
+        },
+        {
+          "id": "ruy_lopez-c3",
+          "title": "Réponses adverses",
+          "summary": "L'Espagnole ouverte avec 9.Nbd2, la Schliemann avec 4.d3, la Défense classique 3…Bc5 et les deux lignes rapides 5…b5 et 5…Bc5.",
+          "stage": "responses",
+          "lessons": [
+            {
+              "id": "ruy_lopez-c3-l1",
+              "title": "5…Nxe4 : l'Ouverte et 9.Nbd2",
+              "legacyIds": []
+            },
+            {
+              "id": "ruy_lopez-c3-l2",
+              "title": "3…f5 : la Schliemann et 4.d3",
+              "legacyIds": []
+            },
+            {
+              "id": "ruy_lopez-c3-l3",
+              "title": "3…Bc5 et 3…Nd4 : c3 et d4",
+              "legacyIds": []
+            },
+            {
+              "id": "ruy_lopez-c3-l4",
+              "title": "5…b5 et …Bc5 : l'Arkhangelsk et la Möller",
+              "legacyIds": []
+            }
+          ]
+        },
+        {
+          "id": "ruy_lopez-c4",
+          "title": "Pièges",
+          "summary": "Les erreurs noires typiques contre l'Espagnole : le piège de Tarrasch dans la Steinitz, …d5? contre le cavalier cloué, la variante de Riga dans l'Ouverte et la mauvaise reprise dans la Schliemann.",
+          "stage": "traps",
+          "lessons": [
+            {
+              "id": "ruy_lopez-c4-l1",
+              "title": "Le piège de Tarrasch : 7…O-O? dans la Steinitz",
+              "legacyIds": []
+            },
+            {
+              "id": "ruy_lopez-c4-l2",
+              "title": "6…d5? : le cavalier c6 cloué",
+              "legacyIds": []
+            },
+            {
+              "id": "ruy_lopez-c4-l3",
+              "title": "6…exd4? : la variante de Riga",
+              "legacyIds": []
+            },
+            {
+              "id": "ruy_lopez-c4-l4",
+              "title": "Schliemann : 7…dxc6? et l'échange des dames",
+              "legacyIds": []
+            }
+          ]
+        },
+        {
+          "id": "ruy_lopez-c5",
+          "title": "Grande théorie",
+          "summary": "Les lignes profondes : la Breyer avec a4 et d5, la Dilworth dans l'Ouverte, la Rio de Janeiro contre la Berlinoise et l'anti-Marshall 8.h3.",
+          "stage": "theory",
+          "lessons": [
+            {
+              "id": "ruy_lopez-c5-l1",
+              "title": "La Breyer : Nf1-g3, a4 puis d5",
               "legacyIds": [
                 "ruy_lopez-m3"
               ]
             },
             {
-              "id": "ruy_lopez-c2-l2",
-              "title": "Spanish: Open, Dilworth, 14.Kxf2",
+              "id": "ruy_lopez-c5-l2",
+              "title": "La Dilworth : 9.c3 Bc5 et le sacrifice en f2",
               "legacyIds": [
                 "ruy_lopez-m4"
               ]
             },
             {
-              "id": "ruy_lopez-c2-l3",
-              "title": "Spanish: Open Berlin, Main Line 9.Nc3 (Rio de Janerio)",
+              "id": "ruy_lopez-c5-l3",
+              "title": "La Rio de Janeiro : 5…Be7 6.Qe2",
               "legacyIds": [
                 "ruy_lopez-m5"
               ]
+            },
+            {
+              "id": "ruy_lopez-c5-l4",
+              "title": "L'anti-Marshall : 8.h3 Bb7 9.d3 d5",
+              "legacyIds": []
             }
           ]
         }
@@ -1748,65 +2673,170 @@
     },
     {
       "id": "slav",
-      "name": "Slav",
-      "description": "Formation complète sur Slav",
+      "name": "Défense slave",
+      "description": "1.d4 d5 2.c4 c6 : les Noirs soutiennent d5 avec le pion c et gardent la diagonale du fou c8. Un répertoire complet côté Noirs avec la Slave 4…dxc4 5…Bf5, la Semi-Slave Meran contre 4.e3, les réponses à l'échange et aux sorties de dame, pièges et grandes lignes.",
       "side": "black",
       "eco": [
         "D10",
+        "D11",
+        "D15",
+        "D16",
         "D17",
-        "D49",
+        "D18",
+        "D19",
+        "D45",
         "D47",
-        "D19"
+        "D48",
+        "D49"
       ],
       "chapters": [
         {
           "id": "slav-c1",
           "title": "Les fondations",
-          "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+          "summary": "Pourquoi 2…c6, la prise 4…dxc4 suivie de 5…Bf5, la variante centrale 6.Ne5, la hollandaise 6.e3 et la Meran contre 4.e3.",
           "stage": "foundations",
           "lessons": [
             {
               "id": "slav-c1-l1",
-              "title": "Défense Slave",
+              "title": "2…c6 et 4…dxc4 : le fou c8 avant …e6",
               "legacyIds": [
                 "slav-m1"
               ]
             },
             {
               "id": "slav-c1-l2",
-              "title": "Slav: Central, Main Line",
+              "title": "Variante centrale : 6.Ne5 e6 7.f3 Bb4",
               "legacyIds": [
                 "slav-m2"
+              ]
+            },
+            {
+              "id": "slav-c1-l3",
+              "title": "Variante hollandaise : 6.e3 e6 7.Bxc4 Bb4",
+              "legacyIds": [
+                "slav-m5"
+              ]
+            },
+            {
+              "id": "slav-c1-l4",
+              "title": "Meran : 4.e3 e6 et 7…b5",
+              "legacyIds": [
+                "slav-m3"
               ]
             }
           ]
         },
         {
           "id": "slav-c2",
-          "title": "Lignes théoriques",
-          "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
-          "stage": "theory",
+          "title": "Les plans",
+          "summary": "La Meran Wade 9.e4 b4 10.Na4 c5, la Meran 11.d5 Qc7, la centrale 8.Nxc4 O-O et la hollandaise 9.Nh4.",
+          "stage": "plans",
           "lessons": [
             {
               "id": "slav-c2-l1",
-              "title": "Semi-Slav Defense: Meran Variation, Sozin Variation",
-              "legacyIds": [
-                "slav-m3"
-              ]
-            },
-            {
-              "id": "slav-c2-l2",
-              "title": "Semi-Slav: Meran, Wade, Main Line, 12.O-O",
+              "title": "Meran Wade : 9.e4 b4 10.Na4 c5",
               "legacyIds": [
                 "slav-m4"
               ]
             },
             {
+              "id": "slav-c2-l2",
+              "title": "Meran : 11.d5 Qc7 et la prise en e6",
+              "legacyIds": []
+            },
+            {
               "id": "slav-c2-l3",
-              "title": "Slav: Dutch, 8...O-O 9.Qe2 Bg6 10.Ne5 Nbd7, 12.Rd1",
-              "legacyIds": [
-                "slav-m5"
-              ]
+              "title": "Centrale : 8.Nxc4 O-O 9.Kf2 c5",
+              "legacyIds": []
+            },
+            {
+              "id": "slav-c2-l4",
+              "title": "Hollandaise : 9.Nh4 Nbd7 10.Nxf5 exf5",
+              "legacyIds": []
+            }
+          ]
+        },
+        {
+          "id": "slav-c3",
+          "title": "Les réponses adverses",
+          "summary": "L'échange 3.cxd5, les sorties de dame 4.Qc2 et 4.Qb3, les poussées 5.e4 et 5.e3 contre 4…dxc4, et l'anti-Meran 6.Qc2.",
+          "stage": "responses",
+          "lessons": [
+            {
+              "id": "slav-c3-l1",
+              "title": "Échange : 3.cxd5 cxd5 4.Nc3 Nf6 5.Bf4",
+              "legacyIds": []
+            },
+            {
+              "id": "slav-c3-l2",
+              "title": "4.Qc2 et 4.Qb3 : …dxc4 et …Bf5",
+              "legacyIds": []
+            },
+            {
+              "id": "slav-c3-l3",
+              "title": "5.e4 b5 et 5.e3 b5",
+              "legacyIds": []
+            },
+            {
+              "id": "slav-c3-l4",
+              "title": "Anti-Meran : 6.Qc2 Bd6",
+              "legacyIds": []
+            }
+          ]
+        },
+        {
+          "id": "slav-c4",
+          "title": "Les pièges",
+          "summary": "Quatre pièges noirs : …Bc2 contre 10.Rd1? dans la ligne 4.Qc2, …bxc4 dans l'anti-Meran, …Nxd4 contre 6.Qb3? dans l'échange et …g6 contre la sortie Qh5.",
+          "stage": "traps",
+          "lessons": [
+            {
+              "id": "slav-c4-l1",
+              "title": "4.Qc2 : 10.Rd1? Bc2!",
+              "legacyIds": []
+            },
+            {
+              "id": "slav-c4-l2",
+              "title": "Anti-Meran : 10.Rd1? bxc4",
+              "legacyIds": []
+            },
+            {
+              "id": "slav-c4-l3",
+              "title": "Échange : 6.Qb3? Nxd4!",
+              "legacyIds": []
+            },
+            {
+              "id": "slav-c4-l4",
+              "title": "5.e4 b5 6.e5 Nd5 7.Ng5 h6 8.Qh5? g6",
+              "legacyIds": []
+            }
+          ]
+        },
+        {
+          "id": "slav-c5",
+          "title": "La théorie approfondie",
+          "summary": "Les lignes de référence : la centrale jusqu'à 17…f6, 8.Bg5 et 10.Qf3, la hollandaise 12.Rd1 Qa5 et 6.Nh4 e6.",
+          "stage": "theory",
+          "lessons": [
+            {
+              "id": "slav-c5-l1",
+              "title": "Centrale : 15.Nxc4 O-O 16.Qe5",
+              "legacyIds": []
+            },
+            {
+              "id": "slav-c5-l2",
+              "title": "Centrale : 8.Bg5 h6 et 10.Qf3",
+              "legacyIds": []
+            },
+            {
+              "id": "slav-c5-l3",
+              "title": "Hollandaise : 12.Rd1 Qa5 13.Bd2",
+              "legacyIds": []
+            },
+            {
+              "id": "slav-c5-l4",
+              "title": "6.Nh4 e6 7.Nxf5 exf5",
+              "legacyIds": []
             }
           ]
         }
@@ -1814,65 +2844,172 @@
     },
     {
       "id": "queens_gambit",
-      "name": "Queens Gambit",
-      "description": "Formation complète sur Queens Gambit",
+      "name": "Gambit Dame",
+      "description": "1.d4 d5 2.c4 : la pression sur le pion d5 dès le deuxième coup. Un répertoire complet côté Blancs avec 4.Bg5 contre le Gambit Dame refusé (Orthodoxe, Tartakover, Lasker), la structure de Carlsbad et l'attaque de minorité, le Gambit accepté, la Slave, l'Albin, la Tchigorine et la Tarrasch, pièges et grandes lignes.",
       "side": "white",
       "eco": [
+        "D06",
+        "D07",
+        "D09",
         "D20",
+        "D27",
         "D30",
-        "D68",
-        "D28",
-        "D34"
+        "D34",
+        "D36",
+        "D45",
+        "D56",
+        "D58",
+        "D63",
+        "D68"
       ],
       "chapters": [
         {
           "id": "queens_gambit-c1",
           "title": "Les fondations",
-          "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+          "summary": "Pourquoi 2.c4 n'est pas un vrai gambit, le développement Nc3, Bg5, e3 et Nf3, la lutte pour le tempo dans l'Orthodoxe, le Gambit accepté et la structure de Carlsbad.",
           "stage": "foundations",
           "lessons": [
             {
               "id": "queens_gambit-c1-l1",
-              "title": "Gambit Dame Accepté",
+              "title": "2.c4 : attaquer le pion d5",
+              "legacyIds": []
+            },
+            {
+              "id": "queens_gambit-c1-l2",
+              "title": "L'Orthodoxe : Rc1 et la bataille du tempo",
+              "legacyIds": [
+                "queens_gambit-m2"
+              ]
+            },
+            {
+              "id": "queens_gambit-c1-l3",
+              "title": "Le Gambit accepté : Nf3, e3 et Bxc4",
               "legacyIds": [
                 "queens_gambit-m1"
               ]
             },
             {
-              "id": "queens_gambit-c1-l2",
-              "title": "Gambit Dame Refusé",
-              "legacyIds": [
-                "queens_gambit-m2"
-              ]
+              "id": "queens_gambit-c1-l4",
+              "title": "4…Nbd7 : 5.cxd5 et la structure de Carlsbad",
+              "legacyIds": []
             }
           ]
         },
         {
           "id": "queens_gambit-c2",
-          "title": "Lignes théoriques",
-          "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
-          "stage": "theory",
+          "title": "Plans typiques",
+          "summary": "L'attaque de minorité dans la Carlsbad, la pression sur les pions pendants de la Tartakover, la simplification de la Lasker et le pion isolé de la Tarrasch.",
+          "stage": "plans",
           "lessons": [
             {
               "id": "queens_gambit-c2-l1",
-              "title": "QGD: Orthodox, Classical, Vidmar, 13...exd4",
+              "title": "L'attaque de minorité : a3, b4 et b5",
+              "legacyIds": []
+            },
+            {
+              "id": "queens_gambit-c2-l2",
+              "title": "Tartakover : la pression sur les pions pendants",
+              "legacyIds": []
+            },
+            {
+              "id": "queens_gambit-c2-l3",
+              "title": "Lasker : 7…Ne4 et la colonne c",
+              "legacyIds": []
+            },
+            {
+              "id": "queens_gambit-c2-l4",
+              "title": "La Tarrasch : g3, Bg2 et le pion isolé",
+              "legacyIds": []
+            }
+          ]
+        },
+        {
+          "id": "queens_gambit-c3",
+          "title": "Réponses adverses",
+          "summary": "La Slave avec 5.a4, la Semi-Slave avec 5.e3 et Qc2, le contre-gambit Albin avec g3, la Tchigorine et la Baltique.",
+          "stage": "responses",
+          "lessons": [
+            {
+              "id": "queens_gambit-c3-l1",
+              "title": "La Slave : 4…dxc4 5.a4",
+              "legacyIds": []
+            },
+            {
+              "id": "queens_gambit-c3-l2",
+              "title": "La Semi-Slave : 5.e3 et Qc2",
+              "legacyIds": []
+            },
+            {
+              "id": "queens_gambit-c3-l3",
+              "title": "Le contre-gambit Albin : 4.Nf3 et 5.g3",
+              "legacyIds": []
+            },
+            {
+              "id": "queens_gambit-c3-l4",
+              "title": "La Tchigorine et la Baltique : les sorties du fou c8",
+              "legacyIds": []
+            }
+          ]
+        },
+        {
+          "id": "queens_gambit-c4",
+          "title": "Pièges",
+          "summary": "Les erreurs noires typiques contre le Gambit Dame : la mauvaise prise dans la Lasker, …b5? dans le Gambit accepté, puis …Bh3? et …Bf5? dans l'Albin.",
+          "stage": "traps",
+          "lessons": [
+            {
+              "id": "queens_gambit-c4-l1",
+              "title": "Lasker : 8…Nxc3? et le fou qui prend tout",
+              "legacyIds": []
+            },
+            {
+              "id": "queens_gambit-c4-l2",
+              "title": "Contre-gambit Albin : 8…Bh3? 9.e6",
+              "legacyIds": []
+            },
+            {
+              "id": "queens_gambit-c4-l3",
+              "title": "Gambit Dame accepté : 9…b5? 10.d5",
+              "legacyIds": []
+            },
+            {
+              "id": "queens_gambit-c4-l4",
+              "title": "Albin : 7…Bf5? et le pion b7",
+              "legacyIds": []
+            }
+          ]
+        },
+        {
+          "id": "queens_gambit-c5",
+          "title": "Grande théorie",
+          "summary": "Les lignes profondes : le dégagement de Capablanca dans l'Orthodoxe, la ligne classique du Gambit accepté, la Tarrasch avec 10.Bg5 d4 et la Slave avec e4-e5.",
+          "stage": "theory",
+          "lessons": [
+            {
+              "id": "queens_gambit-c5-l1",
+              "title": "Le dégagement de Capablanca : 11…Nxc3 et …e5",
               "legacyIds": [
                 "queens_gambit-m3"
               ]
             },
             {
-              "id": "queens_gambit-c2-l2",
-              "title": "QGA: Classical, 7.Qe2 b5 8.Bb3 Nc6 9.Rd1 c4",
+              "id": "queens_gambit-c5-l2",
+              "title": "Gambit accepté classique : 7.Qe2 b5 8.Bb3",
               "legacyIds": [
                 "queens_gambit-m4"
               ]
             },
             {
-              "id": "queens_gambit-c2-l3",
-              "title": "QGD Tarrasch: 9.dxc5 Bxc5 10.Bg5 d4 11.Bxf6 Qxf6 12.Nd5",
+              "id": "queens_gambit-c5-l3",
+              "title": "Tarrasch : 10.Bg5 d4 11.Bxf6 et 12.Nd5",
               "legacyIds": [
                 "queens_gambit-m5"
               ]
+            },
+            {
+              "id": "queens_gambit-c5-l4",
+              "title": "Slave principale : 9.Qe2, e4 et e5",
+              "legacyIds": []
             }
           ]
         }
@@ -1880,65 +3017,169 @@
     },
     {
       "id": "grunfeld",
-      "name": "Grunfeld",
-      "description": "Formation complète sur Grunfeld",
+      "name": "Défense Grünfeld",
+      "description": "1.d4 Nf6 2.c4 g6 3.Nc3 d5 : les Noirs laissent les Blancs bâtir un grand centre pour l'attaquer ensuite avec le fou g7, le pion c5 et le cavalier c6. Un répertoire complet côté Noirs contre l'échange, le système russe, les sorties de fou, la Néo-Grünfeld et 3.f3, avec pièges et grandes lignes.",
       "side": "black",
       "eco": [
+        "D70",
+        "D76",
         "D80",
-        "D89",
+        "D82",
+        "D85",
+        "D86",
+        "D87",
         "D91",
-        "D97",
-        "D79"
+        "D92",
+        "D97"
       ],
       "chapters": [
         {
           "id": "grunfeld-c1",
           "title": "Les fondations",
-          "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+          "summary": "Le défi 3…d5, la variante d'échange et ses deux plans (7.Bc4 et 7.Nf3), la sortie 5.Bg5 et le système russe 5.Qb3.",
           "stage": "foundations",
           "lessons": [
             {
               "id": "grunfeld-c1-l1",
-              "title": "Défense Grünfeld",
+              "title": "3…d5 et l'échange : le centre comme cible",
               "legacyIds": [
                 "grunfeld-m1"
               ]
             },
             {
               "id": "grunfeld-c1-l2",
-              "title": "Gruenfeld: Classical Exchange, Main Line, 13.Bd3 Be6 14.Rc1",
+              "title": "Échange classique : 10…Bg4 11.f3 Na5",
               "legacyIds": [
                 "grunfeld-m2"
+              ]
+            },
+            {
+              "id": "grunfeld-c1-l3",
+              "title": "4.Nf3 Bg7 5.Bg5 Ne4",
+              "legacyIds": [
+                "grunfeld-m3"
+              ]
+            },
+            {
+              "id": "grunfeld-c1-l4",
+              "title": "Système russe : 5.Qb3 dxc4 et 7…Na6",
+              "legacyIds": [
+                "grunfeld-m4"
               ]
             }
           ]
         },
         {
           "id": "grunfeld-c2",
-          "title": "Lignes théoriques",
-          "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
-          "stage": "theory",
+          "title": "Les plans typiques",
+          "summary": "Les plans noirs dans l'échange avec Rb1, avec 7.Be3 et Qd2, dans le sacrifice Bxf7+ de la classique et contre la sortie 4.Bf4.",
+          "stage": "plans",
           "lessons": [
             {
               "id": "grunfeld-c2-l1",
-              "title": "Gruenfeld: 5.Bg5 Ne4 6.cxd5 Nxg5 7.Nxg5 e6 8.Qd2 exd5",
-              "legacyIds": [
-                "grunfeld-m3"
-              ]
+              "title": "Échange 8.Rb1 : …Qa5+ et …Qxa2",
+              "legacyIds": []
             },
             {
               "id": "grunfeld-c2-l2",
-              "title": "Gruenfeld: Russian, Prins, 8.Be2",
-              "legacyIds": [
-                "grunfeld-m4"
-              ]
+              "title": "Échange 7.Be3 : …Qa5 et la finale",
+              "legacyIds": []
             },
             {
               "id": "grunfeld-c2-l3",
-              "title": "Neo-Gruenfeld, Main Line",
+              "title": "Classique : 12.Bxf7+ Rxf7 13.fxg4",
+              "legacyIds": []
+            },
+            {
+              "id": "grunfeld-c2-l4",
+              "title": "4.Bf4 Bg7 5.e3 c5 : la riposte au centre",
+              "legacyIds": []
+            }
+          ]
+        },
+        {
+          "id": "grunfeld-c3",
+          "title": "Répondre aux alternatives blanches",
+          "summary": "La Néo-Grünfeld 3.g3, la sortie 4.Bg5 Ne4, le coup 5.Bd2 dans l'échange et le système 5.Bf4 avec Rc1.",
+          "stage": "responses",
+          "lessons": [
+            {
+              "id": "grunfeld-c3-l1",
+              "title": "Néo-Grünfeld : 3.g3 Bg7 4.Bg2 d5",
               "legacyIds": [
                 "grunfeld-m5"
               ]
+            },
+            {
+              "id": "grunfeld-c3-l2",
+              "title": "4.Bg5 Ne4 5.Bh4 Nxc3",
+              "legacyIds": []
+            },
+            {
+              "id": "grunfeld-c3-l3",
+              "title": "Échange 5.Bd2 : …Nb6 et …e5",
+              "legacyIds": []
+            },
+            {
+              "id": "grunfeld-c3-l4",
+              "title": "4.Nf3 Bg7 5.Bf4 O-O 6.Rc1 dxc4",
+              "legacyIds": []
+            }
+          ]
+        },
+        {
+          "id": "grunfeld-c4",
+          "title": "Les pièges",
+          "summary": "Quatre pièges blancs à punir : 10.O-O? dans la ligne Rb1, 9.Bd3? dans l'échange, le roque qui oublie le fou c4 contre 4.Bf4 et Bh6? contre 3.f3.",
+          "stage": "traps",
+          "lessons": [
+            {
+              "id": "grunfeld-c4-l1",
+              "title": "Rb1 : 10.O-O? dxc3!",
+              "legacyIds": []
+            },
+            {
+              "id": "grunfeld-c4-l2",
+              "title": "Échange : 9.Bd3? cxd4!",
+              "legacyIds": []
+            },
+            {
+              "id": "grunfeld-c4-l3",
+              "title": "4.Bf4 : 10.O-O? Qxc4!",
+              "legacyIds": []
+            },
+            {
+              "id": "grunfeld-c4-l4",
+              "title": "3.f3 : 10.Bh6? Qxd4!",
+              "legacyIds": []
+            }
+          ]
+        },
+        {
+          "id": "grunfeld-c5",
+          "title": "La théorie approfondie",
+          "summary": "Les suites principales de l'échange classique avec 14.d5, de la ligne Rb1 avec …Qxa2, du système russe 12.Be3 et de l'anti-Grünfeld 3.f3.",
+          "stage": "theory",
+          "lessons": [
+            {
+              "id": "grunfeld-c5-l1",
+              "title": "Classique : 14.d5 Bxa1 15.Qxa1 f6 16.Bh6",
+              "legacyIds": []
+            },
+            {
+              "id": "grunfeld-c5-l2",
+              "title": "Rb1 : 15.d5 Bxf3 16.Bxf3 Ne5 17.Rxb7 a5",
+              "legacyIds": []
+            },
+            {
+              "id": "grunfeld-c5-l3",
+              "title": "Système russe : 12.Be3 Qb6 13.b3 Rfe8",
+              "legacyIds": []
+            },
+            {
+              "id": "grunfeld-c5-l4",
+              "title": "Anti-Grünfeld 3.f3 d5 : …Nb6 et …Nc6",
+              "legacyIds": []
             }
           ]
         }
@@ -1946,65 +3187,169 @@
     },
     {
       "id": "catalan",
-      "name": "Catalan",
-      "description": "Formation complète sur Catalan",
+      "name": "Catalane",
+      "description": "1.d4 Nf6 2.c4 e6 3.g3 : le fou blanc s'installe en g2 et pèse sur la grande diagonale pendant toute la partie. Un répertoire complet côté Blancs contre la Catalane ouverte et fermée, les échecs en b4, 3…c5, avec pièges et grandes lignes.",
       "side": "white",
       "eco": [
+        "E00",
+        "E01",
+        "E02",
+        "E03",
         "E04",
-        "E08",
-        "E09",
         "E05",
-        "E06"
+        "E06",
+        "E07",
+        "E08",
+        "E09"
       ],
       "chapters": [
         {
           "id": "catalan-c1",
           "title": "Les fondations",
-          "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+          "summary": "Le fou g2 et la grande diagonale, la Catalane ouverte 4…dxc4, la Catalane fermée 4…Be7 avec e4, l'échec 3…Bb4+ et la variante classique 7.Qc2 a6 8.a4.",
           "stage": "foundations",
           "lessons": [
             {
               "id": "catalan-c1-l1",
-              "title": "Catalane - Ouverte",
+              "title": "Catalane ouverte : 4…dxc4 et le fou g2",
               "legacyIds": [
                 "catalan-m1"
               ]
             },
             {
               "id": "catalan-c1-l2",
-              "title": "Catalan Opening: Closed",
+              "title": "Catalane fermée : Qc2, Nbd2 et e4",
               "legacyIds": [
                 "catalan-m2"
+              ]
+            },
+            {
+              "id": "catalan-c1-l3",
+              "title": "3…Bb4+ 4.Bd2 : la Bogo-catalane",
+              "legacyIds": []
+            },
+            {
+              "id": "catalan-c1-l4",
+              "title": "Ouverte classique : 7.Qc2 a6 8.a4",
+              "legacyIds": [
+                "catalan-m4"
               ]
             }
           ]
         },
         {
           "id": "catalan-c2",
-          "title": "Lignes théoriques",
-          "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
-          "stage": "theory",
+          "title": "Les plans",
+          "summary": "La Catalane fermée avec 9.e4 Bb7 10.b3, la classique 10.Bg5 Nbd7, la fermée 6…c6 7.Qc2 b6 et la Catalane ouverte 5…a6 6.O-O Nc6 7.e3.",
+          "stage": "plans",
           "lessons": [
             {
               "id": "catalan-c2-l1",
-              "title": "Catalan: Closed, Main Line, 9.e4 Bb7 10.b3",
+              "title": "Fermée : 9.e4 Bb7 10.b3",
               "legacyIds": [
                 "catalan-m3"
               ]
             },
             {
               "id": "catalan-c2-l2",
-              "title": "Catalan: Open, Classical, 8.a4 Bd7 9.Qxc4",
-              "legacyIds": [
-                "catalan-m4"
-              ]
+              "title": "Ouverte classique : 10.Bg5 Nbd7 11.Nc3",
+              "legacyIds": []
             },
             {
               "id": "catalan-c2-l3",
-              "title": "Catalan: Closed, 6.O-O c6 7.Qc2 b6",
+              "title": "Fermée : 6…c6 7.Qc2 b6 8.Nbd2",
               "legacyIds": [
                 "catalan-m5"
               ]
+            },
+            {
+              "id": "catalan-c2-l4",
+              "title": "Ouverte : 5…a6 6.O-O Nc6 7.e3",
+              "legacyIds": []
+            }
+          ]
+        },
+        {
+          "id": "catalan-c3",
+          "title": "Les réponses adverses",
+          "summary": "3…c5 avec 4.Nf3 cxd4 5.Nxd4, l'échec 4…Bb4+ 5.Bd2 avec …a5 ou …Bd6, et les Catalanes ouvertes 5…Nc6 et 5…c5.",
+          "stage": "responses",
+          "lessons": [
+            {
+              "id": "catalan-c3-l1",
+              "title": "3…c5 : 4.Nf3 cxd4 5.Nxd4",
+              "legacyIds": []
+            },
+            {
+              "id": "catalan-c3-l2",
+              "title": "4…Bb4+ 5.Bd2 : …a5 et …Bd6",
+              "legacyIds": []
+            },
+            {
+              "id": "catalan-c3-l3",
+              "title": "Ouverte : 5…Nc6 6.Qa4",
+              "legacyIds": []
+            },
+            {
+              "id": "catalan-c3-l4",
+              "title": "Ouverte : 5…c5 6.O-O Nc6 7.Qa4",
+              "legacyIds": []
+            }
+          ]
+        },
+        {
+          "id": "catalan-c4",
+          "title": "Les pièges",
+          "summary": "Quatre pièges blancs : Bxf6 et Ng5 contre h7 et b7, le sacrifice en g5 dans la fermée, cxd5 et Qc6 contre le Stonewall, et Ne5 qui démasque le fou g2.",
+          "stage": "traps",
+          "lessons": [
+            {
+              "id": "catalan-c4-l1",
+              "title": "Ouverte : 7…b6 8.Bg5 Bb7? 9.Bxf6!",
+              "legacyIds": []
+            },
+            {
+              "id": "catalan-c4-l2",
+              "title": "Fermée : 10…c5? 11.Nxf6+!",
+              "legacyIds": []
+            },
+            {
+              "id": "catalan-c4-l3",
+              "title": "Fermée : 10…b6? 11.cxd5!",
+              "legacyIds": []
+            },
+            {
+              "id": "catalan-c4-l4",
+              "title": "Ouverte : 7…b5? 8.Ne5!",
+              "legacyIds": []
+            }
+          ]
+        },
+        {
+          "id": "catalan-c5",
+          "title": "La théorie approfondie",
+          "summary": "Les lignes de référence : la classique 10.Bg5 Bd5, 7…b5 8.a4 b4, la Catalane fermée 9…dxc4 et 9…Ba6, et 5…Bb4+ 6.Bd2 a5.",
+          "stage": "theory",
+          "lessons": [
+            {
+              "id": "catalan-c5-l1",
+              "title": "Ouverte classique : 10.Bg5 Bd5 et 10…a5",
+              "legacyIds": []
+            },
+            {
+              "id": "catalan-c5-l2",
+              "title": "Ouverte classique : 7…b5 8.a4 b4",
+              "legacyIds": []
+            },
+            {
+              "id": "catalan-c5-l3",
+              "title": "Fermée : 9…dxc4 et 9…Ba6",
+              "legacyIds": []
+            },
+            {
+              "id": "catalan-c5-l4",
+              "title": "Ouverte : 5…Bb4+ 6.Bd2 a5 7.Qc2",
+              "legacyIds": []
             }
           ]
         }
@@ -2012,33 +3357,53 @@
     },
     {
       "id": "kings_indian",
-      "name": "Kings Indian",
-      "description": "Formation complète sur Kings Indian",
+      "name": "Défense Est-Indienne",
+      "description": "1.d4 Nf6 2.c4 g6 : une défense de contre-attaque qui laisse le centre aux Blancs pour mieux le frapper. Un répertoire complet côté Noirs avec la classique et la Mar del Plata, la Bayonet, la Sämisch, le fianchetto Panno, les Quatre pions, l'Averbakh et h3, pièges et grandes lignes.",
       "side": "black",
       "eco": [
-        "E90",
-        "E66",
-        "E80",
+        "E61",
+        "E62",
+        "E63",
+        "E71",
+        "E75",
+        "E77",
+        "E84",
         "E87",
-        "E84"
+        "E88",
+        "E90",
+        "E92",
+        "E97",
+        "E99"
       ],
       "chapters": [
         {
           "id": "kings_indian-c1",
           "title": "Les fondations",
-          "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+          "summary": "Le schéma …Bg7, …d6, …O-O et …e5, la variante classique avec 9.Ne1, la Sämisch avec …Nh5 et le fianchetto Panno.",
           "stage": "foundations",
           "lessons": [
             {
               "id": "kings_indian-c1-l1",
-              "title": "Est-Indienne - Classique",
+              "title": "Le schéma est-indien : fianchetto, roque et …e5",
+              "legacyIds": []
+            },
+            {
+              "id": "kings_indian-c1-l2",
+              "title": "La classique : 7.O-O Nc6 8.d5 Ne7",
               "legacyIds": [
                 "kings_indian-m1"
               ]
             },
             {
-              "id": "kings_indian-c1-l2",
-              "title": "King's Indian: Fianchetto, Yugoslav Panno, Main Line, 12.Bb2 bxc4",
+              "id": "kings_indian-c1-l3",
+              "title": "La Sämisch : 5.f3 et 7…Nh5",
+              "legacyIds": [
+                "kings_indian-m3"
+              ]
+            },
+            {
+              "id": "kings_indian-c1-l4",
+              "title": "Le fianchetto : la Panno 6…Nc6 7…a6",
               "legacyIds": [
                 "kings_indian-m2"
               ]
@@ -2047,30 +3412,117 @@
         },
         {
           "id": "kings_indian-c2",
-          "title": "Lignes théoriques",
-          "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
-          "stage": "theory",
+          "title": "Plans typiques",
+          "summary": "La course aux ailes de la Mar del Plata, la Bayonet 9.b4, la variante Petrosian avec 7.d5 et la finale de l'échange.",
+          "stage": "plans",
           "lessons": [
             {
               "id": "kings_indian-c2-l1",
-              "title": "King's Indian: Saemisch, 5...e5 6.d5",
-              "legacyIds": [
-                "kings_indian-m3"
-              ]
+              "title": "Mar del Plata : la course …f5-f4-g5",
+              "legacyIds": []
             },
             {
               "id": "kings_indian-c2-l2",
-              "title": "King's Indian: Saemisch, Orthodox, Bronstein, 9.g3",
+              "title": "La Bayonet 9.b4 : …Nh5 et …f5",
+              "legacyIds": []
+            },
+            {
+              "id": "kings_indian-c2-l3",
+              "title": "La Petrosian 7.d5 : …a5, …Na6 et …Qe8",
+              "legacyIds": []
+            },
+            {
+              "id": "kings_indian-c2-l4",
+              "title": "L'échange 7.dxe5 : une finale sans danger",
+              "legacyIds": []
+            }
+          ]
+        },
+        {
+          "id": "kings_indian-c3",
+          "title": "Réponses adverses",
+          "summary": "Les Quatre pions avec …c5, l'Averbakh 6.Bg5, le système Makogonov 5.h3 et la Gligoric 7.Be3.",
+          "stage": "responses",
+          "lessons": [
+            {
+              "id": "kings_indian-c3-l1",
+              "title": "Les Quatre pions : 5.f4 et …c5",
+              "legacyIds": []
+            },
+            {
+              "id": "kings_indian-c3-l2",
+              "title": "L'Averbakh 6.Bg5 : …c5 et …h6",
+              "legacyIds": []
+            },
+            {
+              "id": "kings_indian-c3-l3",
+              "title": "Le système 5.h3 : …e5 et …a5",
+              "legacyIds": []
+            },
+            {
+              "id": "kings_indian-c3-l4",
+              "title": "La Gligoric 7.Be3 : …Ng4 et …f6",
+              "legacyIds": []
+            }
+          ]
+        },
+        {
+          "id": "kings_indian-c4",
+          "title": "Pièges",
+          "summary": "La retraite 9.Bf4?? dans la Gligoric, 8.Ne1? et 8.b4? contre …Nc6, puis 9.Ba3? contre le fianchetto.",
+          "stage": "traps",
+          "lessons": [
+            {
+              "id": "kings_indian-c4-l1",
+              "title": "Gligoric : 9.Bf4?? exf4",
+              "legacyIds": []
+            },
+            {
+              "id": "kings_indian-c4-l2",
+              "title": "8.Ne1? exd4 et le pion e4",
+              "legacyIds": []
+            },
+            {
+              "id": "kings_indian-c4-l3",
+              "title": "8.b4? exd4 et la grande diagonale",
+              "legacyIds": []
+            },
+            {
+              "id": "kings_indian-c4-l4",
+              "title": "Fianchetto : 9.Ba3? e4",
+              "legacyIds": []
+            }
+          ]
+        },
+        {
+          "id": "kings_indian-c5",
+          "title": "Grande théorie",
+          "summary": "La Sämisch avec 7…c6, la Panno contre la Sämisch, la Mar del Plata avec 10.Be3 et la Bayonet jusqu'à la finale.",
+          "stage": "theory",
+          "lessons": [
+            {
+              "id": "kings_indian-c5-l1",
+              "title": "Sämisch orthodoxe : 7.d5 c6",
               "legacyIds": [
                 "kings_indian-m4"
               ]
             },
             {
-              "id": "kings_indian-c2-l3",
-              "title": "King's Indian: Saemisch, Panno Main Line, 9.h4 h5 10.O-O-O",
+              "id": "kings_indian-c5-l2",
+              "title": "La Panno contre la Sämisch : 6…Nc6",
               "legacyIds": [
                 "kings_indian-m5"
               ]
+            },
+            {
+              "id": "kings_indian-c5-l3",
+              "title": "Mar del Plata avec 10.Be3 : 13.b4 et c5",
+              "legacyIds": []
+            },
+            {
+              "id": "kings_indian-c5-l4",
+              "title": "Bayonet : 14.Ne6 et la finale du pion e6",
+              "legacyIds": []
             }
           ]
         }

@@ -1,47 +1,93 @@
 {
   "id": "sicilian",
-  "name": "Sicilian",
-  "description": "Formation complète sur Sicilian",
+  "name": "Défense Sicilienne",
+  "description": "1.e4 c5 : le combat déséquilibré par excellence. Un répertoire Najdorf complet côté Noirs avec …e5 contre l'attaque anglaise, 6.Be2 et 6.f4, le Pion empoisonné contre 6.Bg5, …e6 et …b5 contre 6.Bc4, les anti-Siciliennes 2.c3, 2.Nc3 et 3.Bb5+, la Dragon en alternative, pièges et grandes lignes.",
   "side": "black",
   "eco": [
     "B22",
-    "B70",
+    "B23",
+    "B52",
+    "B54",
+    "B76",
+    "B78",
+    "B87",
     "B90",
-    "B97",
-    "B23"
+    "B92",
+    "B93",
+    "B97"
   ],
   "chapters": [
     {
       "id": "sicilian-c1",
       "title": "Les fondations",
-      "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+      "summary": "Pourquoi 1…c5 et 5…a6, la réponse …e5 contre 6.Be3 et 6.Be2, et la variante Alapine 2.c3.",
       "stage": "foundations",
       "lessons": [
         {
           "id": "sicilian-c1-l1",
-          "legacyIds": [
-            "sicilian-m1"
+          "legacyIds": [],
+          "title": "1…c5 et 5…a6 : l'idée Najdorf",
+          "eco": "B90",
+          "kind": "concept",
+          "objectives": [
+            "Échanger un pion de côté contre le pion central d4",
+            "Comprendre le rôle multiple du coup …a6",
+            "Prendre de l'espace au centre par …e5 et …Be6"
           ],
-          "title": "Sicilienne - Alapine",
-          "eco": "B22",
-          "kind": "line",
-          "objectives": [],
-          "pgn": "1. e4 {e4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e4]} 1... c5 {c5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc7c5]} 2. c3 {c3 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc2c3]} 2... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 3. e5 {e5 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge4e5]} 3... Nd5 {Nd5 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gf6d5]} 4. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 4... Nc6 {Nc6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb8c6]} 5. Bc4 {Bc4 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf1c4]} 5... Nb6 {Nb6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gd5b6]} 6. Bb3 {Bb3 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gc4b3]} 6... c4 {c4 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc5c4]} 7. Bc2 {Bc2 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gb3c2]}",
-          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "pgn": "{La Sicilienne crée un déséquilibre dès le premier coup : le pion c5 s'échange contre le pion d4, et les Noirs gardent deux pions centraux contre un. Le petit coup …a6 interdit Nb5 et Bb5, et prépare …e5 ou …b5 selon le plan blanc.} 1. e4 1... c5 {Le pion c5 contrôle d4 sans bloquer vos pièces. [%cal Gc7c5,Gc5d4]} 2. Nf3 (2. c3 2... Nf6 {Contre l'Alapine, le cavalier attaque e4 tout de suite. [%cal Gg8f6,Gf6e4]}) (2. Nc3 2... d6 {Contre 2.Nc3, le même pion d6 garde e5 en souplesse. [%cal Gd7d6]}) 2... d6 {[%cal Gd7d6]} 3. d4 (3. Bb5+ 3... Bd7 {Le fou s'interpose et propose l'échange. [%cal Gc8d7,Gd7b5]}) 3... cxd4 {[%cal Gc5d4]} 4. Nxd4 4... Nf6 {Le cavalier attaque e4 et force Nc3. [%cal Gg8f6,Gf6e4]} 5. Nc3 5... a6 {Le coup Najdorf : b5 est interdit aux pièces blanches. [%cal Ga7a6,Ga6b5]} 6. Be3 (6. Bg5 6... e6 {Contre Bg5, le pion e6 protège la case d5 et le fou e7 pourra rompre le clouage. [%cal Ge7e6]}) 6... e5 {Le pion chasse le cavalier d4 et gagne de l'espace. [%cal Ge7e5,Ge5d4]} 7. Nb3 7... Be6 {Le fou contrôle d5, la case clé de toute la structure. [%cal Gc8e6,Ge6d5]}",
+          "conclusion": "La Najdorf repose sur deux idées : …a6 tient b5 et les pièces blanches à distance, et …e5 gagne de l'espace avec le contrôle de d5 comme fil rouge.",
           "mustCover": "allBranches",
           "reviewable": true
         },
         {
           "id": "sicilian-c1-l2",
           "legacyIds": [
-            "sicilian-m2"
+            "sicilian-m3"
           ],
-          "title": "Sicilienne - Dragon",
-          "eco": "B70",
+          "title": "6.Be3 e5 7.Nb3 : l'attaque anglaise",
+          "eco": "B90",
           "kind": "line",
-          "objectives": [],
-          "pgn": "1. e4 {e4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e4]} 1... c5 {c5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc7c5]} 2. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 2... d6 {d6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d6]} 3. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 3... cxd4 {cxd4 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gc5d4]} 4. Nxd4 {Nxd4 : Les Blancs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gf3d4]} 4... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 5. Nc3 {Nc3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb1c3]} 5... g6 {g6 : Les Noirs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Gg7g6]} 6. Be3 {Be3 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gc1e3]} 6... Bg7 {Bg7 : Les Noirs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf8g7]} 7. f3 {f3 : Les Blancs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Gf2f3]}",
-          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "objectives": [
+            "Répondre à 6.Be3 par …e5 et …Be6",
+            "Développer par …Be7, …O-O et …Nbd7",
+            "Garder le contrôle de d5 face au plan f3, Qd2 et O-O-O"
+          ],
+          "pgn": "{Contre 6.Be3, les Blancs préparent f3, Qd2, le grand roque et la poussée g4. Votre schéma est simple : …e5, …Be6, …Be7, petit roque et …Nbd7, puis la contre-attaque à l'aile dame.} 1. e4 1... c5 {[%cal Gc7c5]} 2. Nf3 2... d6 {[%cal Gd7d6]} 3. d4 3... cxd4 {[%cal Gc5d4]} 4. Nxd4 4... Nf6 {[%cal Gg8f6]} 5. Nc3 5... a6 {[%cal Ga7a6]} 6. Be3 6... e5 {[%cal Ge7e5]} 7. Nb3 (7. Nf3 7... Be7 {Le cavalier f3 est moins actif : développez sans crainte. [%cal Gf8e7]}) (7. Nde2 7... Be7 {Même réponse : le fou e7 prépare le roque. [%cal Gf8e7]}) 7... Be6 {[%cal Gc8e6]} 8. f3 (8. Qd2 8... Nbd7 {Le cavalier rejoint c5 ou b6 et soutient …d5. [%cal Gb8d7,Gd7b6]}) (8. Be2 8... Be7 {Contre le développement calme, le fou e7 suffit. [%cal Gf8e7]}) 8... Be7 {[%cal Gf8e7]} 9. Qd2 9... O-O {[%cal Ge8g8]} 10. O-O-O 10... Nbd7 {Les deux rois sont mis à l'abri sur des ailes opposées : la course aux attaques commence. [%cal Gb8d7,Gb7b5]}",
+          "conclusion": "Contre l'attaque anglaise, …e5, …Be6, …Be7 et …Nbd7 forment un bloc solide. Après le grand roque blanc, votre roi est en sécurité et l'aile dame vous appartient.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "sicilian-c1-l3",
+          "legacyIds": [],
+          "title": "6.Be2 e5 : la case d5 avant tout",
+          "eco": "B92",
+          "kind": "line",
+          "objectives": [
+            "Répondre au développement classique par …e5",
+            "Opposer le fou e6 au cavalier qui vise d5",
+            "Roquer rapidement avant d'ouvrir le jeu"
+          ],
+          "pgn": "{Contre 6.Be2, les Blancs jouent positionnel : ils visent la case d5, affaiblie par …e5. Votre réponse : le fou e6 et le cavalier d7 surveillent d5, et vous ne jouez …d5 qu'une fois bien préparé.} 1. e4 1... c5 {[%cal Gc7c5]} 2. Nf3 2... d6 {[%cal Gd7d6]} 3. d4 3... cxd4 {[%cal Gc5d4]} 4. Nxd4 4... Nf6 {[%cal Gg8f6]} 5. Nc3 5... a6 {[%cal Ga7a6]} 6. Be2 6... e5 {[%cal Ge7e5]} 7. Nb3 (7. Nf3 7... Be7 {Le cavalier f3 ne vise plus d5 aussi vite : le développement suit. [%cal Gf8e7]}) 7... Be7 {[%cal Gf8e7]} 8. O-O 8... O-O {[%cal Ge8g8]} 9. Be3 (9. Kh1 9... Be6 {Le fou prend sa diagonale, qu'importe le coup d'attente blanc. [%cal Gc8e6,Ge6d5]}) 9... Be6 {Le fou contrôle d5 et menace déjà …d5 dans certains cas. [%cal Gc8e6,Ge6d5]}",
+          "conclusion": "Contre 6.Be2, le cœur de la position est d5. Tant que le fou e6 et vos pièces contrôlent cette case, le pion d6 n'est pas faible.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "sicilian-c1-l4",
+          "legacyIds": [
+            "sicilian-m1"
+          ],
+          "title": "2.c3 Nf6 : l'Alapine",
+          "eco": "B22",
+          "kind": "line",
+          "objectives": [
+            "Attaquer e4 par 2…Nf6 pour forcer e5",
+            "Contester le pion e5 par …d6 et …Nc6",
+            "Répondre à Bb5 par …dxe5 et …Bd7"
+          ],
+          "pgn": "{L'Alapine veut construire un grand centre par d4. 2…Nf6 attaque e4 tout de suite : après e5, le cavalier s'installe en d5, et …d6 avec …Nc6 sape le pion avancé.} 1. e4 1... c5 {[%cal Gc7c5]} 2. c3 2... Nf6 {Le cavalier attaque e4 avant que d4 ne le soutienne. [%cal Gg8f6,Gf6e4]} 3. e5 3... Nd5 {[%cal Gf6d5]} 4. d4 (4. Nf3 4... Nc6 {Contre Nf3, le cavalier attaque e5. [%cal Gb8c6,Gc6e5]} 5. Bc4 5... Nb6 {[%cal Gd5b6]} 6. Bb3 6... c4 {Le pion chasse le fou et gagne de l'espace. [%cal Gc5c4,Gc4b3]} 7. Bc2 7... Qc7 {[%cal Gd8c7]} 8. Qe2 8... g5 {L'attaque du pion e5 par …g5-g4 : une idée originale et forte. [%cal Gg7g5,Gg5g4]}) 4... cxd4 {[%cal Gc5d4]} 5. Nf3 (5. cxd4 5... d6 {[%cal Gd7d6]} 6. Nf3 6... Nc6 {Même position, par un autre ordre de coups. [%cal Gb8c6]}) 5... Nc6 {[%cal Gb8c6]} 6. cxd4 6... d6 {[%cal Gd7d6]} 7. Bc4 7... Nb6 {Le cavalier recule en chassant le fou. [%cal Gd5b6,Gb6c4]} 8. Bb5 8... dxe5 {[%cal Gd6e5]} 9. Nxe5 9... Bd7 {[%cal Gc8d7]} 10. Nxd7 10... Qxd7 {Les échanges soulagent les Noirs : le pion d4 isolé est une cible. [%cal Gd8d7,Gd7d4]}",
+          "conclusion": "Contre 2.c3, 2…Nf6 force e5, puis …d6 et …Nc6 sapent le centre. Le pion d4, souvent isolé, devient votre cible.",
           "mustCover": "allBranches",
           "reviewable": true
         }
@@ -49,49 +95,293 @@
     },
     {
       "id": "sicilian-c2",
-      "title": "Lignes théoriques",
-      "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
-      "stage": "theory",
+      "title": "Plans typiques",
+      "summary": "La course …b5-b4 contre l'attaque anglaise, la case d5 contre 6.Be2, …b5 et …Qc7 contre le fou c4, et …e5 contre 6.f4.",
+      "stage": "plans",
       "lessons": [
         {
           "id": "sicilian-c2-l1",
-          "legacyIds": [
-            "sicilian-m3"
-          ],
-          "title": "Sicilienne - Najdorf",
+          "legacyIds": [],
+          "title": "La course : …b5, …b4 et …a5",
           "eco": "B90",
           "kind": "line",
-          "objectives": [],
-          "pgn": "1. e4 {e4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e4]} 1... c5 {c5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc7c5]} 2. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 2... d6 {d6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d6]} 3. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 3... cxd4 {cxd4 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gc5d4]} 4. Nxd4 {Nxd4 : Les Blancs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gf3d4]} 4... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 5. Nc3 {Nc3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb1c3]} 5... a6 {a6 : Les Noirs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Ga7a6]} 6. Be3 {Be3 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gc1e3]} 6... e5 {e5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e5]} 7. Nb3 {Nb3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gd4b3]}",
-          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "objectives": [
+            "Lancer les pions de l'aile dame dès que les Blancs poussent g4",
+            "Chasser le cavalier c3 par …b4",
+            "Garder le roi en sécurité par …Ne8"
+          ],
+          "pgn": "{Dans l'attaque anglaise, chaque tempo compte. Les Blancs poussent g4-g5 contre votre cavalier f6 ; vous répondez par …b5-b4 contre leur cavalier c3, puis …a5-a4 contre le roi blanc.} 1. e4 1... c5 {[%cal Gc7c5]} 2. Nf3 2... d6 {[%cal Gd7d6]} 3. d4 3... cxd4 {[%cal Gc5d4]} 4. Nxd4 4... Nf6 {[%cal Gg8f6]} 5. Nc3 5... a6 {[%cal Ga7a6]} 6. Be3 6... e5 {[%cal Ge7e5]} 7. Nb3 7... Be6 {[%cal Gc8e6]} 8. f3 8... Be7 {[%cal Gf8e7]} 9. Qd2 9... O-O {[%cal Ge8g8]} 10. O-O-O 10... Nbd7 {[%cal Gb8d7]} 11. g4 11... b5 {Le pion b5 menace …b4 : la course est lancée. [%cal Gb7b5,Gb5b4]} 12. g5 12... b4 {Le pion chasse le cavalier c3, défenseur de d5 et de e4. [%cal Gb5b4,Gb4c3]} 13. Ne2 13... Ne8 {Le cavalier recule pour protéger g7 et c7, et libère le fou e7. [%cal Gf6e8,Ge8c7]} 14. f4 14... a5 {Le pion a5 rejoint b4 : …a4 chassera le cavalier b3. [%cal Ga6a5,Ga5a4]}",
+          "conclusion": "Dans la course, les pions de l'aile dame sont vos attaquants. …b5-b4 chasse le cavalier c3, …a5-a4 fait reculer le cavalier b3, et le roi blanc se retrouve exposé.",
           "mustCover": "allBranches",
           "reviewable": true
         },
         {
           "id": "sicilian-c2-l2",
-          "legacyIds": [
-            "sicilian-m4"
-          ],
-          "title": "Sicilian: Najdorf, Poisoned Pawn, Main Line, 13.e5 dxe5: 15.Ne4 Be7",
-          "eco": "B97",
+          "legacyIds": [],
+          "title": "6.Be2 : la lutte pour d5",
+          "eco": "B92",
           "kind": "line",
-          "objectives": [],
-          "pgn": "1. e4 {e4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e4]} 1... c5 {c5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc7c5]} 2. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 2... d6 {d6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d6]} 3. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 3... cxd4 {cxd4 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gc5d4]} 4. Nxd4 {Nxd4 : Les Blancs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gf3d4]} 4... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 5. Nc3 {Nc3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb1c3]} 5... a6 {a6 : Les Noirs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Ga7a6]} 6. Bg5 {Bg5 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gc1g5]} 6... e6 {e6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e6]} 7. f4 {f4 : Les Blancs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Gf2f4]}",
-          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "objectives": [
+            "Placer le cavalier d7 et la tour c8 contre la colonne c",
+            "Répondre à a4-a5 par …Qc7",
+            "Préparer …d5 avec les tours centrales"
+          ],
+          "pgn": "{Dans la structure 6.Be2 e5, les Blancs gèlent l'aile dame par a4-a5 et visent d5. Votre plan : la tour en c8 sur la colonne semi-ouverte, la dame en c7, puis les tours centrales soutiennent la libération …d5.} 1. e4 1... c5 {[%cal Gc7c5]} 2. Nf3 2... d6 {[%cal Gd7d6]} 3. d4 3... cxd4 {[%cal Gc5d4]} 4. Nxd4 4... Nf6 {[%cal Gg8f6]} 5. Nc3 5... a6 {[%cal Ga7a6]} 6. Be2 6... e5 {[%cal Ge7e5]} 7. Nb3 7... Be7 {[%cal Gf8e7]} 8. O-O 8... O-O {[%cal Ge8g8]} 9. Be3 9... Be6 {[%cal Gc8e6]} 10. Qd2 10... Nbd7 {Le cavalier protège e5 et peut aller en b8-c6 ou en f6. [%cal Gb8d7,Gd7f6]} 11. a4 11... Rc8 {La tour occupe la colonne semi-ouverte et vise c2. [%cal Ga8c8,Gc8c2]} 12. a5 12... Qc7 {La dame libère d8 pour la tour et presse sur c2. [%cal Gd8c7,Gc7c2]} 13. Rfd1 13... Rfd8 {La tour soutient d6 et prépare …d5 au bon moment. [%cal Gf8d8,Gd8d5]}",
+          "conclusion": "Contre 6.Be2, la colonne c et la préparation de …d5 rythment votre jeu. Si vous jouez …d5 sans perte, la position s'ouvre en votre faveur.",
           "mustCover": "allBranches",
           "reviewable": true
         },
         {
           "id": "sicilian-c2-l3",
+          "legacyIds": [],
+          "title": "6.Bc4 e6 : …b5 et la dame c7",
+          "eco": "B87",
+          "kind": "line",
+          "objectives": [
+            "Fermer la diagonale du fou c4 par …e6",
+            "Chasser le fou par …b5 et développer le fou f8",
+            "Défendre g7 par …Ne8 face à Qg3 et Bh6"
+          ],
+          "pgn": "{Le fou c4 vise e6 et f7. Contre lui, la structure …e6 est plus solide que …e5 : le pion e6 bloque la diagonale, …b5 chasse le fou et, plus tard, …b4 attaquera le cavalier c3.} 1. e4 1... c5 {[%cal Gc7c5]} 2. Nf3 2... d6 {[%cal Gd7d6]} 3. d4 3... cxd4 {[%cal Gc5d4]} 4. Nxd4 4... Nf6 {[%cal Gg8f6]} 5. Nc3 5... a6 {[%cal Ga7a6]} 6. Bc4 6... e6 {Le pion ferme la diagonale du fou c4. [%cal Ge7e6,Ge6c4]} 7. Bb3 7... b5 {Le pion prend de l'espace et prépare …Bb7 ou …b4. [%cal Gb7b5,Gb5b4]} 8. O-O (8. Bg5 8... Be7 {Contre le clouage, le fou e7 met fin au problème. [%cal Gf8e7]}) 8... Be7 {[%cal Gf8e7]} 9. Qf3 9... Qc7 {La dame protège la colonne c et vise c3. [%cal Gd8c7,Gc7c3]} 10. Qg3 10... O-O {[%cal Ge8g8]} 11. Bh6 11... Ne8 {Le cavalier protège g7 : l'attaque blanche marque le pas. [%cal Gf6e8,Ge8g7]}",
+          "conclusion": "Contre le fou c4, …e6 ferme la diagonale, …b5 et …Qc7 activent l'aile dame, et …Ne8 répond calmement aux menaces sur g7.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "sicilian-c2-l4",
+          "legacyIds": [],
+          "title": "6.f4 e5 : frapper la base du pion f4",
+          "eco": "B93",
+          "kind": "line",
+          "objectives": [
+            "Attaquer f4 et chasser le cavalier d4 par …e5",
+            "Placer le cavalier en d7 pour garder e5",
+            "Ouvrir le jeu par …exf4 au bon moment"
+          ],
+          "pgn": "{6.f4 veut pousser f5 ou e5. Le coup …e5 attaque f4 tout de suite et chasse le cavalier : les Blancs doivent choisir entre la pression en f4 et la fermeture du centre.} 1. e4 1... c5 {[%cal Gc7c5]} 2. Nf3 2... d6 {[%cal Gd7d6]} 3. d4 3... cxd4 {[%cal Gc5d4]} 4. Nxd4 4... Nf6 {[%cal Gg8f6]} 5. Nc3 5... a6 {[%cal Ga7a6]} 6. f4 6... e5 {Le pion attaque f4 et chasse le cavalier d4. [%cal Ge7e5,Ge5f4,Ge5d4]} 7. Nf3 (7. Nb3 7... Nbd7 {Même schéma : le cavalier d7 garde e5. [%cal Gb8d7]}) 7... Nbd7 {[%cal Gb8d7]} 8. a4 (8. Bd3 8... Be7 {Le développement continue : petit roque et …exf4 suivront. [%cal Gf8e7]}) 8... Be7 {[%cal Gf8e7]} 9. Bd3 9... O-O {[%cal Ge8g8]} 10. O-O 10... exf4 {La prise libère la case e5 pour votre cavalier. [%cal Ge5f4,Gd7e5]}",
+          "conclusion": "Contre 6.f4, …e5 met la base de la chaîne sous pression. Le cavalier d7 garde e5, puis …exf4 libère cette case pour vos pièces.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        }
+      ]
+    },
+    {
+      "id": "sicilian-c3",
+      "title": "Réponses adverses",
+      "summary": "Le Pion empoisonné contre 6.Bg5, la variante Adams 6.h3, l'échec 3.Bb5+ et le Grand Prix 2.Nc3 avec f4.",
+      "stage": "responses",
+      "lessons": [
+        {
+          "id": "sicilian-c3-l1",
+          "legacyIds": [],
+          "title": "6.Bg5 e6 7.f4 Qb6 : le Pion empoisonné",
+          "eco": "B97",
+          "kind": "line",
+          "objectives": [
+            "Attaquer b2 et d4 par …Qb6",
+            "Prendre le pion b2 et replier la dame en a3",
+            "Développer par …Be7 et …Nbd7 après Be2"
+          ],
+          "pgn": "{Contre 6.Bg5, la dame b6 attaque le pion b2 et le cavalier d4. Les Blancs peuvent offrir le pion par Qd2 : vous le prenez et la dame se replie en a3, d'où elle gêne le développement blanc.} 1. e4 1... c5 {[%cal Gc7c5]} 2. Nf3 2... d6 {[%cal Gd7d6]} 3. d4 3... cxd4 {[%cal Gc5d4]} 4. Nxd4 4... Nf6 {[%cal Gg8f6]} 5. Nc3 5... a6 {[%cal Ga7a6]} 6. Bg5 6... e6 {[%cal Ge7e6]} 7. f4 7... Qb6 {La dame attaque b2 et met la pression sur d4. [%cal Gd8b6,Gb6b2,Gb6d4]} 8. Qd2 (8. Nb3 8... Be7 {Le cavalier a quitté d4 : développez et roquez. [%cal Gf8e7]}) 8... Qxb2 {Le pion empoisonné : risqué, mais solide avec une défense précise. [%cal Gb6b2]} 9. Rb1 9... Qa3 {La dame se replie en a3 : elle surveille c3 et a2. [%cal Gb2a3,Ga3c3]} 10. Be2 10... Be7 {[%cal Gf8e7]} 11. O-O 11... Nbd7 {Les Noirs ont un pion de plus et une position compacte. [%cal Gb8d7,Gd7c5]}",
+          "conclusion": "Dans le Pion empoisonné, la dame prend b2 puis se replie en a3. Votre défense est précise mais saine : vous gardez le pion et développez tranquillement.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "sicilian-c3-l2",
+          "legacyIds": [],
+          "title": "6.h3 e5 : la variante Adams",
+          "eco": "B90",
+          "kind": "line",
+          "objectives": [
+            "Répondre au projet g4 par …e5",
+            "Freiner la poussée g4 par …h5",
+            "Développer le fou c8 en e6"
+          ],
+          "pgn": "{6.h3 prépare g4 pour chasser votre cavalier f6. Le pion …e5 chasse d'abord le cavalier d4, puis …h5 rend la poussée g4 difficile.} 1. e4 1... c5 {[%cal Gc7c5]} 2. Nf3 2... d6 {[%cal Gd7d6]} 3. d4 3... cxd4 {[%cal Gc5d4]} 4. Nxd4 4... Nf6 {[%cal Gg8f6]} 5. Nc3 5... a6 {[%cal Ga7a6]} 6. h3 6... e5 {[%cal Ge7e5]} 7. Nde2 (7. Nb3 7... Be6 {Le fou contrôle d5 : le schéma de l'attaque anglaise revient. [%cal Gc8e6,Ge6d5]}) 7... h5 {Le pion freine g4 : votre cavalier f6 reste en place. [%cal Gh7h5,Gh5g4]} 8. g3 8... Be6 {[%cal Gc8e6]} 9. Bg2 9... Nbd7 {Le cavalier rejoint b6 ou c5 et surveille d5. [%cal Gb8d7,Gd7b6]}",
+          "conclusion": "Contre 6.h3, …e5 et …h5 neutralisent la poussée g4. Le fou e6 et le cavalier d7 se placent ensuite comme dans l'attaque anglaise.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "sicilian-c3-l3",
+          "legacyIds": [],
+          "title": "3.Bb5+ Bd7 : l'échange des fous",
+          "eco": "B52",
+          "kind": "line",
+          "objectives": [
+            "Interposer le fou d7 et reprendre de la dame",
+            "Placer les pions en e6 et d5 contre la structure c3-d4",
+            "Activer le cavalier en e4 après e5"
+          ],
+          "pgn": "{L'échec 3.Bb5+ échange les fous de cases blanches. Votre plan : reprendre de la dame, développer …Nc6 et …Nf6, puis jouer …e6 et …d5 pour contester le centre blanc.} 1. e4 1... c5 {[%cal Gc7c5]} 2. Nf3 2... d6 {[%cal Gd7d6]} 3. Bb5+ 3... Bd7 {[%cal Gc8d7]} 4. Bxd7+ 4... Qxd7 {La dame reprend : votre cavalier b8 peut aller en c6. [%cal Gd8d7,Gb8c6]} 5. O-O (5. c4 5... Nc6 {Contre la structure Maroczy, le cavalier vise d4. [%cal Gb8c6,Gc6d4]}) 5... Nc6 {[%cal Gb8c6]} 6. c3 6... Nf6 {[%cal Gg8f6]} 7. Re1 7... e6 {[%cal Ge7e6]} 8. d4 8... cxd4 {[%cal Gc5d4]} 9. cxd4 9... d5 {Le pion conteste e4 : la structure devient symétrique. [%cal Gd6d5,Gd5e4]} 10. e5 10... Ne4 {Le cavalier s'installe en e4, d'où il est très fort. [%cal Gf6e4,Ge4c3]}",
+          "conclusion": "Contre 3.Bb5+, l'échange des fous vous soulage. …Nc6, …Nf6, …e6 et …d5 contestent le centre, et le cavalier e4 compense l'avance e5.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "sicilian-c3-l4",
           "legacyIds": [
             "sicilian-m5"
           ],
-          "title": "Sicilian: Closed, Grand Prix, 3...d6 4.Nf3 g6",
+          "title": "2.Nc3 d6 3.f4 : le Grand Prix",
           "eco": "B23",
           "kind": "line",
-          "objectives": [],
-          "pgn": "1. e4 {e4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e4]} 1... c5 {c5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc7c5]} 2. Nc3 {Nc3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb1c3]} 2... d6 {d6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d6]} 3. f4 {f4 : Les Blancs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Gf2f4]} 3... Nc6 {Nc6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb8c6]} 4. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 4... g6 {g6 : Les Noirs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Gg7g6]} 5. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 5... cxd4 {cxd4 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gc5d4]} 6. Nxd4 {Nxd4 : Les Blancs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gf3d4]} 6... Bg7 {Bg7 : Les Noirs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf8g7]} 7. Be3 {Be3 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gc1e3]}",
-          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "objectives": [
+            "Développer par …Nc6 et …g6 contre l'attaque f4",
+            "Placer le fou en g7 sur la grande diagonale",
+            "Répondre à Bb5 par …Bd7 et …a6"
+          ],
+          "pgn": "{Dans le Grand Prix, les Blancs jouent f4 et préparent une attaque sur le roi. Votre fou g7 vise la grande diagonale : si les Blancs ouvrent par d4, il frappe directement leur aile dame.} 1. e4 1... c5 {[%cal Gc7c5]} 2. Nc3 2... d6 {[%cal Gd7d6]} 3. f4 (3. Nge2 3... Nf6 {Le cavalier attaque e4 : les Blancs vont jouer d4. [%cal Gg8f6]}) 3... Nc6 {[%cal Gb8c6]} 4. Nf3 4... g6 {Le fianchetto : le fou g7 visera la grande diagonale. [%cal Gg7g6,Gf8g7]} 5. d4 (5. Bb5 5... Bd7 {Le fou s'interpose pour ne pas abîmer vos pions. [%cal Gc8d7]} 6. O-O 6... Bg7 {[%cal Gf8g7]} 7. d3 7... a6 {Le pion chasse le fou : …b5 suivra. [%cal Ga7a6]}) 5... cxd4 {[%cal Gc5d4]} 6. Nxd4 6... Bg7 {Le fou vise d4 et le cavalier c3. [%cal Gf8g7,Gg7d4]} 7. Be3 7... Nf6 {[%cal Gg8f6]} 8. Be2 8... O-O {[%cal Ge8g8]} 9. O-O {Les deux camps ont roqué : …Qb6 ou …Ng4 viseront le fou e3.}",
+          "conclusion": "Contre le Grand Prix, …Nc6 et …g6 mettent le fou g7 en batterie sur la grande diagonale. L'ouverture du jeu par d4 profite à ce fou.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        }
+      ]
+    },
+    {
+      "id": "sicilian-c4",
+      "title": "Pièges",
+      "summary": "Les erreurs blanches typiques : 5.Bg5? qui oublie e4, le pion empoisonné sans Rb1, le fou f4 laissé seul dans l'Alapine et le petit roque prématuré après 3.Bb5+.",
+      "stage": "traps",
+      "lessons": [
+        {
+          "id": "sicilian-c4-l1",
+          "legacyIds": [],
+          "title": "5.Bg5? : le pion e4 oublié",
+          "eco": "B54",
+          "kind": "trap",
+          "objectives": [
+            "Vérifier si le pion e4 est encore défendu avant Nc3",
+            "Prendre en e4 en attaquant le fou g5",
+            "Chasser les cavaliers blancs par …e5 et …a6"
+          ],
+          "pgn": "{Après 4…Nf6, le pion e4 est attaqué : les Blancs doivent jouer Nc3 ou f3. S'ils sortent le fou en g5, votre cavalier prend e4 avec gain de temps, car le pion e7 protège la dame d8.} 1. e4 1... c5 {[%cal Gc7c5]} 2. Nf3 2... d6 {[%cal Gd7d6]} 3. d4 3... cxd4 {[%cal Gc5d4]} 4. Nxd4 4... Nf6 {[%cal Gg8f6]} 5. Bg5 {Le fou oublie que le pion e4 n'est plus défendu.} 5... Nxe4 {Le cavalier prend e4 et attaque le fou g5. [%cal Gf6e4,Ge4g5]} 6. Be3 6... e5 {Le fou e3 a reculé : le pion e5 repousse maintenant le cavalier central. [%cal Ge7e5,Ge5d4]} 7. Nb5 7... a6 {Le pion repousse le cavalier, qui menaçait c7. [%cal Ga7a6,Ga6b5]} 8. N5c3 8... Nxc3 {[%cal Ge4c3]} 9. Nxc3 {Vous avez un pion de plus et le centre.}",
+          "conclusion": "Dans la Sicilienne ouverte, le cavalier f6 attaque e4 dès le quatrième coup. Tant que Nc3 n'est pas joué, comptez les défenseurs de e4 : souvent, il tombe.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "sicilian-c4-l2",
+          "legacyIds": [],
+          "title": "Pion empoisonné : 9.f5? Qxa1+",
+          "eco": "B97",
+          "kind": "trap",
+          "objectives": [
+            "Repérer que la tour a1 est en prise une fois b2 pris",
+            "Prendre la tour avec échec par …Qxa1+",
+            "Ramener la dame en b2 en gardant la qualité"
+          ],
+          "pgn": "{Après 8…Qxb2, la dame noire attaque la tour a1. Les Blancs doivent jouer Rb1 ou Nb3 : toute autre poussée offre la tour avec échec, car la première rangée est vide.} 1. e4 1... c5 {[%cal Gc7c5]} 2. Nf3 2... d6 {[%cal Gd7d6]} 3. d4 3... cxd4 {[%cal Gc5d4]} 4. Nxd4 4... Nf6 {[%cal Gg8f6]} 5. Nc3 5... a6 {[%cal Ga7a6]} 6. Bg5 6... e6 {[%cal Ge7e6]} 7. f4 7... Qb6 {[%cal Gd8b6]} 8. Qd2 8... Qxb2 {[%cal Gb6b2]} 9. f5 (9. e5 9... Qxa1+ {La même prise : la tour tombe avec échec. [%cal Gb2a1]} 10. Ke2 10... dxe5 {[%cal Gd6e5]} 11. fxe5 11... Nd5 {Le cavalier bloque et échange : votre avantage matériel est décisif. [%cal Gf6d5,Gd5c3]}) (9. Bxf6 9... Qxa1+ {Le coup intermédiaire avant de reprendre en f6. [%cal Gb2a1]} 10. Kf2 10... Qb2 {La dame revient et attaque le cavalier c3. [%cal Ga1b2,Gb2c3]}) 9... Qxa1+ {La dame prend la tour avec échec. [%cal Gb2a1,Ga1e1]} 10. Ke2 10... Be7 {[%cal Gf8e7]} 11. g4 11... Qb2 {La dame se replie : vous avez une tour de plus. [%cal Ga1b2,Gb2c3]}",
+          "conclusion": "Dans le Pion empoisonné, la tour a1 est votre première cible après …Qxb2. Si les Blancs oublient Rb1, …Qxa1+ gagne une tour entière.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "sicilian-c4-l3",
+          "legacyIds": [],
+          "title": "Alapine : 7.Bf4? et le fou sans défense",
+          "eco": "B22",
+          "kind": "trap",
+          "objectives": [
+            "Prendre le fou f4 avec le cavalier d5",
+            "Contrer la poussée d5 par …Nxd5",
+            "Échanger les dames avec deux pions de plus"
+          ],
+          "pgn": "{Dans l'Alapine, votre cavalier d5 contrôle f4. Si les Blancs y placent leur fou pour défendre e5, le cavalier le prend tout simplement.} 1. e4 1... c5 {[%cal Gc7c5]} 2. c3 2... Nf6 {[%cal Gg8f6]} 3. e5 3... Nd5 {[%cal Gf6d5]} 4. d4 4... cxd4 {[%cal Gc5d4]} 5. Nf3 5... Nc6 {[%cal Gb8c6]} 6. cxd4 6... d6 {[%cal Gd7d6]} 7. Bf4 {Le fou défend e5, mais il va sur une case que le cavalier contrôle.} 7... Nxf4 {Le cavalier prend le fou : une pièce de plus. [%cal Gd5f4]} 8. d5 8... Nxd5 {Le cavalier f4 revient en d5 et prend le pion. [%cal Gf4d5]} 9. Qxd5 9... dxe5 {Le pion d6 dégage la colonne : votre dame attaque la sienne. [%cal Gd6e5,Gd8d5]} 10. Qxd8+ 10... Kxd8 {Vous avez deux pions de plus en finale. [%cal Ge8d8]}",
+          "conclusion": "Le cavalier d5 de l'Alapine contrôle b4, c3, e3 et f4. Avant chaque coup blanc, regardez s'il ne va pas se poser sur une de ces cases.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "sicilian-c4-l4",
+          "legacyIds": [],
+          "title": "3.Bb5+ Bd7 4.O-O? Bxb5",
+          "eco": "B52",
+          "kind": "trap",
+          "objectives": [
+            "Remarquer que le fou b5 n'est défendu par rien",
+            "Prendre le fou et garder la pièce",
+            "Développer par …e6 et …Nf6 face au gambit b4"
+          ],
+          "pgn": "{Après 3.Bb5+ Bd7, le fou b5 est attaqué : les Blancs doivent l'échanger, le défendre par a4 ou c4, ou reculer. S'ils roquent, votre fou le prend sans contrepartie.} 1. e4 1... c5 {[%cal Gc7c5]} 2. Nf3 2... d6 {[%cal Gd7d6]} 3. Bb5+ 3... Bd7 {[%cal Gc8d7]} 4. O-O {Le roque oublie le fou b5.} 4... Bxb5 {Le fou prend : une pièce de plus. [%cal Gd7b5]} 5. Re1 5... e6 {Le pion soutient d5 et ouvre la diagonale du fou f8. [%cal Ge7e6,Gf8e7]} 6. b4 6... cxb4 {[%cal Gc5b4]} 7. d4 7... Nf6 {[%cal Gg8f6]} 8. a3 8... d5 {Le centre est verrouillé : la pièce de plus fera la différence. [%cal Gd6d5,Gd5e4]}",
+          "conclusion": "Après 3.Bb5+ Bd7, vérifiez toujours si le fou b5 est protégé. Sans a4, c4 ou Nc3, il est en prise : …Bxb5 gagne une pièce.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        }
+      ]
+    },
+    {
+      "id": "sicilian-c5",
+      "title": "Grande théorie",
+      "summary": "Les lignes profondes : le Pion empoisonné avec 10.f5, la Dragon yougoslave, la course de l'attaque anglaise et l'attaque Sozine.",
+      "stage": "theory",
+      "lessons": [
+        {
+          "id": "sicilian-c5-l1",
+          "legacyIds": [
+            "sicilian-m4"
+          ],
+          "title": "Pion empoisonné : 10.f5 et 13.e5",
+          "eco": "B97",
+          "kind": "line",
+          "objectives": [
+            "Connaître la ligne forcée 10.f5 Nc6 11.fxe6 fxe6",
+            "Rendre du matériel au bon moment pour sécuriser le roi",
+            "Placer la dame en a4 et le fou en e7"
+          ],
+          "pgn": "{Le Pion empoisonné principal est une suite forcée. Les Blancs sacrifient pour ouvrir votre roi ; vous rendez le matériel nécessaire, échangez les pièces actives, et votre dame revient en défense.} 1. e4 1... c5 {[%cal Gc7c5]} 2. Nf3 2... d6 {[%cal Gd7d6]} 3. d4 3... cxd4 {[%cal Gc5d4]} 4. Nxd4 4... Nf6 {[%cal Gg8f6]} 5. Nc3 5... a6 {[%cal Ga7a6]} 6. Bg5 6... e6 {[%cal Ge7e6]} 7. f4 7... Qb6 {[%cal Gd8b6]} 8. Qd2 8... Qxb2 {[%cal Gb6b2]} 9. Rb1 9... Qa3 {[%cal Gb2a3]} 10. f5 10... Nc6 {Le cavalier attaque d4 et prépare l'échange. [%cal Gb8c6,Gc6d4]} 11. fxe6 11... fxe6 {[%cal Gf7e6]} 12. Nxc6 12... bxc6 {[%cal Gb7c6]} 13. e5 13... dxe5 {[%cal Gd6e5]} 14. Bxf6 14... gxf6 {[%cal Gg7f6]} 15. Ne4 15... Be7 {Le fou couvre la diagonale d8-h4. [%cal Gf8e7,Ge7h4]} 16. Be2 16... h5 {Le pion empêche Bh5+ et prépare …Ra7. [%cal Gh7h5,Gh5h4]} 17. Rb3 17... Qa4 {La dame vise e4 et revient vers le centre. [%cal Ga3a4,Ga4e4]} 18. Nxf6+ 18... Bxf6 {[%cal Ge7f6]} 19. c4 19... Bh4+ {[%cal Gf6h4]} 20. g3 20... Be7 {[%cal Gh4e7]} 21. O-O 21... h4 {Le pion h4 ouvre la colonne h : votre tour h8 entre en jeu. [%cal Gh5h4,Gh4g3]}",
+          "conclusion": "La ligne principale du Pion empoisonné demande de la mémoire, mais chaque coup noir a un sens : rendre du matériel, échanger les attaquants, puis contre-attaquer par …h4.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "sicilian-c5-l2",
+          "legacyIds": [
+            "sicilian-m2"
+          ],
+          "title": "La Dragon yougoslave : 5…g6 et la colonne c",
+          "eco": "B78",
+          "kind": "line",
+          "objectives": [
+            "Connaître l'alternative 5…g6 et le fianchetto",
+            "Sacrifier la qualité en c3 ou installer la tour en c4",
+            "Répondre au grand roque par …d5 sans attendre"
+          ],
+          "pgn": "{La Dragon est une alternative à la Najdorf : le fou g7 vise la grande diagonale, et la colonne c ouverte conduit vos tours vers le roi blanc. Contre le grand roque immédiat, la poussée …d5 ouvre le centre.} 1. e4 1... c5 {[%cal Gc7c5]} 2. Nf3 2... d6 {[%cal Gd7d6]} 3. d4 3... cxd4 {[%cal Gc5d4]} 4. Nxd4 4... Nf6 {[%cal Gg8f6]} 5. Nc3 5... g6 {[%cal Gg7g6]} 6. Be3 6... Bg7 {[%cal Gf8g7]} 7. f3 7... O-O {[%cal Ge8g8]} 8. Qd2 8... Nc6 {[%cal Gb8c6]} 9. Bc4 (9. O-O-O 9... d5 {La rupture centrale : le roi blanc n'a pas le temps d'être attaqué. [%cal Gd6d5,Gd5e4]} 10. exd5 10... Nxd5 {[%cal Gf6d5]} 11. Nxc6 11... bxc6 {[%cal Gb7c6]} 12. Bd4 12... Bxd4 {[%cal Gg7d4]} 13. Qxd4 13... Qb6 {La dame propose l'échange : la finale est équilibrée. [%cal Gd8b6]}) 9... Bd7 {[%cal Gc8d7]} 10. O-O-O 10... Rc8 {La tour sur la colonne c vise c3 et c2. [%cal Ga8c8,Gc8c3]} 11. Bb3 11... Ne5 {Le cavalier rejoint c4 pour échanger le fou b3. [%cal Gc6e5,Ge5c4]} 12. Kb1 12... Nc4 {[%cal Ge5c4]} 13. Bxc4 13... Rxc4 {La tour c4 est active : …Qa5 et …b5 suivront. [%cal Gc8c4,Gc4c3]} 14. g4 14... b5 {Le pion b5 lance l'attaque contre le roi b1. [%cal Gb7b5,Gb5b4]}",
+          "conclusion": "Dans la Dragon yougoslave, le fou g7 et la colonne c sont vos armes. La tour c4 et la poussée …b5 contre-attaquent pendant que les Blancs poussent à l'aile roi.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "sicilian-c5-l3",
+          "legacyIds": [],
+          "title": "Attaque anglaise : 15.f5 a4 et la percée …b3",
+          "eco": "B90",
+          "kind": "line",
+          "objectives": [
+            "Pousser …a4 et …b3 pour ouvrir le roi blanc",
+            "Échanger le fou e6 contre le pion a2 par …Bb3",
+            "Ouvrir la colonne a pour la tour a8"
+          ],
+          "pgn": "{Dans la course de l'attaque anglaise, la percée …b3 est la clé : elle ouvre une colonne devant le roi blanc. Le fou e6 se sacrifie en b3 pour que votre tour a8 entre en jeu.} 1. e4 1... c5 {[%cal Gc7c5]} 2. Nf3 2... d6 {[%cal Gd7d6]} 3. d4 3... cxd4 {[%cal Gc5d4]} 4. Nxd4 4... Nf6 {[%cal Gg8f6]} 5. Nc3 5... a6 {[%cal Ga7a6]} 6. Be3 6... e5 {[%cal Ge7e5]} 7. Nb3 7... Be6 {[%cal Gc8e6]} 8. f3 8... Be7 {[%cal Gf8e7]} 9. Qd2 9... O-O {[%cal Ge8g8]} 10. O-O-O 10... Nbd7 {[%cal Gb8d7]} 11. g4 11... b5 {[%cal Gb7b5]} 12. g5 12... b4 {[%cal Gb5b4]} 13. Ne2 13... Ne8 {[%cal Gf6e8]} 14. f4 14... a5 {[%cal Ga6a5]} 15. f5 15... a4 {Le pion chasse le cavalier b3. [%cal Ga5a4,Ga4b3]} 16. Nbd4 (16. fxe6 16... axb3 {[%cal Ga4b3]} 17. cxb3 17... fxe6 {La colonne f s'ouvre pour votre tour, et le fou blanc reste à g2 ou h3. [%cal Gf7e6]}) 16... exd4 {[%cal Ge5d4]} 17. Nxd4 17... b3 {La percée : le pion ouvre la position du roi blanc. [%cal Gb4b3,Gb3c2]} 18. Kb1 18... bxc2+ {[%cal Gb3c2]} 19. Nxc2 19... Bb3 {Le fou se sacrifie pour ouvrir la colonne a. [%cal Ge6b3,Gb3a2]} 20. axb3 20... axb3 {[%cal Ga4b3]} 21. Na3 {La tour a8 est maintenant sur une colonne ouverte face au roi blanc.}",
+          "conclusion": "Dans l'attaque anglaise, …b3 est la percée thématique : vos pions ouvrent la colonne a et le roi blanc devient la cible principale de la partie.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "sicilian-c5-l4",
+          "legacyIds": [],
+          "title": "L'attaque Sozine : 12.Rad1 et f4-f5",
+          "eco": "B87",
+          "kind": "line",
+          "objectives": [
+            "Échanger le cavalier d4 par …Nc6",
+            "Opposer le fou c6 à la poussée f5",
+            "Rendre la qualité ou le fou h6 pour éteindre l'attaque"
+          ],
+          "pgn": "{Dans l'attaque Sozine, les Blancs lancent f4-f5 contre e6. Vous échangez le cavalier d4, mettez votre fou en c6 sur la grande diagonale et préparez …Kh8 pour neutraliser le fou h6.} 1. e4 1... c5 {[%cal Gc7c5]} 2. Nf3 2... d6 {[%cal Gd7d6]} 3. d4 3... cxd4 {[%cal Gc5d4]} 4. Nxd4 4... Nf6 {[%cal Gg8f6]} 5. Nc3 5... a6 {[%cal Ga7a6]} 6. Bc4 6... e6 {[%cal Ge7e6]} 7. Bb3 7... b5 {[%cal Gb7b5]} 8. O-O 8... Be7 {[%cal Gf8e7]} 9. Qf3 9... Qc7 {[%cal Gd8c7]} 10. Qg3 10... O-O {[%cal Ge8g8]} 11. Bh6 11... Ne8 {[%cal Gf6e8]} 12. Rad1 12... Bd7 {Le fou prépare …Nc6 et …Bc6. [%cal Gc8d7,Gd7c6]} 13. f4 13... Nc6 {[%cal Gb8c6]} 14. Nxc6 14... Bxc6 {Le fou c6 vise e4, la base de l'attaque blanche. [%cal Gd7c6,Gc6e4]} 15. f5 15... Kh8 {Le roi évite les échecs et menace …gxh6. [%cal Gg8h8,Gg7h6]} 16. f6 16... gxh6 {[%cal Gg7h6]} 17. fxe7 17... Qxe7 {Les Noirs ont gagné le fou h6 contre le fou e7 : la position est dynamiquement équilibrée. [%cal Gc7e7]}",
+          "conclusion": "Contre l'attaque Sozine, …Nc6, …Bc6 et …Kh8 vous préparent à la poussée f5. Après f6, vous prenez le fou h6 et gardez une position solide.",
           "mustCover": "allBranches",
           "reviewable": true
         }

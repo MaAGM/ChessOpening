@@ -1,20 +1,26 @@
 {
   "id": "slav",
-  "name": "Slav",
-  "description": "Formation complète sur Slav",
+  "name": "Défense slave",
+  "description": "1.d4 d5 2.c4 c6 : les Noirs soutiennent d5 avec le pion c et gardent la diagonale du fou c8. Un répertoire complet côté Noirs avec la Slave 4…dxc4 5…Bf5, la Semi-Slave Meran contre 4.e3, les réponses à l'échange et aux sorties de dame, pièges et grandes lignes.",
   "side": "black",
   "eco": [
     "D10",
+    "D11",
+    "D15",
+    "D16",
     "D17",
-    "D49",
+    "D18",
+    "D19",
+    "D45",
     "D47",
-    "D19"
+    "D48",
+    "D49"
   ],
   "chapters": [
     {
       "id": "slav-c1",
       "title": "Les fondations",
-      "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+      "summary": "Pourquoi 2…c6, la prise 4…dxc4 suivie de 5…Bf5, la variante centrale 6.Ne5, la hollandaise 6.e3 et la Meran contre 4.e3.",
       "stage": "foundations",
       "lessons": [
         {
@@ -22,12 +28,16 @@
           "legacyIds": [
             "slav-m1"
           ],
-          "title": "Défense Slave",
-          "eco": "D10",
-          "kind": "line",
-          "objectives": [],
-          "pgn": "1. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 1... d5 {d5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d5]} 2. c4 {c4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc2c4]} 2... c6 {c6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc7c6]} 3. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 3... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 4. Nc3 {Nc3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb1c3]} 4... dxc4 {dxc4 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gd5c4]} 5. a4 {a4 : Les Blancs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Ga2a4]}",
-          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "title": "2…c6 et 4…dxc4 : le fou c8 avant …e6",
+          "eco": "D15",
+          "kind": "concept",
+          "objectives": [
+            "Soutenir d5 avec le pion c sans enfermer le fou c8",
+            "Prendre en c4 quand le cavalier c3 ne contrôle plus e4",
+            "Développer le fou en f5 avant de jouer …e6"
+          ],
+          "pgn": "{La Slave défend d5 avec le pion c : la diagonale du fou c8 reste ouverte. Après 4.Nc3, la prise en c4 oblige les Blancs à jouer a4 pour récupérer le pion.} 1. d4 1... d5 {[%cal Gd7d5]} 2. c4 2... c6 {Le pion c6 soutient d5 et laisse la diagonale c8-h3 libre. [%cal Gc7c6,Gc6d5,Gc8h3]} 3. Nf3 (3. Nc3 3... Nf6 {[%cal Gg8f6]} 4. Nf3 4... dxc4 {Même position par une autre suite de coups. [%cal Gd5c4]}) 3... Nf6 {[%cal Gg8f6]} 4. Nc3 4... dxc4 {Le pion prend en c4 : les Blancs doivent prendre du temps pour le récupérer. [%cal Gd5c4]} 5. a4 {Le coup a4 empêche …b5, qui aurait gardé le pion c4. [%cal Ga4b5]} 5... Bf5 {Le fou sort avant que …e6 ne l'enferme. [%cal Gc8f5,Gf5b1]} 6. e3 6... e6 {[%cal Ge7e6]} 7. Bxc4 7... Bb4 {Le fou cloue le cavalier c3 et prépare le roque. [%cal Gf8b4,Gb4c3]} 8. O-O 8... O-O {Les deux fous noirs sont actifs : la structure c6-e6 est solide. [%cal Ge8g8]}",
+          "conclusion": "La Slave règle le problème du fou c8 : il sort en f5 avant …e6. Le pion c4 est rendu, mais en échange les Blancs ont affaibli b4 avec a4.",
           "mustCover": "allBranches",
           "reviewable": true
         },
@@ -36,12 +46,52 @@
           "legacyIds": [
             "slav-m2"
           ],
-          "title": "Slav: Central, Main Line",
+          "title": "Variante centrale : 6.Ne5 e6 7.f3 Bb4",
           "eco": "D17",
-          "kind": "line",
-          "objectives": [],
-          "pgn": "1. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 1... d5 {d5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d5]} 2. c4 {c4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc2c4]} 2... c6 {c6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc7c6]} 3. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 3... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 4. Nc3 {Nc3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb1c3]} 4... dxc4 {dxc4 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gd5c4]} 5. a4 {a4 : Les Blancs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Ga2a4]} 5... Bf5 {Bf5 : Les Noirs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gc8f5]} 6. Ne5 {Ne5 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gf3e5]} 6... e6 {e6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e6]} 7. f3 {f3 : Les Blancs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Gf2f3]}",
-          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "kind": "concept",
+          "objectives": [
+            "Répondre à Ne5 par …e6 et …Bb4",
+            "Sacrifier une pièce en e4 contre trois pions",
+            "Mettre le roi blanc à découvert au centre"
+          ],
+          "pgn": "{Avec Ne5 et f3, les Blancs préparent e4 pour chasser le fou f5. La réponse principale est un sacrifice de pièce en e4 qui met le roi blanc à nu.} 1. d4 1... d5 {[%cal Gd7d5]} 2. c4 2... c6 {[%cal Gc7c6]} 3. Nf3 3... Nf6 {[%cal Gg8f6]} 4. Nc3 4... dxc4 {[%cal Gd5c4]} 5. a4 5... Bf5 {[%cal Gc8f5]} 6. Ne5 6... e6 {[%cal Ge7e6]} 7. f3 7... Bb4 {Le fou cloue le cavalier c3 et prépare le sacrifice en e4. [%cal Gf8b4,Gb4c3,Gb4e1]} 8. e4 8... Bxe4 {Le fou prend : le cavalier f6 suivra en e4. [%cal Gf5e4]} 9. fxe4 9... Nxe4 {Deux pions pour la pièce, et la menace …Qh4+ plane. [%cal Gf6e4,Gd8h4]} 10. Bd2 10... Qxd4 {Troisième pion, et le cavalier e4 est défendu. [%cal Gd8d4,Gd4f2]} 11. Nxe4 11... Qxe4+ {[%cal Gd4e4]} 12. Qe2 12... Bxd2+ {[%cal Gb4d2]} 13. Kxd2 13... Qd5+ {Échec : le roi blanc ne peut pas se cacher. [%cal Ge4d5,Gd5d2]} 14. Kc2 14... Na6 {Le cavalier vise b4 et attaque la case c5. [%cal Gb8a6,Ga6b4]}",
+          "conclusion": "Dans la variante centrale, …Bxe4 et …Nxe4 donnent trois pions pour la pièce. Le roi blanc reste exposé et vos pions centraux avancent.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "slav-c1-l3",
+          "legacyIds": [
+            "slav-m5"
+          ],
+          "title": "Variante hollandaise : 6.e3 e6 7.Bxc4 Bb4",
+          "eco": "D19",
+          "kind": "concept",
+          "objectives": [
+            "Clouer le cavalier c3 avec …Bb4",
+            "Retirer le fou en g6 avant Ne5 ou Nh4",
+            "Reprendre de h7 pour ouvrir la colonne h"
+          ],
+          "pgn": "{Dans la variante hollandaise, les Blancs récupèrent le pion c4 tout de suite. Votre fou b4 et votre fou f5 occupent leurs meilleures diagonales.} 1. d4 1... d5 {[%cal Gd7d5]} 2. c4 2... c6 {[%cal Gc7c6]} 3. Nf3 3... Nf6 {[%cal Gg8f6]} 4. Nc3 4... dxc4 {[%cal Gd5c4]} 5. a4 5... Bf5 {[%cal Gc8f5]} 6. e3 6... e6 {[%cal Ge7e6]} 7. Bxc4 7... Bb4 {[%cal Gf8b4]} 8. O-O 8... O-O {[%cal Ge8g8]} 9. Qe2 {La dame prépare e4 pour chasser le fou f5. [%cal Ge3e4]} 9... Bg6 {Le fou recule avant e4 et reste sur la diagonale b1-h7. [%cal Gf5g6,Gg6b1]} 10. Ne5 10... Nbd7 {Le cavalier défie celui de e5. [%cal Gb8d7,Gd7e5]} 11. Nxg6 11... hxg6 {La colonne h s'ouvre pour votre tour. [%cal Gh7g6,Gh8h1]} 12. Rd1 12... Qa5 {La dame vise le cavalier c3 cloué et la case a4. [%cal Gd8a5,Ga5c3,Ga5a4]}",
+          "conclusion": "Dans la hollandaise, …Bb4 et …Bg6 placent vos fous à l'abri. La prise hxg6 renforce le roque et ouvre la colonne h.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "slav-c1-l4",
+          "legacyIds": [
+            "slav-m3"
+          ],
+          "title": "Meran : 4.e3 e6 et 7…b5",
+          "eco": "D49",
+          "kind": "concept",
+          "objectives": [
+            "Répondre à 4.e3 par la Semi-Slave …e6",
+            "Prendre en c4 quand le fou blanc a bougé",
+            "Gagner du temps avec …b5 sur le fou c4"
+          ],
+          "pgn": "{Contre 4.e3, le fou c1 blanc est enfermé : vous pouvez jouer …e6 sans complexe. La Meran gagne de l'espace avec …b5 après la prise en c4.} 1. d4 1... d5 {[%cal Gd7d5]} 2. c4 2... c6 {[%cal Gc7c6]} 3. Nf3 3... Nf6 {[%cal Gg8f6]} 4. e3 4... e6 {La structure c6-d5-e6 est un bloc solide. [%cal Ge7e6,Gd5e4]} 5. Nc3 5... Nbd7 {[%cal Gb8d7]} 6. Bd3 6... dxc4 {Vous prenez au moment où le fou d3 doit reprendre : il perd un temps. [%cal Gd5c4]} 7. Bxc4 7... b5 {Le pion chasse le fou et gagne de l'espace à l'aile dame. [%cal Gb7b5,Gb5c4]} 8. Bd3 8... Bb7 {Le fou rejoint la grande diagonale pour soutenir …c5. [%cal Gc8b7,Gb7d5]} 9. O-O 9... a6 {[%cal Ga7a6]} 10. e4 10... c5 {La poussée …c5 frappe le centre blanc. [%cal Gc6c5,Gc5d4]}",
+          "conclusion": "Dans la Meran, …dxc4 puis …b5 fait perdre un temps au fou blanc. Le fou b7 et la poussée …c5 frappent alors le centre.",
           "mustCover": "allBranches",
           "reviewable": true
         }
@@ -49,49 +99,289 @@
     },
     {
       "id": "slav-c2",
-      "title": "Lignes théoriques",
-      "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
-      "stage": "theory",
+      "title": "Les plans",
+      "summary": "La Meran Wade 9.e4 b4 10.Na4 c5, la Meran 11.d5 Qc7, la centrale 8.Nxc4 O-O et la hollandaise 9.Nh4.",
+      "stage": "plans",
       "lessons": [
         {
           "id": "slav-c2-l1",
           "legacyIds": [
-            "slav-m3"
+            "slav-m4"
           ],
-          "title": "Semi-Slav Defense: Meran Variation, Sozin Variation",
-          "eco": "D49",
+          "title": "Meran Wade : 9.e4 b4 10.Na4 c5",
+          "eco": "D47",
           "kind": "line",
-          "objectives": [],
-          "pgn": "1. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 1... d5 {d5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d5]} 2. c4 {c4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc2c4]} 2... c6 {c6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc7c6]} 3. Nc3 {Nc3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb1c3]} 3... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 4. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 4... e6 {e6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e6]} 5. e3 {e3 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e3]} 5... Nbd7 {Nbd7 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb8d7]} 6. Bd3 {Bd3 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf1d3]} 6... dxc4 {dxc4 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gd5c4]} 7. Bxc4 {Bxc4 : Les Blancs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gd3c4]}",
-          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "objectives": [
+            "Chasser le cavalier c3 avec …b4",
+            "Frapper d4 avec …c5 et …cxd4",
+            "Installer le cavalier en d5"
+          ],
+          "pgn": "{Si les Blancs poussent e4 avant de roquer, …b4 chasse le cavalier c3 vers le bord. La poussée …c5 ouvre ensuite le centre.} 1. d4 1... d5 {[%cal Gd7d5]} 2. c4 2... c6 {[%cal Gc7c6]} 3. Nf3 3... Nf6 {[%cal Gg8f6]} 4. e3 4... e6 {[%cal Ge7e6]} 5. Nc3 5... Nbd7 {[%cal Gb8d7]} 6. Bd3 6... dxc4 {[%cal Gd5c4]} 7. Bxc4 7... b5 {[%cal Gb7b5]} 8. Bd3 8... Bb7 {[%cal Gc8b7]} 9. e4 9... b4 {Le pion chasse le cavalier qui défend e4. [%cal Gb5b4,Gb4c3]} 10. Na4 10... c5 {Le pion frappe d4 et ouvre la diagonale du fou b7. [%cal Gc6c5,Gc5d4]} 11. e5 11... Nd5 {Le cavalier s'installe sur la case libérée par le pion d5. [%cal Gf6d5,Gd5b4]} 12. O-O 12... cxd4 {Vous prenez le pion d4 : le centre blanc se disloque. [%cal Gc5d4]} 13. Re1 13... g6 {Le fou f8 ira en g7 pour viser le pion e5. [%cal Gg7g6,Gf8g7]}",
+          "conclusion": "Dans la Wade, …b4 chasse le cavalier c3 vers a4. Les poussées …c5 et …cxd4 donnent la case d5 à votre cavalier.",
           "mustCover": "allBranches",
           "reviewable": true
         },
         {
           "id": "slav-c2-l2",
-          "legacyIds": [
-            "slav-m4"
-          ],
-          "title": "Semi-Slav: Meran, Wade, Main Line, 12.O-O",
-          "eco": "D47",
+          "legacyIds": [],
+          "title": "Meran : 11.d5 Qc7 et la prise en e6",
+          "eco": "D48",
           "kind": "line",
-          "objectives": [],
-          "pgn": "1. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 1... d5 {d5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d5]} 2. c4 {c4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc2c4]} 2... c6 {c6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc7c6]} 3. Nc3 {Nc3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb1c3]} 3... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 4. e3 {e3 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e3]} 4... e6 {e6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e6]} 5. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 5... Nbd7 {Nbd7 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb8d7]} 6. Bd3 {Bd3 : Les Blancs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gf1d3]} 6... dxc4 {dxc4 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gd5c4]} 7. Bxc4 {Bxc4 : Les Blancs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gd3c4]}",
-          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "objectives": [
+            "Clouer le pion d5 avec la dame c7",
+            "Reprendre en e6 avec le pion f",
+            "Utiliser la colonne f à demi ouverte"
+          ],
+          "pgn": "{Après 10.e4 c5, les Blancs avancent le pion en d5. La dame c7 soutient votre jeu au centre, et la reprise …fxe6 donne la colonne f.} 1. d4 1... d5 {[%cal Gd7d5]} 2. c4 2... c6 {[%cal Gc7c6]} 3. Nf3 3... Nf6 {[%cal Gg8f6]} 4. e3 4... e6 {[%cal Ge7e6]} 5. Nc3 5... Nbd7 {[%cal Gb8d7]} 6. Bd3 6... dxc4 {[%cal Gd5c4]} 7. Bxc4 7... b5 {[%cal Gb7b5]} 8. Bd3 8... Bb7 {[%cal Gc8b7]} 9. O-O 9... a6 {[%cal Ga7a6]} 10. e4 10... c5 {[%cal Gc6c5]} 11. d5 11... Qc7 {La dame protège c5 et vise h2 par la diagonale. [%cal Gd8c7,Gc7h2]} 12. dxe6 12... fxe6 {Le pion reprend vers le centre et ouvre la colonne f. [%cal Gf7e6,Gf8f1]} 13. Bc2 13... c4 {Le pion gagne de l'espace et libère la case c5. [%cal Gc5c4,Gc4d3]}",
+          "conclusion": "Contre 11.d5, la dame c7 tient la position. Après dxe6 fxe6, votre majorité centrale et la colonne f compensent le pion e6 isolé.",
           "mustCover": "allBranches",
           "reviewable": true
         },
         {
           "id": "slav-c2-l3",
-          "legacyIds": [
-            "slav-m5"
+          "legacyIds": [],
+          "title": "Centrale : 8.Nxc4 O-O 9.Kf2 c5",
+          "eco": "D17",
+          "kind": "line",
+          "objectives": [
+            "Roquer quand les Blancs renoncent à e4",
+            "Frapper le centre par …c5",
+            "Profiter du roi blanc en f2"
           ],
-          "title": "Slav: Dutch, 8...O-O 9.Qe2 Bg6 10.Ne5 Nbd7, 12.Rd1",
+          "pgn": "{Si les Blancs reprennent en c4 au lieu de jouer e4, ils doivent encore régler la sécurité de leur roi. La poussée …c5 ouvre le jeu avant qu'il ne soit à l'abri.} 1. d4 1... d5 {[%cal Gd7d5]} 2. c4 2... c6 {[%cal Gc7c6]} 3. Nf3 3... Nf6 {[%cal Gg8f6]} 4. Nc3 4... dxc4 {[%cal Gd5c4]} 5. a4 5... Bf5 {[%cal Gc8f5]} 6. Ne5 6... e6 {[%cal Ge7e6]} 7. f3 7... Bb4 {[%cal Gf8b4]} 8. Nxc4 8... O-O {[%cal Ge8g8]} 9. Kf2 {Le roi s'écarte du clouage en e1 pour préparer e4. [%cal Gf2e1]} 9... c5 {La poussée frappe d4 et ouvre la colonne c. [%cal Gc6c5,Gc5d4]} 10. e4 10... Bg6 {Le fou recule et garde la diagonale b1-h7, face au roi f2. [%cal Gf5g6,Gg6b1]} 11. Na2 11... Nc6 {Le cavalier attaque d4 et laisse le fou b4 s'échanger. [%cal Gb8c6,Gc6d4]} 12. Nxb4 12... Nxb4 {Le cavalier b4 vise d3 et c2, et le pion d4 reste attaqué. [%cal Gc6b4]}",
+          "conclusion": "Si les Blancs évitent e4 avec 8.Nxc4, le roque et …c5 frappent le centre. Le roi blanc en f2 reste une cible.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "slav-c2-l4",
+          "legacyIds": [],
+          "title": "Hollandaise : 9.Nh4 Nbd7 10.Nxf5 exf5",
           "eco": "D19",
           "kind": "line",
-          "objectives": [],
-          "pgn": "1. d4 {d4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd2d4]} 1... d5 {d5 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gd7d5]} 2. c4 {c4 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc2c4]} 2... c6 {c6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Gc7c6]} 3. Nf3 {Nf3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg1f3]} 3... Nf6 {Nf6 : Les Noirs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gg8f6]} 4. Nc3 {Nc3 : Les Blancs développent le cavalier avec un gain de coordination et de contrôle des cases clés. [%cal Gb1c3]} 4... dxc4 {dxc4 : Les Noirs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gd5c4]} 5. a4 {a4 : Les Blancs améliorent la structure et gardent des options flexibles selon la réponse adverse. [%cal Ga2a4]} 5... Bf5 {Bf5 : Les Noirs développent le fou avec un gain de coordination et de contrôle des cases clés. [%cal Gc8f5]} 6. e3 {e3 : Les Blancs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge2e3]} 6... e6 {e6 : Les Noirs disputent le centre et préparent les ruptures critiques de l’ouverture. [%cal Ge7e6]} 7. Bxc4 {Bxc4 : Les Blancs provoquent un échange utile pour ouvrir des lignes et clarifier la structure. [%cal Gf1c4]}",
-          "conclusion": "Bilan Masterclass : plans, tactiques typiques et réponses aux déviations principales sont désormais prêts.",
+          "objectives": [
+            "Laisser le cavalier prendre le fou f5",
+            "Reprendre avec le pion e pour contrôler e4",
+            "Placer un cavalier en e4 soutenu par f5"
+          ],
+          "pgn": "{Le coup Nh4 gagne la paire de fous. En reprenant avec le pion e, vous obtenez un pion f5 qui contrôle e4 et une colonne e semi-ouverte.} 1. d4 1... d5 {[%cal Gd7d5]} 2. c4 2... c6 {[%cal Gc7c6]} 3. Nf3 3... Nf6 {[%cal Gg8f6]} 4. Nc3 4... dxc4 {[%cal Gd5c4]} 5. a4 5... Bf5 {[%cal Gc8f5]} 6. e3 6... e6 {[%cal Ge7e6]} 7. Bxc4 7... Bb4 {[%cal Gf8b4]} 8. O-O 8... O-O {[%cal Ge8g8]} 9. Nh4 9... Nbd7 {[%cal Gb8d7]} 10. Nxf5 10... exf5 {Le pion f5 contrôle e4 : vos cavaliers peuvent s'y installer. [%cal Ge6f5,Gf5e4]} 11. Qc2 11... g6 {Le pion protège f5 et ferme la diagonale b1-h7. [%cal Gg7g6,Gg6f5]} 12. f3 12... Nb6 {Le cavalier vise c4 et a4. [%cal Gd7b6,Gb6c4,Gb6a4]}",
+          "conclusion": "Contre Nh4, cédez le fou f5 et reprenez avec le pion e. Le contrôle de e4 compense la paire de fous.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        }
+      ]
+    },
+    {
+      "id": "slav-c3",
+      "title": "Les réponses adverses",
+      "summary": "L'échange 3.cxd5, les sorties de dame 4.Qc2 et 4.Qb3, les poussées 5.e4 et 5.e3 contre 4…dxc4, et l'anti-Meran 6.Qc2.",
+      "stage": "responses",
+      "lessons": [
+        {
+          "id": "slav-c3-l1",
+          "legacyIds": [],
+          "title": "Échange : 3.cxd5 cxd5 4.Nc3 Nf6 5.Bf4",
+          "eco": "D10",
+          "kind": "line",
+          "objectives": [
+            "Reprendre en d5 avec le pion c",
+            "Développer le fou en f5 avant …e6",
+            "Répondre à Qb3 par …Na5 et …Bd7"
+          ],
+          "pgn": "{L'échange rend la structure symétrique. Vos pièces se développent comme celles des Blancs : le fou c8 sort avant …e6.} 1. d4 1... d5 {[%cal Gd7d5]} 2. c4 2... c6 {[%cal Gc7c6]} 3. cxd5 3... cxd5 {[%cal Gc6d5]} 4. Nc3 4... Nf6 {[%cal Gg8f6]} 5. Bf4 5... Nc6 {[%cal Gb8c6]} 6. e3 6... Bf5 {Le fou sort avant …e6, comme dans toute la Slave. [%cal Gc8f5,Gf5b1]} 7. Qb3 7... Na5 {Le cavalier attaque la dame et protège b7. [%cal Gc6a5,Ga5b3]} 8. Qa4+ 8... Bd7 {[%cal Gf5d7]} 9. Qc2 9... e6 {Le fou d7 et le pion e6 bouclent le centre. [%cal Ge7e6,Ge6d5]} 10. Bd3 10... Rc8 {La tour s'installe sur la colonne c ouverte. [%cal Ga8c8,Gc8c2]}",
+          "conclusion": "Contre l'échange, sortez le fou en f5 puis jouez …e6. Contre Qb3, …Na5 protège b7 avec gain de temps.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "slav-c3-l2",
+          "legacyIds": [],
+          "title": "4.Qc2 et 4.Qb3 : …dxc4 et …Bf5",
+          "eco": "D11",
+          "kind": "line",
+          "objectives": [
+            "Prendre en c4 pour développer avec gain de temps",
+            "Attaquer la dame c4 avec le fou f5",
+            "Compléter le développement avec …e6 et …Nbd7"
+          ],
+          "pgn": "{Avec Qc2 ou Qb3, les Blancs protègent c4 avec la dame. La prise en c4 l'attire en c4, où …Bf5 et …e6 la gênent.} 1. d4 1... d5 {[%cal Gd7d5]} 2. c4 2... c6 {[%cal Gc7c6]} 3. Nf3 3... Nf6 {[%cal Gg8f6]} 4. Qc2 (4. Qb3 4... dxc4 {[%cal Gd5c4]} 5. Qxc4 5... Bf5 {Même position qu'après 4.Qc2 : la dame c4 est exposée. [%cal Gc8f5]}) 4... dxc4 {[%cal Gd5c4]} 5. Qxc4 5... Bf5 {Le fou sort avec gain de temps sur la case c2. [%cal Gc8f5,Gf5c2]} 6. g3 6... e6 {[%cal Ge7e6]} 7. Bg2 7... Nbd7 {Le cavalier prépare …Nb6 ou …e5. [%cal Gb8d7,Gd7b6]} 8. O-O 8... Be7 {Vous roquez au prochain coup avec une position solide. [%cal Gf8e7]}",
+          "conclusion": "Contre les sorties de dame, prenez en c4 puis jouez …Bf5. La dame blanche devient une cible pour vos pièces.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "slav-c3-l3",
+          "legacyIds": [],
+          "title": "5.e4 b5 et 5.e3 b5",
+          "eco": "D15",
+          "kind": "line",
+          "objectives": [
+            "Garder le pion c4 avec …b5 quand a4 n'est pas joué",
+            "Placer le cavalier en d5 contre e5",
+            "Répondre à a4 par …b4"
+          ],
+          "pgn": "{Si les Blancs ne jouent pas a4, le pion c4 peut être gardé par …b5. Contre e4 et e5, le cavalier f6 se réfugie en d5.} 1. d4 1... d5 {[%cal Gd7d5]} 2. c4 2... c6 {[%cal Gc7c6]} 3. Nf3 3... Nf6 {[%cal Gg8f6]} 4. Nc3 4... dxc4 {[%cal Gd5c4]} 5. e4 (5. e3 5... b5 {[%cal Gb7b5]} 6. a4 6... b4 {[%cal Gb5b4]} 7. Na2 7... e6 {[%cal Ge7e6]} 8. Bxc4 8... Nbd7 {Le pion b4 gêne le cavalier a2 et vous gardez une structure saine. [%cal Gb8d7]}) 5... b5 {[%cal Gb7b5]} 6. e5 6... Nd5 {Le cavalier s'installe en d5, sa case naturelle. [%cal Gf6d5,Gd5c3]} 7. a4 7... e6 {Le pion soutient le cavalier d5 et ouvre la diagonale du fou f8. [%cal Ge7e6,Ge6d5]} 8. axb5 8... Nxc3 {[%cal Gd5c3]} 9. bxc3 9... cxb5 {Vous gardez le pion de plus et la structure blanche est abîmée. [%cal Gc6b5]}",
+          "conclusion": "Sans a4, …b5 garde le pion c4. Contre 5.e4, le cavalier d5 est solide et les pions blancs de l'aile dame sont abîmés.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "slav-c3-l4",
+          "legacyIds": [],
+          "title": "Anti-Meran : 6.Qc2 Bd6",
+          "eco": "D45",
+          "kind": "line",
+          "objectives": [
+            "Développer le fou en d6 contre la dame c2",
+            "Prendre en c4 après le roque blanc",
+            "Gagner de l'espace avec …b5 et …Bb7"
+          ],
+          "pgn": "{Avec 6.Qc2, les Blancs évitent la Meran et préparent e4. Le fou d6 contrôle e5 et soutient la poussée …e5.} 1. d4 1... d5 {[%cal Gd7d5]} 2. c4 2... c6 {[%cal Gc7c6]} 3. Nf3 3... Nf6 {[%cal Gg8f6]} 4. e3 4... e6 {[%cal Ge7e6]} 5. Nc3 5... Nbd7 {[%cal Gb8d7]} 6. Qc2 6... Bd6 {Le fou contrôle e5 et vise h2. [%cal Gf8d6,Gd6h2]} 7. Bd3 7... O-O {[%cal Ge8g8]} 8. O-O 8... dxc4 {La prise en c4 tombe alors que le fou d3 a déjà bougé. [%cal Gd5c4]} 9. Bxc4 9... b5 {[%cal Gb7b5]} 10. Be2 10... Bb7 {Le fou rejoint la grande diagonale. [%cal Gc8b7,Gb7f3]} 11. Rd1 11... Qc7 {La dame relie les tours et soutient …c5. [%cal Gd8c7,Gc7c5]}",
+          "conclusion": "Contre l'anti-Meran, le fou d6 et le roque précèdent la prise en c4. Le schéma …b5, …Bb7 et …c5 reste le même que dans la Meran.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        }
+      ]
+    },
+    {
+      "id": "slav-c4",
+      "title": "Les pièges",
+      "summary": "Quatre pièges noirs : …Bc2 contre 10.Rd1? dans la ligne 4.Qc2, …bxc4 dans l'anti-Meran, …Nxd4 contre 6.Qb3? dans l'échange et …g6 contre la sortie Qh5.",
+      "stage": "traps",
+      "lessons": [
+        {
+          "id": "slav-c4-l1",
+          "legacyIds": [],
+          "title": "4.Qc2 : 10.Rd1? Bc2!",
+          "eco": "D11",
+          "kind": "trap",
+          "objectives": [
+            "Viser la case c2 avec le fou f5",
+            "Fourcher la tour d1 depuis c2",
+            "Enfermer la dame c4 si la tour s'échappe"
+          ],
+          "pgn": "{Dans la ligne 4.Qc2 dxc4 5.Qxc4 Bf5, la dame blanche a quitté c2. Si la tour va en d1 avant e3, le fou f5 entre en c2 et l'attaque.} 1. d4 1... d5 {[%cal Gd7d5]} 2. c4 2... c6 {[%cal Gc7c6]} 3. Nf3 3... Nf6 {[%cal Gg8f6]} 4. Qc2 4... dxc4 {[%cal Gd5c4]} 5. Qxc4 5... Bf5 {[%cal Gc8f5]} 6. g3 6... e6 {[%cal Ge7e6]} 7. Bg2 7... Nbd7 {[%cal Gb8d7]} 8. O-O 8... Be7 {[%cal Gf8e7]} 9. Nc3 9... O-O {[%cal Ge8g8]} 10. Rd1 10... Bc2 {Le fou attaque la tour d1, qui ne peut pas être protégée. [%cal Gf5c2,Gc2d1]} 11. e3 (11. Rd2 11... Nb6 {Le cavalier chasse la dame, qui n'a plus de case : b3, d3 et a4 sont tenues par le fou c2. [%cal Gd7b6,Gb6c4,Gc2b3]}) 11... Bxd1 {[%cal Gc2d1]} 12. Nxd1 {Vous avez gagné la qualité contre un pion.}",
+          "conclusion": "Quand la dame blanche quitte c2, la case devient un point d'entrée pour le fou f5. Rd1 avant e3 permet …Bc2 et le gain de la qualité.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "slav-c4-l2",
+          "legacyIds": [],
+          "title": "Anti-Meran : 10.Rd1? bxc4",
+          "eco": "D45",
+          "kind": "trap",
+          "objectives": [
+            "Attaquer le fou c4 avec …b5",
+            "Prendre le fou quand les Blancs l'oublient",
+            "Garder la pièce de plus avec …Bb7 et …Be7"
+          ],
+          "pgn": "{Dans l'anti-Meran, …b5 chasse le fou c4 avec gain de temps. Si les Blancs jouent un coup de développement au lieu de reculer, le fou tombe.} 1. d4 1... d5 {[%cal Gd7d5]} 2. c4 2... c6 {[%cal Gc7c6]} 3. Nf3 3... Nf6 {[%cal Gg8f6]} 4. e3 4... e6 {[%cal Ge7e6]} 5. Nc3 5... Nbd7 {[%cal Gb8d7]} 6. Qc2 6... Bd6 {[%cal Gf8d6]} 7. Bd3 7... O-O {[%cal Ge8g8]} 8. O-O 8... dxc4 {[%cal Gd5c4]} 9. Bxc4 9... b5 {[%cal Gb7b5]} 10. Rd1 10... bxc4 {Le pion prend le fou : vous avez une pièce de plus. [%cal Gb5c4]} 11. b3 11... cxb3 {[%cal Gc4b3]} 12. axb3 {Les Blancs récupèrent un pion, mais vous gardez la pièce.}",
+          "conclusion": "Le coup …b5 attaque le fou c4. Si les Blancs l'oublient, vous gagnez une pièce : regardez toujours si un fou blanc est en prise après vos poussées de pions.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "slav-c4-l3",
+          "legacyIds": [],
+          "title": "Échange : 6.Qb3? Nxd4!",
+          "eco": "D10",
+          "kind": "trap",
+          "objectives": [
+            "Voir que Qb3 laisse le pion d4 sans défense",
+            "Prendre en d4 avec le cavalier c6",
+            "Revenir en c6 après l'échec Qa4+"
+          ],
+          "pgn": "{Dans l'échange, le cavalier c6 attaque d4. Le coup Qb3 vise b7, mais la dame quitte la défense du pion d4.} 1. d4 1... d5 {[%cal Gd7d5]} 2. c4 2... c6 {[%cal Gc7c6]} 3. cxd5 3... cxd5 {[%cal Gc6d5]} 4. Nc3 4... Nf6 {[%cal Gg8f6]} 5. Bf4 5... Nc6 {[%cal Gb8c6]} 6. Qb3 6... Nxd4 {Le cavalier prend le pion et attaque la dame b3. [%cal Gc6d4,Gd4b3]} 7. Qa4+ 7... Nc6 {Le cavalier revient pour parer l'échec : vous avez gagné le pion d4. [%cal Gd4c6]} 8. Nf3 8... Bd7 {Le fou se place derrière le cavalier c6 : un saut du cavalier découvrira une attaque sur la dame a4. [%cal Gc8d7,Gd7a4]}",
+          "conclusion": "Le pion d4 n'est défendu que par la dame d1. Si elle s'en va, …Nxd4 gagne un pion central avec gain de temps.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "slav-c4-l4",
+          "legacyIds": [],
+          "title": "5.e4 b5 6.e5 Nd5 7.Ng5 h6 8.Qh5? g6",
+          "eco": "D15",
+          "kind": "trap",
+          "objectives": [
+            "Répondre à Qh5 par …g6 avec gain de temps",
+            "Profiter de la dame partie loin de c2",
+            "Attaquer c2 avec …Nb4 et …Bf5"
+          ],
+          "pgn": "{Les Blancs attaquent f7 avec Ng5 et Qh5. Le pion g6 chasse la dame, et la case c2, qu'elle ne défend plus, devient votre cible.} 1. d4 1... d5 {[%cal Gd7d5]} 2. c4 2... c6 {[%cal Gc7c6]} 3. Nf3 3... Nf6 {[%cal Gg8f6]} 4. Nc3 4... dxc4 {[%cal Gd5c4]} 5. e4 5... b5 {[%cal Gb7b5]} 6. e5 6... Nd5 {[%cal Gf6d5]} 7. Ng5 7... h6 {[%cal Gh7h6]} 8. Qh5 8... g6 {Le pion chasse la dame, qui doit garder le cavalier g5. [%cal Gg7g6,Gg6h5,Gh6g5]} 9. Qh4 9... Bg7 {Le fou vise le pion e5 et prépare le roque. [%cal Gf8g7,Gg7e5]} 10. Nf3 (10. Nxf7 10... Kxf7 {Le sacrifice ne donne rien : vous avez une pièce de plus. [%cal Ge8f7]}) 10... Nb4 {Le cavalier menace Nc2+ avec fourchette du roi et de la tour a1. [%cal Gd5b4,Gb4c2]} 11. Kd1 11... Bf5 {Le fou vise encore la case c2 : le roi blanc est coincé au centre. [%cal Gc8f5,Gf5c2]}",
+          "conclusion": "Une sortie de dame précoce laisse la case c2 sans défense. Après …g6, …Nb4 et …Bf5 attaquent c2 et le roi blanc doit rester au centre.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        }
+      ]
+    },
+    {
+      "id": "slav-c5",
+      "title": "La théorie approfondie",
+      "summary": "Les lignes de référence : la centrale jusqu'à 17…f6, 8.Bg5 et 10.Qf3, la hollandaise 12.Rd1 Qa5 et 6.Nh4 e6.",
+      "stage": "theory",
+      "lessons": [
+        {
+          "id": "slav-c5-l1",
+          "legacyIds": [],
+          "title": "Centrale : 15.Nxc4 O-O 16.Qe5",
+          "eco": "D17",
+          "kind": "line",
+          "objectives": [
+            "Roquer après avoir récupéré trois pions",
+            "Opposer une tour à la dame blanche",
+            "Avancer les pions de l'aile roi"
+          ],
+          "pgn": "{Après le sacrifice en e4, les Blancs centralisent leur dame. Vos trois pions et la sécurité de votre roi équilibrent la pièce de moins.} 1. d4 1... d5 {[%cal Gd7d5]} 2. c4 2... c6 {[%cal Gc7c6]} 3. Nf3 3... Nf6 {[%cal Gg8f6]} 4. Nc3 4... dxc4 {[%cal Gd5c4]} 5. a4 5... Bf5 {[%cal Gc8f5]} 6. Ne5 6... e6 {[%cal Ge7e6]} 7. f3 7... Bb4 {[%cal Gf8b4]} 8. e4 8... Bxe4 {[%cal Gf5e4]} 9. fxe4 9... Nxe4 {[%cal Gf6e4]} 10. Bd2 10... Qxd4 {[%cal Gd8d4]} 11. Nxe4 11... Qxe4+ {[%cal Gd4e4]} 12. Qe2 12... Bxd2+ {[%cal Gb4d2]} 13. Kxd2 13... Qd5+ {[%cal Ge4d5]} 14. Kc2 14... Na6 {[%cal Gb8a6]} 15. Nxc4 15... O-O {[%cal Ge8g8]} 16. Qe5 16... Rab8 {La tour prépare …b5 pour ouvrir l'aile dame. [%cal Ga8b8,Gb8b5]} 17. a5 17... f6 {Le pion chasse la dame et prépare …e5. [%cal Gf7f6,Gf6e5]}",
+          "conclusion": "Dans la centrale, le roque après Nxc4 met votre roi en sûreté. Les pions centraux …e5 et l'aile dame …b5 donnent du jeu actif.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "slav-c5-l2",
+          "legacyIds": [],
+          "title": "Centrale : 8.Bg5 h6 et 10.Qf3",
+          "eco": "D17",
+          "kind": "line",
+          "objectives": [
+            "Chasser le fou g5 avant de jouer …c5",
+            "Connaître la réponse à 10.Qf3 dans le sacrifice",
+            "Sauver la tour h8 par l'échec …Qe3+ puis …Rf8"
+          ],
+          "pgn": "{Les Blancs ont deux déviations importantes : 8.Bg5 et 10.Qf3 dans la ligne du sacrifice. Dans les deux cas, le centre noir reste actif.} 1. d4 1... d5 {[%cal Gd7d5]} 2. c4 2... c6 {[%cal Gc7c6]} 3. Nf3 3... Nf6 {[%cal Gg8f6]} 4. Nc3 4... dxc4 {[%cal Gd5c4]} 5. a4 5... Bf5 {[%cal Gc8f5]} 6. Ne5 6... e6 {[%cal Ge7e6]} 7. f3 7... Bb4 {[%cal Gf8b4]} 8. e4 (8. Bg5 8... h6 {[%cal Gh7h6]} 9. Bh4 9... c5 {La poussée frappe d4 pendant que le fou h4 est loin de l'aile dame. [%cal Gc6c5,Gc5d4]}) 8... Bxe4 {[%cal Gf5e4]} 9. fxe4 9... Nxe4 {[%cal Gf6e4]} 10. Qf3 10... Qxd4 {La dame prend le pion d4 et menace f2. [%cal Gd8d4,Gd4f2]} 11. Qxf7+ 11... Kd8 {[%cal Ge8d8]} 12. Bg5+ 12... Nxg5 {Le cavalier prend le fou avec gain de matériel. [%cal Ge4g5]} 13. Qxg7 {La dame menace la tour h8 : l'échec …Qe3+ puis …Rf8 la met à l'abri, avec une position équilibrée.}",
+          "conclusion": "Contre 8.Bg5, …h6 et …c5 ouvrent le centre. Contre 10.Qf3, …Qxd4 et …Kd8 tiennent la position.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "slav-c5-l3",
+          "legacyIds": [],
+          "title": "Hollandaise : 12.Rd1 Qa5 13.Bd2",
+          "eco": "D19",
+          "kind": "line",
+          "objectives": [
+            "Doubler les tours sur la colonne d",
+            "Répondre à Bd2 par …Rad8",
+            "Préparer …e5 pour libérer le jeu"
+          ],
+          "pgn": "{Après 12.Rd1 Qa5, le cavalier c3 est cloué et la tour d1 attend e4. Votre plan est de préparer …e5 avec …Rad8.} 1. d4 1... d5 {[%cal Gd7d5]} 2. c4 2... c6 {[%cal Gc7c6]} 3. Nf3 3... Nf6 {[%cal Gg8f6]} 4. Nc3 4... dxc4 {[%cal Gd5c4]} 5. a4 5... Bf5 {[%cal Gc8f5]} 6. e3 6... e6 {[%cal Ge7e6]} 7. Bxc4 7... Bb4 {[%cal Gf8b4]} 8. O-O 8... O-O {[%cal Ge8g8]} 9. Qe2 9... Bg6 {[%cal Gf5g6]} 10. Ne5 10... Nbd7 {[%cal Gb8d7]} 11. Nxg6 11... hxg6 {[%cal Gh7g6]} 12. Rd1 12... Qa5 {[%cal Gd8a5]} 13. Bd2 13... Rad8 {La tour soutient …e5 et s'oppose à la tour d1. [%cal Ga8d8,Gd8d1]} 14. Be1 14... Nb6 {Le cavalier attaque le fou c4 et vise a4. [%cal Gd7b6,Gb6c4,Gb6a4]} 15. Bb3 15... e5 {Le centre s'ouvre et vos pièces sont prêtes. [%cal Ge6e5,Ge5d4]}",
+          "conclusion": "Dans la hollandaise, …Rad8 et …e5 libèrent votre jeu. Les pièces noires sont bien placées pour l'ouverture du centre.",
+          "mustCover": "allBranches",
+          "reviewable": true
+        },
+        {
+          "id": "slav-c5-l4",
+          "legacyIds": [],
+          "title": "6.Nh4 e6 7.Nxf5 exf5",
+          "eco": "D16",
+          "kind": "line",
+          "objectives": [
+            "Accepter de rendre le fou f5 contre un pion f5",
+            "Garder le pion c4 au moins un temps",
+            "Développer le fou f8 en b4"
+          ],
+          "pgn": "{Le coup Nh4 attaque le fou f5 tout de suite. Avec …e6, vous laissez le cavalier le prendre et reprenez avec le pion e.} 1. d4 1... d5 {[%cal Gd7d5]} 2. c4 2... c6 {[%cal Gc7c6]} 3. Nf3 3... Nf6 {[%cal Gg8f6]} 4. Nc3 4... dxc4 {[%cal Gd5c4]} 5. a4 5... Bf5 {[%cal Gc8f5]} 6. Nh4 6... e6 {[%cal Ge7e6]} 7. Nxf5 7... exf5 {Le pion f5 contrôle e4, et la colonne e s'ouvre. [%cal Ge6f5,Gf5e4]} 8. e3 8... Bb4 {Le fou cloue le cavalier c3. [%cal Gf8b4,Gb4c3]} 9. Bxc4 9... O-O {Vous avez roqué, et e4 reste difficile à jouer pour les Blancs. [%cal Ge8g8]}",
+          "conclusion": "Contre 6.Nh4, …e6 cède le fou f5 pour une structure solide. Le pion f5 contrôle e4 et le fou b4 cloue le cavalier c3.",
           "mustCover": "allBranches",
           "reviewable": true
         }

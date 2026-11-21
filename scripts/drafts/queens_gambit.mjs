@@ -1,0 +1,366 @@
+// Brouillon de la Masterclass « Gambit Dame » (côté Blancs) : 1.d4 d5 2.c4.
+// Répertoire principal : 2…e6 3.Nc3 Nf6 4.Bg5 (Orthodoxe, Tartakover, Lasker), 5.cxd5 contre 4…Nbd7
+// (structure de Carlsbad), 3.Nf3-e3-Bxc4 contre le Gambit accepté, 3.Nf3 et 4.Nc3 contre la Slave,
+// 6.g3 contre la Tarrasch. Les flèches du coup à jouer sont ajoutées par scripts/course-builder.mjs ;
+// celles écrites ici illustrent une idée (cible, manœuvre, menace).
+import { TRAPS } from "./queens_gambit-traps.mjs";
+
+const QGD = "1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Bg5";
+const ORTHODOX = `${QGD} Be7 5. e3 O-O 6. Nf3`;
+const CARLSBAD = `${QGD} Nbd7 5. cxd5 exd5 6. e3 c6 7. Bd3 Be7 8. Qc2 O-O 9. Nf3 Re8 10. O-O Nf8`;
+const QGA = "1. d4 d5 2. c4 dxc4 3. Nf3 Nf6 4. e3 e6 5. Bxc4 c5 6. O-O a6";
+const SLAV = "1. d4 d5 2. c4 c6 3. Nf3 Nf6 4. Nc3";
+const TARRASCH = "1. d4 d5 2. c4 e6 3. Nc3 c5 4. cxd5 exd5 5. Nf3 Nc6 6. g3 Nf6 7. Bg2 Be7 8. O-O O-O";
+
+export default {
+  id: "queens_gambit",
+  name: "Gambit Dame",
+  description:
+    "1.d4 d5 2.c4 : la pression sur le pion d5 dès le deuxième coup. Un répertoire complet côté Blancs avec 4.Bg5 contre le Gambit Dame refusé (Orthodoxe, Tartakover, Lasker), la structure de Carlsbad et l'attaque de minorité, le Gambit accepté, la Slave, l'Albin, la Tchigorine et la Tarrasch, pièges et grandes lignes.",
+  side: "white",
+  eco: ["D06", "D07", "D09", "D20", "D27", "D30", "D34", "D36", "D45", "D56", "D58", "D63", "D68"],
+  chapters: [
+    // =====================================================================================
+    {
+      title: "Les fondations",
+      summary:
+        "Pourquoi 2.c4 n'est pas un vrai gambit, le développement Nc3, Bg5, e3 et Nf3, la lutte pour le tempo dans l'Orthodoxe, le Gambit accepté et la structure de Carlsbad.",
+      stage: "foundations",
+      lessons: [
+        {
+          title: "2.c4 : attaquer le pion d5",
+          eco: "D30",
+          kind: "concept",
+          objectives: [
+            "Comprendre que le pion c4 se récupère toujours si les Noirs le prennent",
+            "Mettre trois pièces contre d5 : le pion c4, le cavalier c3 et le fou g5",
+            "Développer par e3 et Nf3 avant d'ouvrir le jeu",
+          ],
+          pgn: `{Le Gambit Dame n'en est pas vraiment un : si les Noirs prennent en c4, le pion se récupère par e3 et Bxc4. Le vrai but de 2.c4 est d'attaquer le pion d5, qui tient le centre noir. Vous ajoutez ensuite le cavalier c3 et le fou g5, qui cloue le défenseur f6.}
+1. d4 d5 2. c4 {Le pion attaque d5 : les Noirs doivent choisir entre le soutenir, le céder ou contre-attaquer. [%cal Gc4d5]}
+2... e6 {Le Gambit Dame refusé : le pion e6 soutient d5.}
+(2... dxc4 3. Nf3 {Le cavalier empêche …e5 ; e3 et Bxc4 récupéreront le pion. [%cal Gf3e5]} 3... Nf6 4. e3 {La diagonale du fou f1 s'ouvre vers c4. [%cal Gf1c4]})
+(2... c6 3. Nf3 {La Slave : le pion c6 soutient d5 sans enfermer le fou c8. Le cavalier se développe d'abord.})
+3. Nc3 {Le cavalier ajoute une deuxième pièce contre d5. [%cal Gc3d5]}
+3... Nf6 4. Bg5 {Le fou cloue le cavalier f6, qui défend d5. [%cal Gg5f6,Gf6d5]}
+4... Be7 5. e3 {Le pion protège d4 et libère le fou f1.}
+5... O-O 6. Nf3 {Le développement est terminé vers le centre : trois pièces visent d5. [%cal Gf3e5]}`,
+          conclusion:
+            "Le Gambit Dame met la pression sur d5 avec c4, Nc3 et Bg5. Si les Noirs prennent en c4, e3 et Bxc4 rendent le pion : vous gardez un beau centre.",
+        },
+        {
+          legacyIds: ["queens_gambit-m2"],
+          title: "L'Orthodoxe : Rc1 et la bataille du tempo",
+          eco: "D63",
+          kind: "line",
+          objectives: [
+            "Placer la tour en c1 sur la future colonne ouverte",
+            "Attendre …dxc4 pour reprendre avec le fou en un seul temps",
+            "Échanger en e7 contre la manœuvre libératrice …Nd5",
+          ],
+          pgn: `{Dans l'Orthodoxe, les Noirs attendent que votre fou f1 bouge pour prendre en c4 : vous perdriez alors un temps. Vous jouez donc d'abord des coups utiles (Rc1), puis Bd3 ; après …dxc4, le fou reprend en un seul coup.}
+${ORTHODOX} Nbd7
+(6... h6 7. Bh4 {Le fou garde le clouage sur le cavalier f6. [%cal Gh4f6]})
+7. Rc1 {La tour s'installe sur la colonne c, qui s'ouvrira après …dxc4 ou …c5. [%cal Gc1c7]}
+7... c6
+(7... h6 8. Bh4 {Le fou reste sur la diagonale h4-d8, contre la dame noire. [%cal Gh4d8]})
+8. Bd3 {Le fou se développe : les Noirs prennent maintenant, faute de coup d'attente utile.}
+8... dxc4 9. Bxc4 {Le fou reprend en un temps : votre développement est complet.}
+9... Nd5 {Les Noirs cherchent à échanger des pièces pour se libérer.}
+10. Bxe7 Qxe7 11. O-O {Le roi est à l'abri : vous gardez plus d'espace et une meilleure activité.}`,
+          conclusion:
+            "Dans l'Orthodoxe, chaque tempo compte : Rc1 avant Bd3, puis Bxc4 en un seul coup. Contre …Nd5, l'échange en e7 et le roque maintiennent votre avance de développement.",
+        },
+        {
+          legacyIds: ["queens_gambit-m1"],
+          title: "Le Gambit accepté : Nf3, e3 et Bxc4",
+          eco: "D20",
+          kind: "line",
+          objectives: [
+            "Jouer 3.Nf3 pour empêcher le contre-coup …e5",
+            "Récupérer le pion par e3 et Bxc4",
+            "Protéger le fou par Qe2 avant que …b5 ne le chasse",
+          ],
+          pgn: `{Dans le Gambit accepté, les Noirs rendent le centre pour développer leurs pièces. Vous récupérez le pion avec le fou, roquez, puis la dame e2 protège ce fou et prépare Rd1 et e4.}
+1. d4 d5 2. c4 dxc4 3. Nf3 {Le cavalier empêche …e5, la meilleure réponse au centre. [%cal Gf3e5]}
+3... Nf6 4. e3 e6
+(4... Bg4 5. Bxc4 e6 6. h3 {Le pion demande au fou de se décider. [%cal Gh3g4]} 6... Bh5 7. Nc3 {Le cavalier soutient la poussée e4. [%cal Gc3e4]})
+5. Bxc4 {Le pion est récupéré : vous avez le centre et un développement facile.}
+5... c5 6. O-O a6 {Les Noirs préparent …b5 pour chasser le fou.}
+7. Qe2 {La dame protège le fou c4 et prépare Rd1 et e4. [%cal Ge2c4,Ge2e4]}`,
+          conclusion:
+            "Contre le Gambit accepté, Nf3, e3 et Bxc4 récupèrent le pion sans effort. Qe2, Rd1 et Nc3 préparent ensuite la poussée e4 ou d5.",
+        },
+        {
+          title: "4…Nbd7 : 5.cxd5 et la structure de Carlsbad",
+          eco: "D36",
+          kind: "line",
+          objectives: [
+            "Échanger en d5 contre 4…Nbd7 pour fixer la structure",
+            "Éviter le piège de l'Éléphant après 5…exd5",
+            "Placer le fou en d3 et la dame en c2 sur la diagonale b1-h7",
+          ],
+          pgn: `{Contre 4…Nbd7, les Noirs préparent la Cambridge Springs (…c6 et …Qa5). L'échange 5.cxd5 l'évite et fixe une structure : le pion d5 noir est soutenu par c6, et votre pion b2 pourra un jour monter en b5. C'est la structure de Carlsbad.}
+${QGD} Nbd7 {Les Noirs préparent …c6 et …Qa5.}
+5. cxd5 {L'échange fixe la structure avant que les Noirs ne jouent …dxc4. [%cal Gc4d5]}
+5... exd5 6. e3 {Le développement normal. 6.Nxd5?? perdrait une pièce : …Nxd5 7.Bxd8 Bb4+ récupère la dame avec un cavalier de plus, c'est le piège de l'Éléphant.}
+6... c6 7. Bd3 {Le fou vise h7 et contrôle f5, la bonne case du fou c8. [%cal Gd3h7,Gd3f5]}
+7... Be7 8. Qc2 {La dame renforce la diagonale b1-h7 et empêche …Bf5. [%cal Gc2h7]}
+8... O-O 9. Nf3 Re8 10. O-O Nf8 {Le cavalier protège h7 et ira en e6 ou g6.}
+11. Rab1 {La tour soutient la future poussée b4-b5 : c'est l'attaque de minorité. [%cal Gb1b4,Gb4b5]}`,
+          conclusion:
+            "Contre 4…Nbd7, 5.cxd5 vous donne la structure de Carlsbad. Bd3, Qc2 et Rab1 préparent b4-b5 : deux pions de l'aile dame contre trois pour y créer une faiblesse.",
+        },
+      ],
+    },
+    // =====================================================================================
+    {
+      title: "Plans typiques",
+      summary:
+        "L'attaque de minorité dans la Carlsbad, la pression sur les pions pendants de la Tartakover, la simplification de la Lasker et le pion isolé de la Tarrasch.",
+      stage: "plans",
+      lessons: [
+        {
+          title: "L'attaque de minorité : a3, b4 et b5",
+          eco: "D36",
+          kind: "line",
+          objectives: [
+            "Pousser a3 et b4 contre …a5",
+            "Échanger en e7 quand le cavalier noir vient en e4",
+            "Viser une faiblesse en c6 après b5",
+          ],
+          pgn: `{Dans la Carlsbad, vos deux pions a et b vont attaquer les trois pions noirs a7, b7 et c6. Après b5 et l'échange en c6, les Noirs gardent un pion c6 faible ou un pion d5 isolé : une cible pour toute la partie.}
+${CARLSBAD} 11. Rab1 a5 {Les Noirs freinent la poussée b4.}
+(11... g6 12. b4 {La poussée b4 est lancée : b5 suivra. [%cal Gb4b5]})
+12. a3 {Le pion soutient b4 : la poussée ne pourra pas être empêchée. [%cal Ga3b4]}
+12... Ne4 13. Bxe7 Qxe7 14. b4 {Le pion avance malgré …a5 : la colonne a ou b va s'ouvrir. [%cal Gb4b5]}
+14... axb4 15. axb4 {La colonne a s'ouvre, et le pion b4 est prêt pour b5. [%cal Ga1a8]}`,
+          conclusion:
+            "L'attaque de minorité suit un ordre simple : Rab1, a3, b4 puis b5. Échangez le fou e7 quand le cavalier noir vient en e4, et gardez votre pion b prêt à avancer.",
+        },
+        {
+          title: "Tartakover : la pression sur les pions pendants",
+          eco: "D58",
+          kind: "line",
+          objectives: [
+            "Échanger en d5 et en e7 contre la Tartakover",
+            "Placer la tour en c1 et la dame en a4 contre c5",
+            "Provoquer les pions pendants c5-d5 et les attaquer",
+          ],
+          pgn: `{Avec 7…b6, les Noirs préparent …Bb7 et …c5. Vous échangez des pièces au centre, puis Qa4 et Rc1 visent le pion c5 : quand il avance à côté de d5, ces deux pions « pendants » deviennent des cibles.}
+${ORTHODOX} h6 7. Bh4 b6 8. cxd5 Nxd5 9. Bxe7 Qxe7 10. Nxd5 exd5 {Les Noirs ont un pion d5 sans soutien du pion e.}
+11. Rc1 {La tour vise c7 et la future case c5. [%cal Gc1c7]}
+11... Be6 12. Qa4 {La dame vise a7 et c6 : les Noirs doivent jouer …c5. [%cal Ga4a7,Ga4c6]}
+12... c5 13. Qa3 {La dame cloue le pion c5 sur la dame e7 : les pions pendants c5 et d5 sont sous le feu. [%cal Ga3c5,Gc5e7]}`,
+          conclusion:
+            "Contre la Tartakover, échangez au centre puis frappez c5 avec la tour et la dame. Les pions pendants c5-d5 ne peuvent plus avancer sans perdre un pion.",
+        },
+        {
+          title: "Lasker : 7…Ne4 et la colonne c",
+          eco: "D56",
+          kind: "line",
+          objectives: [
+            "Échanger le fou e7 contre la simplification de la Lasker",
+            "Reprendre en c3 avec la tour pour l'activer",
+            "Garder la colonne c et l'avance de développement",
+          ],
+          pgn: `{La Lasker échange deux paires de pièces pour se libérer. Vous acceptez, mais reprenez en c3 avec la tour : elle est déjà active sur la colonne c, et vos pièces restantes sont mieux placées.}
+${ORTHODOX} h6 7. Bh4 Ne4 {Le cavalier propose d'échanger les fous et les cavaliers.}
+8. Bxe7 Qxe7 9. Rc1 {La tour occupe la colonne c avant le roque. [%cal Gc1c7]}
+9... c6 10. Bd3 Nxc3 11. Rxc3 {La tour reprend et reste active sur la troisième rangée. [%cal Gc3c6]}
+11... dxc4 12. Bxc4 Nd7 13. O-O {Le roi est à l'abri : les Noirs doivent encore jouer …e5 ou …b6 pour sortir leur fou c8.}`,
+          conclusion:
+            "Contre la Lasker, laissez les Noirs échanger, mais gardez la colonne c : Rc1 puis Rxc3. Le fou c8 noir reste le problème de leur position.",
+        },
+        {
+          title: "La Tarrasch : g3, Bg2 et le pion isolé",
+          eco: "D34",
+          kind: "line",
+          objectives: [
+            "Fianchetter le fou en g2 contre le pion isolé d5",
+            "Échanger en c5 pour isoler définitivement le pion d5",
+            "Clouer le cavalier f6 par Bg5 pour gagner le contrôle de d4",
+          ],
+          pgn: `{Dans la Tarrasch, les Noirs acceptent un pion isolé en d5 contre un jeu de pièces actif. Votre fou g2 frappe ce pion par la grande diagonale ; l'échange en c5 l'isole, et Bg5 enlève son défenseur f6.}
+${TARRASCH.split(" 6. g3")[0]} 6. g3 {Le fou ira en g2, face au pion d5. [%cal Gf1g2,Gg2d5]}
+6... Nf6 7. Bg2 Be7
+(7... cxd4 8. Nxd4 {Le cavalier reprend et bloque d4, la case devant le pion isolé. [%cal Gd4d5]})
+8. O-O O-O 9. dxc5 {L'échange isole le pion d5. [%cal Gd4c5]}
+9... Bxc5 10. Bg5 {Le fou cloue le cavalier f6, défenseur de d5. [%cal Gg5f6,Gf6d5]}`,
+          conclusion:
+            "Contre la Tarrasch, g3 et Bg2 visent le pion isolé, dxc5 l'isole pour de bon, et Bg5 attaque son défenseur f6. Votre plan : bloquer en d4 et gagner d5.",
+        },
+      ],
+    },
+    // =====================================================================================
+    {
+      title: "Réponses adverses",
+      summary:
+        "La Slave avec 5.a4, la Semi-Slave avec 5.e3 et Qc2, le contre-gambit Albin avec g3, la Tchigorine et la Baltique.",
+      stage: "responses",
+      lessons: [
+        {
+          title: "La Slave : 4…dxc4 5.a4",
+          eco: "D17",
+          kind: "line",
+          objectives: [
+            "Empêcher …b5 par a4 contre 4…dxc4",
+            "Récupérer le pion c4 par e3 et Bxc4",
+            "Chasser le fou g4 par Ne5 dans la ligne 5…Bg4",
+          ],
+          pgn: `{Dans la Slave, …dxc4 suivi de …b5 garderait le pion. Le coup 5.a4 l'interdit ; le pion se récupère ensuite par e3 et Bxc4, et vous gardez un centre plus fort.}
+${SLAV} dxc4 5. a4 {Le pion interdit …b5, qui protégerait c4. [%cal Ga4b5]}
+5... Bf5
+(5... Bg4 6. Ne5 {Le cavalier attaque c4 et chasse le fou. [%cal Ge5c4,Ge5g4]} 6... Bh5 7. f3 {Le pion prépare e4 et enferme le fou h5 hors du jeu.})
+6. e3 e6 7. Bxc4 Bb4 {Le fou cloue le cavalier c3 pour gêner e4.}
+8. O-O O-O 9. Qe2 {La dame prépare e4 et protège le fou c4. [%cal Ge3e4]}`,
+          conclusion:
+            "Contre la Slave avec …dxc4, a4 empêche …b5, puis e3 et Bxc4 récupèrent le pion. Qe2 prépare e4, le grand plan blanc.",
+        },
+        {
+          title: "La Semi-Slave : 5.e3 et Qc2",
+          eco: "D45",
+          kind: "line",
+          objectives: [
+            "Jouer e3 et Qc2 contre la Semi-Slave",
+            "Reprendre en c4 avec le fou puis le replier en d3",
+            "Contrôler b5 et e4 par a3 après …b5",
+          ],
+          pgn: `{La Semi-Slave combine …c6 et …e6 : les Noirs sont solides et veulent …dxc4 puis …b5. Avec Qc2, vous préparez e4 et surveillez h7 ; vous reprenez en c4 et reculez le fou en d3, d'où il vise l'aile roi.}
+${SLAV} e6 5. e3 Nbd7 6. Qc2 {La dame contrôle e4 et vise h7. [%cal Gc2e4,Gc2h7]}
+6... Bd6 7. Bd3 O-O 8. O-O dxc4 9. Bxc4 b5 {Le pion chasse le fou avec gain de temps.}
+10. Bd3 {Le fou reste dirigé vers h7. [%cal Gd3h7]}
+10... Bb7 11. a3 {Le pion empêche …b4, qui chasserait le cavalier c3, et prépare b4. [%cal Ga3b4]}`,
+          conclusion:
+            "Contre la Semi-Slave, e3, Qc2 et Bd3 visent h7 et préparent e4. Après …dxc4 et …b5, a3 empêche …b4 et garde le cavalier c3 en place.",
+        },
+        {
+          title: "Le contre-gambit Albin : 4.Nf3 et 5.g3",
+          eco: "D09",
+          kind: "line",
+          objectives: [
+            "Prendre le pion e5 et le garder",
+            "Fianchetter le fou en g2 contre le pion d4",
+            "Développer par Nbd2 et roquer avant de contre-attaquer",
+          ],
+          pgn: `{L'Albin sacrifie un pion pour installer un pion en d4. Vous gardez le pion e5, fianchettez le fou en g2, puis Nbd2 et le roque : le pion d4 finira par devenir une cible.}
+1. d4 d5 2. c4 e5 3. dxe5 {Vous prenez le pion : les Noirs n'auront pas de compensation simple.}
+3... d4 4. Nf3 {Le cavalier protège e5 et contrôle d4. [%cal Gf3e5]}
+4... Nc6 5. g3 {Le fou ira en g2, où il vise b7 et le roi noir s'il roque à l'aile dame. [%cal Gf1g2]}
+5... Be6
+(5... Nge7 6. Bg2 Ng6 7. O-O {Le roi est à l'abri : le pion e5 tient encore. [%cal Gg1h1]})
+6. Nbd2 {Le cavalier attaque d4 par b3 et protège c4. [%cal Gd2b3]}
+6... Qd7 7. Bg2 O-O-O 8. O-O {Le roi est en sécurité, alors que le roi noir sur l'aile dame fait face au fou g2. [%cal Gg2b7]}`,
+          conclusion:
+            "Contre l'Albin, gardez le pion e5 et fianchettez : Nf3, g3, Bg2 et Nbd2. Le roi noir sur l'aile dame se retrouve face à votre fou g2.",
+        },
+        {
+          title: "La Tchigorine et la Baltique : les sorties du fou c8",
+          eco: "D07",
+          kind: "line",
+          objectives: [
+            "Prendre en d5 contre la Tchigorine pour échanger le fou g4",
+            "Accepter les pions doublés en f3 contre la paire de fous",
+            "Répondre à 2…Bf5 par 3.cxd5 et Qa4+",
+          ],
+          pgn: `{La Tchigorine et la Baltique sortent tôt les pièces noires. Contre 2…Nc6, vous prenez en d5 : après …Bxf3, vous avez la paire de fous et un centre solide. Contre 2…Bf5, cxd5 puis Qa4+ récupère le pion d5 avec avantage.}
+1. d4 d5 2. c4 Nc6
+(2... Bf5 3. cxd5 Bxb1 4. Qa4+ {L'échec récupère le temps : la dame reprendra en d5. [%cal Ga4e8]} 4... c6 5. Rxb1 Qxd5 6. Nf3 {Vous avez la paire de fous et un développement sain.})
+3. Nf3 Bg4 4. cxd5 {L'échange chasse le cavalier c6 du centre. [%cal Gc4d5]}
+4... Bxf3 5. gxf3 Qxd5 6. e3 e5 7. Nc3 Bb4 8. Bd2 Bxc3 9. bxc3 {Vos deux fous compensent largement les pions doublés.}
+9... Qd6 10. Rb1 {La tour occupe la colonne b ouverte et vise b7. [%cal Gb1b7]}`,
+          conclusion:
+            "Contre les sorties précoces du fou c8, échangez et prenez la paire de fous. Les pions doublés comptent moins que vos deux fous et vos colonnes ouvertes.",
+        },
+      ],
+    },
+    // =====================================================================================
+    {
+      title: "Pièges",
+      summary:
+        "Les erreurs noires typiques contre le Gambit Dame : la mauvaise prise dans la Lasker, …b5? dans le Gambit accepté, puis …Bh3? et …Bf5? dans l'Albin.",
+      stage: "traps",
+      lessons: TRAPS,
+    },
+    // =====================================================================================
+    {
+      title: "Grande théorie",
+      summary:
+        "Les lignes profondes : le dégagement de Capablanca dans l'Orthodoxe, la ligne classique du Gambit accepté, la Tarrasch avec 10.Bg5 d4 et la Slave avec e4-e5.",
+      stage: "theory",
+      lessons: [
+        {
+          legacyIds: ["queens_gambit-m3"],
+          title: "Le dégagement de Capablanca : 11…Nxc3 et …e5",
+          eco: "D68",
+          kind: "line",
+          objectives: [
+            "Reprendre en c3 avec la tour après l'échange des cavaliers",
+            "Répondre à …e5 par Bb3 pour garder le fou actif",
+            "Placer la tour en e1 face au pion isolé d4 après les échanges",
+          ],
+          pgn: `{Dans l'Orthodoxe, Capablanca a montré comment les Noirs se libèrent : …Nd5, échanges, puis …e5. Votre fou c4 se replie en b3, où il vise f7, et après les échanges en d4 vos tours occupent la colonne e.}
+${ORTHODOX} Nbd7 7. Rc1 c6 8. Bd3 dxc4 9. Bxc4 Nd5 10. Bxe7 Qxe7 11. O-O Nxc3 12. Rxc3 e5 {La poussée libératrice : le fou c8 respire enfin.}
+13. Bb3 {Le fou se met à l'abri et vise f7. [%cal Gb3f7]}
+13... exd4 14. exd4 Nf6 15. Re1 {La tour occupe la colonne e avec gain de temps sur la dame. [%cal Ge1e7]}
+15... Qd6 {La dame évite la tour : vous gardez le centre et des pièces actives.}`,
+          conclusion:
+            "Contre le dégagement de Capablanca, gardez le fou en b3 et occupez la colonne e. Votre pion d4 isolé est compensé par l'activité de vos pièces.",
+        },
+        {
+          legacyIds: ["queens_gambit-m4"],
+          title: "Gambit accepté classique : 7.Qe2 b5 8.Bb3",
+          eco: "D28",
+          kind: "line",
+          objectives: [
+            "Reculer le fou en b3 contre …b5",
+            "Mettre la tour en d1 puis pousser d5",
+            "Ouvrir le centre contre le roi noir qui n'a pas roqué",
+          ],
+          pgn: `{Dans la ligne classique, les Noirs gagnent de l'espace à l'aile dame avec …b5 et …Bb7. Vous préparez la percée d5 avec Rd1 et Nc3 : elle ouvre le centre alors que le roi noir n'a pas encore roqué.}
+${QGA} 7. Qe2 b5 8. Bb3 Bb7
+(8... Nc6 9. Rd1 c4 10. Bc2 Nb4 11. Nc3 Nxc2 12. Qxc2 Bb7 13. d5 {La percée centrale, même sans le fou b3. [%cal Gd4d5]})
+9. Rd1 {La tour soutient la future poussée d5. [%cal Gd1d5]}
+9... Nbd7 10. Nc3 Qb8 11. d5 {La percée : le centre s'ouvre contre le roi noir. [%cal Gd4d5]}
+11... exd5 12. Nxd5 Nxd5 13. Bxd5 Bxd5 14. Rxd5 {La tour s'installe en d5 : elle frappe c5 et la colonne d. [%cal Gd5c5]}`,
+          conclusion:
+            "Dans la ligne classique du Gambit accepté, Rd1 et Nc3 préparent d5. Cette percée ouvre la colonne d pour votre tour pendant que le roi noir est au centre.",
+        },
+        {
+          legacyIds: ["queens_gambit-m5"],
+          title: "Tarrasch : 10.Bg5 d4 11.Bxf6 et 12.Nd5",
+          eco: "D34",
+          kind: "line",
+          objectives: [
+            "Échanger en f6 quand le pion noir arrive en d4",
+            "Installer un cavalier en d5 devant le pion avancé",
+            "Ramener l'autre cavalier en c4 par d2",
+          ],
+          pgn: `{Après 10.Bg5, les Noirs avancent souvent …d4 pour gagner de l'espace. Le pion n'est plus isolé, mais il est avancé : vous échangez en f6 et installez un cavalier en d5, devant lui, puis l'autre cavalier passe par d2 vers c4.}
+${TARRASCH} 9. dxc5 Bxc5 10. Bg5 d4 {Le pion avance et chasse le cavalier c3.}
+11. Bxf6 Qxf6 12. Nd5 {Le cavalier s'installe sur la case libérée devant le pion d4. [%cal Gd5d4]}
+12... Qd8 13. Nd2 {L'autre cavalier part vers c4, d'où il visera e5 et d6. [%cal Gd2c4]}
+13... Re8 14. Rc1 Bb6 15. Nc4 {Les deux cavaliers dominent les cases centrales. [%cal Gc4b6,Gd5b6]}`,
+          conclusion:
+            "Contre …d4 dans la Tarrasch, Bxf6 et Nd5 donnent à votre cavalier une case idéale. Nd2-c4 ajoute le second : les fous noirs n'ont plus de cible.",
+        },
+        {
+          title: "Slave principale : 9.Qe2, e4 et e5",
+          eco: "D19",
+          kind: "line",
+          objectives: [
+            "Pousser e4 contre le fou f5 pour gagner un temps",
+            "Avancer e5 pour chasser le cavalier f6",
+            "Reprendre en d5 avec le cavalier, puis placer la dame en e3",
+          ],
+          pgn: `{Dans la ligne principale de la Slave, vous poussez e4 puis e5 : le fou noir est chassé en h5 et le cavalier f6 doit quitter la défense de son roi. Après les échanges en d5, la dame e3 surveille l'aile roi.}
+${SLAV} dxc4 5. a4 Bf5 6. e3 e6 7. Bxc4 Bb4 8. O-O O-O 9. Qe2 Nbd7 10. e4 {Le pion attaque le fou f5. [%cal Ge4f5]}
+10... Bg6 11. Bd3 Bh5 12. e5 {Le pion chasse le cavalier f6. [%cal Ge5f6]}
+12... Nd5 13. Nxd5 cxd5 14. Qe3 {La dame vise l'aile roi et protège d4. [%cal Ge3h6]}`,
+          conclusion:
+            "Dans la Slave principale, e4 puis e5 chassent les pièces noires. Après l'échange en d5, Qe3 et l'espace à l'aile roi vous donnent l'initiative.",
+        },
+      ],
+    },
+  ],
+};

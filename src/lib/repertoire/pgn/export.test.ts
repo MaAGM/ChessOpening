@@ -174,7 +174,7 @@ describe("export puis import : aller-retour", () => {
     expect(plain(roundTrip(tree))).toEqual(plain(tree));
   });
 
-  it("restitue les 135 cours du catalogue Masterclass à l'identique", async () => {
+  it("restitue les 420 cours du catalogue Masterclass à l'identique", async () => {
     let lessons = 0;
     for (const course of await loadAllCourses()) {
       for (const lesson of course.chapters.flatMap((chapter) => chapter.lessons)) {
@@ -184,7 +184,7 @@ describe("export puis import : aller-retour", () => {
         lessons += 1;
       }
     }
-    expect(lessons).toBe(210);
+    expect(lessons).toBe(420);
   });
 
   it("réimporte une suite de chapitres exportés comme un seul arbre fusionné", () => {

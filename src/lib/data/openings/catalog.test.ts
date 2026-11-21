@@ -70,7 +70,7 @@ describe("catalogue Masterclass : index et fichiers d'ouverture", () => {
 
   it("garde les 105 anciens identifiants (m1..m5 par ouverture), chacun lié à un cours", () => {
     const lessons = courseEntries.flatMap((c) => c.chapters.flatMap((ch) => ch.lessons));
-    expect(lessons).toHaveLength(210);
+    expect(lessons).toHaveLength(420);
     for (const lesson of lessons) {
       for (const legacyId of lesson.legacyIds) expect(resolveLessonId(legacyId)).toBe(lesson.id);
     }
@@ -80,8 +80,10 @@ describe("catalogue Masterclass : index et fichiers d'ouverture", () => {
     }
   });
 
-  it("les ouvertures pilotes sont des Masterclasses de 5 chapitres de 4 cours", () => {
-    for (const id of ["french", "italian", "london_system", "reti", "trompowsky", "scandinavian", "alekhine"]) {
+  it("les ouvertures converties sont des Masterclasses de 5 chapitres de 4 cours", () => {
+    for (const id of ["french", "italian", "london_system", "reti", "trompowsky", "scandinavian", "alekhine",
+      "ruy_lopez", "queens_gambit", "sicilian", "caro_kann", "kings_indian",
+      "english", "benoni", "pirc", "vienna", "kings_gambit", "scotch", "catalan", "slav", "grunfeld"]) {
       const course = courseEntries.find((c) => c.id === id)!;
       expect(course.chapters.map((ch) => ch.stage)).toEqual([...COURSE_STAGES]);
       expect(course.chapters.map((ch) => ch.lessons.length)).toEqual([4, 4, 4, 4, 4]);

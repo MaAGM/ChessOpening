@@ -41,11 +41,13 @@ describe("reviewRepertoire (données réelles)", () => {
   it("fusionne par position : moins de nœuds que de positions cumulées par les chapitres", () => {
     const ids = chapterIdsOf("black");
     const graph = buildReviewGraphForSide("black", ids)!;
-    const edges = [...graph.nodes.values()].reduce((n, node) => n + Object.keys(node.edges).length, 0);
+    const countEdges = (g: NonNullable<ReturnType<typeof buildReviewGraphForSide>>) =>
+      [...g.nodes.values()].reduce((n, node) => n + Object.keys(node.edges).length, 0);
     // Un graphe de positions partage les préfixes communs : il reste bien plus petit
-    // que la somme des coups de tous les chapitres.
+    // que la somme des coups de tous les chapitres pris séparément.
+    const separate = ids.reduce((n, id) => n + countEdges(buildReviewGraphForSide("black", [id])!), 0);
     expect(graph.nodes.size).toBeGreaterThan(ids.length);
-    expect(edges).toBeLessThan(ids.length * 14);
+    expect(countEdges(graph)).toBeLessThan(separate * 0.7);
   });
 
   it("filtre par couleur : un chapitre Blancs n'entre pas dans le répertoire des Noirs", () => {
