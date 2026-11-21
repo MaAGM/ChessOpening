@@ -4,12 +4,19 @@ import type { ExplorerSummary } from "@/lib/chess/explorerStats";
 import { analysisKey, type EngineAnalysis } from "@/lib/engine";
 
 import {
+  COACH_CHAT_MAX_COMMENT_LENGTH,
   COACH_CHAT_MAX_ENGINE_LINE,
+  COACH_CHAT_MAX_EXPECTED_MOVES,
   COACH_CHAT_MAX_EXPLORER_MOVES,
   COACH_CHAT_MAX_HISTORY,
+  COACH_CHAT_MAX_LESSON_TITLE_LENGTH,
   COACH_CHAT_MAX_MOVES,
+  COACH_CHAT_MAX_OBJECTIVE_LENGTH,
+  COACH_CHAT_MAX_OBJECTIVES,
   COACH_CHAT_MAX_OPENING_LENGTH,
+  isStudentToMove,
   type CoachChatMessage,
+  type CoachLessonContext,
   type CoachPositionSnapshot,
   type CoachSide,
 } from "./chatProtocol";
@@ -55,7 +62,25 @@ export type SnapshotInput = {
   explorer: ExplorerSummary | null;
   /** Camp affiché en bas de l'échiquier (camp étudié par le joueur). */
   boardOrientation: CoachSide;
+  /** Cours suivi (mode Apprentissage) ; absent ou null en Exploration. */
+  lesson?: CoachLessonContext | null;
 };
+
+/** Ramène le contexte de cours dans les limites acceptées par le serveur. */
+export function clampLessonContext(lesson: CoachLessonContext): CoachLessonContext {
+  const title = (text: string) => text.slice(0, COACH_CHAT_MAX_LESSON_TITLE_LENGTH);
+  const comment = lesson.comment?.trim();
+  return {
+    courseName: title(lesson.courseName),
+    chapterTitle: title(lesson.chapterTitle),
+    lessonTitle: title(lesson.lessonTitle),
+    objectives: lesson.objectives
+      .slice(0, COACH_CHAT_MAX_OBJECTIVES)
+      .map((objective) => objective.slice(0, COACH_CHAT_MAX_OBJECTIVE_LENGTH)),
+    comment: comment ? comment.slice(0, COACH_CHAT_MAX_COMMENT_LENGTH) : null,
+    expectedMoves: lesson.expectedMoves.slice(0, COACH_CHAT_MAX_EXPECTED_MOVES),
+  };
+}
 
 /** Ce que le joueur voit à l'écran, dans le format validé par `coach.chat`. */
 export function buildPositionSnapshot({
@@ -65,6 +90,7 @@ export function buildPositionSnapshot({
   analysis,
   explorer,
   boardOrientation,
+  lesson,
 }: SnapshotInput): CoachPositionSnapshot {
   const engine =
     analysis && analysis.score && analysis.key === analysisKey(fen)
@@ -96,6 +122,7 @@ export function buildPositionSnapshot({
         }
       : null,
     boardOrientation,
+    ...(lesson ? { lesson: clampLessonContext(lesson) } : {}),
   };
 }
 
@@ -109,8 +136,25 @@ export function trimHistory(messages: readonly CoachChatMessage[], max = COACH_C
   return start === -1 ? [] : recent.slice(start);
 }
 
+/** Questions proposées pendant un cours (jamais plus de 3). */
+export function learningSuggestions(
+  snapshot: Pick<CoachPositionSnapshot, "fen" | "moves" | "boardOrientation" | "lesson">,
+): string[] {
+  const suggestions: string[] = [];
+  if (snapshot.moves.length > 0) suggestions.push("Pourquoi ce coup ?");
+  suggestions.push("Quel est le plan ici ?");
+  if (isStudentToMove(snapshot) && (snapshot.lesson?.expectedMoves.length ?? 0) > 0) {
+    suggestions.push("Donne-moi un indice");
+  }
+  return suggestions.slice(0, 3);
+}
+
 /** Questions proposées selon la position (jamais plus de 3). */
-export function suggestedQuestions(snapshot: Pick<CoachPositionSnapshot, "moves" | "explorer">): string[] {
+export function suggestedQuestions(
+  snapshot: Pick<CoachPositionSnapshot, "moves" | "explorer"> &
+    Partial<Pick<CoachPositionSnapshot, "fen" | "boardOrientation" | "lesson">>,
+): string[] {
+  if (snapshot.lesson && snapshot.fen) return learningSuggestions({ ...snapshot, fen: snapshot.fen });
   const suggestions: string[] = [];
   const top = snapshot.explorer?.moves[0];
   if (top) suggestions.push(`Pourquoi les maîtres jouent ${top.san} ?`);

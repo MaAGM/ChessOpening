@@ -10,7 +10,8 @@
     "lint": "eslint",
     "postinstall": "node scripts/copy-stockfish.mjs",
     "courses:index": "node scripts/build-course-index.mjs",
-    "courses:lab": "node --import ./scripts/lib/register-src.mjs scripts/opening-lab.mjs"
+    "courses:build": "node --import ./scripts/lib/register-src.mjs scripts/course-builder.mjs",
+    "courses:lab":"node --import ./scripts/lib/register-src.mjs scripts/opening-lab.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.10.0",

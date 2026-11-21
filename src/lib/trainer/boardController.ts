@@ -97,6 +97,15 @@ export function engineAllowed(panelMode: PanelMode): boolean {
 }
 
 /**
+ * Stockfish calcule-t-il ? Partout où il est affiché, et aussi en silence pendant un cours
+ * (`learning_active`) pour que le Coach dispose d'une évaluation fiable : rien n'est montré
+ * à l'écran. La révision reste sans moteur ni Coach.
+ */
+export function engineRuns(panelMode: PanelMode): boolean {
+  return engineAllowed(panelMode) || panelMode === "learning_active";
+}
+
+/**
  * Décide, selon l'écran affiché, qui reçoit les coups joués sur l'échiquier,
  * quelles flèches / cases sont surlignées et dans quel sens l'échiquier est orienté.
  *

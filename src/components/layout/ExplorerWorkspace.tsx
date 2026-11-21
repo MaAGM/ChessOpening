@@ -2,6 +2,8 @@
 
 import { useState, type ReactNode } from "react";
 
+import { SparkleIcon } from "@/components/ui/PanelIcons";
+
 type ExplorerWorkspaceProps = {
   /** Bouton retour (à gauche de l'en-tête). */
   back: ReactNode;
@@ -32,15 +34,6 @@ function SearchIcon() {
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" className={ICON_CLASS} aria-hidden="true">
       <circle cx="11" cy="11" r="7" />
       <path d="m20 20-3.5-3.5" />
-    </svg>
-  );
-}
-
-function SparkleIcon() {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={ICON_CLASS} aria-hidden="true">
-      <path d="M12 2l2.2 6.6L21 11l-6.8 2.4L12 20l-2.2-6.6L3 11l6.8-2.4L12 2z" />
-      <path d="M19 15l.9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9L19 15z" />
     </svg>
   );
 }

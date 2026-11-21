@@ -16,11 +16,12 @@ import type { Side } from "@/lib/review/reviewRepertoire";
 import { sanToSquares } from "@/lib/review/reviewGraph";
 import { uciToSquares } from "@/lib/engine";
 import { buildPositionSnapshot, suggestedQuestions } from "@/lib/coach/chatSnapshot";
+import { buildLessonContext } from "@/lib/coach/lessonContext";
 import { getConvexClient } from "@/lib/convex/client";
 import { createCoachChatBackend } from "@/lib/convex/coachRemote";
 import {
   ENGINE_ARROW_COLOR,
-  engineAllowed,
+  engineRuns,
   resolveBoardController,
   shouldEnterExplorer,
 } from "@/lib/trainer/boardController";
@@ -119,9 +120,6 @@ export default function HomePage() {
   });
 
   // ----------------------------------------------------------------------
-  // Analyse Stockfish locale (coupée pendant la révision et l'apprentissage)
-  // ----------------------------------------------------------------------
-  // ----------------------------------------------------------------------
   // Un coup joué depuis le menu (ou une option pas encore lancée) ouvre l'Exploration
   // ----------------------------------------------------------------------
   const previousPliesRef = useRef(sanHistory.length);
@@ -131,12 +129,18 @@ export default function HomePage() {
     if (shouldEnterExplorer(panelMode, previous, sanHistory.length)) setPanelMode("explorer");
   }, [sanHistory.length, panelMode, setPanelMode]);
 
-  const engine = useEngineAnalysis(currentFen, engineAllowed(panelMode));
+  // ----------------------------------------------------------------------
+  // Analyse Stockfish locale : coupée en révision ; pendant un cours, elle tourne en
+  // silence (rien à l'écran) pour nourrir le Coach.
+  // ----------------------------------------------------------------------
+  const engine = useEngineAnalysis(currentFen, engineRuns(panelMode));
   const engineBestMove = engine.analysis?.bestMove ? uciToSquares(engine.analysis.bestMove) : null;
 
   // ----------------------------------------------------------------------
-  // Mode Exploration : base des maîtres et Coach IA (chat, comptes connectés)
+  // Base des maîtres (Exploration) et Coach IA (Exploration et Apprentissage, comptes
+  // connectés ; jamais en Révision)
   // ----------------------------------------------------------------------
+  const isLearning = panelMode === "learning_active";
   const explorer = useMasterExplorer(currentFen, isExplorer);
   const explorerSummary = explorer.status === "ready" ? explorer.summary : null;
   const playedMoves = useMemo(() => sanHistory.slice(0, historyIndex), [sanHistory, historyIndex]);
@@ -158,20 +162,47 @@ export default function HomePage() {
     const client = coachAccess === "authenticated" ? getConvexClient() : null;
     return client ? createCoachChatBackend(client) : null;
   }, [coachAccess]);
+  const { course: tutorialCourse, activeChapter, activeLesson, activeNode, activeLessonId } = tutorial;
+  const lessonContext = useMemo(
+    () => (isLearning ? buildLessonContext({ course: tutorialCourse, activeChapter, activeLesson, activeNode }) : null),
+    [isLearning, tutorialCourse, activeChapter, activeLesson, activeNode],
+  );
   const snapshot = useMemo(
     () =>
       buildPositionSnapshot({
         fen: currentFen,
         moves: playedMoves,
-        openingName: displayedOpening,
+        openingName: lessonContext?.courseName ?? displayedOpening,
         analysis: engine.analysis,
-        explorer: explorerSummary,
-        boardOrientation: explorerOrientation,
+        explorer: isExplorer ? explorerSummary : null,
+        boardOrientation: isLearning ? tutorial.userColor : explorerOrientation,
+        lesson: lessonContext,
       }),
-    [currentFen, playedMoves, displayedOpening, engine.analysis, explorerSummary, explorerOrientation],
+    [
+      currentFen,
+      playedMoves,
+      displayedOpening,
+      engine.analysis,
+      isExplorer,
+      explorerSummary,
+      isLearning,
+      tutorial.userColor,
+      explorerOrientation,
+      lessonContext,
+    ],
   );
   const getSnapshot = useCallback(() => snapshot, [snapshot]);
   const coachChat = useCoachChat({ backend: coachBackend, getSnapshot });
+
+  // Chaque cours ouvre une nouvelle discussion (le fil d'un autre cours ou de
+  // l'Exploration n'a plus de sens).
+  const { reset: resetCoachChat } = coachChat;
+  const coachLessonRef = useRef<string | null>(null);
+  useEffect(() => {
+    const lessonId = isLearning ? activeLessonId : null;
+    if (lessonId && lessonId !== coachLessonRef.current) resetCoachChat();
+    coachLessonRef.current = lessonId;
+  }, [isLearning, activeLessonId, resetCoachChat]);
 
   /** Coup de la base des maîtres survolé : aperçu en flèche sur l'échiquier. */
   const [previewSan, setPreviewSan] = useState<string | null>(null);
@@ -329,7 +360,25 @@ export default function HomePage() {
       boardHeader={<OpeningName name={openingName} />}
       board={boardElement}
       boardAside={evalBar}
-      panel={<TrainerSidebar navigation={navigation} tutorial={tutorial} review={review} editor={editor} />}
+      panel={
+        <TrainerSidebar
+          navigation={navigation}
+          tutorial={tutorial}
+          review={review}
+          editor={editor}
+          learningCoach={
+            isLearning ? (
+              <CoachChat
+                chat={coachChat}
+                access={coachAccess}
+                onSignIn={() => void signInWithGoogle()}
+                suggestions={suggestedQuestions(snapshot)}
+                emptyHint="Une question sur la variante ? Je t'explique les idées du cours, et je te donne un indice quand c'est à toi de jouer, sans te souffler le coup."
+              />
+            ) : undefined
+          }
+        />
+      }
     />
   );
 }

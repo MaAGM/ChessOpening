@@ -16,7 +16,12 @@ type CoachChatProps = {
   onSignIn: () => void;
   /** Questions proposées pour la position affichée. */
   suggestions: string[];
+  /** Texte d'accueil avant la première question (par défaut : celui de l'Exploration). */
+  emptyHint?: string;
 };
+
+const EXPLORER_HINT =
+  "Joue des coups, puis demande-moi ce que tu veux sur la position : je vois l'échiquier, les parties des maîtres et l'analyse.";
 
 function samePosition(a?: string[], b?: string[]): boolean {
   if (!a || !b || a.length !== b.length) return false;
@@ -78,7 +83,7 @@ function LockedState({ access, onSignIn }: { access: Exclude<CoachAccess, "authe
 }
 
 /** Chat avec le Coach : il voit la position, les coups, l'explorateur et Stockfish. */
-export function CoachChat({ chat, access, onSignIn, suggestions }: CoachChatProps) {
+export function CoachChat({ chat, access, onSignIn, suggestions, emptyHint = EXPLORER_HINT }: CoachChatProps) {
   const [draft, setDraft] = useState("");
   const scrollRef = useRef<HTMLDivElement>(null);
   const { messages, pending, notice, remaining, canSend, send, reset } = chat;
@@ -137,10 +142,7 @@ export function CoachChat({ chat, access, onSignIn, suggestions }: CoachChatProp
         <>
           <div ref={scrollRef} className="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto pr-1" aria-live="polite">
             {messages.length === 0 && (
-              <p className="mt-2 text-sm text-slate-400">
-                Joue des coups, puis demande-moi ce que tu veux sur la position : je vois l&apos;échiquier, les
-                parties des maîtres et l&apos;analyse.
-              </p>
+              <p className="mt-2 text-sm text-slate-400">{emptyHint}</p>
             )}
             <Thread messages={messages} />
             {pending && (

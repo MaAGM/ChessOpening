@@ -68,61 +68,164 @@
     },
     {
       "id": "reti",
-      "name": "Reti",
-      "description": "Formation complète sur Reti",
+      "name": "Réti",
+      "description": "1.Nf3 et le schéma g3-Bg2-O-O-d3-e4 de l'Attaque Est-Indienne : un système complet côté Blancs contre …d5. Poussée e5 et attaque à l'aile roi, plans Nh4-f4 et exd5, réponses à la Yougoslave, à …g6 et à …Bg4, pièges et lignes principales.",
       "side": "white",
       "eco": [
+        "A04",
+        "A05",
+        "A06",
+        "A07",
         "A08"
       ],
       "chapters": [
         {
           "id": "reti-c1",
           "title": "Les fondations",
-          "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+          "summary": "Le schéma Nf3-g3-Bg2-O-O-d3, la poussée e4 préparée par Nbd2 et Re1, puis les réponses aux trois installations noires les plus fréquentes.",
           "stage": "foundations",
           "lessons": [
             {
               "id": "reti-c1-l1",
-              "title": "Reti: KIA, French Variation",
+              "title": "Le schéma : Nf3, g3, Bg2, O-O, d3 et e4",
+              "legacyIds": []
+            },
+            {
+              "id": "reti-c1-l2",
+              "title": "Contre …Nf6 et …Be7 : la poussée e5",
               "legacyIds": [
                 "reti-m1"
               ]
             },
             {
-              "id": "reti-c1-l2",
-              "title": "Reti: KIA, French Variation",
+              "id": "reti-c1-l3",
+              "title": "Contre …Bd6 et …Nge7 : Re1 et c3",
               "legacyIds": [
                 "reti-m2"
               ]
+            },
+            {
+              "id": "reti-c1-l4",
+              "title": "Contre …c6 et …Bf5 : Qe1 et e4",
+              "legacyIds": []
             }
           ]
         },
         {
           "id": "reti-c2",
-          "title": "Lignes théoriques",
-          "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
-          "stage": "theory",
+          "title": "Plans typiques",
+          "summary": "Les plans qui reviennent dans toutes les lignes : l'attaque N1h2-Ng4, la batterie Qe2 contre …Qc7, l'ouverture du centre par exd5 et la poussée f4 préparée par Nh4.",
+          "stage": "plans",
           "lessons": [
             {
               "id": "reti-c2-l1",
-              "title": "Reti: KIA, 2...c5, 3.Bg2 Nc6 4.O-O",
+              "title": "N1h2 et Ng4 : l'assaut à l'aile roi",
+              "legacyIds": []
+            },
+            {
+              "id": "reti-c2-l2",
+              "title": "Contre …Qc7 : la batterie Qe2",
+              "legacyIds": []
+            },
+            {
+              "id": "reti-c2-l3",
+              "title": "La prise exd5 contre …b5",
+              "legacyIds": []
+            },
+            {
+              "id": "reti-c2-l4",
+              "title": "Nh4 et f4 contre …Bd6",
+              "legacyIds": []
+            }
+          ]
+        },
+        {
+          "id": "reti-c3",
+          "title": "Réponses adverses",
+          "summary": "Les installations noires qui évitent le schéma français : la Yougoslave …Bg4-…e5, le fianchetto …g6, le fou en g4 avant …Nf6 et la combinaison …g6-…b6.",
+          "stage": "responses",
+          "lessons": [
+            {
+              "id": "reti-c3-l1",
+              "title": "La Yougoslave : …Bg4, …Nbd7 et …e5",
+              "legacyIds": []
+            },
+            {
+              "id": "reti-c3-l2",
+              "title": "Contre …g6 : la Grünfeld inversée",
+              "legacyIds": []
+            },
+            {
+              "id": "reti-c3-l3",
+              "title": "Contre …Bg4 et …Nd7 : e4 et h3",
+              "legacyIds": []
+            },
+            {
+              "id": "reti-c3-l4",
+              "title": "Contre …g6 et …b6 : h4 et a4",
+              "legacyIds": [
+                "reti-m5"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "reti-c4",
+          "title": "Pièges",
+          "summary": "Les erreurs noires typiques du Réti : le fou f5 exposé à la reprise dxe4, le pion e5 poussé sans soutien, le centre fermé trop tôt par …d4 et un mauvais calcul sur e5.",
+          "stage": "traps",
+          "lessons": [
+            {
+              "id": "reti-c4-l1",
+              "title": "…Bf5 et …dxe4 : la fourchette du pion e4",
+              "legacyIds": []
+            },
+            {
+              "id": "reti-c4-l2",
+              "title": "9…e5? contre c4 : le pion e5 sans défenseur",
+              "legacyIds": []
+            },
+            {
+              "id": "reti-c4-l3",
+              "title": "9…d4? : le centre fermé et l'attaque Nh4-f4",
+              "legacyIds": []
+            },
+            {
+              "id": "reti-c4-l4",
+              "title": "…Ndxe5? : le pion e5 défendu trois fois",
+              "legacyIds": []
+            }
+          ]
+        },
+        {
+          "id": "reti-c5",
+          "title": "Grande théorie",
+          "summary": "Les lignes profondes : …g6 avec …Nge7 et e5, la structure exd5-Nb3 contre …Nf6-…g6, la ligne principale Bf4-a3-Ne3 et le schéma …g6-…e5.",
+          "stage": "theory",
+          "lessons": [
+            {
+              "id": "reti-c5-l1",
+              "title": "Contre …g6 et …Nge7 : e5 et Qe2",
               "legacyIds": [
                 "reti-m3"
               ]
             },
             {
-              "id": "reti-c2-l2",
-              "title": "Reti: KIA, 2...c5, 3.Bg2 Nc6 4.O-O",
+              "id": "reti-c5-l2",
+              "title": "…Nf6 et …g6 : exd5 et Nb3",
               "legacyIds": [
                 "reti-m4"
               ]
             },
             {
-              "id": "reti-c2-l3",
-              "title": "Reti: KIA, 2...c5, 3.Bg2 Nc6 4.O-O",
-              "legacyIds": [
-                "reti-m5"
-              ]
+              "id": "reti-c5-l3",
+              "title": "Ligne principale : Bf4, a3 et Ne3",
+              "legacyIds": []
+            },
+            {
+              "id": "reti-c5-l4",
+              "title": "Contre …g6 et …e5 : c3 et a4",
+              "legacyIds": []
             }
           ]
         }
@@ -197,60 +300,160 @@
     {
       "id": "trompowsky",
       "name": "Trompowsky",
-      "description": "Formation complète sur Trompowsky",
+      "description": "1.d4 Nf6 2.Bg5 : le fou menace tout de suite de doubler les pions noirs. Un système complet côté Blancs contre 2…Ne4, 2…e6, 2…d5, 2…c5 et 2…g6, avec les plans f3-e4, Qd2-O-O-O et c4 contre les pions doublés, pièges et lignes principales.",
       "side": "white",
       "eco": [
-        "A45"
+        "A45",
+        "D00"
       ],
       "chapters": [
         {
           "id": "trompowsky-c1",
           "title": "Les fondations",
-          "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+          "summary": "Ce que menace 2.Bg5, la retraite Bf4 contre 2…Ne4, le grand centre contre 2…e6 et la structure de pions doublés après 2…d5 3.Bxf6.",
           "stage": "foundations",
           "lessons": [
             {
               "id": "trompowsky-c1-l1",
-              "title": "Attaque Trompowsky",
+              "title": "2.Bg5 : la menace Bxf6",
+              "legacyIds": []
+            },
+            {
+              "id": "trompowsky-c1-l2",
+              "title": "2…Ne4 3.Bf4 c5 : f3, c3 et d5",
               "legacyIds": [
                 "trompowsky-m1"
               ]
             },
             {
-              "id": "trompowsky-c1-l2",
-              "title": "Trompowsky Attack: Edge Variation",
-              "legacyIds": [
-                "trompowsky-m2"
-              ]
+              "id": "trompowsky-c1-l3",
+              "title": "2…e6 3.e4 : le grand centre",
+              "legacyIds": []
+            },
+            {
+              "id": "trompowsky-c1-l4",
+              "title": "2…d5 3.Bxf6 : les pions doublés",
+              "legacyIds": []
             }
           ]
         },
         {
           "id": "trompowsky-c2",
-          "title": "Lignes théoriques",
-          "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
-          "stage": "theory",
+          "title": "Plans typiques",
+          "summary": "Les plans de la retraite 3.Bh4, l'attaque avec Qd2 et O-O-O, et la lutte contre le centre …e5 après 2…e6 3.e4 h6.",
+          "stage": "plans",
           "lessons": [
             {
               "id": "trompowsky-c2-l1",
-              "title": "Trompowsky Attack: Edge Variation",
+              "title": "3.Bh4 c6 : Nd2, c3 et f3",
+              "legacyIds": [
+                "trompowsky-m2"
+              ]
+            },
+            {
+              "id": "trompowsky-c2-l2",
+              "title": "3.Bh4 d5 : f3 et Nc3",
+              "legacyIds": [
+                "trompowsky-m5"
+              ]
+            },
+            {
+              "id": "trompowsky-c2-l3",
+              "title": "3.Bh4 c5 : f3 et le sacrifice …g5",
               "legacyIds": [
                 "trompowsky-m3"
               ]
             },
             {
-              "id": "trompowsky-c2-l2",
-              "title": "Trompowsky Attack: Edge Variation",
+              "id": "trompowsky-c2-l4",
+              "title": "Contre …h6 et …Qxf6 : c3 et Bd3",
+              "legacyIds": []
+            }
+          ]
+        },
+        {
+          "id": "trompowsky-c3",
+          "title": "Réponses adverses",
+          "summary": "Les réponses ambitieuses : 2…c5 avec la poussée d5 et le gambit b2, la prise en f6 contre 2…c5, la retraite Bc1 contre …Qb6, et le fianchetto 2…g6.",
+          "stage": "responses",
+          "lessons": [
+            {
+              "id": "trompowsky-c3-l1",
+              "title": "2…c5 3.d5 Qb6 : le gambit Nc3",
+              "legacyIds": []
+            },
+            {
+              "id": "trompowsky-c3-l2",
+              "title": "2…c5 3.Bxf6 : la dame en c1",
+              "legacyIds": []
+            },
+            {
+              "id": "trompowsky-c3-l3",
+              "title": "2…c5 3.d5 Ne4 : Bf4, Bc1 et f3",
+              "legacyIds": []
+            },
+            {
+              "id": "trompowsky-c3-l4",
+              "title": "2…g6 : Bxf6 et le fianchetto g3",
+              "legacyIds": []
+            }
+          ]
+        },
+        {
+          "id": "trompowsky-c4",
+          "title": "Pièges",
+          "summary": "Les erreurs noires typiques de la Trompowsky : la dame qui prend b2 au mauvais moment, le cavalier e4 laissé sans retraite, et le fianchetto prématuré.",
+          "stage": "traps",
+          "lessons": [
+            {
+              "id": "trompowsky-c4-l1",
+              "title": "4…Qb6? 5.fxe4 : le cavalier sans retraite",
+              "legacyIds": []
+            },
+            {
+              "id": "trompowsky-c4-l2",
+              "title": "La dame en b4 : la chasse par Rb1",
+              "legacyIds": []
+            },
+            {
+              "id": "trompowsky-c4-l3",
+              "title": "9…g6? 10.e5 : le mat en d8",
+              "legacyIds": []
+            },
+            {
+              "id": "trompowsky-c4-l4",
+              "title": "…g6? contre f4 : la fourchette Nxd6+",
+              "legacyIds": []
+            }
+          ]
+        },
+        {
+          "id": "trompowsky-c5",
+          "title": "Grande théorie",
+          "summary": "Les lignes profondes : la structure d5 avec Na3 après …Qb6 et Bc1, la prise dxc5 avec O-O-O, le clouage …Bb4 et la structure …gxf6 avec dxc5.",
+          "stage": "theory",
+          "lessons": [
+            {
+              "id": "trompowsky-c5-l1",
+              "title": "6.d5 Qb6 7.Bc1 : la structure d5 et Na3",
               "legacyIds": [
                 "trompowsky-m4"
               ]
             },
             {
-              "id": "trompowsky-c2-l3",
-              "title": "Trompowsky: 2...Ne4 3.Bh4 d5",
-              "legacyIds": [
-                "trompowsky-m5"
-              ]
+              "id": "trompowsky-c5-l2",
+              "title": "4…Nf6 5.dxc5 : Qd2 et O-O-O",
+              "legacyIds": []
+            },
+            {
+              "id": "trompowsky-c5-l3",
+              "title": "5…Bb4 6.Qd2 : le clouage et a3",
+              "legacyIds": []
+            },
+            {
+              "id": "trompowsky-c5-l4",
+              "title": "2…d5 3.Bxf6 gxf6 : e3, dxc5 et Be2",
+              "legacyIds": []
             }
           ]
         }
@@ -258,8 +461,8 @@
     },
     {
       "id": "scandinavian",
-      "name": "Scandinavian",
-      "description": "Formation complète sur Scandinavian",
+      "name": "Défense Scandinave",
+      "description": "1.e4 d5 : les Noirs ouvrent le jeu tout de suite et sortent la dame en a5. Un répertoire complet côté Noirs avec …Nf6, …Bf5, …c6 et …e6, la structure …gxf6, les réponses à 3.Nf3 et 3.d4, l'alternative 3…Qd6, pièges et lignes principales.",
       "side": "black",
       "eco": [
         "B01"
@@ -268,50 +471,149 @@
         {
           "id": "scandinavian-c1",
           "title": "Les fondations",
-          "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+          "summary": "Pourquoi la dame va en a5, le schéma …Nf6, …Bf5, …c6 et …e6, et comment le garder contre 4.Bc4, 4.g3 et 4.Nf3.",
           "stage": "foundations",
           "lessons": [
             {
               "id": "scandinavian-c1-l1",
-              "title": "Défense Scandinave",
-              "legacyIds": [
-                "scandinavian-m1"
-              ]
+              "title": "3…Qa5 : la dame hors de portée",
+              "legacyIds": []
             },
             {
               "id": "scandinavian-c1-l2",
-              "title": "Scandinavian Defense: Schiller-Pytel Variation",
+              "title": "5…Bf5 : le fou avant …e6",
               "legacyIds": [
-                "scandinavian-m2"
+                "scandinavian-m5"
               ]
+            },
+            {
+              "id": "scandinavian-c1-l3",
+              "title": "4.Bc4 : …Nf6, …c6 puis …Qc7",
+              "legacyIds": []
+            },
+            {
+              "id": "scandinavian-c1-l4",
+              "title": "4.g3 et 4.Nf3 : le même schéma",
+              "legacyIds": []
             }
           ]
         },
         {
           "id": "scandinavian-c2",
-          "title": "Lignes théoriques",
-          "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
-          "stage": "theory",
+          "title": "Plans typiques",
+          "summary": "Les plans noirs contre les grands systèmes blancs : …Bb4 et …Bxc3 contre Qe2, le grand roque dans la structure …gxf6, …Qc7 contre Ne4 et …Bd6 contre le petit roque.",
+          "stage": "plans",
           "lessons": [
             {
               "id": "scandinavian-c2-l1",
-              "title": "Scandinavian: Schiller, 4.d4 Nf6",
-              "legacyIds": [
-                "scandinavian-m3"
-              ]
+              "title": "Contre Qe2 : …Bb4, …Bxc3 et …Qc7",
+              "legacyIds": []
             },
             {
               "id": "scandinavian-c2-l2",
-              "title": "Scandinavian Defense: Classical Variation",
+              "title": "La structure …gxf6 : …Nd7, …Qc7 et O-O-O",
+              "legacyIds": []
+            },
+            {
+              "id": "scandinavian-c2-l3",
+              "title": "Contre 8.Ne4 : …Qc7 et la reprise …gxf6",
+              "legacyIds": []
+            },
+            {
+              "id": "scandinavian-c2-l4",
+              "title": "Contre 8.O-O : …Qc7 et …Bd6",
+              "legacyIds": []
+            }
+          ]
+        },
+        {
+          "id": "scandinavian-c3",
+          "title": "Réponses adverses",
+          "summary": "La riposte …e5 contre 4.d4, les réponses à 3.Nf3 et 3.d4, et le traitement de 5.Bc4 avec Nd5.",
+          "stage": "responses",
+          "lessons": [
+            {
+              "id": "scandinavian-c3-l1",
+              "title": "4.d4 e5 : la contre-attaque centrale",
+              "legacyIds": [
+                "scandinavian-m1"
+              ]
+            },
+            {
+              "id": "scandinavian-c3-l2",
+              "title": "3.Nf3 Bg4 : …Nc6 et le grand roque",
+              "legacyIds": []
+            },
+            {
+              "id": "scandinavian-c3-l3",
+              "title": "3.d4 : …Nf6, …Bg4 et …e6",
+              "legacyIds": []
+            },
+            {
+              "id": "scandinavian-c3-l4",
+              "title": "5.Bc4 c6 : …Bf5 contre Nd5",
+              "legacyIds": []
+            }
+          ]
+        },
+        {
+          "id": "scandinavian-c4",
+          "title": "Pièges",
+          "summary": "Les erreurs blanches typiques contre la Scandinave : le pion d4 laissé sans défenseur, la dame sortie trop tôt, le cavalier c3 cloué et le fou f5 qui prend c2.",
+          "stage": "traps",
+          "lessons": [
+            {
+              "id": "scandinavian-c4-l1",
+              "title": "10.Nh4? Qxd4 : la double attaque sur d4 et c4",
+              "legacyIds": []
+            },
+            {
+              "id": "scandinavian-c4-l2",
+              "title": "5.Qf3? Nc6 : la dame blanche sortie trop tôt",
+              "legacyIds": []
+            },
+            {
+              "id": "scandinavian-c4-l3",
+              "title": "10.Qe2? Nxe5 : le cavalier c3 cloué",
+              "legacyIds": []
+            },
+            {
+              "id": "scandinavian-c4-l4",
+              "title": "10.Nh4? Bxc2 : le fou f5 prend avant de fuir",
+              "legacyIds": []
+            }
+          ]
+        },
+        {
+          "id": "scandinavian-c5",
+          "title": "Grande théorie",
+          "summary": "Les lignes profondes : l'attaque g4-h4 contre 6.Ne5, la structure …gxf6 avec c3, et l'alternative 3…Qd6 contre g3 et contre Bc4-Nge2.",
+          "stage": "theory",
+          "lessons": [
+            {
+              "id": "scandinavian-c5-l1",
+              "title": "6.Ne5 c6 7.Bc4 e6 8.g4 : …Bg6 et …Be4",
               "legacyIds": [
                 "scandinavian-m4"
               ]
             },
             {
-              "id": "scandinavian-c2-l3",
-              "title": "Scandinavian Defense: Classical Variation",
+              "id": "scandinavian-c5-l2",
+              "title": "9.Nxf6+ gxf6 10.c3 : …Nd7, …Bg6 et …Nb6",
+              "legacyIds": []
+            },
+            {
+              "id": "scandinavian-c5-l3",
+              "title": "3…Qd6 : …a6, …Bg4 et O-O-O contre g3",
               "legacyIds": [
-                "scandinavian-m5"
+                "scandinavian-m2"
+              ]
+            },
+            {
+              "id": "scandinavian-c5-l4",
+              "title": "3…Qd6 contre Bc4 et Nge2 : …c6, …Bf5 et …Qb4",
+              "legacyIds": [
+                "scandinavian-m3"
               ]
             }
           ]
@@ -320,62 +622,163 @@
     },
     {
       "id": "alekhine",
-      "name": "Alekhine",
-      "description": "Formation complète sur Alekhine",
+      "name": "Défense Alekhine",
+      "description": "1.e4 Nf6 : le cavalier provoque l'avance des pions blancs pour mieux les attaquer ensuite. Un répertoire complet côté Noirs contre la variante moderne 4.Nf3, l'échange 5.exd6, les Quatre Pions et les déviations 2.Nc3, 3.c4, 3.Nc3 et 3.Bc4, avec pièges et lignes principales.",
       "side": "black",
       "eco": [
         "B02",
-        "B03"
+        "B03",
+        "B04",
+        "B05"
       ],
       "chapters": [
         {
           "id": "alekhine-c1",
           "title": "Les fondations",
-          "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+          "summary": "L'idée de 1…Nf6, la variante moderne avec …Bg4 et …e6, la reprise …cxd6 contre l'échange et la réponse classique à 2.Nc3.",
           "stage": "foundations",
           "lessons": [
             {
               "id": "alekhine-c1-l1",
-              "title": "Défense Alekhine",
+              "title": "1…Nf6 : inviter les pions blancs",
+              "legacyIds": []
+            },
+            {
+              "id": "alekhine-c1-l2",
+              "title": "4.Nf3 Bg4 : la variante moderne",
               "legacyIds": [
                 "alekhine-m1"
               ]
             },
             {
-              "id": "alekhine-c1-l2",
-              "title": "Alekhine Defense: Four Pawns Attack, Main Line",
-              "legacyIds": [
-                "alekhine-m2"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "alekhine-c2",
-          "title": "Lignes théoriques",
-          "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
-          "stage": "theory",
-          "lessons": [
-            {
-              "id": "alekhine-c2-l1",
-              "title": "Alekhine: Exchange, 5...cxd6",
+              "id": "alekhine-c1-l3",
+              "title": "5.exd6 cxd6 6.Nf3 : …g6 et …Bg7",
               "legacyIds": [
                 "alekhine-m3"
               ]
             },
             {
+              "id": "alekhine-c1-l4",
+              "title": "2.Nc3 d5 : …Nxd5 et …Nb6",
+              "legacyIds": []
+            }
+          ]
+        },
+        {
+          "id": "alekhine-c2",
+          "title": "Plans typiques",
+          "summary": "Les plans noirs : …d5 et …Nc8 contre c5 dans la variante moderne, …e5 dans l'échange, la rupture …f6 dans les Quatre Pions et le jeu sur les cases blanches contre h3.",
+          "stage": "plans",
+          "lessons": [
+            {
+              "id": "alekhine-c2-l1",
+              "title": "La moderne : …d5, …Bxf3 et …Nc8",
+              "legacyIds": []
+            },
+            {
               "id": "alekhine-c2-l2",
-              "title": "Alekhine: Exchange, 5...cxd6 6.Nc3",
+              "title": "L'échange : …g6, …Bg7 et …e5",
               "legacyIds": [
                 "alekhine-m4"
               ]
             },
             {
               "id": "alekhine-c2-l3",
-              "title": "Alekhine: Four Pawns Attack, 6...Bf5",
+              "title": "Quatre Pions : …dxe5, …Nc6 et …f6",
+              "legacyIds": [
+                "alekhine-m2"
+              ]
+            },
+            {
+              "id": "alekhine-c2-l4",
+              "title": "Contre h3 : …Nc6, …Bf5 et …d5",
+              "legacyIds": []
+            }
+          ]
+        },
+        {
+          "id": "alekhine-c3",
+          "title": "Réponses adverses",
+          "summary": "Les déviations blanches : la chasse 3.c4 Nb6 4.c5, l'échange 3.Nc3, le fou 3.Bc4 et la variante 6…Bf5 des Quatre Pions.",
+          "stage": "responses",
+          "lessons": [
+            {
+              "id": "alekhine-c3-l1",
+              "title": "3.c4 Nb6 4.c5 : la chasse au cavalier",
+              "legacyIds": []
+            },
+            {
+              "id": "alekhine-c3-l2",
+              "title": "3.Nc3 Nxc3 : l'échange en c3",
+              "legacyIds": []
+            },
+            {
+              "id": "alekhine-c3-l3",
+              "title": "3.Bc4 Nb6 4.Bb3 : …d6 et …Nc6",
+              "legacyIds": []
+            },
+            {
+              "id": "alekhine-c3-l4",
+              "title": "Quatre Pions : 6…Bf5 7.Nc3",
               "legacyIds": [
                 "alekhine-m5"
               ]
+            }
+          ]
+        },
+        {
+          "id": "alekhine-c4",
+          "title": "Pièges",
+          "summary": "Les erreurs blanches typiques contre l'Alekhine : le centre laissé sans soutien par Nc3 ou Bf4, la dame sortie trop tôt et la dame f3 dans l'échange.",
+          "stage": "traps",
+          "lessons": [
+            {
+              "id": "alekhine-c4-l1",
+              "title": "5.Nc3? dxe5 : le centre blanc s'effondre",
+              "legacyIds": []
+            },
+            {
+              "id": "alekhine-c4-l2",
+              "title": "5.Bf4? dxe5 : l'échange des dames qui coûte le roque",
+              "legacyIds": []
+            },
+            {
+              "id": "alekhine-c4-l3",
+              "title": "4.Qh5? g6 : la dame chassée et le pion c2",
+              "legacyIds": []
+            },
+            {
+              "id": "alekhine-c4-l4",
+              "title": "8.Qf3? Nc6 : la dame cible du cavalier",
+              "legacyIds": []
+            }
+          ]
+        },
+        {
+          "id": "alekhine-c5",
+          "title": "Grande théorie",
+          "summary": "Les lignes profondes : la moderne avec h3 et …Nc4, la poussée d5 dans les Quatre Pions, la structure …Ne5 dans l'échange et la ligne …Nc6 avec d5 dans la moderne.",
+          "stage": "theory",
+          "lessons": [
+            {
+              "id": "alekhine-c5-l1",
+              "title": "La moderne avec h3 : …Bh5, …d5 et …Nc4",
+              "legacyIds": []
+            },
+            {
+              "id": "alekhine-c5-l2",
+              "title": "Quatre Pions : 10.d5 exd5 11.cxd5 Nb4",
+              "legacyIds": []
+            },
+            {
+              "id": "alekhine-c5-l3",
+              "title": "L'échange : 9.b3 Nc6 10.d5 Ne5",
+              "legacyIds": []
+            },
+            {
+              "id": "alekhine-c5-l4",
+              "title": "La moderne : …Nc6, exd6 et d5",
+              "legacyIds": []
             }
           ]
         }
@@ -1179,61 +1582,165 @@
     },
     {
       "id": "london_system",
-      "name": "London System",
-      "description": "Formation complète sur London System",
+      "name": "Système de Londres",
+      "description": "Le fou en f4 avant e3, puis la pyramide c3-d4-e3 : un système complet côté Blancs contre …d5 et contre les défenses indiennes. Plans Ne5-f4, Qe2-Rd1-e4, réponses à …Qb6, …Bf5, …c5 et …g6, pièges et lignes principales.",
       "side": "white",
       "eco": [
-        "D02"
+        "D00",
+        "D02",
+        "A45",
+        "A46",
+        "A47",
+        "A48"
       ],
       "chapters": [
         {
           "id": "london_system-c1",
           "title": "Les fondations",
-          "summary": "Les idées de base de l'ouverture et les premières lignes à connaître.",
+          "summary": "L'ordre Bf4 puis e3, la pyramide c3-d4-e3, la retraite Bg3, la défense de b2 contre …Qb6 et les deux schémas noirs les plus fréquents : …g6 et …c6-…Bf5.",
           "stage": "foundations",
           "lessons": [
             {
               "id": "london_system-c1-l1",
-              "title": "Système de Londres (Classique)",
-              "legacyIds": [
-                "london_system-m1"
-              ]
+              "title": "Le schéma de Londres : Bf4 avant e3",
+              "legacyIds": []
             },
             {
               "id": "london_system-c1-l2",
-              "title": "Queen's Pawn: London",
+              "title": "L'ordre 2.Nf3 et la défense de b2",
               "legacyIds": [
                 "london_system-m2"
+              ]
+            },
+            {
+              "id": "london_system-c1-l3",
+              "title": "Contre …g6 : Be2, h3 et le roque",
+              "legacyIds": []
+            },
+            {
+              "id": "london_system-c1-l4",
+              "title": "Contre …c6 et …Bf5 : c4 et Qb3",
+              "legacyIds": [
+                "london_system-m1"
               ]
             }
           ]
         },
         {
           "id": "london_system-c2",
-          "title": "Lignes théoriques",
-          "summary": "Des variantes plus profondes, jouées au plus haut niveau.",
-          "stage": "theory",
+          "title": "Plans typiques",
+          "summary": "L'étau Ne5-f4, la batterie Qe2-Rd1 avant e4, la prise en c5 contre …Qc7 et la gestion de la structure …cxd4-…Nh5.",
+          "stage": "plans",
           "lessons": [
             {
               "id": "london_system-c2-l1",
-              "title": "Queen's Pawn: London",
-              "legacyIds": [
-                "london_system-m3"
-              ]
+              "title": "Ne5 et f4 : l'étau sur e5",
+              "legacyIds": []
             },
             {
               "id": "london_system-c2-l2",
-              "title": "London System: Ligne principale",
+              "title": "Qe2, Rd1 puis e4",
+              "legacyIds": []
+            },
+            {
+              "id": "london_system-c2-l3",
+              "title": "Contre …Qc7 : dxc5 au bon moment",
+              "legacyIds": []
+            },
+            {
+              "id": "london_system-c2-l4",
+              "title": "…cxd4 et …Nh5 : la retraite Be3",
+              "legacyIds": [
+                "london_system-m3"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "london_system-c3",
+          "title": "Réponses adverses",
+          "summary": "Les défenses qui évitent la ligne principale : l'échange des fous par …Bf5, la contre-attaque 2…c5, la poussée …e5 de l'Est-Indienne et le schéma …b6 de l'Ouest-Indienne.",
+          "stage": "responses",
+          "lessons": [
+            {
+              "id": "london_system-c3-l1",
+              "title": "…Bf5 et …e6 : l'échange Bd3",
+              "legacyIds": [
+                "london_system-m5"
+              ]
+            },
+            {
+              "id": "london_system-c3-l2",
+              "title": "Contre 2…c5 : e3, c3 et Qb3",
+              "legacyIds": []
+            },
+            {
+              "id": "london_system-c3-l3",
+              "title": "Contre l'Est-Indienne : …e5 et la retraite Bh2",
+              "legacyIds": []
+            },
+            {
+              "id": "london_system-c3-l4",
+              "title": "Contre …e6 et …b6 : le schéma Ouest-Indien",
+              "legacyIds": []
+            }
+          ]
+        },
+        {
+          "id": "london_system-c4",
+          "title": "Pièges",
+          "summary": "Les pièges du Londres : ceux qui punissent la gourmandise noire sur b2 et ceux où une pièce noire se retrouve en prise face à la batterie blanche.",
+          "stage": "traps",
+          "lessons": [
+            {
+              "id": "london_system-c4-l1",
+              "title": "3…Qb6 4.Nc3 : le pion b2 empoisonné",
+              "legacyIds": []
+            },
+            {
+              "id": "london_system-c4-l2",
+              "title": "…Bf5?? face à Qc2 : la dame croque le fou",
+              "legacyIds": []
+            },
+            {
+              "id": "london_system-c4-l3",
+              "title": "Ne5 et …Nxe5? : la fourchette du pion e5",
+              "legacyIds": []
+            },
+            {
+              "id": "london_system-c4-l4",
+              "title": "Le sacrifice grec : Bxh7+ contre …Nd7",
+              "legacyIds": []
+            }
+          ]
+        },
+        {
+          "id": "london_system-c5",
+          "title": "Grande théorie",
+          "summary": "Les lignes profondes : 8…Qe7 et 9.Ne5, la structure …cxd4 avec Qb3 et Nh4, l'attaque e4-e5 contre …Be7 et la ligne principale contre …Bf5 et …Qb6.",
+          "stage": "theory",
+          "lessons": [
+            {
+              "id": "london_system-c5-l1",
+              "title": "Ligne principale : 8…Qe7 et 9.Ne5",
               "legacyIds": [
                 "london_system-m4"
               ]
             },
             {
-              "id": "london_system-c2-l3",
-              "title": "London System: Variante ...Bf5",
-              "legacyIds": [
-                "london_system-m5"
-              ]
+              "id": "london_system-c5-l2",
+              "title": "2…c5 3.e3 cxd4 : Qb3 et Nh4",
+              "legacyIds": []
+            },
+            {
+              "id": "london_system-c5-l3",
+              "title": "9.e4 : l'attaque e4-e5 contre …Be7",
+              "legacyIds": []
+            },
+            {
+              "id": "london_system-c5-l4",
+              "title": "Contre …Bf5 et …Qb6 : la ligne principale",
+              "legacyIds": []
             }
           ]
         }

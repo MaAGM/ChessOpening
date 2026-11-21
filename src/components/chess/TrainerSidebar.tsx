@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useMemo } from "react";
+import { FC, useMemo, type ReactNode } from "react";
 
 import { OpeningSelector } from "@/components/chess/OpeningSelector";
 import { LearningPanel } from "@/components/chess/LearningPanel";
@@ -43,6 +43,8 @@ type Props = {
   review: ReviewManager;
   /** État et actions de l'éditeur de répertoire (useRepertoireEditor) */
   editor: RepertoireEditor;
+  /** Chat du Coach affiché pendant un cours (jamais en révision). */
+  learningCoach?: ReactNode;
 };
 
 /** Largeur du panneau selon l'écran affiché (classes complètes pour Tailwind). */
@@ -54,6 +56,9 @@ function sidebarWidthClass(mode: PanelMode, courseOpen: boolean): string {
       return "w-96";
     case "repertoire_editor":
       return "w-120";
+    case "learning_active":
+      return "w-96"; // un peu plus large pour le chat du Coach
+
     default:
       return "w-80";
   }
@@ -66,7 +71,7 @@ function sidebarWidthClass(mode: PanelMode, courseOpen: boolean): string {
  * All visual logic lives here; the page component only renders this
  * component and passes the hook‑generated props.
  */
-export const TrainerSidebar: FC<Props> = ({ navigation, tutorial, review, editor }) => {
+export const TrainerSidebar: FC<Props> = ({ navigation, tutorial, review, editor, learningCoach }) => {
   const {
     panelMode,
     setPanelMode,
@@ -203,7 +208,7 @@ export const TrainerSidebar: FC<Props> = ({ navigation, tutorial, review, editor
           {/* ---------------------------------------------------------------- */}
           {/* Learning panel – shown when a tutorial is active */}
           {/* ---------------------------------------------------------------- */}
-          {panelMode === "learning_active" && <LearningPanel tutorial={tutorial} />}
+          {panelMode === "learning_active" && <LearningPanel tutorial={tutorial} coach={learningCoach} />}
         </div>
       )}
     </aside>

@@ -11,7 +11,10 @@ import {
 import {
   COACH_CHAT_MAX_HISTORY,
   COACH_CHAT_MAX_MESSAGE_LENGTH,
+  COACH_CHAT_MAX_COMMENT_LENGTH,
+  COACH_CHAT_MAX_EXPECTED_MOVES,
   COACH_CHAT_SYSTEM_PROMPT,
+  COACH_LEARN_SYSTEM_PROMPT,
   type CoachChatMessage,
   type CoachPositionSnapshot,
 } from "../../src/lib/coach/chatProtocol";
@@ -260,6 +263,96 @@ describe("coach.chat — quotas", () => {
     vi.setSystemTime(new Date("2026-11-19T00:00:01Z"));
     callCoachModel.mockResolvedValue(completion());
     expect((await alice.action(api.coach.chat, { messages: ask(), position })).status).toBe("ok");
+  });
+});
+
+describe("coach.chat — mode Apprentissage", () => {
+  // Partie italienne après 1.e4 e5 2.Nf3 Nc6 : l'élève (Blancs) doit trouver 3.Bc4.
+  const learning: CoachPositionSnapshot = {
+    fen: "r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3",
+    moves: ["e4", "e5", "Nf3", "Nc6"],
+    openingName: "Partie italienne",
+    engine: { score: { type: "cp", value: 30 }, depth: 16, line: ["Bb5", "a6"] },
+    explorer: null,
+    boardOrientation: "white",
+    lesson: {
+      courseName: "Partie italienne",
+      chapterTitle: "Les fondations",
+      lessonTitle: "3.Bc4 : le fou contre f7",
+      objectives: ["Comprendre pourquoi f7 est la cible de l'Italienne"],
+      comment: "Le cavalier c6 défend e5.",
+      expectedMoves: ["Bc4"],
+    },
+  };
+
+  it("utilise les consignes d'Apprentissage et transmet le cours avec le coup attendu marqué secret", async () => {
+    const { alice } = setup();
+    await alice.action(api.coach.chat, { messages: ask("Donne-moi un indice"), position: learning });
+
+    const call = callCoachModel.mock.calls[0][0];
+    expect(call.system).toBe(COACH_LEARN_SYSTEM_PROMPT);
+    const context: string = call.messages[0].content;
+    expect(context).toContain("cours : 3.Bc4 : le fou contre f7");
+    expect(context).toContain("Commentaire du cours affiché à l'élève : Le cavalier c6 défend e5.");
+    expect(context).toContain("Coup(s) attendu(s) de l'élève — SECRET");
+    expect(context).toContain("ligne principale masquée");
+    expect(context).not.toContain("Bb5");
+  });
+
+  it("masque dans la réponse le coup que l'élève doit trouver", async () => {
+    const { alice } = setup();
+    callCoachModel.mockResolvedValue(completion("Pense à f7 : Bc4 le vise directement, comme Fc4."));
+    const result = await alice.action(api.coach.chat, { messages: ask("Je joue quoi ?"), position: learning });
+    expect(result).toMatchObject({
+      status: "ok",
+      text: "Pense à f7 : (à toi de le trouver) le vise directement, comme (à toi de le trouver).",
+    });
+  });
+
+  it("laisse la réponse intacte quand c'est à l'adversaire de jouer", async () => {
+    const { alice } = setup();
+    callCoachModel.mockResolvedValue(completion("Après Bc4, les Noirs répondent souvent Bc5."));
+    const opponentTurn: CoachPositionSnapshot = {
+      ...learning,
+      fen: "r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R b KQkq - 3 3",
+      moves: [...learning.moves, "Bc4"],
+      lesson: { ...learning.lesson!, expectedMoves: ["Bc5"] },
+    };
+    const result = await alice.action(api.coach.chat, { messages: ask("Pourquoi ce coup ?"), position: opponentTurn });
+    expect(result).toMatchObject({ status: "ok", text: "Après Bc4, les Noirs répondent souvent Bc5." });
+  });
+
+  it("garde les consignes d'Exploration sans cours", async () => {
+    const { alice } = setup();
+    await alice.action(api.coach.chat, { messages: ask(), position });
+    expect(callCoachModel.mock.calls[0][0].system).toBe(COACH_CHAT_SYSTEM_PROMPT);
+  });
+
+  it("refuse un contexte de cours mal formé", async () => {
+    const { alice } = setup();
+    const withLesson = (patch: Partial<NonNullable<CoachPositionSnapshot["lesson"]>>) => ({
+      ...learning,
+      lesson: { ...learning.lesson!, ...patch },
+    });
+    await expect(
+      alice.action(api.coach.chat, { messages: ask(), position: withLesson({ lessonTitle: "  " }) }),
+    ).rejects.toThrow(/titre invalide/);
+    await expect(
+      alice.action(api.coach.chat, {
+        messages: ask(),
+        position: withLesson({ comment: "x".repeat(COACH_CHAT_MAX_COMMENT_LENGTH + 1) }),
+      }),
+    ).rejects.toThrow(/commentaire trop long/);
+    await expect(
+      alice.action(api.coach.chat, { messages: ask(), position: withLesson({ expectedMoves: ["<b>"] }) }),
+    ).rejects.toThrow(/coup invalide/);
+    await expect(
+      alice.action(api.coach.chat, {
+        messages: ask(),
+        position: withLesson({ expectedMoves: Array.from({ length: COACH_CHAT_MAX_EXPECTED_MOVES + 1 }, () => "Nf3") }),
+      }),
+    ).rejects.toThrow(/trop de coups/);
+    expect(callCoachModel).not.toHaveBeenCalled();
   });
 });
 

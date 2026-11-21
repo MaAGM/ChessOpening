@@ -42,6 +42,11 @@ const USER_AGENT = "opening-course-builder/1.0";
 const PRESETS = {
   french: { side: "black", root: "e4 e6" },
   italian: { side: "white", root: "e4 e5 Nf3 Nc6 Bc4" },
+  london_system: { side: "white", root: "d4 d5 Bf4" },
+  reti: { side: "white", root: "Nf3 d5 g3" },
+  trompowsky: { side: "white", root: "d4 Nf6 Bg5" },
+  scandinavian: { side: "black", root: "e4 d5 exd5 Qxd5" },
+  alekhine: { side: "black", root: "e4 Nf6 e5 Nd5" },
 };
 
 // ---------------------------------------------------------------------------

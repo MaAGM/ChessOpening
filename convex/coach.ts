@@ -2,17 +2,24 @@ import { DAY, MINUTE, RateLimiter } from "@convex-dev/rate-limiter";
 import { v } from "convex/values";
 import {
   buildChatTurns,
+  COACH_CHAT_MAX_COMMENT_LENGTH,
   COACH_CHAT_MAX_ENGINE_LINE,
+  COACH_CHAT_MAX_EXPECTED_MOVES,
   COACH_CHAT_MAX_EXPLORER_MOVES,
   COACH_CHAT_MAX_FEN_LENGTH,
   COACH_CHAT_MAX_HISTORY,
+  COACH_CHAT_MAX_LESSON_TITLE_LENGTH,
   COACH_CHAT_MAX_MESSAGE_LENGTH,
   COACH_CHAT_MAX_MOVES,
+  COACH_CHAT_MAX_OBJECTIVE_LENGTH,
+  COACH_CHAT_MAX_OBJECTIVES,
   COACH_CHAT_MAX_OPENING_LENGTH,
   COACH_CHAT_MAX_REPLY_LENGTH,
   COACH_CHAT_MAX_SAN_LENGTH,
-  COACH_CHAT_SYSTEM_PROMPT,
+  coachSystemPrompt,
+  maskSpoilers,
   type CoachChatMessage,
+  type CoachLessonContext,
   type CoachPositionSnapshot,
 } from "../src/lib/coach/chatProtocol";
 import { components, internal } from "./_generated/api";
@@ -21,11 +28,14 @@ import { callCoachModel, CoachModelError, DEFAULT_COACH_MODEL } from "./lib/llm"
 import { check, requireUserId } from "./lib/validation";
 
 /**
- * Coach IA : discussion libre sur la position du mode Exploration.
+ * Coach IA : discussion sur la position du mode Exploration, ou du cours suivi en mode
+ * Apprentissage (jamais en Révision : le client n'y affiche pas le Coach).
  *
  * Le client envoie l'historique récent de la discussion et un instantané structuré de
- * ce qu'il voit (position, coups, explorateur, Stockfish). Le serveur valide tout, met
- * le contexte en forme et garde pour lui les consignes, la clé d'API et le modèle.
+ * ce qu'il voit (position, coups, explorateur, Stockfish, cours). Le serveur valide tout,
+ * met le contexte en forme et garde pour lui les consignes, la clé d'API et le modèle.
+ * En Apprentissage, quand c'est à l'élève de jouer, le coup attendu est masqué dans la
+ * réponse (en plus de la consigne qui interdit de le révéler).
  *
  * Garde-fous contre la surconsommation :
  *  - utilisateur connecté uniquement (`requireUserId`) ;
@@ -100,6 +110,17 @@ const positionValidator = v.object({
     }),
   ),
   boardOrientation: v.optional(v.union(v.literal("white"), v.literal("black"))),
+  // Mode Apprentissage : cours suivi et coup(s) attendu(s) (gardés secrets par le Coach).
+  lesson: v.optional(
+    v.object({
+      courseName: v.string(),
+      chapterTitle: v.string(),
+      lessonTitle: v.string(),
+      objectives: v.array(v.string()),
+      comment: v.union(v.string(), v.null()),
+      expectedMoves: v.array(v.string()),
+    }),
+  ),
 });
 
 // ---------------------------------------------------------------------------
@@ -168,6 +189,19 @@ export function validatePosition(position: CoachPositionSnapshot): void {
       );
     }
   }
+  if (position.lesson) validateLesson(position.lesson);
+}
+
+function validateLesson(lesson: CoachLessonContext): void {
+  for (const title of [lesson.courseName, lesson.chapterTitle, lesson.lessonTitle]) {
+    check(title.trim().length > 0 && title.length <= COACH_CHAT_MAX_LESSON_TITLE_LENGTH, "cours : titre invalide");
+  }
+  check(lesson.objectives.length <= COACH_CHAT_MAX_OBJECTIVES, "cours : trop d'objectifs");
+  for (const objective of lesson.objectives) {
+    check(objective.length <= COACH_CHAT_MAX_OBJECTIVE_LENGTH, "cours : objectif trop long");
+  }
+  check(lesson.comment === null || lesson.comment.length <= COACH_CHAT_MAX_COMMENT_LENGTH, "cours : commentaire trop long");
+  checkSanList(lesson.expectedMoves, COACH_CHAT_MAX_EXPECTED_MOVES, "cours");
 }
 
 // ---------------------------------------------------------------------------
@@ -316,13 +350,14 @@ export const chat = action({
     const quota = await ctx.runMutation(internal.coach.consumeQuota, { userId });
     if (!quota.ok) return { status: "quota", scope: quota.scope, retryAfterMs: quota.retryAfterMs };
 
+    const position = { ...args.position, fen: args.position.fen.trim() };
     let completion;
     try {
       completion = await callCoachModel({
         apiKey,
         model,
-        system: COACH_CHAT_SYSTEM_PROMPT,
-        messages: buildChatTurns(messages, { ...args.position, fen: args.position.fen.trim() }),
+        system: coachSystemPrompt(position),
+        messages: buildChatTurns(messages, position),
       });
     } catch (error) {
       await ctx.runMutation(internal.coach.refundQuota, { userId });
@@ -335,6 +370,8 @@ export const chat = action({
       inputTokens: completion.inputTokens,
       outputTokens: completion.outputTokens,
     });
-    return { status: "ok", text: completion.text.slice(0, COACH_CHAT_MAX_REPLY_LENGTH), remaining: quota.remaining };
+    // Filet de sécurité du mode Apprentissage : le coup à trouver n'apparaît jamais en clair.
+    const text = maskSpoilers(completion.text, position).slice(0, COACH_CHAT_MAX_REPLY_LENGTH);
+    return { status: "ok", text, remaining: quota.remaining };
   },
 });

@@ -7,6 +7,7 @@ import {
   REVIEW_HINT_ARROW_COLOR,
   boardModeKind,
   engineAllowed,
+  engineRuns,
   isBrowsingScreen,
   resolveBoardController,
   shouldEnterExplorer,
@@ -146,6 +147,13 @@ describe("resolveBoardController", () => {
 });
 
 describe("analyse moteur", () => {
+  it("engineRuns : Stockfish calcule en silence pendant un cours, jamais en révision", () => {
+    expect(engineRuns("learning_active")).toBe(true);
+    expect(engineAllowed("learning_active")).toBe(false); // rien n'est affiché
+    expect(engineRuns("review_active")).toBe(false);
+    expect(engineRuns("explorer")).toBe(true);
+  });
+
   it("engineAllowed : masquée pendant les exercices uniquement", () => {
     expect(engineAllowed("review_active")).toBe(false);
     expect(engineAllowed("learning_active")).toBe(false);

@@ -25,6 +25,12 @@ export const COACH_CHAT_MAX_SAN_LENGTH = 10;
 export const COACH_CHAT_MAX_OPENING_LENGTH = 120;
 export const COACH_CHAT_MAX_ENGINE_LINE = 12;
 export const COACH_CHAT_MAX_EXPLORER_MOVES = 6;
+/** Plafonds du contexte de cours (mode Apprentissage). */
+export const COACH_CHAT_MAX_LESSON_TITLE_LENGTH = 160;
+export const COACH_CHAT_MAX_OBJECTIVES = 8;
+export const COACH_CHAT_MAX_OBJECTIVE_LENGTH = 200;
+export const COACH_CHAT_MAX_COMMENT_LENGTH = 2_000;
+export const COACH_CHAT_MAX_EXPECTED_MOVES = 8;
 
 // ===========================================================================
 // Types échangés avec le serveur
@@ -66,16 +72,33 @@ export type CoachPositionSnapshot = {
    * pour accepter les clients antérieurs au bouton « retourner l'échiquier ».
    */
   boardOrientation?: CoachSide;
+  /** Cours suivi en mode Apprentissage (absent en Exploration). */
+  lesson?: CoachLessonContext;
 };
 
 /** Camp affiché en bas de l'échiquier. */
 export type CoachSide = "white" | "black";
 
+/** Ce que le cours affiche et attend à la position courante (mode Apprentissage). */
+export type CoachLessonContext = {
+  courseName: string;
+  chapterTitle: string;
+  lessonTitle: string;
+  objectives: string[];
+  /** Commentaire du cours affiché pour la position courante (null : aucun). */
+  comment: string | null;
+  /**
+   * Coups (SAN) prévus par le cours depuis la position affichée : ceux de l'élève quand
+   * c'est à lui de jouer (à ne JAMAIS révéler), sinon les réponses prévues de l'adversaire.
+   */
+  expectedMoves: string[];
+};
+
 // ===========================================================================
 // Consignes système (`./systemPrompt`, lui aussi sans import)
 // ===========================================================================
 
-export { COACH_CHAT_SYSTEM_PROMPT } from "./systemPrompt";
+export { COACH_CHAT_SYSTEM_PROMPT, COACH_LEARN_SYSTEM_PROMPT, coachSystemPrompt } from "./systemPrompt";
 
 // ===========================================================================
 // Mise en forme du contexte (côté serveur)
@@ -146,6 +169,37 @@ export function describeSides(position: Pick<CoachPositionSnapshot, "fen" | "mov
   return lines;
 }
 
+/**
+ * Vrai en mode Apprentissage quand c'est à l'élève de jouer : le coup attendu (et le
+ * premier coup de la ligne Stockfish, qui est souvent le même) doit rester secret.
+ */
+export function isStudentToMove(position: Pick<CoachPositionSnapshot, "fen" | "boardOrientation" | "lesson">): boolean {
+  if (!position.lesson || !position.boardOrientation) return false;
+  return SIDE_LABEL[position.boardOrientation] === sideToMove(position.fen);
+}
+
+/** Bloc « cours en cours » (mode Apprentissage). */
+export function formatLessonContext(position: CoachPositionSnapshot): string[] {
+  const lesson = position.lesson;
+  if (!lesson) return [];
+  const lines = ["", "[Cours suivi par l'élève]"];
+  lines.push(`Ouverture : ${lesson.courseName} ; chapitre : ${lesson.chapterTitle} ; cours : ${lesson.lessonTitle}`);
+  if (lesson.objectives.length > 0) lines.push(`Objectifs du cours : ${lesson.objectives.join(" ; ")}`);
+  lines.push(`Commentaire du cours affiché à l'élève : ${lesson.comment ?? "aucun"}`);
+
+  if (lesson.expectedMoves.length === 0) {
+    lines.push("Fin de la variante étudiée : tu peux parler librement de tous les coups.");
+  } else if (isStudentToMove(position)) {
+    lines.push(
+      `Coup(s) attendu(s) de l'élève — SECRET, ne l'écris jamais et ne le décris pas de façon reconnaissable : ${lesson.expectedMoves.join(", ")}`,
+    );
+    lines.push("C'est à l'élève de trouver ce coup : aide-le par un indice stratégique (idée, case, pièce à améliorer), jamais par le coup lui-même.");
+  } else {
+    lines.push(`Réponse(s) prévue(s) de l'adversaire dans le cours : ${lesson.expectedMoves.join(", ")} (tu peux en parler).`);
+  }
+  return lines;
+}
+
 /** Bloc de contexte joint à la dernière question du joueur. */
 export function formatPositionContext(position: CoachPositionSnapshot): string {
   const lines: string[] = ["[Position affichée]"];
@@ -156,7 +210,13 @@ export function formatPositionContext(position: CoachPositionSnapshot): string {
 
   if (position.engine) {
     const { score, depth, line } = position.engine;
-    const pv = line.length > 0 ? ` ; ligne principale : ${formatMoveSequence(line, position.moves.length)}` : "";
+    // Quand l'élève doit trouver le coup, la ligne Stockfish commencerait par la réponse.
+    const pv =
+      line.length === 0
+        ? ""
+        : isStudentToMove(position)
+          ? " ; ligne principale masquée (elle commence par le coup que l'élève doit trouver)"
+          : ` ; ligne principale : ${formatMoveSequence(line, position.moves.length)}`;
     lines.push(`Stockfish (profondeur ${depth}) : ${describeScore(score)}${pv}`);
   } else {
     lines.push("Stockfish : analyse indisponible");
@@ -169,10 +229,60 @@ export function formatPositionContext(position: CoachPositionSnapshot): string {
         `- ${move.san} : ${move.games} parties, Blancs ${Math.round(move.white)} % / nulles ${Math.round(move.draws)} % / Noirs ${Math.round(move.black)} %, Elo moyen ${Math.round(move.averageRating)}`,
       );
     }
-  } else {
+  } else if (!position.lesson) {
     lines.push("Base des maîtres : aucune partie de maître depuis cette position");
   }
+  lines.push(...formatLessonContext(position));
   return lines.join("\n");
+}
+
+// ===========================================================================
+// Garde-fou anti-divulgation (côté serveur, mode Apprentissage)
+// ===========================================================================
+
+const FRENCH_PIECES: Record<string, string> = { N: "C", B: "F", R: "T", Q: "D", K: "R" };
+/** Coup de pion simple (« e4 », « d5+ ») : son nom est aussi celui d'une case, on ne le masque pas. */
+const PLAIN_PAWN_PUSH = /^[a-h][1-8][+#]?$/;
+const SPOILER_MASK = "(à toi de le trouver)";
+
+function escapeRegExp(text: string): string {
+  return text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+/** Écritures d'un coup reconnaissables dans une réponse : SAN anglaise, française, roques. */
+function spellings(san: string): string[] {
+  const bare = san.replace(/[+#!?]+$/, "");
+  if (bare === "O-O" || bare === "O-O-O") return [bare, bare.replace(/O/g, "0")];
+  const french = FRENCH_PIECES[bare[0]] ? FRENCH_PIECES[bare[0]] + bare.slice(1) : bare;
+  return [...new Set([bare, french])];
+}
+
+/** Coups qui ne doivent pas apparaître dans la réponse du Coach. */
+export function secretMoves(position: CoachPositionSnapshot): string[] {
+  if (!isStudentToMove(position)) return [];
+  const secrets = [...(position.lesson?.expectedMoves ?? [])];
+  const best = position.engine?.line[0];
+  if (best) secrets.push(best);
+  return [...new Set(secrets)].filter((san) => !PLAIN_PAWN_PUSH.test(san));
+}
+
+/**
+ * Masque dans la réponse du Coach les coups que l'élève doit trouver (filet de sécurité :
+ * les consignes l'interdisent déjà). Les poussées de pion simples ne sont pas masquées,
+ * car « e4 » désigne aussi la case : la consigne système seule les protège.
+ */
+export function maskSpoilers(text: string, position: CoachPositionSnapshot): string {
+  let masked = text;
+  for (const san of secretMoves(position)) {
+    for (const spelling of spellings(san)) {
+      const pattern = new RegExp(
+        `(?<![A-Za-z0-9-])(?:\\d+\\.(?:\\.\\.)?\\s?)?${escapeRegExp(spelling)}[+#!?]*(?![A-Za-z0-9-])`,
+        "g",
+      );
+      masked = masked.replace(pattern, SPOILER_MASK);
+    }
+  }
+  return masked;
 }
 
 /**

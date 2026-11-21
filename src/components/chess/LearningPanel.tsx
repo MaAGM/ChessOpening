@@ -1,7 +1,10 @@
 "use client";
 
+import { useState, type ReactNode } from "react";
+
 import { Button } from "@/components/ui/Button";
 import { Callout } from "@/components/ui/Callout";
+import { BookIcon, SparkleIcon, tabButtonClass } from "@/components/ui/PanelIcons";
 import { useReviewStore } from "@/hooks/useReviewStore";
 import type { TutorialManager } from "@/hooks/useTutorialManager";
 
@@ -21,10 +24,24 @@ function ArrowRightIcon() {
 
 type LearningPanelProps = {
   tutorial: TutorialManager;
+  /** Chat du Coach (onglet masqué si absent). */
+  coach?: ReactNode;
 };
 
-/** Déroulé d'un cours : fil d'Ariane, explications, choix de variante et fin de cours. */
-export function LearningPanel({ tutorial }: LearningPanelProps) {
+type LearningView = "lesson" | "coach";
+
+const VIEWS: { value: LearningView; label: string; icon: ReactNode }[] = [
+  { value: "lesson", label: "Cours", icon: <BookIcon /> },
+  { value: "coach", label: "Coach", icon: <SparkleIcon /> },
+];
+
+/**
+ * Déroulé d'un cours : fil d'Ariane, explications, choix de variante et fin de cours.
+ * Avec `coach`, deux onglets-icônes (Cours / Coach) partagent la hauteur du panneau ; les
+ * deux vues restent montées pour garder la saisie et le défilement du chat.
+ */
+export function LearningPanel({ tutorial, coach }: LearningPanelProps) {
+  const [view, setView] = useState<LearningView>("lesson");
   const {
     course,
     activeLesson,
@@ -60,13 +77,47 @@ export function LearningPanel({ tutorial }: LearningPanelProps) {
   const inReview = isInReview(activeLesson.id);
   const showCoverage = coverage !== null && coverage.total > 1;
 
+  const lessonVisible = !coach || view === "lesson";
+
   return (
-    <section className="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto">
-      {/* Fil d'Ariane : Ouverture › Chapitre › Cours */}
-      <header className="flex flex-col gap-1">
-        <p className="truncate text-xs text-slate-400">
+    <section className="flex min-h-0 flex-1 flex-col gap-3">
+      {/* Fil d'Ariane (Ouverture › Chapitre) et onglets Cours / Coach */}
+      <div className="flex shrink-0 items-center gap-2">
+        <p className="min-w-0 flex-1 truncate text-xs text-slate-400">
           {course.name} › Chapitre {activeChapterIndex + 1} · {activeChapter.title}
         </p>
+        {coach && (
+          <div
+            role="tablist"
+            aria-label="Affichage du panneau"
+            className="flex shrink-0 gap-0.5 rounded-lg border border-slate-700 bg-slate-900/50 p-0.5"
+          >
+            {VIEWS.map(({ value, label, icon }) => (
+              <button
+                key={value}
+                type="button"
+                role="tab"
+                aria-label={label}
+                title={label}
+                aria-selected={view === value}
+                onClick={() => setView(value)}
+                className={tabButtonClass(view === value)}
+              >
+                {icon}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {coach && (
+        <div data-slot="coach" className={`min-h-0 flex-1 flex-col ${view === "coach" ? "flex" : "hidden"}`}>
+          {coach}
+        </div>
+      )}
+
+      <div data-slot="lesson" className={`min-h-0 flex-1 flex-col gap-3 overflow-y-auto ${lessonVisible ? "flex" : "hidden"}`}>
+      <header className="flex flex-col gap-1">
         <h2 className="flex items-start justify-between gap-2 text-sm font-semibold text-slate-100">
           <span>
             Cours {activeLessonIndex + 1} · {activeLesson.title}
@@ -171,6 +222,7 @@ export function LearningPanel({ tutorial }: LearningPanelProps) {
           <ArrowRightIcon />
         </Button>
       )}
+      </div>
     </section>
   );
 }

@@ -184,7 +184,7 @@ describe("export puis import : aller-retour", () => {
         lessons += 1;
       }
     }
-    expect(lessons).toBe(135);
+    expect(lessons).toBe(210);
   });
 
   it("réimporte une suite de chapitres exportés comme un seul arbre fusionné", () => {

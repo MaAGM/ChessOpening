@@ -1,0 +1,384 @@
+// Brouillon de la Masterclass « Réti » (côté Blancs) : le schéma Nf3-g3-Bg2-O-O-d3, c'est-à-dire
+// l'Attaque Est-Indienne, contre …d5. Les flèches du coup à jouer sont ajoutées par
+// scripts/course-builder.mjs ; celles écrites ici illustrent une idée.
+import { TRAPS } from "./reti-traps.mjs";
+
+// Schéma « français » des Noirs : …d5, …c5, …Nc6, …e6.
+const KIA = "1. Nf3 d5 2. g3 c5 3. Bg2 Nc6 4. O-O e6 5. d3";
+const MAIN = `${KIA} Nf6 6. Nbd2 Be7 7. e4 O-O 8. Re1`;
+
+export default {
+  id: "reti",
+  name: "Réti",
+  description:
+    "1.Nf3 et le schéma g3-Bg2-O-O-d3-e4 de l'Attaque Est-Indienne : un système complet côté Blancs contre …d5. Poussée e5 et attaque à l'aile roi, plans Nh4-f4 et exd5, réponses à la Yougoslave, à …g6 et à …Bg4, pièges et lignes principales.",
+  side: "white",
+  eco: ["A04", "A05", "A06", "A07", "A08"],
+  chapters: [
+    // =====================================================================================
+    {
+      title: "Les fondations",
+      summary:
+        "Le schéma Nf3-g3-Bg2-O-O-d3, la poussée e4 préparée par Nbd2 et Re1, puis les réponses aux trois installations noires les plus fréquentes.",
+      stage: "foundations",
+      lessons: [
+        {
+          title: "Le schéma : Nf3, g3, Bg2, O-O, d3 et e4",
+          eco: "A08",
+          kind: "concept",
+          objectives: [
+            "Mettre en place le fianchetto et le roque avant d'agir au centre",
+            "Préparer e4 par d3 et Nbd2",
+            "Soutenir le centre par Re1 avant toute poussée",
+          ],
+          pgn: `{Le Réti joué avec d3 et e4 s'appelle l'Attaque Est-Indienne : les Blancs prennent la structure de la Défense Est-Indienne avec un temps de plus. Le schéma est toujours le même, quel que soit l'ordre des Noirs : on construit d'abord, on frappe ensuite.}
+1. Nf3 {Le cavalier contrôle e5 et d4 sans engager aucun pion central. [%cal Gf3e5,Gf3d4]}
+1... d5 2. g3 {Le pion prépare le fianchetto : le fou g2 visera d5 et toute la grande diagonale. [%cal Gf1g2]}
+2... c5 3. Bg2 {Le fou s'installe sur la grande diagonale, braqué vers b7 à travers d5. [%cal Gg2b7]}
+3... Nc6 4. O-O {Le roi se met à l'abri derrière le fou g2 : rien ne presse au centre. [%cal Ge1g1]}
+4... e6
+(4... Nf6 5. d3 {Même idée : le pion d3 soutient e4 et ouvre la diagonale du fou c1. [%cal Gd3e4,Gc1g5]})
+5. d3 {Le pion d3 prépare e4 : votre centre sera e4-d3, souple et solide. [%cal Gd3e4]}
+5... Nf6 6. Nbd2 {Le cavalier va en d2 pour soutenir e4 ; en c3, il gênerait le pion c. [%cal Gd2e4]}
+6... Be7 7. e4 {La poussée centrale : d5 est attaqué deux fois. [%cal Ge4d5]}
+7... O-O 8. Re1 {La tour soutient e4 et prépare e5 : le schéma est complet. [%cal Ge1e5]}`,
+          conclusion:
+            "Retenez l'ordre : Nf3, g3, Bg2, O-O, d3, Nbd2, e4 et Re1. Ce schéma fonctionne contre presque toutes les installations noires ; seul le moment de la poussée e5 change.",
+        },
+        {
+          legacyIds: ["reti-m1"],
+          title: "Contre …Nf6 et …Be7 : la poussée e5",
+          eco: "A08",
+          kind: "line",
+          objectives: [
+            "Pousser e5 pour chasser le cavalier f6",
+            "Réorganiser le cavalier par Nf1",
+            "Lancer h4 pendant que les Noirs avancent à l'aile dame",
+          ],
+          pgn: `{Contre le schéma français classique, la ligne principale est une course : les Noirs avancent leurs pions à l'aile dame, les Blancs poussent e5 et attaquent à l'aile roi. Chaque temps compte.}
+${MAIN} 8... b5 {Les Noirs lancent tout de suite leur minorité à l'aile dame.}
+(8... b6 9. e5 {Même réponse contre …b6 : le cavalier f6 est chassé. [%cal Ge5f6]} 9... Nd7 10. Nf1 {Le cavalier se dirige vers h2 ou e3, d'où il soutiendra l'attaque. [%cal Gf1h2]} 10... Bb7 11. h4 {Le pion h prend de l'espace et prépare h5. [%cal Gh4h5]})
+9. e5 {Le pion e5 chasse le meilleur défenseur du roi noir et gagne de l'espace. [%cal Ge5f6]}
+9... Nd7 10. Nf1 {Le cavalier libère d2 pour le fou et part vers l'aile roi. [%cal Gf1h2,Gc1f4]}
+10... a5 11. h4 {Le pion h attaque à son tour : il prépare h5 et une case g4 pour le cavalier. [%cal Gh4h5]}
+11... b4 12. N1h2 {Le cavalier rejoint h2 : il ira en g4, en pleine aile roi. [%cal Gh2g4]}`,
+          conclusion:
+            "Contre …Nf6 et …Be7, e5 chasse le cavalier f6, puis Nf1, h4 et N1h2 dirigent vos pièces vers le roi noir. Les Noirs jouent à l'aile dame : il faut être plus rapide.",
+        },
+        {
+          legacyIds: ["reti-m2"],
+          title: "Contre …Bd6 et …Nge7 : Re1 et c3",
+          eco: "A08",
+          kind: "line",
+          objectives: [
+            "Soutenir e4 par Re1 contre le schéma …Bd6",
+            "Préparer d4 ou e5 par c3",
+            "Pousser e5 pour enfermer le fou c7",
+          ],
+          pgn: `{Avec …Bd6 et …Nge7, les Noirs empêchent la poussée e5 immédiate et gardent leur pion f libre. Les Blancs renforcent e4, puis jouent c3 : la poussée d4 ou e5 viendra au bon moment.}
+${KIA} Bd6 6. Nbd2 Nge7 7. e4 {Le pion attaque d5, déjà affaibli par l'absence de cavalier en f6. [%cal Ge4d5]}
+7... O-O 8. Re1 {La tour soutient e4 et e5 : le fou d6 est placé en face d'elle. [%cal Ge1e5]}
+8... Bc7 {Le fou se replie pour éviter e5 avec gain de temps.}
+9. c3 {Le pion contrôle d4 et b4 : les Blancs pourront jouer d4 ou e5 selon la position. [%cal Gc3d4]}
+9... b6 10. e5 {La poussée prend de l'espace et ferme la diagonale du fou c7. [%cal Ge5c7]}`,
+          conclusion:
+            "Contre …Bd6 et …Nge7, renforcez e4 par Re1, puis c3 : vous pourrez ensuite choisir entre d4 et e5. Une fois e5 joué, le fou c7 se heurte à votre pion.",
+        },
+        {
+          title: "Contre …c6 et …Bf5 : Qe1 et e4",
+          eco: "A06",
+          kind: "line",
+          objectives: [
+            "Préparer e4 par Qe1 contre le fou f5",
+            "Répondre à …h6 sans perdre de temps",
+            "Pousser e4 pour chasser le fou noir en h7",
+          ],
+          pgn: `{Contre le schéma …c6 et …Bf5, le fou noir surveille e4. Les Blancs soutiennent la poussée avec la dame en e1 : la case libère d1 et appuie e4 sans gêner les autres pièces.}
+1. Nf3 d5 2. g3 Nf6 3. Bg2 c6 4. O-O Bf5 5. d3 {Le pion d3 contrôle e4 et c4, malgré le fou f5. [%cal Gd3e4]}
+5... e6 6. Nbd2 {Le cavalier ajoute un défenseur sur e4. [%cal Gd2e4]}
+6... h6 {Les Noirs préparent une retraite en h7 pour leur fou.}
+7. Qe1 {La dame soutient e4 depuis e1 : la poussée ne pourra plus être empêchée. [%cal Ge1e4]}
+7... Be7 8. e4 {Le pion attaque le fou f5 et frappe d5. [%cal Ge4f5,Ge4d5]}
+8... Bh7 9. Qe2 {La dame revient en e2 : elle protège e4 et prépare e5. [%cal Ge2e4]}`,
+          conclusion:
+            "Contre …c6 et …Bf5, Qe1 prépare e4 malgré le fou noir. Après e4 et …Bh7, la dame revient en e2 : le fou h7 regarde un centre bien protégé.",
+        },
+      ],
+    },
+    // =====================================================================================
+    {
+      title: "Plans typiques",
+      summary:
+        "Les plans qui reviennent dans toutes les lignes : l'attaque N1h2-Ng4, la batterie Qe2 contre …Qc7, l'ouverture du centre par exd5 et la poussée f4 préparée par Nh4.",
+      stage: "plans",
+      lessons: [
+        {
+          title: "N1h2 et Ng4 : l'assaut à l'aile roi",
+          eco: "A08",
+          kind: "line",
+          objectives: [
+            "Amener le cavalier en g4 par Nf1-h2",
+            "Garder le pion e5 comme coin dans le camp noir",
+            "Répondre à …a4 par a3 pour bloquer l'aile dame",
+          ],
+          pgn: `{Dans la course aux ailes, votre cavalier f1 est la pièce clé : depuis h2, il saute en g4, d'où il vise f6 et h6. Avec le pion e5, il crée des menaces directes contre le roi noir.}
+${MAIN} 8... b5 9. e5 Nd7 10. Nf1 a5 11. h4 b4 12. N1h2 {Le cavalier prépare Ng4 ; le pion h4 empêche toute riposte …g5. [%cal Gh2g4]}
+12... Ba6
+(12... a4 {Les Noirs poursuivent leur attaque à l'aile dame.} 13. a3 {Le pion bloque l'avance noire : après …bxa3 bxa3, la colonne b est ouverte mais vos pions tiennent. [%cal Ga3b4]} 13... bxa3 14. bxa3 {La reprise garde la structure intacte : votre attaque reprend dès le coup suivant. [%cal Gh2g4]})
+13. Ng4 {Le cavalier arrive en g4 : il vise f6 et h6, et le fou c1 pourra venir en g5 ou h6. [%cal Gg4f6,Gg4h6,Gc1h6]}`,
+          conclusion:
+            "Le chemin Nf1-h2-g4 est la manœuvre typique de l'Attaque Est-Indienne. Avec e5 et h4, le cavalier g4 et le fou c1 menacent le roque noir.",
+        },
+        {
+          title: "Contre …Qc7 : la batterie Qe2",
+          eco: "A08",
+          kind: "line",
+          objectives: [
+            "Défendre e5 par Qe2 contre la dame c7",
+            "Jouer Nf1 et h4 comme dans la ligne principale",
+            "Placer le fou en f4 pour renforcer e5",
+          ],
+          pgn: `{Avec …Qc7, les Noirs mettent la pression sur e5 avant même que le pion n'y arrive. La dame blanche va en e2 : elle défend e5 et libère la diagonale pour le fou c1.}
+${MAIN} 8... Qc7 9. e5 {La poussée reste possible : la dame noire ne peut pas encore la punir. [%cal Ge5f6]}
+9... Nd7 10. Qe2 {La dame défend e5 et met la colonne e sous contrôle. [%cal Ge2e5]}
+10... b5 11. Nf1 {Le cavalier part vers h2 ou e3, comme dans la ligne principale. [%cal Gf1e3]}
+11... a5
+(11... Bb7 12. Bf4 {Le fou défend e5 et vise d6 : les Blancs n'ont plus besoin de la dame pour tenir le centre. [%cal Gf4e5]})
+12. h4 {Le pion h prend de l'espace et prépare h5 ou Ng5. [%cal Gh4h5]}
+12... Ba6 13. Bf4 {Le fou défend e5 une deuxième fois : la dame et le fou forment un bloc solide. [%cal Gf4e5,Ge2e5]}`,
+          conclusion:
+            "Contre …Qc7, Qe2 et Bf4 tiennent e5. Vos autres pièces poursuivent le plan habituel : Nf1, h4 et une attaque à l'aile roi.",
+        },
+        {
+          title: "La prise exd5 contre …b5",
+          eco: "A08",
+          kind: "line",
+          objectives: [
+            "Ouvrir le centre par exd5 pour attaquer b5",
+            "Pousser d4 pour forcer …c4",
+            "Jouer a4 contre la chaîne c4-b5",
+          ],
+          pgn: `{La poussée e5 n'est pas la seule arme. En prenant en d5, les Blancs ouvrent la colonne e et la grande diagonale : le pion b5 devient une cible pour le fou g2 et le pion a.}
+${MAIN} 8... b5 9. exd5 {La prise ouvre la colonne e et la diagonale du fou g2. [%cal Gg2b7]}
+9... exd5
+(9... Nxd5 10. c4 {Le pion attaque b5 et le cavalier d5 en même temps. [%cal Gc4b5,Gc4d5]} 10... bxc4 11. dxc4 {La reprise chasse le cavalier : d5 n'est plus disponible pour les Noirs. [%cal Gc4d5]})
+10. d4 {Le pion frappe c5 : les Noirs doivent fermer le jeu par …c4 ou laisser un pion isolé. [%cal Gd4c5]}
+10... c4 11. a4 {Le pion attaque la base b5 de la chaîne c4-b5 : la structure noire va céder. [%cal Ga4b5]}`,
+          conclusion:
+            "Contre …b5, exd5 puis d4 forcent les Noirs à jouer …c4. Le levier a4 attaque alors la chaîne c4-b5 et ouvre la colonne a à votre tour.",
+        },
+        {
+          title: "Nh4 et f4 contre …Bd6",
+          eco: "A08",
+          kind: "line",
+          objectives: [
+            "Préparer la poussée f4 par Nh4",
+            "Reprendre dxe4 pour ouvrir la colonne d",
+            "Soutenir e4 par Re1 contre la pression du fou a6",
+          ],
+          pgn: `{Quand les Noirs jouent …Bd6 et …Nge7, la case f4 est libre. Le cavalier part en h4 pour laisser passer le pion f : la poussée f4 contrôle e5 et prépare une attaque avec la tour f1.}
+${KIA} Bd6 6. Nbd2 Nge7 7. e4 O-O 8. Nh4 {Le cavalier libère le pion f et surveille f5. [%cal Gf2f4,Gh4f5]}
+8... b6 9. f4 {Le pion prend e5 sous contrôle : le fou d6 n'a plus d'avenir sur cette diagonale. [%cal Gf4e5]}
+9... dxe4 10. dxe4 {La reprise ouvre la colonne d : votre dame fait face à la dame noire. [%cal Gd1d8]}
+10... Ba6 {Le fou vise f1 et met la tour sous pression.}
+11. Re1 {La tour s'écarte et soutient e4 : la poussée e5 viendra ensuite. [%cal Ge1e4,Ge4e5]}`,
+          conclusion:
+            "Contre …Bd6, Nh4 et f4 transforment la structure : vos pions e4 et f4 contrôlent le centre. Re1 neutralise le fou a6 et prépare e5.",
+        },
+      ],
+    },
+    // =====================================================================================
+    {
+      title: "Réponses adverses",
+      summary:
+        "Les installations noires qui évitent le schéma français : la Yougoslave …Bg4-…e5, le fianchetto …g6, le fou en g4 avant …Nf6 et la combinaison …g6-…b6.",
+      stage: "responses",
+      lessons: [
+        {
+          title: "La Yougoslave : …Bg4, …Nbd7 et …e5",
+          eco: "A07",
+          kind: "line",
+          objectives: [
+            "Ouvrir le centre par e4 contre le centre …d5-…e5",
+            "Clouer le fou g4 puis le chasser par h3",
+            "Installer le cavalier en c4 contre e5",
+          ],
+          pgn: `{Avec …c6, …Bg4, …Nbd7 et …e5, les Noirs bâtissent un centre classique. Les Blancs répondent par e4, échangent en e4 et jouent contre le pion e5 avec leur cavalier c4.}
+1. Nf3 d5 2. g3 Nf6 3. Bg2 c6 4. O-O Bg4 5. d3 Nbd7 6. Nbd2 e5 7. e4 {Le pion conteste le centre avant que …e4 ne soit possible. [%cal Ge4d5]}
+7... dxe4 8. dxe4 {La reprise ouvre la colonne d : la dame d1 fait face à la dame noire. [%cal Gd1d8]}
+8... Bc5 9. h3 {Le pion chasse le fou g4 : il doit choisir entre h5 et l'échange en f3. [%cal Gh3g4]}
+9... Bh5 10. Qe1 {La dame quitte la colonne d et le clouage du fou h5 : elle soutient e4. [%cal Ge1e4]}
+10... O-O 11. Nc4 {Le cavalier attaque e5 et peut venir en d6 ou a5. [%cal Gc4e5]}
+11... Re8
+(11... Qe7 12. Nh4 {Le cavalier vise f5 et prépare f4 : la pression change de côté. [%cal Gh4f5,Gf2f4]})
+12. a4 {Le pion protège le cavalier c4 contre …b5 et gagne de l'espace. [%cal Ga4b5]}`,
+          conclusion:
+            "Contre la Yougoslave, e4 puis dxe4 ouvrent la colonne d ; h3 et Qe1 déclouent votre jeu. Le cavalier c4, soutenu par a4, devient votre meilleure pièce contre e5.",
+        },
+        {
+          title: "Contre …g6 : la Grünfeld inversée",
+          eco: "A07",
+          kind: "line",
+          objectives: [
+            "Jouer e4 contre le fianchetto noir",
+            "Échanger en d5 pour activer le cavalier c4",
+            "Gagner de l'espace par a4 et c3",
+          ],
+          pgn: `{Si les Noirs fianchettent eux aussi leur fou, la position ressemble à une Est-Indienne où chacun a son fou en g2 ou g7. Les Blancs jouent e4, échangent en d5 et utilisent la case c4.}
+1. Nf3 d5 2. g3 g6 3. Bg2 Bg7 4. O-O Nf6 5. d3 O-O 6. Nbd2 c5 7. e4 {Le pion attaque d5 : les Noirs doivent choisir leur structure. [%cal Ge4d5]}
+7... Nc6 8. Re1 {La tour soutient e4 et met e5 sous surveillance. [%cal Ge1e5]}
+8... e5
+(8... dxe4 9. dxe4 {La structure est symétrique au centre, mais votre cavalier d2 peut venir en c4. [%cal Gd2c4]} 9... e5 10. c3 {Le pion contrôle d4 et b4 : la dame pourra venir en a4 ou b3. [%cal Gc3d4]})
+9. exd5 {L'échange libère c4 et la grande diagonale de votre fou g2. [%cal Gg2d5]}
+9... Nxd5 10. Nc4 {Le cavalier attaque e5 : les Noirs doivent le défendre. [%cal Gc4e5]}
+10... f6
+(10... Re8 11. a4 {Le pion soutient le cavalier c4 et prépare a5 : l'aile dame est à vous. [%cal Ga4a5]})
+11. a4 {Le pion empêche …b5 qui chasserait le cavalier. [%cal Ga4b5]}
+11... Be6 12. c3 {Le pion prive le cavalier d5 de b4 et prépare Qb3 contre d5. [%cal Gc3b4,Gd1b3]}`,
+          conclusion:
+            "Contre …g6, e4 puis exd5 ouvrent la diagonale du fou g2 et la case c4. Après a4 et c3, votre jeu se concentre sur d5 et e5.",
+        },
+        {
+          title: "Contre …Bg4 et …Nd7 : e4 et h3",
+          eco: "A06",
+          kind: "line",
+          objectives: [
+            "Jouer le même schéma contre le fou g4 sorti tôt",
+            "Chasser le fou par h3 au moment de e4",
+            "Reprendre avec la dame si les Noirs échangent en f3",
+          ],
+          pgn: `{En jouant …Bg4 avant …Nf6, les Noirs veulent clouer votre cavalier f3 et ralentir e4. Le schéma ne change pas : d3, Nbd2, puis e4 et h3 au bon moment.}
+1. Nf3 d5 2. g3 Bg4 3. Bg2 Nd7 4. O-O c6 5. d3 {Le pion d3 ferme la porte au fou g4, qui ne pourra plus revenir par e2. [%cal Gd3e4]}
+5... Ngf6 6. Nbd2 {Le cavalier soutient e4 et protège f3. [%cal Gd2f3]}
+6... e6
+(6... e5 {Le centre classique.} 7. e4 {On retrouve la Yougoslave : même plan avec e4 et dxe4. [%cal Ge4d5]})
+7. e4 {La poussée centrale, que le fou g4 ne peut plus empêcher. [%cal Ge4d5]}
+7... Be7 8. h3 {Le pion pose la question au fou : h5 ou échange en f3. [%cal Gh3g4]}
+8... Bh5
+(8... Bxf3 9. Qxf3 {La dame reprend : vous avez la paire de fous et la dame vise f7 et d5. [%cal Gf3d5]})
+9. Qe1 {La dame sort du clouage et soutient e4 : vos pièces sont prêtes pour e5. [%cal Ge1e4]}`,
+          conclusion:
+            "Contre …Bg4 sorti tôt, d3 et Nbd2 neutralisent le clouage ; e4 et h3 posent ensuite la question au fou. S'il prend en f3, Qxf3 vous donne la paire de fous.",
+        },
+        {
+          legacyIds: ["reti-m5"],
+          title: "Contre …g6 et …b6 : h4 et a4",
+          eco: "A08",
+          kind: "line",
+          objectives: [
+            "Lancer h4 contre le fianchetto du fou g7",
+            "Jouer c3 pour contrôler d4",
+            "Répondre à …a5 par a4 et fixer l'aile dame",
+          ],
+          pgn: `{Avec …g6, …Bg7, …Nge7 et …b6, les Noirs préparent un double fianchetto. Ils retardent le roque : les Blancs en profitent pour pousser h4 avant de fixer l'aile dame.}
+${KIA} g6 6. Nbd2 Bg7 7. e4 Nge7 8. Re1 {La tour soutient e4 : les Noirs ne peuvent pas ouvrir le centre. [%cal Ge1e4]}
+8... b6
+(8... O-O 9. c3 {Le pion contrôle d4 et prépare e5 ou d4 selon la réaction noire. [%cal Gc3d4]})
+9. h4 {Le pion h attaque le fianchetto noir : h5 menace d'ouvrir la colonne h. [%cal Gh4h5]}
+9... h6 10. c3 {Le pion contrôle d4, la case du fou g7 et du cavalier c6. [%cal Gc3d4]}
+10... a5 11. a4 {Le pion bloque l'avance …a4 et prend b5 sous contrôle. [%cal Ga4b5]}`,
+          conclusion:
+            "Contre …g6 et …b6, h4 frappe le fianchetto avant que le roi noir ne soit roqué. Avec c3 et a4, l'aile dame est fixée et l'initiative reste blanche.",
+        },
+      ],
+    },
+    // =====================================================================================
+    {
+      title: "Pièges",
+      summary:
+        "Les erreurs noires typiques du Réti : le fou f5 exposé à la reprise dxe4, le pion e5 poussé sans soutien, le centre fermé trop tôt par …d4 et un mauvais calcul sur e5.",
+      stage: "traps",
+      lessons: TRAPS,
+    },
+    // =====================================================================================
+    {
+      title: "Grande théorie",
+      summary:
+        "Les lignes profondes : …g6 avec …Nge7 et e5, la structure exd5-Nb3 contre …Nf6-…g6, la ligne principale Bf4-a3-Ne3 et le schéma …g6-…e5.",
+      stage: "theory",
+      lessons: [
+        {
+          legacyIds: ["reti-m3"],
+          title: "Contre …g6 et …Nge7 : e5 et Qe2",
+          eco: "A08",
+          kind: "line",
+          objectives: [
+            "Pousser e5 pour fermer la diagonale du fou g7",
+            "Défendre e5 par Qe2 contre la dame c7",
+            "Punir …g5 par Nxg5",
+          ],
+          pgn: `{Avec …g6 et …Nge7, le fou g7 vise e5. Pousser e5 ferme sa diagonale, mais le pion doit être défendu : c'est le rôle de la dame en e2.}
+${KIA} g6 6. Nbd2 Bg7 7. e4 Nge7 8. Re1 O-O 9. e5 {Le pion coupe le fou g7 de l'aile dame et prive les Noirs de f6. [%cal Ge5f6]}
+9... Qc7 10. Qe2 {La dame défend e5 une deuxième fois. [%cal Ge2e5]}
+10... b5
+(10... g5 {Les Noirs veulent miner e5 par …g4.} 11. Nxg5 {Le cavalier prend le pion : …Qxe5 rendra la dame active, mais vous gardez l'avantage. [%cal Gf3g5]})
+11. h4 {Le pion h prend de l'espace et prépare h5 contre le pion g6. [%cal Gh4h5]}`,
+          conclusion:
+            "Contre …g6 et …Nge7, e5 enferme le fou g7 et Qe2 défend le pion. Pendant que les Noirs jouent …b5, h4 et h5 attaquent leur roque.",
+        },
+        {
+          legacyIds: ["reti-m4"],
+          title: "…Nf6 et …g6 : exd5 et Nb3",
+          eco: "A08",
+          kind: "line",
+          objectives: [
+            "Prendre en d5 pour exploiter le fianchetto noir",
+            "Jouer Nb3 et c4 pour chasser le cavalier d5",
+            "Pousser d4 puis prendre en c5",
+          ],
+          pgn: `{Quand les Noirs combinent …Nf6 et …g6, la case d5 est moins solide. Les Blancs échangent en d5, puis chassent le cavalier par Nb3 et c4 : leur pion d4 frappe le centre noir.}
+${KIA} Nf6 6. Nbd2 g6 7. e4 Bg7 8. exd5 {La prise ouvre la grande diagonale pour votre fou g2. [%cal Gg2d5]}
+8... Nxd5 9. Nb3 {Le cavalier attaque c5 et prépare c4. [%cal Gb3c5]}
+9... b6 10. c4 {Le pion chasse le cavalier d5. [%cal Gc4d5]}
+10... Nde7 11. d4 {Le pion attaque c5 : la tension profite à vos pièces développées. [%cal Gd4c5]}
+11... Ba6
+(11... cxd4 12. Nfxd4 {Le cavalier reprend en d4 : il attaque c6 et vise b5. [%cal Gd4c6]})
+12. dxc5 {La prise ouvre la colonne d : le fou a6 n'a pas eu le temps d'attaquer c4. [%cal Gd1d8]}`,
+          conclusion:
+            "Contre …Nf6 et …g6, exd5, Nb3 et c4 chassent le cavalier, puis d4 attaque c5. La colonne d et la diagonale du fou g2 favorisent les Blancs.",
+        },
+        {
+          title: "Ligne principale : Bf4, a3 et Ne3",
+          eco: "A08",
+          kind: "line",
+          objectives: [
+            "Placer le fou en f4 pour soutenir e5",
+            "Répondre à …a4 par a3 et reprendre bxa3",
+            "Jouer Ne3 et c4 contre le centre noir",
+          ],
+          pgn: `{Dans la ligne principale, les Blancs peuvent aussi jouer Bf4 avant N1h2 : le fou défend e5 et le cavalier ira en e3 pour frapper d5. La structure de l'aile dame se décide alors autour de a3.}
+${MAIN} 8... b5 9. e5 Nd7 10. Nf1 a5 11. h4 b4 12. Bf4 {Le fou défend e5 et vise d6. [%cal Gf4e5]}
+12... a4 13. a3 {Le pion bloque l'avance : les Noirs devront ouvrir la colonne b. [%cal Ga3b4]}
+13... bxa3 14. bxa3 {La reprise garde le pion c2 en réserve pour c4. [%cal Gc2c4]}
+14... Ba6 15. Ne3 {Le cavalier vise d5 et g4, deux cases importantes. [%cal Ge3d5,Ge3g4]}
+15... Rb8
+(15... Nd4 {Le cavalier s'installe en d4.} 16. c4 {Le pion attaque d5 : le cavalier d4 n'a plus d'appui central. [%cal Gc4d5]})
+16. c4 {Le levier c4 conteste d5 et ouvre la diagonale du fou g2. [%cal Gc4d5,Gg2d5]}
+16... dxc4 17. Nxc4 {Le cavalier reprend : il vise d6 et b6, et le fou g2 attaque c6. [%cal Gc4d6,Gg2c6]}`,
+          conclusion:
+            "Dans la ligne principale avec Bf4, l'aile dame se fige après a3 et bxa3. Ne3 puis c4 ouvrent le centre au moment où les pièces blanches sont actives.",
+        },
+        {
+          title: "Contre …g6 et …e5 : c3 et a4",
+          eco: "A07",
+          kind: "line",
+          objectives: [
+            "Jouer e4 contre le centre …d5-…e5",
+            "Soutenir le centre par c3 et Nbd2",
+            "Bloquer l'aile dame par a4 avant d'échanger en d5",
+          ],
+          pgn: `{Avec …g6 et …e5, les Noirs prennent eux-mêmes la structure de l'Est-Indienne. Le combat se joue autour des cases d4 et b5 : les Blancs les contrôlent avant d'ouvrir le centre.}
+1. Nf3 d5 2. g3 g6 3. Bg2 Bg7 4. O-O e5 5. d3 Ne7 6. e4 {Le pion conteste d5 tout de suite. [%cal Ge4d5]}
+6... O-O 7. Nbd2 {Le cavalier soutient e4 et peut aller en b3 ou c4. [%cal Gd2c4]}
+7... Nbc6
+(7... c6 8. Re1 {La tour soutient e4 et prépare exd5 ou c3. [%cal Ge1e4]})
+8. c3 {Le pion contrôle d4 : …d4 sera repris ou bloqué. [%cal Gc3d4]}
+8... a5 9. a4 {Le pion bloque …a4 et donne b5 au cavalier si l'occasion se présente. [%cal Ga4b5]}
+9... h6 10. exd5 {L'échange ouvre la grande diagonale vers b7 et la colonne e. [%cal Gg2b7]}`,
+          conclusion:
+            "Contre …g6 et …e5, c3 et a4 fixent l'aile dame et contrôlent d4. Ensuite seulement, exd5 ouvre le centre pour le fou g2.",
+        },
+      ],
+    },
+  ],
+};
